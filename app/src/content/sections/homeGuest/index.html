@@ -1,0 +1,67 @@
+<geo-map>
+	<button id="ingresarBtn" data-id="ingresar-btn">
+		<svg-icon type="user"></svg-icon>
+		Ingresar
+	</button>
+	<pop-up id="popUpHome">
+		<section>
+			<article data-id="inicioSesion">
+				<h1>Inicio de sesión</h1>
+				<a class="social fb" href="auth/facebook">
+					<svg-icon type="social.facebook"></svg-icon>
+					Ingresar con Facebook
+				</a>
+				<a class="social tw" href="auth/twitter">
+					<svg-icon type="social.twitter"></svg-icon>
+					Ingresar con Twitter
+				</a>
+				<a class="social gl" href="auth/google">
+					<svg-icon type="social.google"></svg-icon>
+					Ingresar con Google
+				</a>
+				<form-vali id="loginForm" direction="login" ajax="false">
+					<label for="emailLoginForm">Mail</label>
+					<input id="emailLoginForm" data-label="email" data-rules="isEmail ajaxMailExist" type="text"></input>
+					<label for="passLoginForm">Clave</label>
+					<input id="passLoginForm" data-label="password" type="password"></input>
+					<a data-id="forgotBtn" class="registrate">¿Olvidaste tu contraseña?</a>
+					<a data-id="registrarse" class="registrate">¿Querés crear una cuenta?</a>
+					<button data-submit >Ingresar</button>
+				</form-vali>
+			</article>
+			<article data-id="registroUsuarios">
+				<h1>Nueva cuenta</h1>
+				<a class="social fb" href="auth/facebook">
+					<svg-icon type="social.facebook"></svg-icon>
+					Registrate con Facebook
+				</a>
+				<a class="social tw" href="auth/twitter">
+					<svg-icon type="social.twitter"></svg-icon>
+					Registrate con Twitter
+				</a>
+				<a class="social gl" href="auth/google">
+					<svg-icon type="social.google"></svg-icon>
+					Registrate con Google
+				</a>
+				<form-vali id="signupForm" direction="signup" ajax="false">
+					<p class="info">o creá una cuenta con tu mail</p>
+					<label for="emailSignupForm">Mail</label>
+					<input id="emailSignupForm" data-label="email" data-rules="isEmail ajaxMailDontExist" type="text"></input>
+					<label for="passSignupForm">Nueva contraseña</label>
+					<input id="passSignupForm" data-label="password" type="password"></input>
+					<a data-id="volverLoginRegis" class="registrate">Volver al inicio de sesión</a>
+					<button data-submit>Registrar</button>
+				</form-vali>
+			</article>
+			<article data-id="forgotPassword">
+				<form-vali id="forgot" direction="forgot">
+				<h1>Recuperar contraseña</h1>
+					<label for="emailForgotForm">Mail</label>
+					<input id="emailForgotForm" data-label="email" data-rules="isEmail ajaxMailExist" type="text"></input>
+					<a data-id="volverLoginMail" class="registrate">Volver al inicio de sesión</a>
+					<button data-submit >Enviar</button>
+				</form-vali>
+			</article>
+		</section>
+	</pop-up>
+</geo-map>

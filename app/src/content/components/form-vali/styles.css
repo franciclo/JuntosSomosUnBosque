@@ -1,0 +1,52 @@
+﻿form-vali{
+    display: flex;
+    flex-direction: column;
+}
+h1 {
+    font-size: 20px;
+    margin: 10px 0px;
+}
+form-vali > label {
+    margin: 13px 0 4px;
+    font-size: 13px;
+    font-weight: bold;
+}
+form-vali > label > .error-msg{
+    float: right;
+    font-size: 12px;
+    color: #FF5D5D;
+}
+form-vali > input, form-vali > textarea, form-vali > select-input {
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    background-color: white;
+    height: 2rem;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+}
+form-vali > input.has-error, form-vali > textarea.has-error, form-vali > select-input.has-error{
+    border: 1px solid #FFA7A7;
+}
+form-vali > textarea {
+    height:4rem;
+    padding: 0.5rem;
+}
+form-vali > button:hover{
+    background: #3F8EE5;
+}
+form-vali > button {
+    cursor: pointer;
+    padding: 5px;
+    margin: 10px 0 0;
+    border: 1px solid #3F8EE5;
+    border-radius: 0.1rem;
+    background: #62ADFF;
+    color: white;
+    font-size: 1.2rem;
+}
+form-vali>.inline-input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem 0 0;
+}

@@ -1,0 +1,23 @@
+import './styles.css'
+import 'icon/close.svg'
+import 'component/svg-icon'
+
+import Proceses from './proceses'
+import Renders from './renders'
+
+require('components').register('pop-up', function () {
+  function init () {
+    Renders(this).init()
+    Proceses(this).init()
+  }
+
+  function destroy () {
+    Renders(this).destroy()
+    Proceses(this).destroy()
+  }
+
+  return {
+    init: init,
+    destroy: destroy
+  }
+})
