@@ -14,8 +14,6 @@ module.exports = function (dom) {
   }
 
   function init () {
-    St('popUpHome.active').value = 'landing'
-
     var registrarseClicks = Dom$
       .click(dom.querySelector('[data-id="registrarse"]'))
 
