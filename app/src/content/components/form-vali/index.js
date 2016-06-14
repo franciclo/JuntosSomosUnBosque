@@ -7,15 +7,13 @@ import Renders from './renders'
 Components.register('form-vali', function () {
   function init () {
     var id = this.id
-    St(id).value = St(id).value || {}
-    St(id + '.errors').value = St(id + '.errors').value || []
-    Proceses(this).init()
     Renders(this).init()
+    Proceses(this).init()
   }
 
   function destroy () {
-    Proceses(this).destroy()
     Renders(this).destroy()
+    Proceses(this).destroy()
   }
 
   return {

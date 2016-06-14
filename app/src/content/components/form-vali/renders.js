@@ -3,7 +3,6 @@ import {className, createElement} from 'domHelpers'
 
 module.exports = function (dom) {
   function initErrors () {
-    console.log('initErrors')
     var createSpan = createElement('<span></span>')
     var span
     var inputElements = dom.querySelectorAll('[data-rules]')
@@ -17,17 +16,12 @@ module.exports = function (dom) {
 
   function printErrors (error) {
     var inputElements = dom.querySelectorAll('[data-label]')
-    debugger
     var spanErr = document.querySelector('label[for=' + inputElements[error.i].id + '] .error-msg')
     spanErr.textContent = error.value
 
-    for (var i = 0; i < inputElements.length; i++) {
-      if (i !== error.i) {
-        className.add(inputElements[i], 'has-error')
-      } else {
-        className.remove(inputElements[i], 'has-error')
-      }
-    }
+    for (var i = 0; i < inputElements.length; i++)
+      className[(i !== error.i)?'add':'remove']
+        (inputElements[i], 'has-error')
   }
 
   function init () {

@@ -18,9 +18,8 @@ module.exports = (function () {
       return acc
     }, seed)
     .do(function(stateDiff){
-      stateData = ObjectPathImmutable.set(stateDiff.state.get())
-      if(stateDiff.diff)
-        console.dir(stateDiff.diff)
+      stateData = ObjectPathImmutable
+        .set(stateDiff.state.get())
     })
     .map(function (stateDiff) {
       return stateDiff.diff

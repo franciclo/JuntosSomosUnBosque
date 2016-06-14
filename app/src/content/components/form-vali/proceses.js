@@ -96,6 +96,9 @@ module.exports = function (dom) {
       .mergeMap(validate)
       .publish()
     formSubmits.connect()
+    
+    St(id).value = St(id).value || {}
+    St(id + '.errors').value = St(id + '.errors').value || []
 
     this.onValidationFail = formSubmits
       .filter(valid(false))
