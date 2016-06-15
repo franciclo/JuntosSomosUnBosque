@@ -15,6 +15,7 @@ module.exports = function (dom) {
   }
 
   function printErrors (error) {
+    console.log('printErrors', error)
     var inputElements = dom.querySelectorAll('[data-label]')
     var spanErr = document.querySelector('label[for=' + inputElements[error.value.i].id + '] .error-msg')
     spanErr.textContent = error.value.error

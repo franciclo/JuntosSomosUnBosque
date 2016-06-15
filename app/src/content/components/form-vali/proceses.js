@@ -52,11 +52,10 @@ module.exports = function (dom) {
             var errorsByI = []
             Object.keys(results)
               .forEach(function(inputI){
-                debugger
                 if(~errorsByI.indexOf(inputI)) return
-                if(!results[inputI]){
+                if(!results[inputI].valid){
                   errorsByI.push(inputI)
-                  inputsData[+inputI].error = validationMsg[inputsData[inputI].rule]
+                  inputsData[+inputI].error = validationMsg[results[inputI].rule]
                 }
               })
             return inputsData
@@ -65,12 +64,12 @@ module.exports = function (dom) {
       } else {
         resolve(inputsData)
       }
-    }).then(function(validatedData){return validatedData})
+    }).then(validatedData => validatedData)
   }
 
   function toErrors (inputs) {
     return inputs
-      .filter(input => input.error !== '' )
+      .filter(input => input.error !== '')
       .map(input => {
         delete input.rules
         delete input.name
@@ -107,7 +106,9 @@ module.exports = function (dom) {
     formSubmits.connect()
     
     St(id).value = St(id).value || {}
-    St(id + '.errors').value = St(id + '.errors').value || []
+    St(id + '.errors').value = []
+    // for (var i = 0; i < inputs.length; i++)
+    //   inputs[i].value = ''
 
     this.onValidationFail = formSubmits
       .filter(isValid(false))

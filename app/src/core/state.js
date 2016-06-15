@@ -29,6 +29,9 @@ var state$Diffs = state$
   .mergeMap(function (diffs) {
     return Rx.Observable.from(diffs)
   })
+  .do(function(d){
+    console.log('stateStream', d)
+  })
   .publish()
 
 state$Diffs.connect()
