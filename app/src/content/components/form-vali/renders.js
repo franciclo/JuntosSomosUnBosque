@@ -16,11 +16,11 @@ module.exports = function (dom) {
 
   function printErrors (error) {
     var inputElements = dom.querySelectorAll('[data-label]')
-    var spanErr = document.querySelector('label[for=' + inputElements[error.i].id + '] .error-msg')
-    spanErr.textContent = error.value
+    var spanErr = document.querySelector('label[for=' + inputElements[error.value.i].id + '] .error-msg')
+    spanErr.textContent = error.value.error
 
     for (var i = 0; i < inputElements.length; i++)
-      className[(i !== error.i)?'add':'remove']
+      className[(i === error.value.i)?'add':'remove']
         (inputElements[i], 'has-error')
   }
 

@@ -45,10 +45,10 @@ function query (path) {
         })
         .map(function (d) {
           switch(d.kind){
-            case 'A':
-              return {i:d.index, value:d.item.rhs}
             case 'D':
               return undefined
+            case 'A':
+              return {i:d.index, value:d.item.rhs}
             default:
               return d.rhs
           }

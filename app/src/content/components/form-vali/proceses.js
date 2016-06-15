@@ -4,7 +4,20 @@ import Request from 'request'
 import { DOM as Dom$ } from 'rx-dom'
 
 module.exports = function (dom) {
-  function validate (inputs) {
+  function extractData (inputs) {
+    var inputsData = []
+    for (var i = 0; i < inputs.length; i++)
+      inputsData.push({
+        i: i,
+        name: inputs[i].getAttribute('data-label'),
+        value: inputs[i].value,
+        rules: inputs[i].getAttribute('data-rules'),
+        error: ''
+      })
+    return inputsData
+  }
+
+  function validate (inputsData) {
     var ajaxValidations = {}
     var validationMsg = {
       isEmail: 'No es un mail válido',
@@ -12,78 +25,72 @@ module.exports = function (dom) {
       ajaxMailExist: 'El mail no existe',
       ajaxMailDontExist: 'El mail ya esta siendo usado'
     }
-    for (let i = 0; i < inputs.length; i++) {
-      let input = inputs[i]
-      if (input.hasAttribute('data-rules')) {
-        let rules = input.getAttribute('data-rules').split(' ')
-        let value = input.value
-        for(let y = 0; y < rules.length; y++) {
-          let rule = rules[y]
+    inputsData.forEach(function(input, inputI){
+      if (!input.rules) return
+      input.rules
+        .split(' ')
+        .forEach(function(rule){
+          if(input.error !== '') return
           if (~rule.indexOf('ajax')) {
-            ajaxValidations[rule+'_'+i] = value
-            continue
+            ajaxValidations[inputI] = JSON.stringify({
+              rule:rule,
+              value:input.value
+            })
+            return
           }
-          let valid = Validator[rule](input.value)
-          if(!valid){
+          if(!Validator[rule](input.value)){
             input.error = validationMsg[rule]
-            break
           }
-        }
-      }
-    }
+        })
+    })
 
     return new Promise(function (resolve, reject) {
-      if(!isEmpty(ajaxValidations)){
+      if(JSON.stringify(ajaxValidations) !== '{}') {
         var ajaxValidated = Request('validate', ajaxValidations)
           .send()
           .then(function (results) {
-            Object.keys(results).forEach(function(id){
-              if(!results[id]){
-                let elemId = +id.split('_')[1]
-                let rule = id.split('_')[0]
-                inputs[elemId].error = validationMsg[rule]
-              }
-            })
-            console.log(results)
-            return inputs
-          }, function (err) {
-            console.warn(err)
-          })
+            var errorsByI = []
+            Object.keys(results)
+              .forEach(function(inputI){
+                debugger
+                if(~errorsByI.indexOf(inputI)) return
+                if(!results[inputI]){
+                  errorsByI.push(inputI)
+                  inputsData[+inputI].error = validationMsg[inputsData[inputI].rule]
+                }
+              })
+            return inputsData
+          }, function (err) { console.warn('from-vali ajax err', err) })
         resolve(ajaxValidated)
       } else {
-        resolve(inputs)
+        resolve(inputsData)
       }
-    }).then(function(inputs){return inputs})
-  }
-
-  function isEmpty(obj) {
-    for(var key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
-    }
-    return true;
+    }).then(function(validatedData){return validatedData})
   }
 
   function toErrors (inputs) {
-    var errors = []
-    for (var i = 0; i < inputs.length; i++) {
-      if(inputs[i].hasOwnProperty('error')) errors[i] = inputs[i].error
-    }
-    return errors
+    return inputs
+      .filter(input => input.error !== '' )
+      .map(input => {
+        delete input.rules
+        delete input.name
+        delete input.value
+        return input
+      })
   }
 
   function toValues (inputs) {
     var values = {}
-    for (var i = 0; i < inputs.length; i++) {
-      values[inputs[i].getAttribute('data-label')] = inputs[i].value
-    }
+    inputs.forEach(function(input){
+      values[input.name] = input.value
+    })
     return values
   }
 
-  function valid (bool) {
+  function isValid (bool) {
     return function (inputs) {
-      let isValid = toErrors(inputs).length === 0
-      return isValid?bool:!bool
+      let allValid = toErrors(inputs).length === 0
+      return allValid?bool:!bool
     }
   }
 
@@ -92,7 +99,9 @@ module.exports = function (dom) {
     let inputs = dom.querySelectorAll('[data-label]')
     let submitBtn = dom.querySelector('[data-submit]')
     let formSubmits = Dom$.click(submitBtn)
-      .map(() => inputs)
+      .map(function(){
+        return extractData(inputs)
+      })
       .mergeMap(validate)
       .publish()
     formSubmits.connect()
@@ -101,14 +110,14 @@ module.exports = function (dom) {
     St(id + '.errors').value = St(id + '.errors').value || []
 
     this.onValidationFail = formSubmits
-      .filter(valid(false))
+      .filter(isValid(false))
       .map(toErrors)
       .subscribe((errors) => {
         St(id + '.errors').value = errors
       })
 
     this.onValidationSuccess = formSubmits
-      .filter(valid(true))
+      .filter(isValid(true))
       .map(toValues)
       .subscribe((data) => {
         if(!dom.hasAttribute('direction')) throw new Error('attempt to send form-vali without direction')
@@ -116,9 +125,9 @@ module.exports = function (dom) {
         Request(dom.getAttribute('direction'), data)
           .send()
           .then(function(info){
-            console.log('envio de mail success')
+            console.log('envio de form-vali success')
           }, function (err) {
-            console.log('envio de mail fail')
+            console.log('envio de form-vali fail')
           })
       })
   }
