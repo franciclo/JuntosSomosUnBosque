@@ -29,9 +29,6 @@ var state$Diffs = state$
   .mergeMap(function (diffs) {
     return Rx.Observable.from(diffs)
   })
-  // .do(function (d) {
-  //   // console.log(d.path, d.kind)
-  // })
   .publish()
 
 state$Diffs.connect()
@@ -43,13 +40,16 @@ function query (path) {
         ? [kind] : kind
       return state$Diffs
         .do(function (d) {
-          console.log(d.path.join('.'), '===', path, '=>', d.path === path)
-          console.log(kind, 'indexOf', d.kind, !!~kind.indexOf(d.kind))
-          console.log('=====================================================')
+          // console.log(d.path.join('.'), '===', path, '=>', d.path === path)
+          // console.log(kind, 'indexOf', d.kind, !!~kind.indexOf(d.kind))
+          // console.log('=====================================================')
         })
         .filter(function (d) {
           return d.path.join('.') === path &&
             ~kind.indexOf(d.kind)
+        })
+        .map(function (d) {
+          return d.rhs
         })
     },
     get value () {

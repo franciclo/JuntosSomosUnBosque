@@ -1,18 +1,16 @@
 import St from 'state'
-import { DOM as Dom$ } from 'rx-dom'
+// import Rx from 'rxjs'
+import RxDom from 'rx-dom'
 
 module.exports = function (dom) {
   function init () {
     var id = dom.id
-    St(id).value = {}
     St(id + '.show').value = false
-    St(id + '.active').value = ''
-
-    let popUpClicks = Dom$.click(dom.querySelector('pop-up'))
-    let closeIconClicks = Dom$.click(dom.querySelector('svg-icon[type="close"]'))
-    this.closeCliks = Rx.Observable
+    let popUpClicks = RxDom.DOM.click(dom)
+    let closeIconClicks = RxDom.DOM.click(dom.querySelector('svg-icon[type="close"]'))
+    this.closeCliks = RxDom.Observable
       .merge(popUpClicks, closeIconClicks)
-      .subscribe(function(){
+      .subscribe(function (v) {
         St(id + '.show').value = false
       })
   }
