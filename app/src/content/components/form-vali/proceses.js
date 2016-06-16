@@ -6,7 +6,7 @@ import { DOM as Dom$ } from 'rx-dom'
 module.exports = function (dom) {
   function extractData (inputs) {
     var inputsData = []
-    for (var i = 0; i < inputs.length; i++)
+    for (var i = 0; i < inputs.length; i++) {
       inputsData.push({
         i: i,
         name: inputs[i].getAttribute('data-label'),
@@ -14,6 +14,7 @@ module.exports = function (dom) {
         rules: inputs[i].getAttribute('data-rules'),
         error: ''
       })
+    }
     return inputsData
   }
 
@@ -25,35 +26,35 @@ module.exports = function (dom) {
       ajaxMailExist: 'El mail no existe',
       ajaxMailDontExist: 'El mail ya esta siendo usado'
     }
-    inputsData.forEach(function(input, inputI){
+    inputsData.forEach(function (input, inputI) {
       if (!input.rules) return
       input.rules
         .split(' ')
-        .forEach(function(rule){
-          if(input.error !== '') return
+        .forEach(function (rule) {
+          if (input.error !== '') return
           if (~rule.indexOf('ajax')) {
             ajaxValidations[inputI] = JSON.stringify({
-              rule:rule,
-              value:input.value
+              rule: rule,
+              value: input.value
             })
             return
           }
-          if(!Validator[rule](input.value)){
+          if (!Validator[rule](input.value)) {
             input.error = validationMsg[rule]
           }
         })
     })
 
     return new Promise(function (resolve, reject) {
-      if(JSON.stringify(ajaxValidations) !== '{}') {
+      if (JSON.stringify(ajaxValidations) !== '{}') {
         var ajaxValidated = Request('validate', ajaxValidations)
           .send()
           .then(function (results) {
             var errorsByI = []
             Object.keys(results)
-              .forEach(function(inputI){
-                if(~errorsByI.indexOf(inputI)) return
-                if(!results[inputI].valid){
+              .forEach(function (inputI) {
+                if (~errorsByI.indexOf(inputI)) return
+                if (!results[inputI].valid) {
                   errorsByI.push(inputI)
                   inputsData[+inputI].error = validationMsg[results[inputI].rule]
                 }
@@ -71,16 +72,16 @@ module.exports = function (dom) {
     return inputs
       .filter(input => input.error !== '')
       .map(input => {
-        delete input.rules
-        delete input.name
-        delete input.value
-        return input
+        return {
+          i: input.i,
+          error: input.error
+        }
       })
   }
 
   function toValues (inputs) {
     var values = {}
-    inputs.forEach(function(input){
+    inputs.forEach(function (input) {
       values[input.name] = input.value
     })
     return values
@@ -89,7 +90,7 @@ module.exports = function (dom) {
   function isValid (bool) {
     return function (inputs) {
       let allValid = toErrors(inputs).length === 0
-      return allValid?bool:!bool
+      return allValid ? bool : !bool
     }
   }
 
@@ -98,17 +99,15 @@ module.exports = function (dom) {
     let inputs = dom.querySelectorAll('[data-label]')
     let submitBtn = dom.querySelector('[data-submit]')
     let formSubmits = Dom$.click(submitBtn)
-      .map(function(){
+      .do(function () {
+        St(id + '.errors').value = undefined
+      })
+      .map(function () {
         return extractData(inputs)
       })
       .mergeMap(validate)
       .publish()
     formSubmits.connect()
-    
-    St(id).value = St(id).value || {}
-    St(id + '.errors').value = []
-    // for (var i = 0; i < inputs.length; i++)
-    //   inputs[i].value = ''
 
     this.onValidationFail = formSubmits
       .filter(isValid(false))
@@ -121,14 +120,14 @@ module.exports = function (dom) {
       .filter(isValid(true))
       .map(toValues)
       .subscribe((data) => {
-        if(!dom.hasAttribute('direction')) throw new Error('attempt to send form-vali without direction')
+        if (!dom.hasAttribute('direction')) throw new Error('attempt to send form-vali without direction')
         St(id + '.errors').value = []
         Request(dom.getAttribute('direction'), data)
           .send()
-          .then(function(info){
+          .then(function (info) {
             console.log('envio de form-vali success')
           }, function (err) {
-            console.log('envio de form-vali fail')
+            console.log('envio de form-vali fail', err)
           })
       })
   }

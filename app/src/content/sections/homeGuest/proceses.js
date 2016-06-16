@@ -1,4 +1,5 @@
 import St from 'state'
+import Rx from 'rxjs'
 import { DOM as Dom$ } from 'rx-dom'
 
 module.exports = function (dom) {
@@ -7,10 +8,6 @@ module.exports = function (dom) {
       St('popUpHome.show').value = true
       St('popUpHome.active').value = active
     }
-  }
-
-  function hidePopup () {
-    St('popUpHome.show').value = false
   }
 
   function init () {
@@ -31,17 +28,16 @@ module.exports = function (dom) {
 
     this.showOlvido = olvidoClicks
       .subscribe(activatePopupSection('forgotPassword'))
-    
+
     this.showRegistrar = registrarseClicks
       .subscribe(activatePopupSection('registroUsuarios'))
-    
+
     this.showLogin = Rx.Observable
       .merge(
         ingresarClicks,
         volverDeRegisClicks,
         volverDeOlvClicks)
       .subscribe(activatePopupSection('inicioSesion'))
-
   }
 
   function destroy (s, f) {

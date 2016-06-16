@@ -20,7 +20,7 @@ Sections.register('home', html, function (dom) {
   }
 
   function destroy (s, f) {
-  	Proceses(dom).destroy()
+    Proceses(dom).destroy()
   }
 
   return {

@@ -53,12 +53,18 @@ module.exports = (function () {
 
   history
     .onPopState
-    .scan(function (previousId, currentId) {
-      ((previousId) ? stop(previousId) : Promise.resolve())
-        .then(start(currentId))
-      return currentId
-    }, null)
-    .subscribe()
+    // .scan(function (previousId, currentId) {
+      
+    //   return ((previousId) ? stop(previousId) : Promise.resolve())
+    //     .then(function () { 
+    //       debugger
+    //       return currentId
+    //     })
+    // }, null)
+    // .do(function(s){debugger})
+    .subscribe(function (id) {
+      start(id)
+    })
 
   return {
     register: register,
