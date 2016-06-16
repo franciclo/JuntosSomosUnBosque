@@ -1,39 +1,41 @@
 import St from 'state'
-import {className, createElement} from 'domHelpers'
+import { className, createElement } from 'domHelpers'
 
 module.exports = function (dom) {
-  function initErrors () {
-    var createSpan = createElement('<span></span>')
-    var span
-    var inputElements = dom.querySelectorAll('[data-rules]')
-    for (var i = 0; i < inputElements.length; i++) {
-      if (!inputElements[i].id) console.warn('El input no tiene id.', inputElements[i])
-      span = createSpan()
-      span.className = 'error-msg'
-      document.querySelector('label[for=' + inputElements[i].id + ']').appendChild(span)
-    }
-  }
-
-  function printErrors (error) {
-    console.log('printErrors', error)
-    var inputElements = dom.querySelectorAll('[data-label]')
-    var spanErr = document.querySelector('label[for=' + inputElements[error.value.i].id + '] .error-msg')
-    spanErr.textContent = error.value.error
-
-    for (var i = 0; i < inputElements.length; i++)
-      className[(i === error.value.i)?'add':'remove']
-        (inputElements[i], 'has-error')
-  }
-
   function init () {
     var id = dom.id
-    this.onCreated = St(id + '.errors')
+    var inputs = dom.querySelectorAll('[data-label]')
+    var createSpan = createElement('<span class="error-msg"></span>')
+    this.onCreated = St(id)
       .on('N')
-      .subscribe(initErrors)
-      
+      .map(function (s) {
+        return inputs
+      })
+      .subscribe(function () {
+        for (var i = 0; i < inputs.length; i++) {
+          if (!inputs[i].id) throw new Error('form-vali error: input without id', inputs[i])
+          dom.querySelector('label[for=' + inputs[i].id + ']').appendChild(createSpan())
+        }
+      })
+
     this.onErrorChange = St(id + '.errors')
-      .on('A')
-      .subscribe(printErrors)
+      .on('N')
+      .do(function () {
+        var spanErrs = dom.querySelectorAll('label .error-msg')
+        for (var i = 0; i < inputs.length; i++) {
+          className['remove'](inputs[i], 'has-error')
+        }
+        for (var y = 0; y < spanErrs.length; y++) {
+          spanErrs[y].textContent = ''
+        }
+      })
+      .subscribe(function (errors) {
+        errors.forEach(function (error) {
+          var spanErr = dom.querySelector('label[for=' + inputs[error.i].id + '] .error-msg')
+          spanErr.textContent = error.error
+          className['add'](inputs[error.i], 'has-error')
+        })
+      })
   }
 
   function destroy () {
