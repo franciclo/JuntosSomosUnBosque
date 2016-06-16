@@ -2,8 +2,8 @@ import St from 'state'
 import {className} from 'domHelpers'
 
 module.exports = function (dom) {
-
   function toggleVisibility (show) {
+    console.log(show)
     if (show) {
       className.add(dom, 'active')
     } else {
@@ -12,6 +12,7 @@ module.exports = function (dom) {
   }
 
   function toggleActiveSection (id) {
+    console.log(id)
     var popUpSections = dom.querySelectorAll('article')
     for (var i = 0; i < popUpSections.length; i++) {
       if (popUpSections[i].getAttribute('data-id') === id) {

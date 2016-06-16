@@ -20,9 +20,9 @@ module.exports = function (dom) {
     var spanErr = document.querySelector('label[for=' + inputElements[error.value.i].id + '] .error-msg')
     spanErr.textContent = error.value.error
 
-    for (var i = 0; i < inputElements.length; i++)
-      className[(i === error.value.i)?'add':'remove']
-        (inputElements[i], 'has-error')
+    for (var i = 0; i < inputElements.length; i++) {
+      className[(i === error.value.i) ? 'add' : 'remove'](inputElements[i], 'has-error')
+    }
   }
 
   function init () {
@@ -30,7 +30,7 @@ module.exports = function (dom) {
     this.onCreated = St(id + '.errors')
       .on('N')
       .subscribe(initErrors)
-      
+
     this.onErrorChange = St(id + '.errors')
       .on('A')
       .subscribe(printErrors)
