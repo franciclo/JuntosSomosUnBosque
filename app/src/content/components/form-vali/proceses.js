@@ -50,7 +50,6 @@ module.exports = function (dom) {
         var ajaxValidated = Request('validate', ajaxValidations)
           .send()
           .then(function (results) {
-            console.log('ajaxValidations', results)
             var errorsByI = []
             Object.keys(results)
               .forEach(function (inputI) {
@@ -120,7 +119,6 @@ module.exports = function (dom) {
             break
           }
         }
-        console.log(index)
         return {
           i: index,
           errors: St(id + '.errors').value
@@ -150,13 +148,15 @@ module.exports = function (dom) {
       .subscribe((data) => {
         if (!dom.hasAttribute('direction')) throw new Error('attempt to send form-vali without direction')
         St(id + '.errors').value = []
-        Request(dom.getAttribute('direction'), data)
-          .send()
-          .then(function (info) {
-            console.log('envio de form-vali success')
-          }, function (err) {
-            console.log('envio de form-vali fail', err)
-          })
+        var sender = Request(dom.getAttribute('direction'), data)
+        if (dom.hasAttribute('ajax') && dom.getAttribute('ajax') === 'false') {
+          window.location = sender.serializeUrl()
+        } else {
+          sender.send()
+            .then(function (info) {
+              console.log('envio de form-vali', info)
+            })
+        }
       })
   }
 

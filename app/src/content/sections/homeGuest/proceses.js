@@ -9,10 +9,6 @@ module.exports = function (dom) {
     }
   }
 
-  function hidePopup () {
-    St('popUpHome.show').value = false
-  }
-
   function init () {
     var registrarseClicks = Dom$
       .click(dom.querySelector('[data-id="registrarse"]'))
@@ -31,17 +27,16 @@ module.exports = function (dom) {
 
     this.showOlvido = olvidoClicks
       .subscribe(activatePopupSection('forgotPassword'))
-    
+
     this.showRegistrar = registrarseClicks
       .subscribe(activatePopupSection('registroUsuarios'))
-    
-    this.showLogin = Rx.Observable
+
+    this.showLogin = window.Rx.Observable
       .merge(
         ingresarClicks,
         volverDeRegisClicks,
         volverDeOlvClicks)
       .subscribe(activatePopupSection('inicioSesion'))
-
   }
 
   function destroy (s, f) {
