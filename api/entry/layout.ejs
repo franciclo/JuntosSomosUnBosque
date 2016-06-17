@@ -12,6 +12,11 @@
     <section id="home">
   		<%- include(sectionHtml) %>
   	</section>
+    <% if (typeof user !== 'undefined') { %>
+      <script type="text/javascript">
+        window.$tate('user').value = {name: JSON.parse('<%= user %>')}
+      </script>
+    <% } %>
   	<script type="text/javascript" src="<%= entryFilename %>.js"></script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 ;(function () {
-  require('section/homeGuest/index.js')
+  require('section/reset/index.js')
 
   document.addEventListener('DOMContentLoaded', function () {
-    require('history').go('home')
+    require('history').go('reset')
   })
 }())

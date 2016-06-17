@@ -12,7 +12,6 @@ module.exports = (function () {
       })
     return new Promise(function (resolve, reject) {
       transporter.sendMail(opts, function (err, info) {
-        console.log('mail sent', info)
         if (err) {
           console.log('send mail error', err)
           reject(err)

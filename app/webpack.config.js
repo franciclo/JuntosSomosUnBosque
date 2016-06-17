@@ -4,7 +4,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
   entry: {
     guest: './src/entry/guest.js',
-    user: './src/entry/user.js'
+    user: './src/entry/user.js',
+    reset: './src/entry/reset.js'
   },
   output: {
     path: './public/',

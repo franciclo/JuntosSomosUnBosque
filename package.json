@@ -29,14 +29,16 @@
     "webpack": "^1.13.0"
   },
   "dependencies": {
+    "async": "^2.0.0-rc.6",
     "autopolyfiller-loader": "^0.3.3",
-    "bcrypt-nodejs": "latest",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.0.0",
     "connect-flash": "~0.1.1",
     "cookie-parser": "~1.0.0",
     "ejs": "^2.4.1",
     "express": "~4.0.0",
     "express-session": "~1.0.0",
+    "jsonwebtoken": "^7.0.1",
     "method-override": "~1.0.0",
     "mongoose": "~3.8.1",
     "morgan": "~1.0.0",

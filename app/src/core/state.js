@@ -4,8 +4,9 @@ import { diff } from 'deep-diff'
 import Rx from 'rxjs'
 import 'rx-dom'
 
-var stateData = {}
-var seed = {state: ObjectPath({}), diff: []}
+var localState = JSON.parse(window.localStorage.getItem('$tate'))
+var stateData = localState || {}
+var seed = {state: ObjectPath(stateData), diff: []}
 var state$ = new Rx.Subject()
 var state$Diffs = state$
   .scan(function (acc, chg) {
@@ -29,9 +30,6 @@ var state$Diffs = state$
   .mergeMap(function (diffs) {
     return Rx.Observable.from(diffs)
   })
-  .do(function (d) {
-    console.log('stateStream', d)
-  })
   .publish()
 
 state$Diffs.connect()
@@ -53,6 +51,28 @@ function query (path) {
     get value () { return ObjectPath(stateData).get(path) },
     set value (value) { state$.next({path: path, value: value}) }
   }
+}
+
+if (query('debugState').value === true) {
+  console.log('window.clear = clear')
+  if (typeof window.clear !== 'function') debugger
+  if (typeof window.clear === 'function')
+    state$Diffs
+      .map(function (d) {
+        return {
+          changetype: d.kind,
+          path: d.path.join('.'),
+          value: JSON.stringify(d.rhs)
+        }
+      })
+      .scan(function (acc, v) {
+        acc.push(v)
+        return acc
+      }, [])
+      .subscribe(function (ds) {
+        window.clear()
+        console.table(ds)
+      })
 }
 window.$tate = query
 export default query

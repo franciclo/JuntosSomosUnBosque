@@ -1,5 +1,5 @@
 import St from 'state'
-import Validator from 'validator'
+import isEmail from 'validator/lib/isEmail'
 import Request from 'request'
 import { DOM as Dom$ } from 'rx-dom'
 
@@ -19,10 +19,16 @@ module.exports = function (dom) {
   }
 
   function validate (inputsData) {
+    var Validator = {
+      isEmail: isEmail,
+      required: function (v) { return v.length !== 0 },
+      equalTo: function (v, _v) { return v === _v }
+    }
     var ajaxValidations = {}
     var validationMsg = {
+      required: 'Obligatorio',
       isEmail: 'No es un mail válido',
-      isAlpha: 'Solo letras',
+      equalTo: 'No coincide',
       ajaxMailExist: 'El mail no existe',
       ajaxMailDontExist: 'El mail ya esta siendo usado'
     }
@@ -37,6 +43,13 @@ module.exports = function (dom) {
               rule: rule,
               value: input.value
             })
+            return
+          }
+          if (~rule.indexOf('equalTo')) {
+            var equalToVal = dom.querySelector('[data-label="' + rule.split('-')[1] + '"]').value
+            if (!Validator[rule.split('-')[0]](input.value, equalToVal)) {
+              input.error = validationMsg[rule.split('-')[0]]
+            }
             return
           }
           if (!Validator[rule](input.value)) {
@@ -87,10 +100,43 @@ module.exports = function (dom) {
     return values
   }
 
+  function toIndex (inputs, input) {
+    var index
+    for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i] === input) {
+        index = i
+        break
+      }
+    }
+    return index
+  }
+
   function isValid (bool) {
     return function (inputs) {
       let allValid = toErrors(inputs).length === 0
       return allValid ? bool : !bool
+    }
+  }
+
+  function sendForm (data) {
+    if (!dom.hasAttribute('direction')) throw new Error('attempt to send form-vali without direction')
+    let id = dom.id
+    St(id + '.errors').value = []
+    var formSender = Request(dom.getAttribute('direction'), data)
+    if (dom.hasAttribute('ajax') && dom.getAttribute('ajax') === 'false') {
+      window.location = formSender.getUrl()
+    } else {
+      return formSender
+        .send()
+        .then(function (response) {
+          console.log('form-vali send response: ', response)
+          St(id + '.formNotification').value = undefined
+          St(id + '.formNotification').value = {
+            success: response.success,
+            text: response.text,
+            result: response.result
+          }
+        })
     }
   }
 
@@ -112,15 +158,11 @@ module.exports = function (dom) {
 
     this.onInputChange = Dom$.keydown(inputs)
       .map(function (ev) {
-        var index
-        for (var i = 0; i < inputs.length; i++) {
-          if (inputs[i] === ev.currentTarget) {
-            index = i
-            break
-          }
-        }
+        return ev.currentTarget
+      })
+      .map(function (input) {
         return {
-          i: index,
+          i: toIndex(inputs, input),
           errors: St(id + '.errors').value
         }
       })
@@ -145,19 +187,7 @@ module.exports = function (dom) {
     this.onValidationSuccess = formSubmits
       .filter(isValid(true))
       .map(toValues)
-      .subscribe((data) => {
-        if (!dom.hasAttribute('direction')) throw new Error('attempt to send form-vali without direction')
-        St(id + '.errors').value = []
-        var sender = Request(dom.getAttribute('direction'), data)
-        if (dom.hasAttribute('ajax') && dom.getAttribute('ajax') === 'false') {
-          window.location = sender.serializeUrl()
-        } else {
-          sender.send()
-            .then(function (info) {
-              console.log('envio de form-vali', info)
-            })
-        }
-      })
+      .subscribe(sendForm)
   }
 
   function destroy () {

@@ -25,6 +25,7 @@ module.exports = function (dom) {
   function createCloseIcon () {
     var closeIcon = document.createElement('svg-icon')
     closeIcon.setAttribute('type', 'close')
+    if (dom.getAttribute('closable') === 'false') closeIcon.className = 'hide'
     dom.querySelector('section').appendChild(closeIcon)
   }
 

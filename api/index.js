@@ -6,7 +6,7 @@ var mongoose = require('mongoose')
 
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
-
+app.set('superSecret', config.secret)
 mongoose.connect(config.db)
 
 app.use(cookieParser())

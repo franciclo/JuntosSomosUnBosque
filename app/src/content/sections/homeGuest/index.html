@@ -21,8 +21,8 @@
 				</a>
 				<form-vali id="loginForm" direction="login" ajax="false">
 					<label for="emailLoginForm">Mail</label>
-					<input id="emailLoginForm" data-label="email" data-rules="isEmail ajaxMailExist" type="text"></input>
-					<label for="passLoginForm">Clave</label>
+					<input id="emailLoginForm" data-label="email" data-rules="required isEmail ajaxMailExist" type="text"></input>
+					<label for="passLoginForm" data-rules="required">Contraseña</label>
 					<input id="passLoginForm" data-label="password" type="password"></input>
 					<a data-id="forgotBtn" class="registrate">¿Olvidaste tu contraseña?</a>
 					<a data-id="registrarse" class="registrate">¿Querés crear una cuenta?</a>
@@ -46,9 +46,9 @@
 				<form-vali id="signupForm" direction="signup" ajax="false">
 					<p class="info">o creá una cuenta con tu mail</p>
 					<label for="emailSignupForm">Mail</label>
-					<input id="emailSignupForm" data-label="email" data-rules="isEmail ajaxMailDontExist" type="text"></input>
+					<input id="emailSignupForm" data-label="email" data-rules="required isEmail ajaxMailDontExist" type="text"></input>
 					<label for="passSignupForm">Nueva contraseña</label>
-					<input id="passSignupForm" data-label="password" type="password"></input>
+					<input id="passSignupForm" data-label="password" data-rules="required" type="password"></input>
 					<a data-id="volverLoginRegis" class="registrate">Volver al inicio de sesión</a>
 					<button data-submit>Registrar</button>
 				</form-vali>
@@ -57,7 +57,7 @@
 				<form-vali id="forgot" direction="forgot">
 				<h1>Recuperar contraseña</h1>
 					<label for="emailForgotForm">Mail</label>
-					<input id="emailForgotForm" data-label="email" data-rules="isEmail ajaxMailExist" type="text"></input>
+					<input id="emailForgotForm" data-label="email" data-rules="required isEmail ajaxMailExist" type="text"></input>
 					<a data-id="volverLoginMail" class="registrate">Volver al inicio de sesión</a>
 					<button data-submit >Enviar</button>
 				</form-vali>

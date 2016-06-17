@@ -1,6 +1,6 @@
 ﻿var server = 'http://localhost:3000'
 module.exports = function (cmd, params) {
-  function serializeUrl () {
+  function getUrl () {
     var paramStr = ''
     var cmdStr = '/' + cmd
 
@@ -17,20 +17,20 @@ module.exports = function (cmd, params) {
   function send () {
     return new Promise(function (resolve, reject) {
       var xhr = new window.XMLHttpRequest()
-      var url = serializeUrl()
+      var url = getUrl()
       console.log('request to', url)
       xhr.open('GET', url, true)
 
       xhr.onload = function () {
         if (xhr.status !== 200) {
-          resolve({success: false, message: 'Ajax no ok - ' + xhr.status})
+          resolve({success: false, text: 'Error interno', result: xhr.status})
           return
         }
 
         try {
           var response = JSON.parse(xhr.responseText)
         } catch (e) {
-          resolve({success: false, message: 'JSON parser error', data: xhr.responseText})
+          resolve({success: false, text: 'Error interno', result: xhr.responseText})
           return
         }
 
@@ -38,7 +38,7 @@ module.exports = function (cmd, params) {
       }
 
       xhr.onerror = function (err) {
-        resolve({success: false, message: 'ajax error - ' + JSON.stringify(err)})
+        resolve({success: false, text: 'Error interno', result: JSON.stringify(err)})
       }
 
       xhr.send()
@@ -47,6 +47,6 @@ module.exports = function (cmd, params) {
 
   return {
     send: send,
-    serializeUrl: serializeUrl
+    getUrl: getUrl
   }
 }

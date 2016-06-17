@@ -50,3 +50,23 @@ form-vali>.inline-input{
     align-items: center;
     margin: 1.5rem 0 0;
 }
+form-vali>span.notification-msg {
+    font-size: 13px;
+    padding: 5px;
+    border-radius: 2px;
+    border: 1px solid;
+    display: none;
+}
+form-vali>span.notification-msg.success {
+    background: #B4E59D;
+    border-color: #8DC373;
+    color: #565656;
+}
+form-vali>span.notification-msg.error {
+    background: #E59D9D;
+    border-color: #C37373;
+    color: #424242;
+}
+form-vali>span.notification-msg.show {
+    display: block;
+}

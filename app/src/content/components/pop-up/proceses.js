@@ -6,8 +6,13 @@ module.exports = function (dom) {
     var id = dom.id
     St(id).value = {}
 
-    let popUpClicks = Dom$.click(dom.querySelector('pop-up'))
+    let popUpClicks = Dom$
+      .click(dom)
+      .filter((e) => e.target.tagName === 'POP-UP')
+      .filter(() => dom.getAttribute('closable') !== 'false')
+
     let closeIconClicks = Dom$.click(dom.querySelector('svg-icon[type="close"]'))
+
     this.closeCliks = window.Rx.Observable
       .merge(popUpClicks, closeIconClicks)
       .subscribe(function () {

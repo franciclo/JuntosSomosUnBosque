@@ -1,5 +1,5 @@
 var isLoggedIn = require('../middleware').isLoggedIn
-var sendMail = require('../../mail')
+
 module.exports = function (app, passport) {
   // =============================================================================
   // LOCAL =======================================================================
@@ -19,20 +19,11 @@ module.exports = function (app, passport) {
     })
   )
 
-  app.get('/forgot', function (req, res) {
-    console.log(req.query.email)
-    var to = req.query.email
-    sendMail({
-      from: 'francisco.pensa.web@gmail.com',
-      to: [to],
-      subject: 'test',
-      text: 'testt'
-    }).then(function (info) {
-      res.json({success: true, info: info})
-    }, function (err) {
-      res.json({success: true, msg: err})
-    })
-  })
+  app.get('/forgot', require('./controller').forgot)
+
+  app.get('/recuperar-clave', require('./controller').recuperar)
+
+  app.get('/reset', require('./controller').reset)
 
   // new account ----------------------------------
 
