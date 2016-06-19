@@ -56,6 +56,7 @@ form-vali>span.notification-msg {
     border-radius: 2px;
     border: 1px solid;
     display: none;
+    text-align: center;
 }
 form-vali>span.notification-msg.success {
     background: #B4E59D;
@@ -63,9 +64,8 @@ form-vali>span.notification-msg.success {
     color: #565656;
 }
 form-vali>span.notification-msg.error {
-    background: #E59D9D;
-    border-color: #C37373;
-    color: #424242;
+    border-color: transparent;
+    color: #FF0000;
 }
 form-vali>span.notification-msg.show {
     display: block;

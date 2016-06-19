@@ -8,7 +8,9 @@
 					<input id="pass1" data-label="pass" data-rules="required" type="password"></input>
 					<label for="pass2">Confirmar contraseña</label>
 					<input id="pass2" data-label="passconfirm" data-rules="required equalTo-pass" type="password"></input>
-					<button data-submit >Enviar</button>
+					<input type="hidden" data-label="email">
+					<input type="hidden" data-label="codigo">
+					<button data-submit label-active="Enviando">Enviar</button>
 				</form-vali>
 			</article>
 		</section>

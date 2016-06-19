@@ -10,26 +10,50 @@ module.exports = function (dom) {
   }
 
   function init () {
-    var registrarseClicks = Dom$
-      .click(dom.querySelector('[data-id="registrarse"]'))
+    var signupFormNotification = St('signupForm.formNotification').value
+    var loginFormNotification = St('loginForm.formNotification').value
+    var resetVal
+    if (signupFormNotification) {
+      activatePopupSection('registroUsuarios')()
+      resetVal = St('signupForm.formNotification').value
+      St('signupForm.formNotification').value = undefined
+      St('signupForm.formNotification').value = resetVal
+    }
 
-    var olvidoClicks = Dom$
-      .click(dom.querySelector('[data-id="forgotBtn"]'))
+    if (loginFormNotification) {
+      activatePopupSection('inicioSesion')()
+      resetVal = St('loginForm.formNotification').value
+      St('loginForm.formNotification').value = undefined
+      St('loginForm.formNotification').value = resetVal
+    }
 
-    var ingresarClicks = Dom$
-      .click(dom.querySelector('button[data-id="ingresar-btn"]'))
+    var registrarseClicks = Dom$.click(
+      dom.querySelector('[data-id="registrarse"]')
+    )
 
-    var volverDeRegisClicks = Dom$
-      .click(dom.querySelector('[data-id="volverLoginRegis"]'))
+    var olvidoClicks = Dom$.click(
+      dom.querySelector('[data-id="forgotBtn"]')
+    )
 
-    var volverDeOlvClicks = Dom$
-      .click(dom.querySelector('[data-id="volverLoginMail"]'))
+    var ingresarClicks = Dom$.click(
+      dom.querySelector('button[data-id="ingresar-btn"]')
+    )
 
-    this.showOlvido = olvidoClicks
-      .subscribe(activatePopupSection('forgotPassword'))
+    var volverDeRegisClicks = Dom$.click(
+      dom.querySelector('[data-id="volverLoginRegis"]')
+    )
 
-    this.showRegistrar = registrarseClicks
-      .subscribe(activatePopupSection('registroUsuarios'))
+    var volverDeOlvClicks = Dom$.click(
+      dom.querySelector('[data-id="volverLoginMail"]')
+    )
+
+    this.showOlvido = olvidoClicks.subscribe(
+      activatePopupSection('forgotPassword')
+    )
+
+    this.showRegistrar = registrarseClicks.subscribe(
+      activatePopupSection('registroUsuarios')
+    )
 
     this.showLogin = window.Rx.Observable
       .merge(
@@ -37,12 +61,23 @@ module.exports = function (dom) {
         volverDeRegisClicks,
         volverDeOlvClicks)
       .subscribe(activatePopupSection('inicioSesion'))
+
+    this.onOlvidoSucces = St('forgot.formNotification').on('N')
+      .filter(function (notification) {
+        return notification.success
+      })
+      .subscribe(function () {
+        window.setTimeout(function () {
+          St('popUpHome.show').value = false
+        }, 4500)
+      })
   }
 
   function destroy (s, f) {
     this.showOlvido.dispose()
     this.showRegistrar.dispose()
     this.showLogin.dispose()
+    this.onOlvidoSucces.dispose()
   }
 
   return {

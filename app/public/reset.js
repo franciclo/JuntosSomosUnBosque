@@ -680,7 +680,7 @@
 
 	    return new Promise(function (resolve, reject) {
 	      if (JSON.stringify(ajaxValidations) !== '{}') {
-	        var ajaxValidated = (0, _request2.default)('validate', ajaxValidations).send().then(function (results) {
+	        var ajaxValidated = (0, _request2.default)('validate', ajaxValidations).then(function (results) {
 	          var errorsByI = [];
 	          Object.keys(results).forEach(function (inputI) {
 	            if (~errorsByI.indexOf(inputI)) return;
@@ -739,32 +739,41 @@
 	    };
 	  }
 
+	  function postRedirect(inputs) {
+	    var form = document.createElement('form');
+	    form.method = 'POST';
+	    form.action = dom.getAttribute('direction');
+	    for (var i = 0; i < inputs.length; i++) {
+	      inputs[i].name = inputs[i].getAttribute('data-label');
+	      form.appendChild(inputs[i].cloneNode());
+	    }
+	    return form.submit();
+	  }
+
 	  function sendForm(data) {
-	    if (!dom.hasAttribute('direction')) throw new Error('attempt to send form-vali without direction');
 	    var id = dom.id;
 	    (0, _state2.default)(id + '.errors').value = [];
-	    var formSender = (0, _request2.default)(dom.getAttribute('direction'), data);
-	    if (dom.hasAttribute('ajax') && dom.getAttribute('ajax') === 'false') {
-	      window.location = formSender.getUrl();
-	    } else {
-	      return formSender.send().then(function (response) {
-	        console.log('form-vali send response: ', response);
-	        (0, _state2.default)(id + '.formNotification').value = undefined;
-	        (0, _state2.default)(id + '.formNotification').value = {
-	          success: response.success,
-	          text: response.text,
-	          result: response.result
-	        };
-	      });
-	    }
+	    (0, _state2.default)(id + '.loading').value = true;
+	    (0, _request2.default)(dom.getAttribute('direction'), data).then(function (response) {
+	      (0, _state2.default)(id + '.loading').value = false;
+	      (0, _state2.default)(id + '.formNotification').value = undefined;
+	      (0, _state2.default)(id + '.formNotification').value = {
+	        success: response.success,
+	        text: response.text,
+	        result: response.result
+	      };
+	    });
 	  }
 
 	  function init() {
+	    if (!dom.hasAttribute('direction')) throw new Error('attempt to send form-vali without direction');
 	    var id = dom.id;
 	    var inputs = dom.querySelectorAll('[data-label]');
 	    var submitBtn = dom.querySelector('[data-submit]');
-
-	    var formSubmits = _rxDom.DOM.click(submitBtn).do(function () {
+	    (0, _state2.default)(id + '.loading').value = false;
+	    var formSubmits = _rxDom.DOM.click(submitBtn).filter(function () {
+	      return (0, _state2.default)(id + '.loading').value === false;
+	    }).do(function () {
 	      (0, _state2.default)(id + '.errors').value = undefined;
 	    }).map(function () {
 	      return extractData(inputs);
@@ -783,7 +792,9 @@
 	        return e.i;
 	      }).indexOf(v.i);
 	    }).subscribe(function (v) {
-	      v.errors.splice(v.i, 1);
+	      v.errors.splice(v.errors.map(function (e) {
+	        return e.i;
+	      }).indexOf(v.i), 1);
 	      (0, _state2.default)(id + '.errors').value = undefined;
 	      (0, _state2.default)(id + '.errors').value = v.errors;
 	    });
@@ -792,7 +803,15 @@
 	      (0, _state2.default)(id + '.errors').value = errors;
 	    });
 
-	    this.onValidationSuccess = formSubmits.filter(isValid(true)).map(toValues).subscribe(sendForm);
+	    this.onValidationSuccess = formSubmits.filter(function () {
+	      return dom.getAttribute('ajax') !== 'false';
+	    }).filter(isValid(true)).map(toValues).subscribe(sendForm);
+
+	    formSubmits.filter(function () {
+	      return dom.getAttribute('ajax') === 'false';
+	    }).filter(isValid(true)).map(function () {
+	      return inputs;
+	    }).subscribe(postRedirect);
 	  }
 
 	  function destroy() {
@@ -1223,7 +1242,18 @@
 	  if (typeof window.clear !== 'function') debugger;
 	  if (typeof window.clear === 'function') state$Diffs.map(function (d) {
 	    return {
-	      changetype: d.kind,
+	      changetype: function (kind) {
+	        switch (kind) {
+	          case 'N':
+	            return 'New';
+	          case 'E':
+	            return 'Edited';
+	          case 'D':
+	            return 'Deleted';
+	          case 'A':
+	            return 'New in array';
+	        }
+	      }(d.kind),
 	      path: d.path.join('.'),
 	      value: JSON.stringify(d.rhs)
 	    };
@@ -33811,41 +33841,34 @@
 	    return server + cmdStr + paramStr;
 	  }
 
-	  function send() {
-	    return new Promise(function (resolve, reject) {
-	      var xhr = new window.XMLHttpRequest();
-	      var url = getUrl();
-	      console.log('request to', url);
-	      xhr.open('GET', url, true);
+	  return new Promise(function (resolve, reject) {
+	    var xhr = new window.XMLHttpRequest();
+	    var url = getUrl();
+	    console.log('request to', url);
+	    xhr.open('GET', url, true);
 
-	      xhr.onload = function () {
-	        if (xhr.status !== 200) {
-	          resolve({ success: false, text: 'Error interno', result: xhr.status });
-	          return;
-	        }
+	    xhr.onload = function () {
+	      if (xhr.status !== 200) {
+	        resolve({ success: false, text: 'Error interno', result: xhr.status });
+	        return;
+	      }
 
-	        try {
-	          var response = JSON.parse(xhr.responseText);
-	        } catch (e) {
-	          resolve({ success: false, text: 'Error interno', result: xhr.responseText });
-	          return;
-	        }
+	      try {
+	        var response = JSON.parse(xhr.responseText);
+	      } catch (e) {
+	        resolve({ success: false, text: 'Error interno', result: xhr.responseText });
+	        return;
+	      }
 
-	        resolve(response);
-	      };
+	      resolve(response);
+	    };
 
-	      xhr.onerror = function (err) {
-	        resolve({ success: false, text: 'Error interno', result: JSON.stringify(err) });
-	      };
+	    xhr.onerror = function (err) {
+	      resolve({ success: false, text: 'Error interno', result: JSON.stringify(err) });
+	    };
 
-	      xhr.send();
-	    });
-	  }
-
-	  return {
-	    send: send,
-	    getUrl: getUrl
-	  };
+	    xhr.send();
+	  });
 	};
 
 /***/ },
@@ -33863,6 +33886,21 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	module.exports = function (dom) {
+	  var createErrSpan = (0, _domHelpers.createElement)('<span class="error-msg"></span>');
+	  var createNotiSpan = (0, _domHelpers.createElement)('<span class="notification-msg"></span>');
+
+	  function createErrorSpans(inputs) {
+	    for (var i = 0; i < inputs.length; i++) {
+	      if (inputs[i].type === 'hidden') continue;
+	      if (!inputs[i].id) throw new Error('form-vali error: input without id', inputs[i]);
+	      dom.querySelector('label[for=' + inputs[i].id + ']').appendChild(createErrSpan());
+	    }
+	  }
+
+	  function createNotificationSpan() {
+	    dom.insertBefore(createNotiSpan(), dom.children[0].tagName === 'H1' ? dom.children[1] : dom.children[0]);
+	  }
+
 	  function clearErrors(inputs) {
 	    var spanErrs = dom.querySelectorAll('label .error-msg');
 	    for (var i = 0; i < inputs.length; i++) {
@@ -33878,18 +33916,6 @@
 	      inputs[i].value = '';
 	    }
 	  }
-	  function createErrorSpans(inputs) {
-	    console.log('createErrorSpans');
-	    var createSpan = (0, _domHelpers.createElement)('<span class="error-msg"></span>');
-	    for (var i = 0; i < inputs.length; i++) {
-	      if (!inputs[i].id) throw new Error('form-vali error: input without id', inputs[i]);
-	      dom.querySelector('label[for=' + inputs[i].id + ']').appendChild(createSpan());
-	    }
-	  }
-
-	  function createNotificationSpan() {
-	    dom.insertBefore((0, _domHelpers.createElement)('<span class="notification-msg"></span>')(), dom.children[0].tagName === 'H1' ? dom.children[1] : dom.children[0]);
-	  }
 
 	  function printErrors(e) {
 	    e.errors.forEach(function (error) {
@@ -33904,14 +33930,24 @@
 	    _domHelpers.className.add(notiSpam, notification.success ? 'success' : 'error');
 	    _domHelpers.className.add(notiSpam, 'show');
 	    notiSpam.textContent = notification.text;
-	    window.setTimeout(function () {
-	      _domHelpers.className.remove(notiSpam, 'show');
-	    }, 5000);
+	    if (notification.success) {
+	      window.setTimeout(function () {
+	        _domHelpers.className.remove(notiSpam, 'show');
+	      }, 4000);
+	    } else {
+	      window.setTimeout(function () {
+	        _domHelpers.className.remove(notiSpam, 'show');
+	      }, 8000);
+	    }
 	  }
 
 	  function init() {
 	    var id = dom.id;
 	    var inputs = dom.querySelectorAll('[data-label]');
+	    var submitBtn = dom.querySelector('[data-submit]');
+
+	    submitBtn.setAttribute('label-pasive', submitBtn.textContent);
+
 	    this.onCreated = (0, _state2.default)(id).on('N').map(function (s) {
 	      return inputs;
 	    }).subscribe(function (inputs) {
@@ -33924,9 +33960,21 @@
 	        errors: errors,
 	        inputs: inputs
 	      };
-	    }).do(clearErrors).subscribe(printErrors);
+	    }).subscribe(function (e) {
+	      clearErrors(e.inputs);
+	      printErrors(e);
+	    });
 
-	    this.onSendSuccess = (0, _state2.default)(id + '.formNotification').on(['N']).subscribe(printNotification);
+	    this.onSendSuccess = (0, _state2.default)(id + '.formNotification').on(['N']).do(printNotification).map(function (s) {
+	      return inputs;
+	    }).subscribe(function (inputs) {
+	      clearErrors(inputs);
+	      clearValues(inputs);
+	    });
+
+	    this.onLoading = (0, _state2.default)(id + '.loading').on(['N', 'E']).subscribe(function (bool) {
+	      submitBtn.textContent = submitBtn.getAttribute(bool ? 'label-active' : 'label-pasive');
+	    });
 	  }
 
 	  function destroy() {
@@ -43543,7 +43591,7 @@
 /* 403 */
 /***/ function(module, exports) {
 
-	module.exports = "<geo-map>\n\t<pop-up id=\"popUpReset\" closable=\"false\">\n\t\t<section>\n\t\t\t<article data-id=\"resetPassword\">\n\t\t\t\t<form-vali id=\"reset\" direction=\"reset\">\n\t\t\t\t<h1>Resetear contraseña</h1>\n\t\t\t\t\t<label for=\"pass1\">Nueva contraseña</label>\n\t\t\t\t\t<input id=\"pass1\" data-label=\"pass\" data-rules=\"required\" type=\"password\"></input>\n\t\t\t\t\t<label for=\"pass2\">Confirmar contraseña</label>\n\t\t\t\t\t<input id=\"pass2\" data-label=\"passconfirm\" data-rules=\"required equalTo-pass\" type=\"password\"></input>\n\t\t\t\t\t<button data-submit >Enviar</button>\n\t\t\t\t</form-vali>\n\t\t\t</article>\n\t\t</section>\n\t</pop-up>\n</geo-map>\n";
+	module.exports = "<geo-map>\n\t<pop-up id=\"popUpReset\" closable=\"false\">\n\t\t<section>\n\t\t\t<article data-id=\"resetPassword\">\n\t\t\t\t<form-vali id=\"reset\" direction=\"reset\">\n\t\t\t\t<h1>Resetear contraseña</h1>\n\t\t\t\t\t<label for=\"pass1\">Nueva contraseña</label>\n\t\t\t\t\t<input id=\"pass1\" data-label=\"pass\" data-rules=\"required\" type=\"password\"></input>\n\t\t\t\t\t<label for=\"pass2\">Confirmar contraseña</label>\n\t\t\t\t\t<input id=\"pass2\" data-label=\"passconfirm\" data-rules=\"required equalTo-pass\" type=\"password\"></input>\n\t\t\t\t\t<input type=\"hidden\" data-label=\"email\">\n\t\t\t\t\t<input type=\"hidden\" data-label=\"codigo\">\n\t\t\t\t\t<button data-submit label-active=\"Enviando\">Enviar</button>\n\t\t\t\t</form-vali>\n\t\t\t</article>\n\t\t</section>\n\t</pop-up>\n</geo-map>\n";
 
 /***/ },
 /* 404 */
@@ -43561,6 +43609,15 @@
 	  function init() {
 	    (0, _state2.default)('popUpReset.show').value = true;
 	    (0, _state2.default)('popUpReset.active').value = 'resetPassword';
+	    dom.querySelector('[data-label="email"]').value = (0, _state2.default)('user.mail').value;
+	    dom.querySelector('[data-label="codigo"]').value = window.location.search.split('=')[1];
+	    (0, _state2.default)('reset.formNotification').on('N').filter(function (notification) {
+	      return notification.success;
+	    }).subscribe(function () {
+	      window.setTimeout(function () {
+	        window.location = '/';
+	      }, 4000);
+	    });
 	  }
 
 	  function destroy(s, f) {}

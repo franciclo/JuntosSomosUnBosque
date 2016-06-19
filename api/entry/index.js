@@ -1,8 +1,15 @@
+var path = require('path')
 module.exports = function (app) {
   app.set('view engine', 'ejs')
-  app.set('views', __dirname + '/')
+  app.set('views', path.resolve(__dirname))
 
   app.get('/', function (req, res) {
+    var formNoti = req.flash('formNotification')[0]
+    if (formNoti) {
+      formNoti.value = JSON.stringify(formNoti.value)
+      console.log(formNoti)
+    }
+
     if (req.isAuthenticated()) {
       res.render('layout', {
         sectionHtml: '../../app/src/content/sections/homeUser/index.html',
@@ -11,7 +18,8 @@ module.exports = function (app) {
     } else {
       res.render('layout', {
         sectionHtml: '../../app/src/content/sections/homeGuest/index.html',
-        entryFilename: 'guest'
+        entryFilename: 'guest',
+        formNotification: formNoti
       })
     }
   })

@@ -5,14 +5,14 @@ module.exports = function (app, passport) {
   // LOCAL =======================================================================
   // =============================================================================
 
-  app.get('/signup',
+  app.post('/signup',
     passport.authenticate('local-signup', {
       successRedirect: '/',
       failureRedirect: '/'
     })
   )
 
-  app.get('/login',
+  app.post('/login',
     passport.authenticate('local-login', {
       successRedirect: '/',
       failureRedirect: '/'
@@ -24,13 +24,6 @@ module.exports = function (app, passport) {
   app.get('/recuperar-clave', require('./controller').recuperar)
 
   app.get('/reset', require('./controller').reset)
-
-  // new account ----------------------------------
-
-  app.get('/connect/local',
-    passport.authenticate('local-signup'),
-    function (req, res) { res.json({success: true}) }
-  )
 
   // unlink -----------------------------------
 

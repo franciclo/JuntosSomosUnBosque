@@ -12,11 +12,19 @@
     <section id="home">
   		<%- include(sectionHtml) %>
   	</section>
-    <% if (typeof user !== 'undefined') { %>
+    <script type="text/javascript" src="<%= entryFilename %>.js"></script>
+
+    <% if (typeof userMail !== 'undefined') { %>
       <script type="text/javascript">
-        window.$tate('user').value = {name: JSON.parse('<%= user %>')}
+        window.$tate('user').value = {mail: '<%= userMail %>'}
       </script>
     <% } %>
-  	<script type="text/javascript" src="<%= entryFilename %>.js"></script>
+    
+    <% if (typeof formNotification !== 'undefined') { %>
+      <script type="text/javascript">
+        window.$tate('<%= formNotification.path %>').value = JSON.parse('<%- formNotification.value %>')
+      </script>
+    <% } %>
+
   </body>
 </html>

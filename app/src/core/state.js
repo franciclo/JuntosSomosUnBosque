@@ -60,7 +60,18 @@ if (query('debugState').value === true) {
     state$Diffs
       .map(function (d) {
         return {
-          changetype: d.kind,
+          changetype: (function (kind) {
+            switch (kind) {
+              case 'N':
+                return 'New'
+              case 'E':
+                return 'Edited'
+              case 'D':
+                return 'Deleted'
+              case 'A':
+                return 'New in array'
+            }
+          }(d.kind)),
           path: d.path.join('.'),
           value: JSON.stringify(d.rhs)
         }

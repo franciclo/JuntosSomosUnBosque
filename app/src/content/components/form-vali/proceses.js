@@ -61,7 +61,6 @@ module.exports = function (dom) {
     return new Promise(function (resolve, reject) {
       if (JSON.stringify(ajaxValidations) !== '{}') {
         var ajaxValidated = Request('validate', ajaxValidations)
-          .send()
           .then(function (results) {
             var errorsByI = []
             Object.keys(results)
@@ -118,34 +117,43 @@ module.exports = function (dom) {
     }
   }
 
+  function postRedirect (inputs) {
+    var form = document.createElement('form')
+    form.method = 'POST'
+    form.action = dom.getAttribute('direction')
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].name = inputs[i].getAttribute('data-label')
+      form.appendChild(inputs[i].cloneNode())
+    }
+    return form.submit()
+  }
+
   function sendForm (data) {
-    if (!dom.hasAttribute('direction')) throw new Error('attempt to send form-vali without direction')
     let id = dom.id
     St(id + '.errors').value = []
-    var formSender = Request(dom.getAttribute('direction'), data)
-    if (dom.hasAttribute('ajax') && dom.getAttribute('ajax') === 'false') {
-      window.location = formSender.getUrl()
-    } else {
-      return formSender
-        .send()
-        .then(function (response) {
-          console.log('form-vali send response: ', response)
-          St(id + '.formNotification').value = undefined
-          St(id + '.formNotification').value = {
-            success: response.success,
-            text: response.text,
-            result: response.result
-          }
-        })
-    }
+    St(id + '.loading').value = true
+    Request(dom.getAttribute('direction'), data)
+      .then(function (response) {
+        St(id + '.loading').value = false
+        St(id + '.formNotification').value = undefined
+        St(id + '.formNotification').value = {
+          success: response.success,
+          text: response.text,
+          result: response.result
+        }
+      })
   }
 
   function init () {
+    if (!dom.hasAttribute('direction')) throw new Error('attempt to send form-vali without direction')
     let id = dom.id
     let inputs = dom.querySelectorAll('[data-label]')
     let submitBtn = dom.querySelector('[data-submit]')
-
+    St(id + '.loading').value = false
     let formSubmits = Dom$.click(submitBtn)
+      .filter(function () {
+        return St(id + '.loading').value === false
+      })
       .do(function () {
         St(id + '.errors').value = undefined
       })
@@ -167,12 +175,19 @@ module.exports = function (dom) {
         }
       })
       .filter(function (v) {
-        return v.errors && ~v.errors
-          .map(function (e) { return e.i })
-          .indexOf(v.i)
+        return v.errors &&
+          ~v.errors
+            .map(function (e) { return e.i })
+            .indexOf(v.i)
       })
       .subscribe(function (v) {
-        v.errors.splice(v.i, 1)
+        v.errors
+          .splice(
+            v.errors
+              .map(function (e) { return e.i })
+              .indexOf(v.i),
+            1
+          )
         St(id + '.errors').value = undefined
         St(id + '.errors').value = v.errors
       })
@@ -185,9 +200,22 @@ module.exports = function (dom) {
       })
 
     this.onValidationSuccess = formSubmits
+      .filter(function () {
+        return dom.getAttribute('ajax') !== 'false'
+      })
       .filter(isValid(true))
       .map(toValues)
       .subscribe(sendForm)
+
+    formSubmits
+      .filter(function () {
+        return dom.getAttribute('ajax') === 'false'
+      })
+      .filter(isValid(true))
+      .map(function () {
+        return inputs
+      })
+      .subscribe(postRedirect)
   }
 
   function destroy () {

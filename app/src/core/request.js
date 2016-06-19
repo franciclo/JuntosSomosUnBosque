@@ -14,39 +14,32 @@ module.exports = function (cmd, params) {
     return server + cmdStr + paramStr
   }
 
-  function send () {
-    return new Promise(function (resolve, reject) {
-      var xhr = new window.XMLHttpRequest()
-      var url = getUrl()
-      console.log('request to', url)
-      xhr.open('GET', url, true)
+  return new Promise(function (resolve, reject) {
+    var xhr = new window.XMLHttpRequest()
+    var url = getUrl()
+    console.log('request to', url)
+    xhr.open('GET', url, true)
 
-      xhr.onload = function () {
-        if (xhr.status !== 200) {
-          resolve({success: false, text: 'Error interno', result: xhr.status})
-          return
-        }
-
-        try {
-          var response = JSON.parse(xhr.responseText)
-        } catch (e) {
-          resolve({success: false, text: 'Error interno', result: xhr.responseText})
-          return
-        }
-
-        resolve(response)
+    xhr.onload = function () {
+      if (xhr.status !== 200) {
+        resolve({success: false, text: 'Error interno', result: xhr.status})
+        return
       }
 
-      xhr.onerror = function (err) {
-        resolve({success: false, text: 'Error interno', result: JSON.stringify(err)})
+      try {
+        var response = JSON.parse(xhr.responseText)
+      } catch (e) {
+        resolve({success: false, text: 'Error interno', result: xhr.responseText})
+        return
       }
 
-      xhr.send()
-    })
-  }
+      resolve(response)
+    }
 
-  return {
-    send: send,
-    getUrl: getUrl
-  }
+    xhr.onerror = function (err) {
+      resolve({success: false, text: 'Error interno', result: JSON.stringify(err)})
+    }
+
+    xhr.send()
+  })
 }
