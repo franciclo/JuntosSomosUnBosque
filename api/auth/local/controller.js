@@ -127,7 +127,7 @@ module.exports.forgot = function (req, res) {
 
       var token = buf.toString('hex')
       var mailText = '<a href="http://localhost:3000/recuperar-clave?codigo=' +
-        token + '">Recuperar contraseña</a>'
+        token + '">Recuperar contraseña de JuntosSomosUnBosque</a>'
 
       user.local.resetPasswordToken = token
       user.local.resetPasswordExpires = Date.now() + 3600000 // 1 hour
@@ -137,7 +137,7 @@ module.exports.forgot = function (req, res) {
       })
 
       sendMail({
-        from: 'francisco.pensa.web@gmail.com',
+        from: 'noreply@JuntosSomosUnBosque.eco',
         to: [email],
         subject: 'test',
         html: mailText
@@ -193,5 +193,16 @@ module.exports.reset = function (req, res) {
         res.json({success: true, text: 'Contraseña cambiada, redireccionando..'})
       })
     })
+  })
+}
+
+module.exports.nombrar = function (req, res) {
+  var user = req.user
+  user.local.name = req.query.name
+  user.save(function (err) {
+    if (err) {
+      res.json({success: false, text: 'Error al guardar tu nombre'})
+    }
+    res.json({success: true, text: 'Nombre guardado!'})
   })
 }

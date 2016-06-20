@@ -3,7 +3,7 @@ module.exports = function (dom) {
   function init () {
     var div = dom.appendChild(document.createElement('div'))
     div.id = 'mapContainer'
-    var map = L.map(div, {scrollWheelZoom:false}).setView([-34.59, -58.50], 11)
+    var map = L.map(div, {zoomControl: false}).setView([-34.59, -58.50], 11)
 
     L.Icon.Default.imagePath = '/images'
 

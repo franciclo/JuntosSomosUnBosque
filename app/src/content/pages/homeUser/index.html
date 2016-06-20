@@ -1,0 +1,56 @@
+<geo-map>
+	<aside id="userAction">
+		<button id="userBtn" data-id="user-btn">
+			<svg-icon type="user"></svg-icon>
+			<span></span>
+			<svg-icon type="triangle"></svg-icon>
+		</button>
+		<aside class="hide" data-id="logout">
+			<span>Salir</span>
+			<svg-icon type="apagar"></svg-icon>
+		</aside>
+	</aside>
+	<button id="agregarArbolesBtn" data-id="mis-arboles-btn">
+		<svg-icon type="plantin"></svg-icon>
+		Mis árboles
+	</button>
+	<pop-up id="popUpHome">
+		<section>
+			<article data-id="agregarArboles">
+				<form-vali direction="arboles">
+					<table id="tablaMisArboles">
+						<caption>Organizá tus arboles por similitúd de especie y edad.</caption>
+						<thead>
+							<tr>
+								<th>Especie</th>
+								<th>Edad</th>
+								<th>Cantidad</th>
+							</tr>
+							<tr>
+								<td><input type="text"></td>
+								<td><input type="number"></td>
+								<td><input type="number"></td>
+							</tr>
+							<tr>
+								<td colspan="3">Agregar grupo</td>
+							</tr>
+						</thead>
+					</table>
+					<button data-submit label-active="Guardando">Guardar</button>
+				</form-vali>
+			</article>
+		</section>
+	</pop-up>
+	<pop-up id="popUpBienvenido" closable="false">
+		<section>
+			<article data-id="comoTeLlamas">
+				<form-vali id="mellamo" direction="mellamo">
+				<h1>Bienvenido al mapa</h1>
+					<label for="nombre">¿Como te llamas?</label>
+					<input id="nombre" data-label="name" data-rules="required" type="text"></input>
+					<button data-submit >¡Empezar!</button>
+				</form-vali>
+			</article>
+		</section>
+	</pop-up>
+</geo-map>

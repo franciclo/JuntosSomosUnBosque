@@ -25,6 +25,11 @@
         window.$tate('<%= formNotification.path %>').value = JSON.parse('<%- formNotification.value %>')
       </script>
     <% } %>
-
+    
+    <% if (typeof userName !== 'undefined') { %>
+      <script type="text/javascript">
+        window.$tate('user.name').value = '<%= userName %>'
+      </script>
+    <% } %>
   </body>
 </html>

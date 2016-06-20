@@ -1,7 +1,7 @@
 ﻿var history = require('history')
 
 module.exports = (function () {
-  var seccionData = {}
+  var pageData = {}
   var container = document.body
 
   function register (ID, html, creator) {
@@ -9,7 +9,7 @@ module.exports = (function () {
     s.id = ID
     s.innerHTML = html
 
-    seccionData[ID] = {
+    pageData[ID] = {
       create: creator,
       dom: s,
       instance: null
@@ -17,36 +17,36 @@ module.exports = (function () {
   }
 
   function start (ID) {
-    var seccion = seccionData[ID]
-    var page = document.getElementById(ID)
+    var page = pageData[ID]
+    var pageDom = document.getElementById(ID)
 
-    if (!seccion) throw new Error('start seccion inexistente: ' + ID)
-    if (seccion.instance) return
-    if (!page) {
-      page = seccion.dom.cloneNode(true)
-      page.id = ID
-      page = container.appendChild(page)
+    if (!page) throw new Error('start page inexistente: ' + ID)
+    if (page.instance) return
+    if (!pageDom) {
+      pageDom = page.dom.cloneNode(true)
+      pageDom.id = ID
+      pageDom = container.appendChild(pageDom)
     }
-    seccion.instance = seccion.create(page)
-    seccion.instance.init()
+    page.instance = page.create(pageDom)
+    page.instance.init()
   }
 
   function stop (ID) {
     if (!ID) return
-    var seccion = seccionData[ID]
-    var page = document.getElementById(ID)
+    var page = pageData[ID]
+    var pageDom = document.getElementById(ID)
 
-    if (!seccion) throw new Error('stop seccion inexistente: ' + ID)
-    if (!seccion.instance) return
+    if (!page) throw new Error('stop page inexistente: ' + ID)
+    if (!page.instance) return
 
     return new Promise(
       function (resolve, reject) {
         Promise.resolve('hola')
-        seccionData[page.id].instance.destroy(resolve, reject)
+        pageData[pageDom.id].instance.destroy(resolve, reject)
       })
       .then(function () {
-        seccionData[page.id].instance = null
-        container.removeChild(page)
+        pageData[pageDom.id].instance = null
+        container.removeChild(pageDom)
         return 'hola'
       })
   }

@@ -1,9 +1,7 @@
-(function(){
-	
-	require('section/homeUser/index.js');
+;(function () {
+  require('page/homeUser/index.js')
 
-	document.addEventListener("DOMContentLoaded", function () {
-		require('history').go('home');
-	});
-	
-}());
+  document.addEventListener('DOMContentLoaded', function () {
+    require('history').go('home')
+  })
+}())

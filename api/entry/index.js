@@ -11,13 +11,24 @@ module.exports = function (app) {
     }
 
     if (req.isAuthenticated()) {
+      var userName = 'Usuario'
+      if (req.user.google.name) {
+        userName = req.user.google.name
+      } else if (req.user.twitter.displayName) {
+        userName = req.user.twitter.displayName
+      } else if (req.user.facebook.name) {
+        userName = req.user.facebook.name
+      } else if (req.user.local.name) {
+        userName = req.user.local.name
+      }
       res.render('layout', {
-        sectionHtml: '../../app/src/content/sections/homeUser/index.html',
-        entryFilename: 'user'
+        sectionHtml: '../../app/src/content/pages/homeUser/index.html',
+        entryFilename: 'user',
+        userName: userName
       })
     } else {
       res.render('layout', {
-        sectionHtml: '../../app/src/content/sections/homeGuest/index.html',
+        sectionHtml: '../../app/src/content/pages/homeGuest/index.html',
         entryFilename: 'guest',
         formNotification: formNoti
       })

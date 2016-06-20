@@ -5,6 +5,7 @@ var userSchema = mongoose.Schema({
   local: {
     email: String,
     password: String,
+    name: String,
     resetPasswordToken: String,
     resetPasswordExpires: Date
   },

@@ -1,5 +1,5 @@
 ;(function () {
-  require('section/reset/index.js')
+  require('page/reset/index.js')
 
   document.addEventListener('DOMContentLoaded', function () {
     require('history').go('reset')

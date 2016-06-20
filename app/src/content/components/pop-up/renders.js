@@ -2,7 +2,6 @@ import St from 'state'
 import {className} from 'domHelpers'
 
 module.exports = function (dom) {
-
   function toggleVisibility (show) {
     if (show) {
       className.add(dom, 'active')

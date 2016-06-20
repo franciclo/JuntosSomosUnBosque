@@ -1,3 +1,14 @@
+/*#home{
+  height: 200vh;
+  overflow: auto;
+}
+#home geo-map>div{
+  height: 100vh;
+  width: auto;
+}*/
+#popUpHome section {
+  max-width: 350px;
+}
 button#ingresarBtn:hover{
   background: #EFEFEF;
 }
@@ -12,7 +23,7 @@ button#ingresarBtn{
   border-radius: 5px;
   color: #000;
   padding: 4px 8px;
-  font-size: 18px;
+  font-size: 15px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -102,7 +113,7 @@ button#ingresarBtn svg-icon use{
   font-weight: bold;
 }
 #signupForm .info{
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #EFEFEF;
   padding-top: 10px;
 }
 .info{

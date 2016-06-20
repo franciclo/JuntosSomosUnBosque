@@ -1,5 +1,5 @@
 ;(function () {
-  require('section/homeGuest/index.js')
+  require('page/homeGuest/index.js')
 
   document.addEventListener('DOMContentLoaded', function () {
     require('history').go('home')

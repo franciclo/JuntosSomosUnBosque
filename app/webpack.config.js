@@ -14,7 +14,7 @@ module.exports = {
   resolve: {
     root: path.resolve('./src/core'),
     alias: {
-      'section': path.resolve('./src/content/sections'),
+      'page': path.resolve('./src/content/pages'),
       'component': path.resolve('./src/content/components'),
       'icon': path.resolve('./src/content/assets/svg')
     },
@@ -43,9 +43,9 @@ module.exports = {
         exclude: /(node_modules)/,
         loader: 'babel',
         query: {
-        presets: ['es2015']
+          presets: ['es2015']
+        }
       }
-    }
     ],
     postLoaders: [
       {

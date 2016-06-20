@@ -54,36 +54,39 @@ function query (path) {
 }
 
 if (query('debugState').value === true) {
-  console.log('window.clear = clear')
-  if (typeof window.clear !== 'function') debugger
-  if (typeof window.clear === 'function')
-    state$Diffs
-      .map(function (d) {
-        return {
-          changetype: (function (kind) {
-            switch (kind) {
-              case 'N':
-                return 'New'
-              case 'E':
-                return 'Edited'
-              case 'D':
-                return 'Deleted'
-              case 'A':
-                return 'New in array'
-            }
-          }(d.kind)),
-          path: d.path.join('.'),
-          value: JSON.stringify(d.rhs)
-        }
-      })
-      .scan(function (acc, v) {
-        acc.push(v)
-        return acc
-      }, [])
-      .subscribe(function (ds) {
-        window.clear()
-        console.table(ds)
-      })
+  window.$tateViz = function () {
+    console.log('need to bind clear() copy paste this please')
+    console.log('window.clear = clear')
+    debugger
+    if (typeof window.clear === 'function')
+      state$Diffs
+        .map(function (d) {
+          return {
+            changetype: (function (kind) {
+              switch (kind) {
+                case 'N':
+                  return 'New'
+                case 'E':
+                  return 'Edited'
+                case 'D':
+                  return 'Deleted'
+                case 'A':
+                  return 'New in array'
+              }
+            }(d.kind)),
+            path: d.path.join('.'),
+            value: JSON.stringify(d.rhs)
+          }
+        })
+        .scan(function (acc, v) {
+          acc.push(v)
+          return acc
+        }, [])
+        .subscribe(function (ds) {
+          window.clear()
+          console.table(ds)
+        })
+  }
 }
 window.$tate = query
 export default query
