@@ -23,14 +23,53 @@ button{
     padding: 4px 8px;
 }
 .hide{display:none;}
-button:focus {outline:0;}/*#home{
-  height: 200vh;
-  overflow: auto;
+button:focus {outline:0;}#home{
+  display: flex;
 }
-#home geo-map>div{
-  height: 100vh;
-  width: auto;
-}*/
+#home side-bar{
+  width: 400px;
+}
+#home geo-map{
+  flex: 1;
+}
+#arboles_data{
+  display: flex;
+}
+.arbol-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+.arbol-data .arbol-nombre:hover {display: block;}
+.arbol-data .arbol-nombre {display: none;}
+.arbol-data svg-icon{
+  width: 70px;
+  height: 70px;
+}
+#user_options {
+  padding: 10px
+}
+#user_options a {
+  float: right;
+}
+
+side-bar h1 {
+  text-align: center;
+  font-weight: 100;
+  font-size: 30px;
+}
+side-bar header {
+  background: #4CAF50;
+  color: white;
+}
+
+
+
+
+
+
+
+
 #popUpHome section {
   max-width: 350px;
 }
@@ -147,7 +186,9 @@ button#ingresarBtn svg-icon use{
   position: relative;
   margin: 8px 0 0;
   text-align: center;
-}svg-icon svg{
+}
+
+svg-icon svg{
   height: inherit;
   width: inherit;
 }form-vali{

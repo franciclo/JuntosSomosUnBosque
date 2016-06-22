@@ -1,8 +1,6 @@
 import '../../assets/css/general.css'
 import './styles.css'
-import 'icon/user.svg'
-import 'icon/triangle.svg'
-import 'icon/apagar.svg'
+
 import 'icon/plantin.svg'
 import 'icon/social.facebook.svg'
 import 'icon/social.twitter.svg'

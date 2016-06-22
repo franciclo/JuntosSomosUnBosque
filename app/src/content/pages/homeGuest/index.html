@@ -1,7 +1,52 @@
-<geo-map>
-	<button id="ingresarBtn" data-id="ingresar-btn">
-		<svg-icon type="user"></svg-icon>
-		Ingresar
+<side-bar>
+	<header>
+		<div id="user_options">
+			<button>Ingresar</button>
+			<a href="#">Registrarse</a>
+		</div>
+		<h1>Juntos somos un bosque</h1>
+		<div id="arboles_data">
+			<div class="arbol-data">
+				<span class="arbol-nombre">Aliso</span>
+				<svg-icon type="arboles.Aliso"></svg-icon>
+				<span class="arbol-count">5</span>
+			</div>
+			<div class="arbol-data">
+				<span class="arbol-nombre">Caranday</span>
+				<svg-icon type="arboles.Caranday"></svg-icon>
+				<span class="arbol-count">2</span>
+			</div>
+			<div class="arbol-data">
+				<span class="arbol-nombre">Chica</span>
+				<svg-icon type="arboles.Chica"></svg-icon>
+				<span class="arbol-count">3</span>
+			</div>
+			<div class="arbol-data">
+				<span class="arbol-nombre">Sen</span>
+				<svg-icon type="arboles.Sen"></svg-icon>
+				<span class="arbol-count">7</span>
+			</div>
+			<div class="arbol-data">
+				<span class="arbol-nombre">Algarrobo</span>
+				<svg-icon type="arboles.Algarrobo"></svg-icon>
+				<span class="arbol-count">1</span>
+			</div>
+			<div class="arbol-data">
+				<span class="arbol-nombre">Ceibo</span>
+				<svg-icon type="arboles.Ceibo"></svg-icon>
+				<span class="arbol-count">9</span>
+			</div>
+	</header>
+	<div id="suma_arboles">
+		<p>Sumá tus arboles y hagamos un bosque</p>
+		<button id="suma_arboles_btn">
+			<svg-icon type="plantin.mas"></svg-icon>
+		</button>
+	</div> 
+
+	<button id="proponer_lugar">
+		Proponer un lugar
+		<svg-icon type="lugar"></svg-icon>
 	</button>
 	<pop-up id="popUpHome">
 		<section>
@@ -64,4 +109,5 @@
 			</article>
 		</section>
 	</pop-up>
-</geo-map>
+</side-bar>
+<geo-map></geo-map>

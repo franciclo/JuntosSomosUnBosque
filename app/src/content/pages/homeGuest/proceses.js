@@ -10,67 +10,67 @@ module.exports = function (dom) {
   }
 
   function init () {
-    var signupFormNotification = St('signupForm.formNotification').value
-    var loginFormNotification = St('loginForm.formNotification').value
-    var resetVal
-    if (signupFormNotification) {
-      activatePopupSection('registroUsuarios')()
-      resetVal = St('signupForm.formNotification').value
-      St('signupForm.formNotification').value = undefined
-      St('signupForm.formNotification').value = resetVal
-    }
+    // var signupFormNotification = St('signupForm.formNotification').value
+    // var loginFormNotification = St('loginForm.formNotification').value
+    // var resetVal
+    // if (signupFormNotification) {
+    //   activatePopupSection('registroUsuarios')()
+    //   resetVal = St('signupForm.formNotification').value
+    //   St('signupForm.formNotification').value = undefined
+    //   St('signupForm.formNotification').value = resetVal
+    // }
 
-    if (loginFormNotification) {
-      activatePopupSection('inicioSesion')()
-      resetVal = St('loginForm.formNotification').value
-      St('loginForm.formNotification').value = undefined
-      St('loginForm.formNotification').value = resetVal
-    }
+    // if (loginFormNotification) {
+    //   activatePopupSection('inicioSesion')()
+    //   resetVal = St('loginForm.formNotification').value
+    //   St('loginForm.formNotification').value = undefined
+    //   St('loginForm.formNotification').value = resetVal
+    // }
 
-    var registrarseClicks = Dom$.click(
-      dom.querySelector('[data-id="registrarse"]')
-    )
+    // var registrarseClicks = Dom$.click(
+    //   dom.querySelector('[data-id="registrarse"]')
+    // )
 
-    var olvidoClicks = Dom$.click(
-      dom.querySelector('[data-id="forgotBtn"]')
-    )
+    // var olvidoClicks = Dom$.click(
+    //   dom.querySelector('[data-id="forgotBtn"]')
+    // )
 
-    var ingresarClicks = Dom$.click(
-      dom.querySelector('button[data-id="ingresar-btn"]')
-    )
+    // var ingresarClicks = Dom$.click(
+    //   dom.querySelector('button[data-id="ingresar-btn"]')
+    // )
 
-    var volverDeRegisClicks = Dom$.click(
-      dom.querySelector('[data-id="volverLoginRegis"]')
-    )
+    // var volverDeRegisClicks = Dom$.click(
+    //   dom.querySelector('[data-id="volverLoginRegis"]')
+    // )
 
-    var volverDeOlvClicks = Dom$.click(
-      dom.querySelector('[data-id="volverLoginMail"]')
-    )
+    // var volverDeOlvClicks = Dom$.click(
+    //   dom.querySelector('[data-id="volverLoginMail"]')
+    // )
 
-    this.showOlvido = olvidoClicks.subscribe(
-      activatePopupSection('forgotPassword')
-    )
+    // this.showOlvido = olvidoClicks.subscribe(
+    //   activatePopupSection('forgotPassword')
+    // )
 
-    this.showRegistrar = registrarseClicks.subscribe(
-      activatePopupSection('registroUsuarios')
-    )
+    // this.showRegistrar = registrarseClicks.subscribe(
+    //   activatePopupSection('registroUsuarios')
+    // )
 
-    this.showLogin = window.Rx.Observable
-      .merge(
-        ingresarClicks,
-        volverDeRegisClicks,
-        volverDeOlvClicks)
-      .subscribe(activatePopupSection('inicioSesion'))
+    // this.showLogin = window.Rx.Observable
+    //   .merge(
+    //     ingresarClicks,
+    //     volverDeRegisClicks,
+    //     volverDeOlvClicks)
+    //   .subscribe(activatePopupSection('inicioSesion'))
 
-    this.onOlvidoSucces = St('forgot.formNotification').on('N')
-      .filter(function (notification) {
-        return notification.success
-      })
-      .subscribe(function () {
-        window.setTimeout(function () {
-          St('popUpHome.show').value = false
-        }, 4500)
-      })
+    // this.onOlvidoSucces = St('forgot.formNotification').on('N')
+    //   .filter(function (notification) {
+    //     return notification.success
+    //   })
+    //   .subscribe(function () {
+    //     window.setTimeout(function () {
+    //       St('popUpHome.show').value = false
+    //     }, 4500)
+    //   })
   }
 
   function destroy (s, f) {
