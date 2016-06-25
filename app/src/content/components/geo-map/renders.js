@@ -4,7 +4,7 @@ module.exports = function (dom) {
   function init () {
     var div = dom.appendChild(document.createElement('div'))
     div.id = 'mapContainer'
-    var map = L.map(div, {zoomControl: false}).setView([-34.59, -58.50], 11)
+    var map = L.map(div, {zoomControl: false}).setView([-34.52, -58.446], 13)
 
     L.Icon.Default.imagePath = '/images'
 
@@ -16,10 +16,14 @@ module.exports = function (dom) {
       })
       .addTo(map)
 
-    L.popup()
-      .setLatLng([-34.59, -58.50])
-      .setContent(popUpHtml)
-      .openOn(map)
+    L.popup({
+      maxWidth: 500,
+      closeOnClick: false,
+      closeButton: false
+    })
+    .setLatLng([-34.539, -58.446])
+    .setContent(popUpHtml)
+    .openOn(map)
   }
 
   return {

@@ -100,13 +100,26 @@ module.exports = function (dom) {
 
     // Home
     St('mainApp').value = {}
+    St('masInfo').value = {}
+
     var sideBarContentMenuClicks = Dom$.click(
       dom.querySelectorAll('[data-id="actionMenu"] button')
     )
+
     sideBarContentMenuClicks
       .map(function (e) { return e.currentTarget.getAttribute('data-target') })
       .subscribe(function (active) {
         St('mainApp.content').value = active
+      })
+
+    var infoContentMenuClicks = Dom$.click(
+      dom.querySelectorAll('#mas_info_side_menu > p')
+    )
+
+    infoContentMenuClicks
+      .map(function (e) { return e.currentTarget.getAttribute('data-target') })
+      .subscribe(function (active) {
+        St('masInfo.content').value = active
       })
   }
 

@@ -1,5 +1,6 @@
 import '../../assets/css/general.css'
 import './styles.css'
+
 import 'icon/user.svg'
 import 'icon/arboles.Aliso.svg'
 import 'icon/arboles.Caranday.svg'
@@ -18,10 +19,10 @@ import 'icon/plantin.svg'
 import 'icon/lugar.svg'
 import 'icon/info.svg'
 import 'icon/arrow.left.svg'
-
 import 'icon/social.facebook.svg'
 import 'icon/social.twitter.svg'
 import 'icon/social.google.svg'
+
 import html from './index.html'
 
 import 'component/svg-icon'
@@ -29,6 +30,7 @@ import 'component/form-vali'
 import 'component/pop-up'
 import 'component/side-bar'
 import 'component/geo-map'
+import 'component/scroll-items'
 import Pages from 'pages'
 import Proceses from './proceses'
 import Renders from './renders'
