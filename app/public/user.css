@@ -21,11 +21,16 @@ button{
     background: #FFF;
     color: #171717;
     padding: 4px 8px;
+    cursor: pointer;
 }
 .hide{display:none;}
 button:focus {outline:0;}svg-icon svg{
   height: inherit;
   width: inherit;
+}
+svg-icon {
+  width: 1em;
+  height: 1em;
 }form-vali{
     display: flex;
     flex-direction: column;
@@ -628,7 +633,7 @@ geo-map, geo-map>#mapContainer{
 	width: 100%;
 	height: 100%;
 }#popUpHome section {
-  max-width: 500px;
+  max-width: 555px;
 }
 aside#userAction {
   position: absolute;

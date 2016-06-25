@@ -4,73 +4,110 @@ import { DOM as Dom$ } from 'rx-dom'
 module.exports = function (dom) {
   function activatePopupSection (active) {
     return function () {
-      St('popUpHome.show').value = true
-      St('popUpHome.active').value = active
+      St('sideBar.active').value = active
     }
   }
 
   function init () {
-    // var signupFormNotification = St('signupForm.formNotification').value
-    // var loginFormNotification = St('loginForm.formNotification').value
-    // var resetVal
-    // if (signupFormNotification) {
-    //   activatePopupSection('registroUsuarios')()
-    //   resetVal = St('signupForm.formNotification').value
-    //   St('signupForm.formNotification').value = undefined
-    //   St('signupForm.formNotification').value = resetVal
-    // }
+    // Login
+    var signupFormNotification = St('signupForm.formNotification').value
+    var loginFormNotification = St('loginForm.formNotification').value
+    var resetVal
+    if (signupFormNotification) {
+      activatePopupSection('registroUsuarios')()
+      resetVal = St('signupForm.formNotification').value
+      St('signupForm.formNotification').value = undefined
+      St('signupForm.formNotification').value = resetVal
+    }
 
-    // if (loginFormNotification) {
-    //   activatePopupSection('inicioSesion')()
-    //   resetVal = St('loginForm.formNotification').value
-    //   St('loginForm.formNotification').value = undefined
-    //   St('loginForm.formNotification').value = resetVal
-    // }
+    if (loginFormNotification) {
+      activatePopupSection('inicioSesion')()
+      resetVal = St('loginForm.formNotification').value
+      St('loginForm.formNotification').value = undefined
+      St('loginForm.formNotification').value = resetVal
+    }
 
-    // var registrarseClicks = Dom$.click(
-    //   dom.querySelector('[data-id="registrarse"]')
-    // )
+    var sumarTusArbolesClicks = Dom$.click(
+      dom.querySelector('[data-id="sumarTusArboles"]')
+    )
+    var proponerUnLugarClicks = Dom$.click(
+      dom.querySelector('[data-id="proponerUnLugar"]')
+    )
 
-    // var olvidoClicks = Dom$.click(
-    //   dom.querySelector('[data-id="forgotBtn"]')
-    // )
+    var registrarseClicks = Dom$.click(
+      dom.querySelector('[data-id="registrarse-btn"]')
+    )
 
-    // var ingresarClicks = Dom$.click(
-    //   dom.querySelector('button[data-id="ingresar-btn"]')
-    // )
+    var olvidoClicks = Dom$.click(
+      dom.querySelector('[data-id="forgotBtn"]')
+    )
 
-    // var volverDeRegisClicks = Dom$.click(
-    //   dom.querySelector('[data-id="volverLoginRegis"]')
-    // )
+    var ingresarClicks = Dom$.click(
+      dom.querySelector('button[data-id="ingresar-btn"]')
+    )
 
-    // var volverDeOlvClicks = Dom$.click(
-    //   dom.querySelector('[data-id="volverLoginMail"]')
-    // )
+    var volverDeRegisClicks = Dom$.click(
+      dom.querySelector('[data-id="volverLoginRegis"]')
+    )
 
-    // this.showOlvido = olvidoClicks.subscribe(
-    //   activatePopupSection('forgotPassword')
-    // )
+    var volverDeOlvClicks = Dom$.click(
+      dom.querySelector('[data-id="volverLoginMail"]')
+    )
 
-    // this.showRegistrar = registrarseClicks.subscribe(
-    //   activatePopupSection('registroUsuarios')
-    // )
+    var volverAHomeClicks = Dom$.click(
+      dom.querySelectorAll('.volver')
+    )
 
-    // this.showLogin = window.Rx.Observable
-    //   .merge(
-    //     ingresarClicks,
-    //     volverDeRegisClicks,
-    //     volverDeOlvClicks)
-    //   .subscribe(activatePopupSection('inicioSesion'))
+    var conocerMasClicks = Dom$.click(
+      dom.querySelector('[data-id="conocerMas"]')
+    )
 
-    // this.onOlvidoSucces = St('forgot.formNotification').on('N')
-    //   .filter(function (notification) {
-    //     return notification.success
-    //   })
-    //   .subscribe(function () {
-    //     window.setTimeout(function () {
-    //       St('popUpHome.show').value = false
-    //     }, 4500)
-    //   })
+    this.showOlvido = olvidoClicks.subscribe(
+      activatePopupSection('forgotPassword')
+    )
+
+    this.showRegistrar = registrarseClicks.subscribe(
+      activatePopupSection('registroUsuarios')
+    )
+
+    this.volverAHome = volverAHomeClicks.subscribe(
+      activatePopupSection('mainApp')
+    )
+
+    this.showLogin = window.Rx.Observable
+      .merge(
+        ingresarClicks,
+        volverDeRegisClicks,
+        volverDeOlvClicks,
+        sumarTusArbolesClicks,
+        proponerUnLugarClicks)
+      .subscribe(activatePopupSection('inicioSesion'))
+
+    this.onOlvidoSucces = St('forgot.formNotification').on('N')
+      .filter(function (notification) {
+        return notification.success
+      })
+      .subscribe(function () {
+        window.setTimeout(function () {
+          St('sideBar.active').value = 'mainApp'
+        }, 4500)
+      })
+
+    conocerMasClicks.subscribe(function () {
+      St('masInformacion.show').value = true
+      St('masInformacion.active').value = 'masInfo'
+    })
+
+    // Home
+    St('mainApp').value = {}
+    var sideBarContentMenuClicks = Dom$.click(
+      dom.querySelectorAll('[data-id="actionMenu"] button')
+    )
+    sideBarContentMenuClicks
+      .map(function (e) { return e.currentTarget.getAttribute('data-target') })
+      .subscribe(function (active) {
+        St('mainApp.content').value = active
+      })
   }
 
   function destroy (s, f) {

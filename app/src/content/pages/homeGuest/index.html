@@ -1,113 +1,169 @@
-<side-bar>
-	<header>
-		<div id="user_options">
-			<button>Ingresar</button>
-			<a href="#">Registrarse</a>
+<side-bar id="sideBar">
+	<article data-id="mainApp" id="home_sidebar" class="active">
+		<header>
+			<div id="user_options">
+				<button id="ingresarBtn" data-id="ingresar-btn">Ingresar</button>
+				<button id="registrarseBtn" data-id="registrarse-btn">Registrarse</button>
+			</div>
+			<h1>JUNTOS SOMOS UN BOSQUE</h1>
+			<div id="arboles_data">
+				<div class="arbol-data">
+					<span class="arbol-nombre">Aliso</span>
+					<svg-icon type="arboles.Aliso"></svg-icon>
+					<span class="arbol-count">5</span>
+				</div>
+				<div class="arbol-data">
+					<span class="arbol-nombre">Caranday</span>
+					<svg-icon type="arboles.Caranday"></svg-icon>
+					<span class="arbol-count">2</span>
+				</div>
+				<div class="arbol-data">
+					<span class="arbol-nombre">Chica</span>
+					<svg-icon type="arboles.Chica"></svg-icon>
+					<span class="arbol-count">3</span>
+				</div>
+				<div class="arbol-data">
+					<span class="arbol-nombre">Sen</span>
+					<svg-icon type="arboles.Sen"></svg-icon>
+					<span class="arbol-count">7</span>
+				</div>
+				<div class="arbol-data">
+					<span class="arbol-nombre">Algarrobo</span>
+					<svg-icon type="arboles.Algarrobo"></svg-icon>
+					<span class="arbol-count">1</span>
+				</div>
+				<div class="arbol-data">
+					<span class="arbol-nombre">Ceibo</span>
+					<svg-icon type="arboles.Ceibo"></svg-icon>
+					<span class="arbol-count">9</span>
+				</div>
+		</header>
+		<div id="action_content">
+			<div id="action_menu" data-id="actionMenu">
+				<button id="suma_arboles_btn_content" class="active" data-target="action_content_suma">
+					<svg-icon type="plantin"></svg-icon>
+					Sumar arboles
+				</button>
+				<button id="proponer_lugar_content" data-target="action_content_lugar">
+					<svg-icon type="lugar"></svg-icon>
+					Donde plantar
+				</button>
+				<button id="info_btn_content" data-target="action_content_info">
+					<svg-icon type="info"></svg-icon>
+					Información
+				</button>
+			</div>
+			<div id="action_content_suma" class="action-content active">
+				<p>Si estás cuidando arbolitos en maceta en tu casa puedes mapearlos aquí</p>
+				<button id="suma_arboles_btn" class="action-button" data-id="sumarTusArboles">
+					Sumá tus arboles
+					<svg-icon type="plantin"></svg-icon>
+				</button>	
+			</div>
+			<div id="action_content_lugar" class="action-content">
+				<p>Si ves un espacio, plaza, parque, baldío, escuela, etc. donde puede crearse un bosque puedes mapearlo aquí.</p>
+				<button id="proponer_lugar" class="action-button" data-id="proponerUnLugar">
+					Proponé un lugar para plantar
+					<svg-icon type="lugar"></svg-icon>
+				</button>	
+			</div>
+			<div id="action_content_info" class="action-content">
+				<p>Juntos somos un bosque es un proyecto que surge de la nececidad de devolverle a la naturaleza su cuerpo, de manera colaborativa, haciendo plantaciones colectivas y asi apadrinando arboles nos volvemos guardianes de los bosques. </p>
+				<button id="ver_mas_info" class="action-button" data-id="conocerMas">
+					Conocer mas
+					<svg-icon type="info"></svg-icon>
+				</button>	
+			</div>
 		</div>
-		<h1>Juntos somos un bosque</h1>
-		<div id="arboles_data">
-			<div class="arbol-data">
-				<span class="arbol-nombre">Aliso</span>
-				<svg-icon type="arboles.Aliso"></svg-icon>
-				<span class="arbol-count">5</span>
-			</div>
-			<div class="arbol-data">
-				<span class="arbol-nombre">Caranday</span>
-				<svg-icon type="arboles.Caranday"></svg-icon>
-				<span class="arbol-count">2</span>
-			</div>
-			<div class="arbol-data">
-				<span class="arbol-nombre">Chica</span>
-				<svg-icon type="arboles.Chica"></svg-icon>
-				<span class="arbol-count">3</span>
-			</div>
-			<div class="arbol-data">
-				<span class="arbol-nombre">Sen</span>
-				<svg-icon type="arboles.Sen"></svg-icon>
-				<span class="arbol-count">7</span>
-			</div>
-			<div class="arbol-data">
-				<span class="arbol-nombre">Algarrobo</span>
-				<svg-icon type="arboles.Algarrobo"></svg-icon>
-				<span class="arbol-count">1</span>
-			</div>
-			<div class="arbol-data">
-				<span class="arbol-nombre">Ceibo</span>
-				<svg-icon type="arboles.Ceibo"></svg-icon>
-				<span class="arbol-count">9</span>
-			</div>
-	</header>
-	<div id="suma_arboles">
-		<p>Sumá tus arboles y hagamos un bosque</p>
-		<button id="suma_arboles_btn">
-			<svg-icon type="plantin.mas"></svg-icon>
-		</button>
-	</div> 
-
-	<button id="proponer_lugar">
-		Proponer un lugar
-		<svg-icon type="lugar"></svg-icon>
-	</button>
-	<pop-up id="popUpHome">
-		<section>
-			<article data-id="inicioSesion">
-				<h1>Inicio de sesión</h1>
-				<a class="social fb" href="auth/facebook">
-					<svg-icon type="social.facebook"></svg-icon>
-					Ingresar con Facebook
-				</a>
-				<a class="social tw" href="auth/twitter">
-					<svg-icon type="social.twitter"></svg-icon>
-					Ingresar con Twitter
-				</a>
-				<a class="social gl" href="auth/google">
-					<svg-icon type="social.google"></svg-icon>
-					Ingresar con Google
-				</a>
-				<form-vali id="loginForm" direction="login" ajax="false">
-					<label for="emailLoginForm">Mail</label>
-					<input id="emailLoginForm" data-label="email" data-rules="required isEmail ajaxMailExist" type="text"></input>
-					<label for="passLoginForm" data-rules="required">Contraseña</label>
-					<input id="passLoginForm" data-label="password" type="password"></input>
-					<a data-id="forgotBtn" class="registrate">¿Olvidaste tu contraseña?</a>
-					<a data-id="registrarse" class="registrate">¿Querés crear una cuenta?</a>
-					<button data-submit label-active="Ingresando">Ingresar</button>
-				</form-vali>
-			</article>
-			<article data-id="registroUsuarios">
-				<h1>Nueva cuenta</h1>
-				<a class="social fb" href="auth/facebook">
-					<svg-icon type="social.facebook"></svg-icon>
-					Registrate con Facebook
-				</a>
-				<a class="social tw" href="auth/twitter">
-					<svg-icon type="social.twitter"></svg-icon>
-					Registrate con Twitter
-				</a>
-				<a class="social gl" href="auth/google">
-					<svg-icon type="social.google"></svg-icon>
-					Registrate con Google
-				</a>
-				<form-vali id="signupForm" direction="signup" ajax="false">
-					<p class="info">o creá una cuenta con tu mail</p>
-					<label for="emailSignupForm">Mail</label>
-					<input id="emailSignupForm" data-label="email" data-rules="required isEmail ajaxMailDontExist" type="text"></input>
-					<label for="passSignupForm">Nueva contraseña</label>
-					<input id="passSignupForm" data-label="password" data-rules="required" type="password"></input>
-					<a data-id="volverLoginRegis" class="registrate">Volver al inicio de sesión</a>
-					<button data-submit label-active="Registrando">Registrar</button>
-				</form-vali>
-			</article>
-			<article data-id="forgotPassword">
-				<form-vali id="forgot" direction="forgot">
-				<h1>Recuperar contraseña</h1>
-					<label for="emailForgotForm">Mail</label>
-					<input id="emailForgotForm" data-label="email" data-rules="required isEmail ajaxMailExist" type="text"></input>
-					<a data-id="volverLoginMail" class="registrate">Volver al inicio de sesión</a>
-					<button data-submit label-active="Enviando" >Enviar</button>
-				</form-vali>
-			</article>
-		</section>
-	</pop-up>
+	</article>
+	
+	<article data-id="inicioSesion" class="loguineo hide">
+		<button class="volver"><svg-icon type="arrow.left"></svg-icon> Volver</button>
+		<h1>Inicio de sesión</h1>
+		<a class="social fb" href="auth/facebook">
+			<svg-icon type="social.facebook"></svg-icon>
+			Ingresar con Facebook
+		</a>
+		<a class="social tw" href="auth/twitter">
+			<svg-icon type="social.twitter"></svg-icon>
+			Ingresar con Twitter
+		</a>
+		<a class="social gl" href="auth/google">
+			<svg-icon type="social.google"></svg-icon>
+			Ingresar con Google
+		</a>
+		<form-vali id="loginForm" direction="login" ajax="false">
+			<label for="emailLoginForm">Mail</label>
+			<input id="emailLoginForm" data-label="email" data-rules="required isEmail ajaxMailExist" type="text"></input>
+			<label for="passLoginForm" data-rules="required">Contraseña</label>
+			<input id="passLoginForm" data-label="password" type="password"></input>
+			<a data-id="forgotBtn" class="registrate">¿Olvidaste tu contraseña?</a>
+			<a data-id="registrarse" class="registrate">¿Querés crear una cuenta?</a>
+			<button data-submit label-active="Ingresando">Ingresar</button>
+		</form-vali>
+	</article>
+	<article data-id="registroUsuarios" class="loguineo hide">
+		<button class="volver"><svg-icon type="arrow.left"></svg-icon> Volver</button>
+		<h1>Nueva cuenta</h1>
+		<a class="social fb" href="auth/facebook">
+			<svg-icon type="social.facebook"></svg-icon>
+			Registrate con Facebook
+		</a>
+		<a class="social tw" href="auth/twitter">
+			<svg-icon type="social.twitter"></svg-icon>
+			Registrate con Twitter
+		</a>
+		<a class="social gl" href="auth/google">
+			<svg-icon type="social.google"></svg-icon>
+			Registrate con Google
+		</a>
+		<form-vali id="signupForm" direction="signup" ajax="false">
+			<p class="info">o creá una cuenta con tu mail</p>
+			<label for="emailSignupForm">Mail</label>
+			<input id="emailSignupForm" data-label="email" data-rules="required isEmail ajaxMailDontExist" type="text"></input>
+			<label for="passSignupForm">Nueva contraseña</label>
+			<input id="passSignupForm" data-label="password" data-rules="required" type="password"></input>
+			<a data-id="volverLoginRegis" class="registrate">Volver al inicio de sesión</a>
+			<button data-submit label-active="Registrando">Registrar</button>
+		</form-vali>
+	</article>
+	<article data-id="forgotPassword" class="loguineo hide">
+		<button class="volver"><svg-icon type="arrow.left"></svg-icon> Volver</button>
+		<form-vali id="forgot" direction="forgot">
+		<h1>Recuperar contraseña</h1>
+			<label for="emailForgotForm">Mail</label>
+			<input id="emailForgotForm" data-label="email" data-rules="required isEmail ajaxMailExist" type="text"></input>
+			<a data-id="volverLoginMail" class="registrate">Ir a inicio de sesión</a>
+			<button data-submit label-active="Enviando" >Enviar</button>
+		</form-vali>
+	</article>
 </side-bar>
 <geo-map></geo-map>
+<pop-up id="masInformacion">
+		<section>
+			<article data-id="masInfo" id="mas_info">
+				<h1>Juntos somos un bosque</h1>
+				<div id="mas_info_content">
+					<div id="mas_info_side_menu">
+						<p>Introducción</p>
+						<p>Motivación</p>
+						<p>Quienes somos</p>
+						<p>Futuro</p>
+					</div>
+					<div id="mas_info_text">
+						<div>
+							En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.
+	Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.
+
+	Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra. 
+
+	La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.
+
+	Juntos, somos un BOSQUE.
+						</div>
+					</div>
+					
+				</div>
+			</article>
+		</section>
+</pop-up>

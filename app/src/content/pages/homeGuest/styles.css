@@ -7,6 +7,7 @@
 #home geo-map{
   flex: 1;
 }
+
 #arboles_data{
   display: flex;
 }
@@ -15,30 +16,210 @@
   flex-direction: column;
   align-items: center; 
 }
-.arbol-data .arbol-nombre:hover {display: block;}
-.arbol-data .arbol-nombre {display: none;}
+.arbol-count { font-size: 20px; }
+.arbol-data .arbol-nombre:hover {visibility: visible;}
+.arbol-data .arbol-nombre {visibility: hidden;}
 .arbol-data svg-icon{
   width: 70px;
   height: 70px;
+  margin-bottom: 10px;
+}
+.arbol-data svg-icon use{
+  fill:#fff;
 }
 #user_options {
-  padding: 10px
+  padding: 2px
 }
-#user_options a {
+#registrarseBtn {
+  border: none;
+  background: none;
+  color: white;
   float: right;
+  font-size: 15px;
+}
+#registrarseBtn:hover {
+  text-decoration: underline;
 }
 
 side-bar h1 {
   text-align: center;
   font-weight: 100;
-  font-size: 30px;
+  font-size: 25px;
+  margin: 20px 0;
 }
 side-bar header {
   background: #4CAF50;
   color: white;
+  padding: 5px 5px 20px;
+}
+#action_menu button:hover {
+  background: #DCDCDC;
+}
+#action_menu button {
+  color: #444;
+  font-size: 17px;
+  flex: 1;
+  border: none;
+  background: #CACACA;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #B5B5B5;
+  border-bottom: 1px solid #B5B5B5;
+}
+#action_menu button svg-icon{
+  display: block;
+  width: 25px;
+  height: 25px;
+}
+#action_menu button use{
+  fill: #444;
+}
+#action_menu button.active:hover {
+  background: #EAEAEA;
+}
+#action_menu button.active {
+  background: #EAEAEA;
+  border-bottom:none;
+  cursor: initial;
+}
+#action_content .action-content.active{
+  display: block;
+  background: #EAEAEA;
+}
+#action_content .action-content p {
+  margin: 25px 15px 20px;
+  color: #444;
+  font-size: 16px;
+}
+#action_content {
+  flex:1;
+  display: flex;
+  flex-direction: column;
+}
+#action_content .action-content{
+  display: none;
+  flex:1;
+  padding: 10px;
+}
+#action_menu {
+  height: 70px;
+  display: flex;
+}
+button.volver:hover {
+  text-decoration: underline;
+}
+button.volver {
+  border: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color:#444;
+}
+button.volver svg-icon use{
+ fill:#444; 
+}
+button.volver svg-icon{
+  width: 40px;
+  height: 40px;
+}
+.loguineo {
+  margin: 30px;
+  justify-content: center; 
+}
+.loguineo h1{
+  color:#444;
 }
 
 
+
+.action-button {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  float: right;
+}
+.action-button svg-icon {
+  margin-left: 5px;
+  height: 25px;
+  width: 25px;
+}
+
+#ver_mas_info {
+  border: 1px solid #3792B3;
+  background: #44B2DA;
+  color: #fff;
+  cursor: pointer;
+}
+#ver_mas_info:hover{
+  background: #3792B3;
+}
+#ver_mas_info svg-icon use{
+  fill:#fff;
+}
+
+#suma_arboles_btn:hover {
+  background: #419444;
+}
+#suma_arboles_btn{
+  background: #4CAF50;
+  border: 1px solid #419444;
+  color: white;
+}
+#suma_arboles_btn use{
+  fill:#fff;
+}
+
+#proponer_lugar {
+  border: 1px solid #D6AA00;
+  background: #FFCB00;
+  color: #4C4C4C;
+}
+#proponer_lugar:hover{
+  background: #FFD83F;
+}
+#proponer_lugar svg-icon use{
+  fill:#4C4C4C;
+}
+
+#masInformacion section{
+  width: 70%;
+  height: 70%;
+}
+
+#mas_info>h1{
+  text-align: center;
+  margin: 0 0 20px;
+}
+#mas_info_content{
+  display: flex;
+}
+#mas_info_side_menu{
+  width: 133px;
+  text-align: right;
+  margin-right: 30px;
+  color: green;
+}
+#mas_info_text{
+  flex: 1;
+  text-align: justify;
+  margin-right: 22px;
+  line-height: 22px;
+}
+#mas_info_side_menu p {
+  margin: 0 0 10px;
+  cursor: pointer;
+}
+#mas_info_side_menu p:first-child {
+  text-decoration: underline;
+}
 
 
 
@@ -52,20 +233,12 @@ button#ingresarBtn:hover{
   background: #EFEFEF;
 }
 button#ingresarBtn{
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  margin: 10px;
-  border: none;
   background: white;
-  border-radius: 5px;
-  color: #000;
-  padding: 4px 8px;
+  border-radius: 3px;
+  color: #616161;
+  padding: 3px 8px;
   font-size: 15px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
   border: 1px solid #ccc;
 }
 
@@ -84,7 +257,12 @@ button#ingresarBtn svg-icon use{
   transform: scale(1.8) translate(-4.5px, -3px);
 }
 
-#popUpHome a.social{
+#sideBar a.social svg-icon{
+  width: 20px;
+  height: 20px;
+}
+
+#sideBar a.social{
   border-radius: 3px;
   display: flex;
   margin: 6px;
@@ -96,37 +274,40 @@ button#ingresarBtn svg-icon use{
   cursor: pointer;
 }
 
-#popUpHome a.social use{
+#sideBar a.social use{
   fill:#fff;
 }
 
-#popUpHome a.social.fb:hover{
+#sideBar a.social.fb:hover{
   background:  #2D59A2;
 }
-#popUpHome a.social.fb{
+#sideBar a.social.fb{
   background: #47c;
   border-color: #2D59A2;
 }
 
-#popUpHome a.social.tw:hover{
+#sideBar a.social.tw:hover{
   background:  #0AC;
 }
-#popUpHome a.social.tw{
+#sideBar a.social.tw{
   background: #0cf;
   border-color: #0AC;
 }
 
-#popUpHome a.social.gl:hover{
+#sideBar a.social.gl:hover{
   background:  #AF3527;
 }
-#popUpHome a.social.gl{
+#sideBar a.social.gl{
   background: #d43;
   border-color: #AF3527;
 }
 
 
+form-vali > label{
+  color: #555;
+}
 #loginForm{
-    border-top: 1px solid #EFEFEF;
+    border-top: 1px solid #B5B5B5;
     margin-top: 20px;
 }
 .registrate{
@@ -152,7 +333,7 @@ button#ingresarBtn svg-icon use{
   font-weight: bold;
 }
 #signupForm .info{
-  border-top: 1px solid #EFEFEF;
+  border-top: 1px solid #B5B5B5;
   padding-top: 10px;
 }
 .info{

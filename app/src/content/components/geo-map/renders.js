@@ -1,3 +1,4 @@
+import popUpHtml from './template.html'
 var L = require('leaflet')
 module.exports = function (dom) {
   function init () {
@@ -14,6 +15,11 @@ module.exports = function (dom) {
         zoomOffset: -1
       })
       .addTo(map)
+
+    L.popup()
+      .setLatLng([-34.59, -58.50])
+      .setContent(popUpHtml)
+      .openOn(map)
   }
 
   return {
