@@ -247,12 +247,11 @@ button.volver svg-icon{
   margin-right: 30px;
   color: white;
   background: #44B2DA;
-  padding: 74px 20px 0 0;
+  padding: 82px 20px 0 0;
 }
 #mas_info_text{
   flex: 1;
   text-align: justify;
-  line-height: 22px;
   padding-right: 22px;
   overflow: auto;
 }
