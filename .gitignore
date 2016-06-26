@@ -3,3 +3,6 @@ api/config.json
 app/public/guest.js
 app/public/user.js
 app/public/reset.js
+app/public/guest.css
+app/public/user.css
+app/public/reset.css

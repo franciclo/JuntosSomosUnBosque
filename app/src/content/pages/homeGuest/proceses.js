@@ -38,6 +38,10 @@ module.exports = function (dom) {
       dom.querySelector('[data-id="registrarse-btn"]')
     )
 
+    var irARegistrarseClicks = Dom$.click(
+      dom.querySelector('[data-id="registrarse"]')
+    )
+
     var olvidoClicks = Dom$.click(
       dom.querySelector('[data-id="forgotBtn"]')
     )
@@ -66,9 +70,11 @@ module.exports = function (dom) {
       activatePopupSection('forgotPassword')
     )
 
-    this.showRegistrar = registrarseClicks.subscribe(
-      activatePopupSection('registroUsuarios')
-    )
+    this.showRegistrar = window.Rx.Observable
+      .merge(
+        irARegistrarseClicks,
+        registrarseClicks)
+      .subscribe(activatePopupSection('registroUsuarios'))
 
     this.volverAHome = volverAHomeClicks.subscribe(
       activatePopupSection('mainApp')
