@@ -6,3 +6,4 @@ app/public/reset.js
 app/public/guest.css
 app/public/user.css
 app/public/reset.css
+*.log
