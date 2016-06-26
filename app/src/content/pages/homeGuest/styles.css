@@ -247,7 +247,7 @@ button.volver svg-icon{
   margin-right: 30px;
   color: white;
   background: #44B2DA;
-  padding: 62px 30px 0 0;
+  padding: 74px 20px 0 0;
 }
 #mas_info_text{
   flex: 1;
@@ -271,8 +271,8 @@ button.volver svg-icon{
   display: block;
 }
 #mas_info_text>div>h1:first-child{
-  margin-top: 0;
-  font-size: 22px;
+  margin: 0 0 20px;
+  font-size: 30px;
 }
 
 
