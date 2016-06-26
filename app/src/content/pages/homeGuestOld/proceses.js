@@ -4,12 +4,12 @@ import { DOM as Dom$ } from 'rx-dom'
 module.exports = function (dom) {
   function activatePopupSection (active) {
     return function () {
-      St('sideBar.active').value = active
+      St('popUpHome.show').value = true
+      St('popUpHome.active').value = active
     }
   }
 
   function init () {
-    // Login
     var signupFormNotification = St('signupForm.formNotification').value
     var loginFormNotification = St('loginForm.formNotification').value
     var resetVal
@@ -27,15 +27,8 @@ module.exports = function (dom) {
       St('loginForm.formNotification').value = resetVal
     }
 
-    var sumarTusArbolesClicks = Dom$.click(
-      dom.querySelector('[data-id="sumarTusArboles"]')
-    )
-    var proponerUnLugarClicks = Dom$.click(
-      dom.querySelector('[data-id="proponerUnLugar"]')
-    )
-
     var registrarseClicks = Dom$.click(
-      dom.querySelector('[data-id="registrarse-btn"]')
+      dom.querySelector('[data-id="registrarse"]')
     )
 
     var olvidoClicks = Dom$.click(
@@ -54,14 +47,6 @@ module.exports = function (dom) {
       dom.querySelector('[data-id="volverLoginMail"]')
     )
 
-    var volverAHomeClicks = Dom$.click(
-      dom.querySelectorAll('.volver')
-    )
-
-    var conocerMasClicks = Dom$.click(
-      dom.querySelector('[data-id="conocerMas"]')
-    )
-
     this.showOlvido = olvidoClicks.subscribe(
       activatePopupSection('forgotPassword')
     )
@@ -70,17 +55,11 @@ module.exports = function (dom) {
       activatePopupSection('registroUsuarios')
     )
 
-    this.volverAHome = volverAHomeClicks.subscribe(
-      activatePopupSection('mainApp')
-    )
-
     this.showLogin = window.Rx.Observable
       .merge(
         ingresarClicks,
         volverDeRegisClicks,
-        volverDeOlvClicks,
-        sumarTusArbolesClicks,
-        proponerUnLugarClicks)
+        volverDeOlvClicks)
       .subscribe(activatePopupSection('inicioSesion'))
 
     this.onOlvidoSucces = St('forgot.formNotification').on('N')
@@ -89,37 +68,8 @@ module.exports = function (dom) {
       })
       .subscribe(function () {
         window.setTimeout(function () {
-          St('sideBar.active').value = 'mainApp'
+          St('popUpHome.show').value = false
         }, 4500)
-      })
-
-    conocerMasClicks.subscribe(function () {
-      St('masInformacion.show').value = true
-      St('masInformacion.active').value = 'masInfo'
-    })
-
-    // Home
-    St('mainApp').value = {}
-    St('masInfo').value = {}
-
-    var sideBarContentMenuClicks = Dom$.click(
-      dom.querySelectorAll('[data-id="actionMenu"] button')
-    )
-
-    sideBarContentMenuClicks
-      .map(function (e) { return e.currentTarget.getAttribute('data-target') })
-      .subscribe(function (active) {
-        St('mainApp.content').value = active
-      })
-
-    var infoContentMenuClicks = Dom$.click(
-      dom.querySelectorAll('#mas_info_side_menu > p')
-    )
-
-    infoContentMenuClicks
-      .map(function (e) { return e.currentTarget.getAttribute('data-target') })
-      .subscribe(function (active) {
-        St('masInfo.content').value = active
       })
   }
 

@@ -1,16 +1,17 @@
-import 'leaflet/dist/leaflet.css'
 import './styles.css'
 import 'component/svg-icon'
-import 'icon/calendar.svg'
-import 'icon/reloj.svg'
+import 'icon/chevron.right.svg'
+import 'icon/chevron.left.svg'
 
 import Components from 'components'
 import Renders from './renders'
+import Proceses from './proceses'
 
-Components.register('geo-map', function () {
+Components.register('scroll-items', function () {
   function init () {
     var dom = this
     Renders(dom).init()
+    Proceses(dom).init()
   }
 
   return {

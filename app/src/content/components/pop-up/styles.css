@@ -4,7 +4,7 @@ pop-up{
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.3);
     box-sizing: border-box;
     align-items: center;
     z-index: 9999;

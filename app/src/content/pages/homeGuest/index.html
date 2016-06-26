@@ -1,67 +1,232 @@
-<geo-map>
-	<button id="ingresarBtn" data-id="ingresar-btn">
-		<svg-icon type="user"></svg-icon>
-		Ingresar
-	</button>
-	<pop-up id="popUpHome">
+<side-bar id="sideBar">
+	<article data-id="mainApp" id="home_sidebar" class="active">
+		<header>
+			<div id="user_options">
+				<button id="ingresarBtn" data-id="ingresar-btn">Ingresar</button>
+				<button id="registrarseBtn" data-id="registrarse-btn">Registrarse</button>
+			</div>
+			<h1>JUNTOS SOMOS UN BOSQUE</h1>
+			<div id="arboles_data">
+				<scroll-items>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Aliso"></svg-icon>
+						<span class="arbol-nombre">Aliso</span>
+						<span class="arbol-count">5</span>
+					</div>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Caranday"></svg-icon>
+						<span class="arbol-nombre">Caranday</span>
+						<span class="arbol-count">2</span>
+					</div>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Chica"></svg-icon>
+						<span class="arbol-nombre">Chica</span>
+						<span class="arbol-count">3</span>
+					</div>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Sen"></svg-icon>
+						<span class="arbol-nombre">Sen</span>
+						<span class="arbol-count">7</span>
+					</div>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Algarrobo"></svg-icon>
+						<span class="arbol-nombre">Algarrobo</span>
+						<span class="arbol-count">1</span>
+					</div>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Ceibo"></svg-icon>
+						<span class="arbol-nombre">Ceibo</span>
+						<span class="arbol-count">9</span>
+					</div>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Aliso"></svg-icon>
+						<span class="arbol-nombre">Aliso</span>
+						<span class="arbol-count">5</span>
+					</div>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Caranday"></svg-icon>
+						<span class="arbol-nombre">Caranday</span>
+						<span class="arbol-count">2</span>
+					</div>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Chica"></svg-icon>
+						<span class="arbol-nombre">Chica</span>
+						<span class="arbol-count">3</span>
+					</div>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Sen"></svg-icon>
+						<span class="arbol-nombre">Sen</span>
+						<span class="arbol-count">7</span>
+					</div>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Algarrobo"></svg-icon>
+						<span class="arbol-nombre">Algarrobo</span>
+						<span class="arbol-count">1</span>
+					</div>
+					<div class="arbol-data">
+						<svg-icon type="arboles.Ceibo"></svg-icon>
+						<span class="arbol-nombre">Ceibo</span>
+						<span class="arbol-count">9</span>
+					</div>
+				</scroll-items>
+				<span id="arboles_data_total">Total: 150 arboles</span>
+			</div>
+		</header>
+		<div id="action_content">
+			<div id="action_menu" data-id="actionMenu">
+				<button id="suma_arboles_btn_content" class="active" data-target="action_content_suma">
+					<svg-icon type="plantin"></svg-icon>
+					Sumar arboles
+				</button>
+				<button id="proponer_lugar_content" data-target="action_content_lugar">
+					<svg-icon type="lugar"></svg-icon>
+					Donde plantar
+				</button>
+				<button id="info_btn_content" data-target="action_content_info">
+					<svg-icon type="info"></svg-icon>
+					Información
+				</button>
+			</div>
+			<div id="action_content_suma" class="action-content active">
+				<p>Si estás cuidando arbolitos en maceta en tu casa puedes mapearlos aquí</p>
+				<button id="suma_arboles_btn" class="action-button" data-id="sumarTusArboles">
+					<svg-icon type="plantin"></svg-icon>
+					Sumá tus arboles
+				</button>	
+			</div>
+			<div id="action_content_lugar" class="action-content">
+				<p>Si ves un espacio, plaza, parque, baldío, escuela, etc. donde puede crearse un bosque puedes mapearlo aquí.</p>
+				<button id="proponer_lugar" class="action-button" data-id="proponerUnLugar">
+					<svg-icon type="lugar"></svg-icon>
+					Proponé un lugar para plantar
+				</button>	
+			</div>
+			<div id="action_content_info" class="action-content">
+				<p>Estamos co-creando un Bosque mediante siembras y plantaciones colectivas en festivales y eventos, a través de una red de personas que cultivan arbolitos en sus casas.</p>
+				<button id="ver_mas_info" class="action-button" data-id="conocerMas">
+					<svg-icon type="info"></svg-icon>
+					Conocé mas
+				</button>	
+			</div>
+		</div>
+	</article>
+	
+	<article data-id="inicioSesion" class="loguineo hide">
+		<button class="volver"><svg-icon type="arrow.left"></svg-icon> Volver</button>
+		<h1>Inicio de sesión</h1>
+		<a class="social fb" href="auth/facebook">
+			<svg-icon type="social.facebook"></svg-icon>
+			Ingresar con Facebook
+		</a>
+		<a class="social tw" href="auth/twitter">
+			<svg-icon type="social.twitter"></svg-icon>
+			Ingresar con Twitter
+		</a>
+		<a class="social gl" href="auth/google">
+			<svg-icon type="social.google"></svg-icon>
+			Ingresar con Google
+		</a>
+		<form-vali id="loginForm" direction="login" ajax="false">
+			<label for="emailLoginForm">Mail</label>
+			<input id="emailLoginForm" data-label="email" data-rules="required isEmail ajaxMailExist" type="text"></input>
+			<label for="passLoginForm" data-rules="required">Contraseña</label>
+			<input id="passLoginForm" data-label="password" type="password"></input>
+			<a data-id="forgotBtn" class="registrate">¿Olvidaste tu contraseña?</a>
+			<a data-id="registrarse" class="registrate">¿Querés crear una cuenta?</a>
+			<button data-submit label-active="Ingresando">Ingresar</button>
+		</form-vali>
+	</article>
+	<article data-id="registroUsuarios" class="loguineo hide">
+		<button class="volver"><svg-icon type="arrow.left"></svg-icon> Volver</button>
+		<h1>Nueva cuenta</h1>
+		<a class="social fb" href="auth/facebook">
+			<svg-icon type="social.facebook"></svg-icon>
+			Registrate con Facebook
+		</a>
+		<a class="social tw" href="auth/twitter">
+			<svg-icon type="social.twitter"></svg-icon>
+			Registrate con Twitter
+		</a>
+		<a class="social gl" href="auth/google">
+			<svg-icon type="social.google"></svg-icon>
+			Registrate con Google
+		</a>
+		<form-vali id="signupForm" direction="signup" ajax="false">
+			<p class="info">o creá una cuenta con tu mail</p>
+			<label for="emailSignupForm">Mail</label>
+			<input id="emailSignupForm" data-label="email" data-rules="required isEmail ajaxMailDontExist" type="text"></input>
+			<label for="passSignupForm">Nueva contraseña</label>
+			<input id="passSignupForm" data-label="password" data-rules="required" type="password"></input>
+			<a data-id="volverLoginRegis" class="registrate">Volver al inicio de sesión</a>
+			<button data-submit label-active="Registrando">Registrar</button>
+		</form-vali>
+	</article>
+	<article data-id="forgotPassword" class="loguineo hide">
+		<button class="volver"><svg-icon type="arrow.left"></svg-icon> Volver</button>
+		<form-vali id="forgot" direction="forgot">
+		<h1>Recuperar contraseña</h1>
+			<label for="emailForgotForm">Mail</label>
+			<input id="emailForgotForm" data-label="email" data-rules="required isEmail ajaxMailExist" type="text"></input>
+			<a data-id="volverLoginMail" class="registrate">Ir a inicio de sesión</a>
+			<button data-submit label-active="Enviando" >Enviar</button>
+		</form-vali>
+	</article>
+</side-bar>
+<geo-map></geo-map>
+<pop-up id="masInformacion">
 		<section>
-			<article data-id="inicioSesion">
-				<h1>Inicio de sesión</h1>
-				<a class="social fb" href="auth/facebook">
-					<svg-icon type="social.facebook"></svg-icon>
-					Ingresar con Facebook
-				</a>
-				<a class="social tw" href="auth/twitter">
-					<svg-icon type="social.twitter"></svg-icon>
-					Ingresar con Twitter
-				</a>
-				<a class="social gl" href="auth/google">
-					<svg-icon type="social.google"></svg-icon>
-					Ingresar con Google
-				</a>
-				<form-vali id="loginForm" direction="login" ajax="false">
-					<label for="emailLoginForm">Mail</label>
-					<input id="emailLoginForm" data-label="email" data-rules="required isEmail ajaxMailExist" type="text"></input>
-					<label for="passLoginForm" data-rules="required">Contraseña</label>
-					<input id="passLoginForm" data-label="password" type="password"></input>
-					<a data-id="forgotBtn" class="registrate">¿Olvidaste tu contraseña?</a>
-					<a data-id="registrarse" class="registrate">¿Querés crear una cuenta?</a>
-					<button data-submit label-active="Ingresando">Ingresar</button>
-				</form-vali>
-			</article>
-			<article data-id="registroUsuarios">
-				<h1>Nueva cuenta</h1>
-				<a class="social fb" href="auth/facebook">
-					<svg-icon type="social.facebook"></svg-icon>
-					Registrate con Facebook
-				</a>
-				<a class="social tw" href="auth/twitter">
-					<svg-icon type="social.twitter"></svg-icon>
-					Registrate con Twitter
-				</a>
-				<a class="social gl" href="auth/google">
-					<svg-icon type="social.google"></svg-icon>
-					Registrate con Google
-				</a>
-				<form-vali id="signupForm" direction="signup" ajax="false">
-					<p class="info">o creá una cuenta con tu mail</p>
-					<label for="emailSignupForm">Mail</label>
-					<input id="emailSignupForm" data-label="email" data-rules="required isEmail ajaxMailDontExist" type="text"></input>
-					<label for="passSignupForm">Nueva contraseña</label>
-					<input id="passSignupForm" data-label="password" data-rules="required" type="password"></input>
-					<a data-id="volverLoginRegis" class="registrate">Volver al inicio de sesión</a>
-					<button data-submit label-active="Registrando">Registrar</button>
-				</form-vali>
-			</article>
-			<article data-id="forgotPassword">
-				<form-vali id="forgot" direction="forgot">
-				<h1>Recuperar contraseña</h1>
-					<label for="emailForgotForm">Mail</label>
-					<input id="emailForgotForm" data-label="email" data-rules="required isEmail ajaxMailExist" type="text"></input>
-					<a data-id="volverLoginMail" class="registrate">Volver al inicio de sesión</a>
-					<button data-submit label-active="Enviando" >Enviar</button>
-				</form-vali>
+			<article data-id="masInfo" id="mas_info">
+					<div id="mas_info_side_menu">
+						<p class="active" data-target="mas_info_intro">Introducción</p>
+						<p data-target="mas_info_motivacion">¿Por qué?</p>
+						<p data-target="mas_info_quienessomos">Quienes somos</p>
+					</div>
+					<div id="mas_info_text">
+						<div id="mas_info_intro" class="active">
+							<h1>Introducción</h1>
+							En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.<br><br>
+							Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.<br><br>
+							Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.<br><br>
+							La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.<br><br>
+							Juntos, somos un BOSQUE.
+						</div>
+						<div id="mas_info_quienessomos">
+							<h1>¿Quienes somos?</h1>
+							Un árbol para mi vereda es una organización sin fines de lucro que trabaja para brindar las herramientas que generan en el ser humano una re-conexión con la naturaleza.<br><br>
+
+							Buscamos incrementar el verde urbano y la conciencia ambiental enfatizando el vínculo de mutuo beneficio entre hombre y árbol, promoviendo una forma de vida basada en el respeto y entendimiento de todo lo que nos rodea.<br><br>
+
+							Motivamos a las personas a criar y plantar más árboles, a través de programas de capacitación, concientización ambiental y participación ciudadana, centrados en la producción de árboles. <br><br>
+
+							Contamos con una Red de Cultivo de especies nativas y comestibles que se está desarrollando en distintos puntos de la Capital Federal y el Gran Buenos Aires.<br><br>
+
+							Realizamos talleres en centros culturales, huertas comunitarias, jardines de infantes, escuelas primarias y secundarias, centros de rehabilitación de adicciones, centros de jubilados y unidades penitenciarias. En estos encuentros de capacitación y producción realizamos desde la siembra y las distintas etapas de vivero, hasta las técnicas de plantado y el cuidado de cada especie. <br><br>
+
+							Cada espacio donde damos un taller se convierte en un pequeño vivero productor.<br><br>
+
+							Cuidar y ver crecer un árbol es una posibilidad simple y concreta de vincularse con la naturaleza. Esta re-conexión produce cambios en las conductas de los ciudadanos sobre su entorno natural y social. <br>
+							Un barrio donde sus habitantes cultivan, plantan y cuidan árboles tiende a convertirse en un lugar más saludable, más armónico, más bello.<br><br>
+
+							Los viveros comunitarios son centros de capacitación en cultivo de árboles. En ellos enseñamos un oficio con salida laboral. Funcionan como plataforma de reunión, divulgación de prácticas sustentables, cultura y expresiones artísticas para el desarrollo del ser humano como ser natural.<br>
+							Son emprendimientos productivos que facilitan la inclusión y la reinserción de sectores sociales vulnerables.
+						</div>
+						<div id="mas_info_motivacion">
+							<h1>¿Por que?</h1>
+							Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.<br>
+							La OMS propone entre 10 y 15 mts2 de espacios verdes por habitante. Al día de hoy, en Capital Federal, tenemos 6,2 mts2 promedio. Y en los barrios vulnerable esa cifra desciende a 1,5 mts2 por habitante.<br><br>
+
+							De Protesta a Propuesta Activa<br>
+							Existe un preocupación social respecto a la necesidad de tener más y mejores espacios verdes en la Ciudad. Proponemos convertir al ciudadano pasivo en un agente activo, en un criador de árboles en su balcón, patio, ventana o terraza.<br>
+							Así se genera una relación Ganar-Ganar-Ganar:<br>
+							Gana el Ciudadano: Cambia su actitud y se involucra en los temas que le importan y con el espacio público que lo rodea.<br>
+							Gana el Municipio: obtiene nuevos espacios verdes con una alta participación comunitaria y una reducción muy significativa en costos (en 2013 se pagaban $900 pesos por árbol plantado, de esta forma serían producidos por la comunidad).<br>
+							Gana el Ecosistema del que formamos parte al haber nuevo refugio y alimento para la fauna local. (Persona-Comunidad-Planeta)<br><br>
+
+							Hacia una Masa Crítica de árboles nativos<br>
+							El término “hace referencia al número de individuos involucrados en un fenómeno a partir del cual éste adquiere una dinámica propia que le permite sostenerse y crecer por sí mismo.”<br>
+							A febrero de 2016 llevamos sembrados más de 10.000 árboles y esta cifra crece semana a semana.
+						</div>
+					</div>
 			</article>
 		</section>
-	</pop-up>
-</geo-map>
+</pop-up>
