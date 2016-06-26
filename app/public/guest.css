@@ -204,10 +204,6 @@ button.volver svg-icon{
   width: 25px;
 }
 
-
-
-
-
 #ver_mas_info {
   border: 1px solid #3792B3;
   background: #44B2DA;
@@ -220,13 +216,6 @@ button.volver svg-icon{
 #ver_mas_info svg-icon use{
   fill:#fff;
 }
-
-
-
-
-
-
-
 #suma_arboles_btn:hover {
   background: #419444;
 }
@@ -266,25 +255,31 @@ button.volver svg-icon{
 #masInformacion section{
   width: 60%;
   height: 85%;
+  padding:0;
+  border: none;
 }
-#mas_info>h1{
-  text-align: center;
-  margin: 0 0 5px;
+#masInformacion section svg-icon[type="close"] {
+  right: 14px;
 }
-#mas_info_content{
+#mas_info{
   display: flex;
+  height: 100%;
+  overflow: hidden;
 }
 #mas_info_side_menu{
   width: 133px;
   text-align: right;
   margin-right: 30px;
-  color: green;
+  color: white;
+  background: #44B2DA;
+  padding: 62px 30px 0 0;
 }
 #mas_info_text{
   flex: 1;
   text-align: justify;
-  margin-right: 22px;
   line-height: 22px;
+  padding-right: 22px;
+  overflow: auto;
 }
 #mas_info_side_menu p {
   margin: 0 0 10px;
@@ -295,16 +290,15 @@ button.volver svg-icon{
 }
 #mas_info_text>div{
   display: none;
+  margin-top: 30px;
 }
 #mas_info_text>.active{
   display: block;
 }
-#mas_info>p{
-  text-align: center;
-  margin: 0 0 20px;
-  color: #555;
+#mas_info_text>div>h1:first-child{
+  margin-top: 0;
+  font-size: 22px;
 }
-
 
 
 
@@ -525,7 +519,7 @@ form-vali>span.notification-msg.show {
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.3);
     box-sizing: border-box;
     align-items: center;
     z-index: 9999;
