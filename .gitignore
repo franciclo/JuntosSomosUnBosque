@@ -2,3 +2,4 @@ node_modules
 api/config.json
 app/public/guest.js
 app/public/user.js
+app/public/reset.js
