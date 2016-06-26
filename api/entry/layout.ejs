@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1, minimum-scale=1,maximum-scale=1, user-scalable=0, width=device-width, height=device-height" />
     <meta name="format-detection" content="telephone=no" />
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; img-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'"> -->
-    <title>Justos Somos Un Bosque</title>
+    <title>Juntos Somos Un Bosque</title>
     <link href="<%= entryFilename %>.css" rel="stylesheet">
 </head>
   <body>
@@ -25,10 +25,28 @@
         window.$tate('<%= formNotification.path %>').value = JSON.parse('<%- formNotification.value %>')
       </script>
     <% } %>
-    
+
     <% if (typeof userName !== 'undefined') { %>
       <script type="text/javascript">
         window.$tate('user.name').value = '<%= userName %>'
+      </script>
+    <% } %>
+
+    <% if (typeof primeraVez !== 'undefined' && primeraVez) { %>
+      <script type="text/javascript">
+        window.$tate('primeraVezBool').value = true
+      </script>
+    <% } %>
+
+    <% if (typeof userType !== 'undefined') { %>
+      <script type="text/javascript">
+        window.$tate('user.type').value = '<%= userType %>'
+      </script>
+    <% } %>
+
+    <% if (typeof location !== 'undefined') { %>
+      <script type="text/javascript">
+        window.$tate('user.location').value = '<%= location %>'
       </script>
     <% } %>
   </body>

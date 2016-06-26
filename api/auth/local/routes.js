@@ -25,8 +25,6 @@ module.exports = function (app, passport) {
 
   app.get('/reset', require('./controller').reset)
 
-  app.get('/mellamo', isLoggedIn, require('./controller').nombrar)
-
   // unlink -----------------------------------
 
   app.get('/unlink/local', isLoggedIn,

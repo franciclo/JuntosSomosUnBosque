@@ -1,6 +1,7 @@
 side-bar{
   height: 100%;
   background: #EAEAEA;
+  overflow: hidden;
 }
 side-bar section svg-icon[type="close"]{
   position: absolute;

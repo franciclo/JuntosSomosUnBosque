@@ -31,6 +31,7 @@ app.use(flash())
 require('./auth/routes')(app, passport)
 require('./entry')(app)
 require('./validations')(app)
+require('./arboles')(app)
 
 app.listen(port)
 console.log('Juntos Somos Un Bosque en puerto ' + port)

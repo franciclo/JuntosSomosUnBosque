@@ -62,7 +62,7 @@ module.exports = function (passport) {
               return done(null, false, req.flash('formNotification', {path: 'signupForm.formNotification', value: {success: false, text: 'El mail ya esta siendo usado'}}))
             } else {
               var newUser = new User()
-
+              newUser.local.name = req.body.name
               newUser.local.email = email
               newUser.local.password = newUser.generateHash(password)
 
@@ -89,6 +89,7 @@ module.exports = function (passport) {
             // Using 'loginMessage instead of signupMessage because it's used by /connect/local'
             } else {
               user = req.user
+              user.local.name = req.body.name
               user.local.email = email
               user.local.password = user.generateHash(password)
               user.save(function (err) {
@@ -193,16 +194,5 @@ module.exports.reset = function (req, res) {
         res.json({success: true, text: 'Contraseña cambiada, redireccionando..'})
       })
     })
-  })
-}
-
-module.exports.nombrar = function (req, res) {
-  var user = req.user
-  user.local.name = req.query.name
-  user.save(function (err) {
-    if (err) {
-      res.json({success: false, text: 'Error al guardar tu nombre'})
-    }
-    res.json({success: true, text: 'Nombre guardado!'})
   })
 }

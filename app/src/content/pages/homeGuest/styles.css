@@ -3,6 +3,7 @@
 }
 #home side-bar{
   width: 400px;
+  border-right: 1px solid #CACACA;
 }
 #home geo-map{
   flex: 1;
@@ -108,7 +109,6 @@ side-bar header {
   flex:1;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #CACACA;
 }
 #action_content .action-content{
   display: none;
@@ -254,6 +254,7 @@ button.volver svg-icon{
   text-align: justify;
   padding-right: 22px;
   overflow: auto;
+  color:#444;
 }
 #mas_info_side_menu p {
   margin: 0 0 10px;
@@ -281,10 +282,10 @@ button.volver svg-icon{
 
 
 
-button#ingresarBtn:hover{
+#ingresarBtn:hover{
   background: #EFEFEF;
 }
-button#ingresarBtn{
+#ingresarBtn{
   background: white;
   border-radius: 3px;
   color: #414141;
@@ -294,7 +295,7 @@ button#ingresarBtn{
   border: 1px solid #868686;
 }
 
-button#ingresarBtn svg-icon{
+#ingresarBtn svg-icon{
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -303,8 +304,11 @@ button#ingresarBtn svg-icon{
   margin-right: 5px;
   overflow: hidden;
 }
-
-button#ingresarBtn svg-icon use{
+#ingresarBtn svg-icon svg{
+  position: relative;
+  top: 4px;
+}
+#ingresarBtn svg-icon use{
   fill:#fff;
   transform: scale(1.8) translate(-4.5px, -3px);
 }
@@ -409,3 +413,43 @@ form-vali > label{
   text-align: center;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sponsors {
+  height: 60px;
+}
+#sponsors a {
+  width: 55px;
+  height: 50px;
+  display: inline-block;
+  background-size: contain;
+  margin-left: 18px; 
+}
+#A_2 {
+  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/1.png") no-repeat;
+}/*#A_2*/
+
+#A_4 {
+  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/3.png") no-repeat;
+}/*#A_4*/
+
+#A_5 {
+  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/4.png") no-repeat;
+}/*#A_5*/
+#A_6 {
+  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/5.png") no-repeat;
+}/*#A_6*/
+#A_8 {
+  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/7.png") no-repeat;
+}/*#A_8*/

@@ -1,42 +1,283 @@
-#popUpHome section {
-  max-width: 555px;
+#home{
+  display: flex;
 }
-aside#userAction {
+#home side-bar{
+  width: 400px;
+  border-right: 1px solid #CACACA;
+}
+#home geo-map{
+  flex: 1;
+}
+
+#arboles_data{
+  padding-top: 20px;
+  position: relative;
+}
+
+#arboles_data_total{
   position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  margin: 10px;
+  bottom: -30px;
+  right: 5px;
+  font-size: 12px;
+  background: white;
+  color: green;
+  padding: 1px 5px;
+  border-radius: 16px;
 }
+
+.arbol-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.arbol-data:hover .arbol-nombre {visibility: visible;}
+.arbol-count { font-size: 20px; }
+.arbol-data .arbol-nombre {
+  visibility: hidden;
+  position: absolute;
+  top: -30px;
+  width: 100%;
+  text-align: center;
+}
+.arbol-data svg-icon{
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10px;
+}
+.arbol-data svg-icon use{
+  fill:#fff;
+}
+
+
+side-bar h1 {
+  text-align: center;
+  font-weight: 100;
+  font-size: 25px;
+  margin: 20px 0;
+}
+side-bar header {
+  background: #4CAF50;
+  color: white;
+  padding: 5px 5px 40px;
+}
+#action_menu button:hover {
+  background: #DCDCDC;
+}
+#action_menu button {
+  color: #444;
+  font-size: 15px;
+  flex: 1;
+  border: none;
+  background: #CACACA;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #B5B5B5;
+  border-bottom: 1px solid #B5B5B5;
+}
+#action_menu button svg-icon{
+  display: block;
+  width: 25px;
+  height: 25px;
+}
+#action_menu button use{
+  fill: #444;
+}
+#action_menu button.active:hover {
+  background: #EAEAEA;
+}
+#action_menu button.active {
+  background: #EAEAEA;
+  border-bottom:none;
+  cursor: initial;
+}
+#action_content .action-content.active{
+  display: block;
+  background: #EAEAEA;
+}
+#action_content .action-content p {
+  margin: 10px 5px 15px;
+  color: #444;
+  font-size: 15px;
+  background: #FFF;
+  padding: 13px;
+}
+#action_content {
+  flex:1;
+  display: flex;
+  flex-direction: column;
+}
+#action_content .action-content{
+  display: none;
+  flex:1;
+  padding: 10px;
+}
+#action_menu {
+  height: 60px;
+  display: flex;
+}
+button.volver:hover {
+  text-decoration: underline;
+}
+button.volver {
+  border: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color:#444;
+}
+button.volver svg-icon use{
+ fill:#444; 
+}
+button.volver svg-icon{
+  width: 40px;
+  height: 40px;
+}
+
+
+
+
+
+
+
+.action-button {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  float: right;
+}
+.action-button svg-icon {
+  margin-right: 5px;
+  height: 25px;
+  width: 25px;
+}
+
+#ver_mas_info {
+  border: 1px solid #3792B3;
+  background: #44B2DA;
+  color: #fff;
+  cursor: pointer;
+}
+#ver_mas_info:hover{
+  background: #3792B3;
+}
+#ver_mas_info svg-icon use{
+  fill:#fff;
+}
+#suma_arboles_btn:hover {
+  background: #419444;
+}
+#suma_arboles_btn{
+  background: #4CAF50;
+  border: 1px solid #419444;
+  color: white;
+}
+#suma_arboles_btn use{
+  fill:#fff;
+}
+
+#proponer_lugar {
+  color: #4C4C4C;
+  background: #FFE551;
+  border: 1px solid #E4CE4C;
+}
+#proponer_lugar:hover{
+  background: #E4CE4C;
+}
+#proponer_lugar svg-icon use{
+  fill:#4C4C4C;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#masInformacion section{
+  width: 60%;
+  height: 85%;
+  padding:0;
+  border: none;
+}
+#masInformacion section svg-icon[type="close"] {
+  right: 14px;
+}
+#mas_info{
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+#mas_info_side_menu{
+  width: 133px;
+  text-align: right;
+  margin-right: 30px;
+  color: white;
+  background: #44B2DA;
+  padding: 82px 20px 0 0;
+}
+#mas_info_text{
+  flex: 1;
+  text-align: justify;
+  padding-right: 22px;
+  overflow: auto;
+  color:#444;
+}
+#mas_info_side_menu p {
+  margin: 0 0 10px;
+  cursor: pointer;
+}
+#mas_info_side_menu p.active {
+  text-decoration: underline;
+}
+#mas_info_text>div{
+  display: none;
+  margin-top: 30px;
+}
+#mas_info_text>.active{
+  display: block;
+}
+#mas_info_text>div>h1:first-child{
+  margin: 0 0 20px;
+  font-size: 30px;
+}
+
+
+
+
+
+
 
 button#userBtn:hover{
   background: #EFEFEF;
 }
 button#userBtn{
   background: white;
-  border-radius: 5px;
-  color: #000;
+  border-radius: 3px;
+  color: #414141;
   padding: 4px 8px;
   font-size: 15px;
   cursor: pointer;
-  display: flex;
+  border: 1px solid #868686;
+  display: inline-flex;
   align-items: center;
-  border: 1px solid #ccc;
 }
 
-aside svg-icon[type="apagar"]{
-  width: 20px;
-  height: 20px;
-  overflow: hidden;
-}
-
-button#userBtn svg-icon[type="triangle"]{
-  width: 20px;
-  height: 20px;
-  overflow: hidden;
-}
-
-button#userBtn svg-icon[type="user"]{
+button#userBtn svg-icon{
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -46,85 +287,166 @@ button#userBtn svg-icon[type="user"]{
   overflow: hidden;
 }
 
-button#userBtn svg-icon[type="user"] use{
+button#userBtn svg-icon use{
   fill:#fff;
   transform: scale(1.8) translate(-4.5px, -3px);
 }
-aside#userAction aside:hover{
-  background: #EFEFEF;
-}
-aside#userAction aside.show {
-  display: flex;
-  animation: baja 100ms linear;
-}
-aside#userAction aside {
-  box-sizing: border-box;
-  position: absolute;
-  left: 0;
-  width: 100%;
-  top: 10px;
-  background: white;
-  border: 1px solid #CCCCCC;
-  font-size: 14px;
-  height: 50px;
-  border-radius: 0 0 4px 4px;
-  z-index: -1;
-  padding-top: 20px;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0px 4px 5px -4px #000;
-  
-}
 
-@keyframes baja {
-  from {
-    padding-top: 0;
-    height:30px;
-  }
-  to {
-    padding-top: 20px;
-    height:50px;
-  }
-}
 
-button#userBtn svg-icon[type="apagar"] use{
-  transform: scale(1.3);
-}
 
-#agregarArbolesBtn{
-  position: absolute;
-  top: 1px;
-  left: 5px;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
-  border: 1px solid #3D801D;
-  font-size: 17px;
-  background: #54A22E;
+#user_options {
+  padding: 2px
+}
+#salirBtn {
+  border: none;
+  background: none;
   color: white;
+  float: right;
+  font-size: 15px;
+  align-items: center;
+  display: flex;
+}
+#salirBtn:hover {
+  text-decoration: underline;
+}
+#salirBtn svg-icon {
+  width: 27px;
+  height: 27px;
+}
+#salirBtn svg-icon use {
+    fill: #fff;
+}
+
+
+
+
+.sidebar-section {
+  margin: 30px;
+  justify-content: center; 
+}
+.sidebar-section h1{
+  color:#444;
+}
+
+#sideBar a.social svg-icon{
+  width: 20px;
+  height: 20px;
+}
+#ubicacionLocalForm{
+  display: flex;
+}
+#ubicacionLocalForm button{
+  flex:1;
+  border-radius: 0;
+}
+#localForm select:hover, #ubicacionLocalForm button:hover{
+  background-color: #D4D4D4;
+}
+#ubicacionLocalForm button:first-child{
+  border-right: none;
+}
+#localForm select {
+  height: 30px;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid #A9A9A9;
+}
+#sideBar a.social{
+  border-radius: 3px;
+  display: flex;
+  margin: 6px;
+  color: #fff;
+  text-decoration: none;
+  align-items: center;
+  padding: 4px;
+  border:1px solid;
   cursor: pointer;
 }
 
-#agregarArbolesBtn:hover {
-  border: 1px solid #3D801D;
-  background: #3D801D;
+#sideBar a.social use{
+  fill:#fff;
 }
 
-#agregarArbolesBtn svg-icon{
-  width: 20px;
-  height: 25px;
-  margin: -4px 0;
+#sideBar a.social.fb:hover{
+  background:  #2D59A2;
 }
-#agregarArbolesBtn svg-icon use{
-  fill: #fff;
-  transform: scale(1.5) translate(-3.5px, -4.5px);
+#sideBar a.social.fb{
+  background: #47c;
+  border-color: #2D59A2;
 }
-#tablaMisArboles {
+
+#sideBar a.social.tw:hover{
+  background:  #0AC;
+}
+#sideBar a.social.tw{
+  background: #0cf;
+  border-color: #0AC;
+}
+
+#sideBar a.social.gl:hover{
+  background:  #AF3527;
+}
+#sideBar a.social.gl{
+  background: #d43;
+  border-color: #AF3527;
+}
+
+
+
+
+
+
+
+#popUpBienvenido section {
+  width: 400px
+}
+#ubicacionLocalFormWelcome{
   width: 100%;
+  height: 200px;
+  display: none;
+  margin-top: 15px;
 }
-#tablaMisArboles td, #tablaMisArboles input[type="number"] {
-  text-align: center;
+#popUpBienvenido select {
+  height: 30px;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid #A9A9A9;
 }
+#popUpBienvenido [data-submit] {
+  display: none;
+}
+
+
+
+
+
+
+#sponsors {
+  height: 60px;
+}
+#sponsors a {
+  width: 55px;
+  height: 50px;
+  display: inline-block;
+  background-size: contain;
+  margin-left: 18px; 
+}
+#A_2 {
+  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/1.png") no-repeat;
+}/*#A_2*/
+
+#A_4 {
+  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/3.png") no-repeat;
+}/*#A_4*/
+
+#A_5 {
+  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/4.png") no-repeat;
+}/*#A_5*/
+#A_6 {
+  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/5.png") no-repeat;
+}/*#A_6*/
+#A_8 {
+  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/7.png") no-repeat;
+}/*#A_8*/

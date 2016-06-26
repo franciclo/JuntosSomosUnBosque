@@ -7,7 +7,7 @@
 			</div>
 			<h1>JUNTOS SOMOS UN BOSQUE</h1>
 			<div id="arboles_data">
-				<scroll-items>
+				<scroll-items id="arboles_data_scroll">
 					<div class="arbol-data">
 						<svg-icon type="arboles.Aliso"></svg-icon>
 						<span class="arbol-nombre">Aliso</span>
@@ -108,9 +108,21 @@
 					Conocé mas
 				</button>	
 			</div>
+
+			<div id="sponsors">
+				<a target="_BLANK" href="http://www.elbiohuertobuenosaires.blogspot.com.ar/" id="A_2"></a>
+				<a target="_BLANK" href="http://www.masquehuertas.com/" id="A_4"></a>
+				<a target="_BLANK" href="http://compostatebien.com.ar/" id="A_5"></a>
+				<a target="_BLANK" href="http://www.flordehuerta.com.ar/" id="A_6"></a>
+				<a target="_BLANK" href="http://www.dedoverde.org.ar/" id="A_8"></a>
+				<a target="_BLANK" href="http://www.activatecompostera.com/" id="A_9"></a>
+				<a target="_BLANK" href="https://www.facebook.com/composteras/" id="A_10"></a>
+				<a target="_BLANK" href="https://www.facebook.com/FabricaOrganica/" id="A_11"></a>
+				<a target="_BLANK" href="http://www.yocompost.com/" id="A_12"></a>
+			</div>
+
 		</div>
 	</article>
-	
 	<article data-id="inicioSesion" class="loguineo hide">
 		<button class="volver"><svg-icon type="arrow.left"></svg-icon> Volver</button>
 		<h1>Inicio de sesión</h1>
@@ -153,11 +165,13 @@
 		</a>
 		<form-vali id="signupForm" direction="signup" ajax="false">
 			<p class="info">o creá una cuenta con tu mail</p>
+			<label for="nameSignupForm">Nombre</label>
+			<input id="nameSignupForm" data-label="name" data-rules="required" type="text"></input>
 			<label for="emailSignupForm">Mail</label>
 			<input id="emailSignupForm" data-label="email" data-rules="required isEmail ajaxMailDontExist" type="text"></input>
 			<label for="passSignupForm">Nueva contraseña</label>
 			<input id="passSignupForm" data-label="password" data-rules="required" type="password"></input>
-			<a data-id="volverLoginRegis" class="registrate">Volver al inicio de sesión</a>
+			<a data-id="volverLoginRegis" class="registrate">Ir a inicio de sesión</a>
 			<button data-submit label-active="Registrando">Registrar</button>
 		</form-vali>
 	</article>
@@ -172,7 +186,7 @@
 		</form-vali>
 	</article>
 </side-bar>
-<geo-map></geo-map>
+<geo-map id="homeMap"></geo-map>
 <pop-up id="masInformacion">
 		<section>
 			<article data-id="masInfo" id="mas_info">
