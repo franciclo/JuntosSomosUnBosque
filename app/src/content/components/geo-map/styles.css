@@ -80,3 +80,14 @@ geo-map, geo-map>#mapContainer{
 #ver_evento_facebook svg-icon use {
   fill: #fff;
 }
+#ver_cronograma:hover {
+  text-decoration: underline;
+}
+#ver_cronograma {
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+  color: #F35F00;
+  font-size: 14px;
+}

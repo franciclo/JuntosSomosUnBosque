@@ -199,9 +199,19 @@ button.volver svg-icon{
 
 
 
+.arboles-inputs {
+  display: flex;
+  color:#444;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  padding:10px;
+  background: rgba(0,0,0,0.1);
+}
 
-
-
+.arboles-inputs .input-group {
+  display: flex;
+  flex-direction: column;
+}
 
 
 

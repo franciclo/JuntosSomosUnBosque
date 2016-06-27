@@ -15,8 +15,12 @@ module.exports = function (dom) {
     // var proponerUnLugarClicks = Dom$.click(
     //   dom.querySelector('[data-id="proponerUnLugar"]')
     // )
-    this.misArboles = sumarTusArbolesClicks.subscribe(
-      activateSidebarSection('mis-arboles')
+    var modelInput = dom.querySelector('[data-id="model-input"]')
+    this.misArboles = sumarTusArbolesClicks.subscribe(function () {
+      var newInput = modelInput.cloneNode(true)
+      dom.querySelector('[data-id="mis-arboles-inputs"]').appendChild(newInput)
+    }
+      // activateSidebarSection('mis-arboles')
     )
     var userClicks = Dom$.click(
       dom.querySelector('[data-id="user-btn"]')

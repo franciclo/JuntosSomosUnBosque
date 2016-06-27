@@ -82,7 +82,7 @@
 			<div id="action_menu" data-id="actionMenu">
 				<button id="suma_arboles_btn_content" class="active" data-target="action_content_suma">
 					<svg-icon type="plantin"></svg-icon>
-					Sumar arboles
+					Mis árboles
 				</button>
 				<button id="proponer_lugar_content" data-target="action_content_lugar">
 					<svg-icon type="lugar"></svg-icon>
@@ -94,10 +94,11 @@
 				</button>
 			</div>
 			<div id="action_content_suma" class="action-content active">
-				<p>Si estás cuidando arbolitos en maceta en tu casa puedes mapearlos aquí</p>
+				<p>No tenés árboles aún</p>
+				<div data-id="mis-arboles-inputs"></div>
 				<button id="suma_arboles_btn" class="action-button" data-id="sumarTusArboles">
 					<svg-icon type="plantin"></svg-icon>
-					Sumá tus arboles
+					Agregar arboles
 				</button>	
 			</div>
 			<div id="action_content_lugar" class="action-content">
@@ -165,6 +166,27 @@
 	<article data-id="mis-arboles" id="misArboles" class="hide sidebar-section">
 		<button class="volver"><svg-icon type="arrow.left"></svg-icon> Volver</button>
 		<h1>Mis Arboles</h1>
+		<p>No tenés árboles aún</p>
+
+		<!-- <form-vali> -->
+			<div data-id="model-input" class="arboles-inputs">
+				<div class="input-group">
+					<label for="especieMisArboles">Especie</label>
+					<select id="especieMisArboles" data-label="especie">
+							<option>Aliso</option>
+							<option>Caranday</option>
+							<option>Chica</option>
+							<option>Sen</option>
+							<option>Algarrobo</option>
+							<option>Ceibo</option>
+					</select>
+				</div>
+				<div class="input-group">
+					<label for="cantidadMisArboles">Cantidad</label>
+					<input id="cantidadMisArboles" type="number" data-label="cantidad">
+				</div>
+			</div>
+		<!-- </form-vali> -->
 	</article>
 </side-bar>
 <geo-map id="homeMap"></geo-map>
