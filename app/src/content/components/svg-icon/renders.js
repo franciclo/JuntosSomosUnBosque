@@ -1,5 +1,5 @@
-module.exports = function (dom) {
-  function init () {
+export default function () {
+  function init (dom) {
     var type = dom.getAttribute('type')
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
     var use = document.createElementNS('http://www.w3.org/2000/svg', 'use')
@@ -8,8 +8,5 @@ module.exports = function (dom) {
     dom.appendChild(svg)
   }
 
-  return {
-    init: init
-  }
+  return {init}
 }
-

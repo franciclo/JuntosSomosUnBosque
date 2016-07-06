@@ -1,19 +1,18 @@
 import St from 'state'
-import { DOM as Dom$ } from 'rx-dom'
+import Rx from 'rxjs'
 
-module.exports = function (dom) {
-  function init () {
+export default function () {
+  function init (dom) {
     var id = dom.id
     St(id).value = {}
 
-    let popUpClicks = Dom$
-      .click(dom)
+    let popUpClicks = Rx.Observable.fromEvent(dom, 'click')
       .filter((e) => e.target.tagName === 'POP-UP')
       .filter(() => dom.getAttribute('closable') !== 'false')
 
-    let closeIconClicks = Dom$.click(dom.querySelector('svg-icon[type="close"]'))
+    let closeIconClicks = Rx.Observable.fromEvent(dom.querySelector('svg-icon[type="close"]'), 'click')
 
-    this.closeCliks = window.Rx.Observable
+    this.closeCliks = Rx.Observable
       .merge(popUpClicks, closeIconClicks)
       .subscribe(function () {
         St(id + '.show').value = false
@@ -24,8 +23,5 @@ module.exports = function (dom) {
     this.closeCliks.dispose()
   }
 
-  return {
-    init: init,
-    destroy: destroy
-  }
+  return {init, destroy}
 }

@@ -1,13 +1,5 @@
 import './styles.css'
-import Components from 'components'
-import Renders from './renders'
+import Component from 'component'
+import renders from './renders'
 
-Components.register('svg-icon', function (dom) {
-  function init () {
-    Renders(this).init()
-  }
-
-  return {
-    init: init
-  }
-})
+Component('svg-icon', {renders})

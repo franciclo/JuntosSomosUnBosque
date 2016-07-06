@@ -1,8 +1,8 @@
 import popUpHtml from './template.html'
 import 'leaflet'
 
-module.exports = function (dom) {
-  function init () {
+export default function () {
+  function init (dom) {
     var div = dom.appendChild(document.createElement('div'))
     div.id = 'mapContainer'
     var map = window.L.map(div, {zoomControl: false}).setView([-34.52, -58.446], 13)
@@ -27,7 +27,5 @@ module.exports = function (dom) {
     .openOn(map)
   }
 
-  return {
-    init: init
-  }
+  return {init}
 }

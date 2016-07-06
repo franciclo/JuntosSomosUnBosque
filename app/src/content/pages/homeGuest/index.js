@@ -1,53 +1,38 @@
 import '../../assets/css/general.css'
 import './styles.css'
 
-import 'icon/user.svg'
-import 'icon/arboles.Aliso.svg'
-import 'icon/arboles.Caranday.svg'
-import 'icon/arboles.Chica.svg'
-import 'icon/arboles.Sen.svg'
-import 'icon/arboles.Algarrobo.svg'
-import 'icon/arboles.Ceibo.svg'
-import 'icon/arboles.Vinal.svg'
-import 'icon/arboles.Tala.svg'
-import 'icon/arboles.Sombra.svg'
-import 'icon/arboles.Curupay.svg'
-import 'icon/arboles.Chal.svg'
-import 'icon/arboles.Brea.svg'
-import 'icon/arboles.Coronillo.svg'
-import 'icon/plantin.svg'
-import 'icon/lugar.svg'
-import 'icon/info.svg'
-import 'icon/arrow.left.svg'
-import 'icon/social.facebook.svg'
-import 'icon/social.twitter.svg'
-import 'icon/social.google.svg'
+import 'icons/user.svg'
+import 'icons/arboles.Aliso.svg'
+import 'icons/arboles.Caranday.svg'
+import 'icons/arboles.Chica.svg'
+import 'icons/arboles.Sen.svg'
+import 'icons/arboles.Algarrobo.svg'
+import 'icons/arboles.Ceibo.svg'
+import 'icons/arboles.Vinal.svg'
+import 'icons/arboles.Tala.svg'
+import 'icons/arboles.Sombra.svg'
+import 'icons/arboles.Curupay.svg'
+import 'icons/arboles.Chal.svg'
+import 'icons/arboles.Brea.svg'
+import 'icons/arboles.Coronillo.svg'
+import 'icons/plantin.svg'
+import 'icons/lugar.svg'
+import 'icons/info.svg'
+import 'icons/arrow.left.svg'
+import 'icons/social.facebook.svg'
+import 'icons/social.twitter.svg'
+import 'icons/social.google.svg'
 
 import html from './index.html'
 
-import 'component/svg-icon'
-import 'component/form-vali'
-import 'component/pop-up'
-import 'component/side-bar'
-import 'component/geo-map'
-import 'component/scroll-items'
-import Pages from 'pages'
-import Proceses from './proceses'
-import Renders from './renders'
+import Page from 'page'
+import 'components/svg-icon'
+import 'components/form-vali'
+import 'components/pop-up'
+import 'components/side-bar'
+import 'components/scroll-items'
+import 'components/geo-map'
+import actions from './actions'
+import renders from './renders'
 
-Pages.register('home', html, function (dom) {
-  function init () {
-    Proceses(dom).init()
-    Renders(dom).init()
-  }
-
-  function destroy (s, f) {
-    Proceses(dom).destroy()
-    Renders(dom).destroy()
-  }
-
-  return {
-    init: init,
-    destroy: destroy
-  }
-})
+Page('home', html, {actions, renders})

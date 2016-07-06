@@ -1,11 +1,3 @@
-/*#home{
-  height: 200vh;
-  overflow: auto;
-}
-#home geo-map>div{
-  height: 100vh;
-  width: auto;
-}*/
 button#ingresarBtn:hover{
   background: #EFEFEF;
 }

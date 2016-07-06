@@ -1,15 +1,16 @@
 import St from 'state'
-import { DOM as Dom$ } from 'rx-dom'
+import Rx from 'rxjs'
 
-module.exports = function (dom) {
+export default function () {
   function activatePopupSection (active) {
     return function () {
       St('sideBar.active').value = active
     }
   }
 
-  function init () {
+  function init (dom) {
     // Login
+    console.log(dom)
     var signupFormNotification = St('signupForm.formNotification').value
     var loginFormNotification = St('loginForm.formNotification').value
     var resetVal
@@ -27,50 +28,61 @@ module.exports = function (dom) {
       St('loginForm.formNotification').value = resetVal
     }
 
-    var sumarTusArbolesClicks = Dom$.click(
-      dom.querySelector('[data-id="sumarTusArboles"]')
+    var sumarTusArbolesClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="sumarTusArboles"]'),
+      'click'
     )
-    var proponerUnLugarClicks = Dom$.click(
-      dom.querySelector('[data-id="proponerUnLugar"]')
-    )
-
-    var registrarseClicks = Dom$.click(
-      dom.querySelector('[data-id="registrarse-btn"]')
+    var proponerUnLugarClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="proponerUnLugar"]'),
+      'click'
     )
 
-    var irARegistrarseClicks = Dom$.click(
-      dom.querySelector('[data-id="registrarse"]')
+    var registrarseClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="registrarse-btn"]'),
+      'click'
     )
 
-    var olvidoClicks = Dom$.click(
-      dom.querySelector('[data-id="forgotBtn"]')
+    var irARegistrarseClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="registrarse"]'),
+      'click'
     )
 
-    var ingresarClicks = Dom$.click(
-      dom.querySelector('button[data-id="ingresar-btn"]')
+    var olvidoClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="forgotBtn"]'),
+      'click'
     )
 
-    var volverDeRegisClicks = Dom$.click(
-      dom.querySelector('[data-id="volverLoginRegis"]')
+    var ingresarClicks = Rx.Observable.fromEvent(
+      dom.querySelector('button[data-id="ingresar-btn"]'),
+      'click'
     )
 
-    var volverDeOlvClicks = Dom$.click(
-      dom.querySelector('[data-id="volverLoginMail"]')
+    var volverDeRegisClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="volverLoginRegis"]'),
+      'click'
     )
 
-    var volverAHomeClicks = Dom$.click(
-      dom.querySelectorAll('.volver')
+    var volverDeOlvClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="volverLoginMail"]'),
+      'click'
     )
 
-    var conocerMasClicks = Dom$.click(
-      dom.querySelector('[data-id="conocerMas"]')
+    var volverAHomeClicks = Rx.Observable.fromEvent(
+      dom.querySelectorAll('.volver'),
+      'click'
+    )
+
+    var conocerMasClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="conocerMas"]'),
+      'click'
     )
 
     this.showOlvido = olvidoClicks.subscribe(
-      activatePopupSection('forgotPassword')
+      activatePopupSection('forgotPassword'),
+      'click'
     )
 
-    this.showRegistrar = window.Rx.Observable
+    this.showRegistrar = Rx.Observable
       .merge(
         irARegistrarseClicks,
         registrarseClicks)
@@ -80,7 +92,7 @@ module.exports = function (dom) {
       activatePopupSection('mainApp')
     )
 
-    this.showLogin = window.Rx.Observable
+    this.showLogin = Rx.Observable
       .merge(
         ingresarClicks,
         volverDeRegisClicks,
@@ -108,8 +120,9 @@ module.exports = function (dom) {
     St('mainApp').value = {}
     St('masInfo').value = {}
 
-    var sideBarContentMenuClicks = Dom$.click(
-      dom.querySelectorAll('[data-id="actionMenu"] button')
+    var sideBarContentMenuClicks = Rx.Observable.fromEvent(
+      dom.querySelectorAll('[data-id="actionMenu"] button'),
+      'click'
     )
 
     sideBarContentMenuClicks
@@ -118,8 +131,9 @@ module.exports = function (dom) {
         St('mainApp.content').value = active
       })
 
-    var infoContentMenuClicks = Dom$.click(
-      dom.querySelectorAll('#mas_info_side_menu > p')
+    var infoContentMenuClicks = Rx.Observable.fromEvent(
+      dom.querySelectorAll('#mas_info_side_menu > p'),
+      'click'
     )
 
     infoContentMenuClicks
@@ -136,8 +150,5 @@ module.exports = function (dom) {
     this.onOlvidoSucces.dispose()
   }
 
-  return {
-    init: init,
-    destroy: destroy
-  }
+  return {init, destroy}
 }

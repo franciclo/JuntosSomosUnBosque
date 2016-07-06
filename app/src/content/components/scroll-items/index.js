@@ -1,20 +1,10 @@
 import './styles.css'
-import 'component/svg-icon'
-import 'icon/chevron.right.svg'
-import 'icon/chevron.left.svg'
+import 'components/svg-icon'
+import 'icons/chevron.right.svg'
+import 'icons/chevron.left.svg'
 
-import Components from 'components'
-import Renders from './renders'
-import Proceses from './proceses'
+import Component from 'component'
+import renders from './renders'
+import actions from './actions'
 
-Components.register('scroll-items', function () {
-  function init () {
-    var dom = this
-    Renders(dom).init()
-    Proceses(dom).init()
-  }
-
-  return {
-    init: init
-  }
-})
+Component('scroll-items', {actions, renders})

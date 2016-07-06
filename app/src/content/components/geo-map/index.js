@@ -1,19 +1,10 @@
 import 'leaflet/dist/leaflet.css'
 import './styles.css'
-import 'component/svg-icon'
-import 'icon/calendar.svg'
-import 'icon/reloj.svg'
+import 'components/svg-icon'
+import 'icons/calendar.svg'
+import 'icons/reloj.svg'
 
-import Components from 'components'
-import Renders from './renders'
+import Component from 'component'
+import renders from './renders'
 
-Components.register('geo-map', function () {
-  function init () {
-    var dom = this
-    Renders(dom).init()
-  }
-
-  return {
-    init: init
-  }
-})
+Component('geo-map', {renders})

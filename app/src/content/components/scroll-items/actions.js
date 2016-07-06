@@ -1,8 +1,8 @@
 import St from 'state'
-import { DOM as Dom$ } from 'rx-dom'
+import Rx from 'rxjs'
 
-module.exports = function (dom) {
-  function init () {
+export default function () {
+  function init (dom) {
     var id = dom.id
     St(id).value = {}
 
@@ -10,8 +10,9 @@ module.exports = function (dom) {
     St(id + '.right').value = true
     St(id + '.left').value = false
 
-    var rightClicks = Dom$.click(
-      dom.querySelectorAll('[type="chevron.right"]')
+    var rightClicks = Rx.Observable.fromEvent(
+      dom.querySelectorAll('[type="chevron.right"]'),
+      'click'
     )
 
     rightClicks
@@ -32,8 +33,9 @@ module.exports = function (dom) {
         St(id + '.scroll').value = initial - 100
       })
 
-    var leftClicks = Dom$.click(
-      dom.querySelectorAll('[type="chevron.left"]')
+    var leftClicks = Rx.Observable.fromEvent(
+      dom.querySelectorAll('[type="chevron.left"]'),
+      'click'
     )
 
     leftClicks
@@ -42,7 +44,7 @@ module.exports = function (dom) {
         var allItems = dom.querySelectorAll('.arbol-data')
         var scrollLeft = scrollBounds.left
         var firstItemLeft = allItems[0].getBoundingClientRect().left
-        // if (firstItemLeft + scrollLeft) return 
+        // if (firstItemLeft + scrollLeft) return
         if (firstItemLeft < scrollLeft) return 20
         return 0
       })
@@ -56,7 +58,5 @@ module.exports = function (dom) {
       })
   }
 
-  return {
-    init: init
-  }
+  return {init}
 }

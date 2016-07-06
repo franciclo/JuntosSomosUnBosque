@@ -14,9 +14,9 @@ module.exports = {
   resolve: {
     root: path.resolve('./src/core'),
     alias: {
-      'page': path.resolve('./src/content/pages'),
-      'component': path.resolve('./src/content/components'),
-      'icon': path.resolve('./src/content/assets/svg')
+      'pages': path.resolve('./src/content/pages'),
+      'components': path.resolve('./src/content/components'),
+      'icons': path.resolve('./src/content/assets/svg')
     },
     extensions: ['', '.js']
   },

@@ -1,7 +1,7 @@
 import St from 'state'
 
-module.exports = function (dom) {
-  function init () {
+export default function () {
+  function init (dom) {
     St('popUpReset.show').value = true
     St('popUpReset.active').value = 'resetPassword'
     dom.querySelector('[data-label="email"]').value = St('user.mail').value
@@ -17,10 +17,5 @@ module.exports = function (dom) {
       })
   }
 
-  function destroy (s, f) {}
-
-  return {
-    init: init,
-    destroy: destroy
-  }
+  return {init}
 }

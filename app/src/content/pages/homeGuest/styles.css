@@ -1,11 +1,11 @@
-#home{
+body>section{
   display: flex;
 }
-#home side-bar{
+body>section side-bar{
   width: 400px;
   border-right: 1px solid #CACACA;
 }
-#home geo-map{
+body>section geo-map{
   flex: 1;
 }
 

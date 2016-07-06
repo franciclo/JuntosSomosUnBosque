@@ -1,7 +1,8 @@
-import ObjectPathImmutable from 'object-path-immutable'
 import ObjectPath from 'object-path'
-import {diff} from 'deep-diff'
-import Rx from 'rxjs/Rx'
+import ObjectPathImmutable from 'object-path-immutable'
+import { diff } from 'deep-diff'
+import Rx from 'rxjs'
+import 'rx-dom'
 
 var localState = JSON.parse(window.localStorage.getItem('$tate'))
 var stateData = localState || {}
@@ -57,7 +58,7 @@ if (query('debugState').value === true) {
     console.log('need to bind clear() copy paste this please')
     console.log('window.clear = clear')
     debugger
-    if (typeof window.clear === 'function') {
+    if (typeof window.clear === 'function')
       state$Diffs
         .map(function (d) {
           return {
@@ -85,7 +86,6 @@ if (query('debugState').value === true) {
           window.clear()
           console.table(ds)
         })
-    }
   }
 }
 window.$tate = query

@@ -1,8 +1,8 @@
 import St from 'state'
-import {className} from 'domHelpers'
+import {className} from 'utils'
 
-module.exports = function (dom) {
-  function toggleActiveSection (id) {
+export default function () {
+  function toggleActiveSection (dom, id) {
     var sidebarActionButtons = dom.querySelectorAll('#action_menu button')
     for (var i = 0; i < sidebarActionButtons.length; i++) {
       if (sidebarActionButtons[i].getAttribute('data-target') === id) {
@@ -22,7 +22,7 @@ module.exports = function (dom) {
     }
   }
 
-  function toggleActiveInfoSection (id) {
+  function toggleActiveInfoSection (dom, id) {
     var infoActionButtons = dom.querySelectorAll('#mas_info_side_menu > p')
     for (var i = 0; i < infoActionButtons.length; i++) {
       if (infoActionButtons[i].getAttribute('data-target') === id) {
@@ -42,22 +42,23 @@ module.exports = function (dom) {
     }
   }
 
-  function init () {
+  function init (dom) {
     this.onActiveContent = St('mainApp.content')
       .on(['N', 'E'])
-      .subscribe(toggleActiveSection)
+      .subscribe(function (id) {
+        toggleActiveSection(dom, id)
+      })
 
     St('masInfo.content')
       .on(['N', 'E'])
-      .subscribe(toggleActiveInfoSection)
+      .subscribe(function (id) {
+        toggleActiveInfoSection(dom, id)
+      })
   }
 
   function destroy () {
     this.onActiveContent.dispose()
   }
 
-  return {
-    init: init,
-    destroy: destroy
-  }
+  return {init, destroy}
 }

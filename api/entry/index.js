@@ -23,14 +23,12 @@ module.exports = function (app) {
 
       if (req.user.primeraVez) {
         res.render('layout', {
-          sectionHtml: '../../app/src/content/pages/homeUser/index.html',
           entryFilename: 'user',
           userName: userName,
           primeraVez: true
         })
       } else {
         res.render('layout', {
-          sectionHtml: '../../app/src/content/pages/homeUser/index.html',
           entryFilename: 'user',
           userName: userName,
           userType: req.user.userType,
@@ -39,7 +37,6 @@ module.exports = function (app) {
       }
     } else {
       res.render('layout', {
-        sectionHtml: '../../app/src/content/pages/homeGuest/index.html',
         entryFilename: 'guest',
         formNotification: formNoti
       })

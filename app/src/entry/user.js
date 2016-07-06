@@ -1,7 +1,6 @@
-;(function () {
-  require('page/homeUser/index.js')
+import 'pages/homeUser'
+import $t from 'state'
 
-  document.addEventListener('DOMContentLoaded', function () {
-    require('history').go('home')
-  })
-}())
+document.addEventListener('DOMContentLoaded', function () {
+  $t('page').value = 'home'
+})

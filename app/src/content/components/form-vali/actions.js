@@ -1,9 +1,9 @@
 import St from 'state'
 import isEmail from 'validator/lib/isEmail'
 import Request from 'request'
-import { DOM as Dom$ } from 'rx-dom'
+import Rx from 'rxjs'
 
-module.exports = function (dom) {
+export default function () {
   function extractData (inputs) {
     var inputsData = []
     for (var i = 0; i < inputs.length; i++) {
@@ -18,7 +18,7 @@ module.exports = function (dom) {
     return inputsData
   }
 
-  function validate (inputsData) {
+  function validate (dom, inputsData) {
     var Validator = {
       isEmail: isEmail,
       required: function (v) { return v.length !== 0 },
@@ -117,7 +117,7 @@ module.exports = function (dom) {
     }
   }
 
-  function postRedirect (inputs) {
+  function postRedirect (dom, inputs) {
     var form = document.createElement('form')
     form.method = 'POST'
     form.action = dom.getAttribute('direction')
@@ -128,7 +128,7 @@ module.exports = function (dom) {
     return form.submit()
   }
 
-  function sendForm (data) {
+  function sendForm (dom, data) {
     let id = dom.id
     St(id + '.errors').value = []
     St(id + '.loading').value = true
@@ -144,13 +144,13 @@ module.exports = function (dom) {
       })
   }
 
-  function init () {
+  function init (dom) {
     if (!dom.hasAttribute('direction')) throw new Error('attempt to send form-vali without direction')
     let id = dom.id
     let inputs = dom.querySelectorAll('[data-label]')
     let submitBtn = dom.querySelector('[data-submit]')
     St(id + '.loading').value = false
-    let formSubmits = Dom$.click(submitBtn)
+    let formSubmits = Rx.Observable.fromEvent(submitBtn, 'click')
       .filter(function () {
         return St(id + '.loading').value === false
       })
@@ -160,11 +160,13 @@ module.exports = function (dom) {
       .map(function () {
         return extractData(inputs)
       })
-      .mergeMap(validate)
+      .mergeMap(function (inputsData) {
+        return validate(dom, inputsData)
+      })
       .publish()
     formSubmits.connect()
 
-    this.onInputChange = Dom$.keydown(inputs)
+    this.onInputChange = Rx.Observable.fromEvent(inputs, 'keydown')
       .map(function (ev) {
         return ev.currentTarget
       })
@@ -205,7 +207,9 @@ module.exports = function (dom) {
       })
       .filter(isValid(true))
       .map(toValues)
-      .subscribe(sendForm)
+      .subscribe(function (data) {
+        sendForm(dom, data)
+      })
 
     formSubmits
       .filter(function () {
@@ -215,7 +219,9 @@ module.exports = function (dom) {
       .map(function () {
         return inputs
       })
-      .subscribe(postRedirect)
+      .subscribe(function (inputs) {
+        postRedirect(dom, inputs)
+      })
   }
 
   function destroy () {
@@ -224,8 +230,5 @@ module.exports = function (dom) {
     this.onInputChange.dispose()
   }
 
-  return {
-    init: init,
-    destroy: destroy
-  }
+  return {init, destroy}
 }

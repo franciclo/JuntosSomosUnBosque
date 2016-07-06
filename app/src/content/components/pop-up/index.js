@@ -1,23 +1,9 @@
 import './styles.css'
-import 'icon/close.svg'
-import 'component/svg-icon'
+import 'icons/close.svg'
+import 'components/svg-icon'
 
-import Proceses from './proceses'
-import Renders from './renders'
+import Component from 'component'
+import actions from './actions'
+import renders from './renders'
 
-require('components').register('pop-up', function () {
-  function init () {
-    Renders(this).init()
-    Proceses(this).init()
-  }
-
-  function destroy () {
-    Renders(this).destroy()
-    Proceses(this).destroy()
-  }
-
-  return {
-    init: init,
-    destroy: destroy
-  }
-})
+Component('pop-up', {actions, renders})

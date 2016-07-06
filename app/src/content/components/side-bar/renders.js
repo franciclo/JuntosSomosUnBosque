@@ -1,8 +1,8 @@
 import St from 'state'
-import {className} from 'domHelpers'
+import {className} from 'utils'
 
-module.exports = function (dom) {
-  function toggleVisibility (show) {
+export default function () {
+  function toggleVisibility (dom, show) {
     if (show) {
       className.add(dom, 'active')
     } else {
@@ -10,7 +10,7 @@ module.exports = function (dom) {
     }
   }
 
-  function toggleActiveSection (id) {
+  function toggleActiveSection (dom, id) {
     var popUpSections = dom.querySelectorAll('article')
     for (var i = 0; i < popUpSections.length; i++) {
       if (popUpSections[i].getAttribute('data-id') === id) {
@@ -23,16 +23,20 @@ module.exports = function (dom) {
     }
   }
 
-  function init () {
+  function init (dom) {
     var id = dom.id
 
     this.onActive = St(id + '.active')
       .on(['N', 'E'])
-      .subscribe(toggleActiveSection)
+      .subscribe(function (id) {
+        toggleActiveSection(dom, id)
+      })
 
     this.onShow = St(id + '.show')
       .on(['N', 'E'])
-      .subscribe(toggleVisibility)
+      .subscribe(function (show) {
+        toggleVisibility(dom, show)
+      })
   }
 
   function destroy () {
@@ -40,8 +44,5 @@ module.exports = function (dom) {
     this.onShow.dispose()
   }
 
-  return {
-    init: init,
-    destroy: destroy
-  }
+  return {init, destroy}
 }

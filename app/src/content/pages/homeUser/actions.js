@@ -1,19 +1,21 @@
 import St from 'state'
-import { DOM as Dom$ } from 'rx-dom'
+import Rx from 'rxjs'
 
-module.exports = function (dom) {
+export default function () {
   function activateSidebarSection (active) {
     return function () {
       St('sideBar.active').value = active
     }
   }
 
-  function init () {
-    var sumarTusArbolesClicks = Dom$.click(
-      dom.querySelector('[data-id="sumarTusArboles"]')
+  function init (dom) {
+    var sumarTusArbolesClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="sumarTusArboles"]'),
+      'click'
     )
-    // var proponerUnLugarClicks = Dom$.click(
-    //   dom.querySelector('[data-id="proponerUnLugar"]')
+    // var proponerUnLugarClicks = Rx.Observable.fromEvent(
+    //   dom.querySelector('[data-id="proponerUnLugar"]'),
+    //   'click'
     // )
     var modelInput = dom.querySelector('[data-id="model-input"]')
     this.misArboles = sumarTusArbolesClicks.subscribe(function () {
@@ -22,24 +24,27 @@ module.exports = function (dom) {
     }
       // activateSidebarSection('mis-arboles')
     )
-    var userClicks = Dom$.click(
-      dom.querySelector('[data-id="user-btn"]')
+    var userClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="user-btn"]'),
+      'click'
     )
 
     this.showPerfil = userClicks.subscribe(
       activateSidebarSection('perfil')
     )
 
-    var volverAHomeClicks = Dom$.click(
-      dom.querySelectorAll('.volver')
+    var volverAHomeClicks = Rx.Observable.fromEvent(
+      dom.querySelectorAll('.volver'),
+      'click'
     )
 
     this.volverAHome = volverAHomeClicks.subscribe(
       activateSidebarSection('mainApp')
     )
 
-    var conocerMasClicks = Dom$.click(
-      dom.querySelector('[data-id="conocerMas"]')
+    var conocerMasClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="conocerMas"]'),
+      'click'
     )
 
     conocerMasClicks.subscribe(function () {
@@ -51,8 +56,9 @@ module.exports = function (dom) {
     St('mainApp').value = {}
     St('masInfo').value = {}
 
-    var sideBarContentMenuClicks = Dom$.click(
-      dom.querySelectorAll('[data-id="actionMenu"] button')
+    var sideBarContentMenuClicks = Rx.Observable.fromEvent(
+      dom.querySelectorAll('[data-id="actionMenu"] button'),
+      'click'
     )
 
     sideBarContentMenuClicks
@@ -61,8 +67,9 @@ module.exports = function (dom) {
         St('mainApp.content').value = active
       })
 
-    var infoContentMenuClicks = Dom$.click(
-      dom.querySelectorAll('#mas_info_side_menu > p')
+    var infoContentMenuClicks = Rx.Observable.fromEvent(
+      dom.querySelectorAll('#mas_info_side_menu > p'),
+      'click'
     )
 
     infoContentMenuClicks
@@ -74,12 +81,14 @@ module.exports = function (dom) {
     var primeraVez = !!St('primeraVezBool').value
     if (primeraVez) {
       dom.querySelector('#primeraVez h1').textContent = dom.querySelector('#primeraVez h1').textContent + St('user.name').value
-      Dom$.click(dom.querySelector('#elegirUbicacion'))
+      Rx.Observable.fromEvent(dom.querySelector('#elegirUbicacion'), 'click')
       .subscribe(function () {
         if ('geolocation' in navigator) {
-          navigator.geolocation.getCurrentPosition(geoSuccess, geoError)
+          navigator.geolocation.getCurrentPosition(function (position) {
+            geoSuccess(dom, position)
+          }, geoError)
         } else {
-          geoSuccess({coords: {latitude: -34.52, longitude: -58.446}})
+          geoSuccess(dom, {coords: {latitude: -34.52, longitude: -58.446}})
         }
       })
       St('popUpBienvenido.show').value = true
@@ -96,7 +105,7 @@ module.exports = function (dom) {
         St('user.location').value = v.result.location
       })
 
-    Dom$.click(dom.querySelector('[data-id="logout"]'))
+    Rx.Observable.fromEvent(dom.querySelector('[data-id="logout"]'), 'click')
       .subscribe(function () {
         window.location = '/logout'
       })
@@ -105,7 +114,7 @@ module.exports = function (dom) {
   function destroy (s, f) {
   }
 
-  function geoSuccess (position) {
+  function geoSuccess (dom, position) {
     dom.querySelector('#primeraVez [data-submit]').style.display = 'block'
     dom.querySelector('#elegirUbicacion').style.display = 'none'
     var div = dom.querySelector('#ubicacionLocalFormWelcome')
@@ -131,8 +140,5 @@ module.exports = function (dom) {
 
   }
 
-  return {
-    init: init,
-    destroy: destroy
-  }
+  return {init, destroy}
 }

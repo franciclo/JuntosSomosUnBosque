@@ -1,11 +1,11 @@
 import St from 'state'
-import { className, createElement } from 'domHelpers'
+import { className, createElement } from 'utils'
 
-module.exports = function (dom) {
+export default function () {
   var createErrSpan = createElement('<span class="error-msg"></span>')
   var createNotiSpan = createElement('<span class="notification-msg"></span>')
 
-  function createErrorSpans (inputs) {
+  function createErrorSpans (dom, inputs) {
     for (var i = 0; i < inputs.length; i++) {
       if (inputs[i].type === 'hidden') continue
       if (!inputs[i].id) throw new Error('form-vali error: input without id', inputs[i])
@@ -13,14 +13,14 @@ module.exports = function (dom) {
     }
   }
 
-  function createNotificationSpan () {
+  function createNotificationSpan (dom) {
     dom.insertBefore(
       createNotiSpan(),
       dom.children[0].tagName === 'H1' ? dom.children[1] : dom.children[0]
     )
   }
 
-  function clearErrors (inputs) {
+  function clearErrors (dom, inputs) {
     var spanErrs = dom.querySelectorAll('label .error-msg')
     for (var i = 0; i < inputs.length; i++) {
       className.remove(inputs[i], 'has-error')
@@ -36,7 +36,7 @@ module.exports = function (dom) {
     }
   }
 
-  function printErrors (e) {
+  function printErrors (dom, e) {
     e.errors.forEach(function (error) {
       var spanErr = dom.querySelector('label[for=' + e.inputs[error.i].id + '] .error-msg')
       spanErr.textContent = error.error
@@ -44,7 +44,7 @@ module.exports = function (dom) {
     })
   }
 
-  function printNotification (notification) {
+  function printNotification (dom, notification) {
     var notiSpam = dom.querySelector('.notification-msg')
     className.add(notiSpam, notification.success ? 'success' : 'error')
     className.add(notiSpam, 'show')
@@ -60,7 +60,7 @@ module.exports = function (dom) {
     }
   }
 
-  function init () {
+  function init (dom) {
     let id = dom.id
     let inputs = dom.querySelectorAll('[data-label]')
     let submitBtn = dom.querySelector('[data-submit]')
@@ -73,8 +73,8 @@ module.exports = function (dom) {
         return inputs
       })
       .subscribe(function (inputs) {
-        createErrorSpans(inputs)
-        createNotificationSpan()
+        createErrorSpans(dom, inputs)
+        createNotificationSpan(dom)
       })
 
     this.onErrorChange = St(id + '.errors')
@@ -86,18 +86,20 @@ module.exports = function (dom) {
         }
       })
       .subscribe(function (e) {
-        clearErrors(e.inputs)
-        printErrors(e)
+        clearErrors(dom, e.inputs)
+        printErrors(dom, e)
       })
 
     this.onSendSuccess = St(id + '.formNotification')
       .on(['N'])
-      .do(printNotification)
+      .do(function (notifications) {
+        printNotification(dom, notifications)
+      })
       .map(function (s) {
         return inputs
       })
       .subscribe(function (inputs) {
-        clearErrors(inputs)
+        clearErrors(dom, inputs)
         clearValues(inputs)
       })
 
@@ -114,8 +116,5 @@ module.exports = function (dom) {
     this.onErrorChange.dispose()
   }
 
-  return {
-    init: init,
-    destroy: destroy
-  }
+  return {init, destroy}
 }
