@@ -89,6 +89,7 @@ body>section geo-map{
   background: #9cda7d;
   color: white;
   padding: 5px 5px 50px;
+  border-bottom: 3px solid #87bd6b;
 }
 
 button.volver:hover {
