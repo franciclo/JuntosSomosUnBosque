@@ -1,5 +1,6 @@
 export default function () {
   function init (dom) {
+    if (dom.querySelector('svg')) return
     var type = dom.getAttribute('type')
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
     var use = document.createElementNS('http://www.w3.org/2000/svg', 'use')

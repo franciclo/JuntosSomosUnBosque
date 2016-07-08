@@ -1,26 +1,27 @@
+import Flickity from 'flickity'
 import St from 'state'
 import {className} from 'utils'
 
 export default function () {
-  function toggleActiveSection (dom, id) {
-    var sidebarActionButtons = dom.querySelectorAll('#action_menu button')
-    for (var i = 0; i < sidebarActionButtons.length; i++) {
-      if (sidebarActionButtons[i].getAttribute('data-target') === id) {
-        className.add(sidebarActionButtons[i], 'active')
-      } else {
-        className.remove(sidebarActionButtons[i], 'active')
-      }
-    }
+  // function toggleActiveSection (dom, id) {
+  //   var sidebarActionButtons = dom.querySelectorAll('#action_menu button')
+  //   for (var i = 0; i < sidebarActionButtons.length; i++) {
+  //     if (sidebarActionButtons[i].getAttribute('data-target') === id) {
+  //       className.add(sidebarActionButtons[i], 'active')
+  //     } else {
+  //       className.remove(sidebarActionButtons[i], 'active')
+  //     }
+  //   }
 
-    var sidebarActionContent = dom.querySelectorAll('.action-content')
-    for (var y = 0; y < sidebarActionContent.length; y++) {
-      if (sidebarActionContent[y].id === id) {
-        className.add(sidebarActionContent[y], 'active')
-      } else {
-        className.remove(sidebarActionContent[y], 'active')
-      }
-    }
-  }
+  //   var sidebarActionContent = dom.querySelectorAll('.action-content')
+  //   for (var y = 0; y < sidebarActionContent.length; y++) {
+  //     if (sidebarActionContent[y].id === id) {
+  //       className.add(sidebarActionContent[y], 'active')
+  //     } else {
+  //       className.remove(sidebarActionContent[y], 'active')
+  //     }
+  //   }
+  // }
 
   function toggleActiveInfoSection (dom, id) {
     var infoActionButtons = dom.querySelectorAll('#mas_info_side_menu > p')
@@ -43,21 +44,26 @@ export default function () {
   }
 
   function init (dom) {
-    this.onActiveContent = St('mainApp.content')
-      .on(['N', 'E'])
-      .subscribe(function (id) {
-        toggleActiveSection(dom, id)
-      })
+    // this.onActiveContent = St('mainApp.content')
+    //   .on(['N', 'E'])
+    //   .subscribe(function (id) {
+    //     toggleActiveSection(dom, id)
+    //   })
 
     St('masInfo.content')
       .on(['N', 'E'])
       .subscribe(function (id) {
         toggleActiveInfoSection(dom, id)
       })
+
+    this.flkty = new Flickity('#arboles_data_scroll', {
+      pageDots: false,
+      contain: true
+    })
   }
 
   function destroy () {
-    this.onActiveContent.dispose()
+    this.onActiveContent.unsubscribe()
   }
 
   return {init, destroy}

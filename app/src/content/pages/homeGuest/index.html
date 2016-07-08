@@ -7,106 +7,131 @@
 			</div>
 			<h1>JUNTOS SOMOS UN BOSQUE</h1>
 			<div id="arboles_data">
-				<scroll-items id="arboles_data_scroll">
+				<div id="arboles_data_scroll">
 					<div class="arbol-data">
-						<svg-icon type="arboles.Aliso"></svg-icon>
-						<span class="arbol-nombre">Aliso</span>
 						<span class="arbol-count">5</span>
-					</div>
-					<div class="arbol-data">
-						<svg-icon type="arboles.Caranday"></svg-icon>
-						<span class="arbol-nombre">Caranday</span>
-						<span class="arbol-count">2</span>
-					</div>
-					<div class="arbol-data">
-						<svg-icon type="arboles.Chica"></svg-icon>
-						<span class="arbol-nombre">Chica</span>
-						<span class="arbol-count">3</span>
-					</div>
-					<div class="arbol-data">
-						<svg-icon type="arboles.Sen"></svg-icon>
-						<span class="arbol-nombre">Sen</span>
-						<span class="arbol-count">7</span>
-					</div>
-					<div class="arbol-data">
-						<svg-icon type="arboles.Algarrobo"></svg-icon>
-						<span class="arbol-nombre">Algarrobo</span>
-						<span class="arbol-count">1</span>
-					</div>
-					<div class="arbol-data">
-						<svg-icon type="arboles.Ceibo"></svg-icon>
-						<span class="arbol-nombre">Ceibo</span>
-						<span class="arbol-count">9</span>
-					</div>
-					<div class="arbol-data">
-						<svg-icon type="arboles.Aliso"></svg-icon>
+						<svg-icon type="hoja1"></svg-icon>
 						<span class="arbol-nombre">Aliso</span>
-						<span class="arbol-count">5</span>
 					</div>
 					<div class="arbol-data">
-						<svg-icon type="arboles.Caranday"></svg-icon>
-						<span class="arbol-nombre">Caranday</span>
 						<span class="arbol-count">2</span>
+						<svg-icon type="hoja2"></svg-icon>
+						<span class="arbol-nombre">Caranday</span>
 					</div>
 					<div class="arbol-data">
-						<svg-icon type="arboles.Chica"></svg-icon>
-						<span class="arbol-nombre">Chica</span>
 						<span class="arbol-count">3</span>
+						<svg-icon type="hoja3"></svg-icon>
+						<span class="arbol-nombre">Chica</span>
 					</div>
 					<div class="arbol-data">
-						<svg-icon type="arboles.Sen"></svg-icon>
-						<span class="arbol-nombre">Sen</span>
 						<span class="arbol-count">7</span>
+						<svg-icon type="hoja12"></svg-icon>
+						<span class="arbol-nombre">Sen</span>
 					</div>
 					<div class="arbol-data">
-						<svg-icon type="arboles.Algarrobo"></svg-icon>
-						<span class="arbol-nombre">Algarrobo</span>
 						<span class="arbol-count">1</span>
+						<svg-icon type="hoja4"></svg-icon>
+						<span class="arbol-nombre">Algarrobo</span>
 					</div>
 					<div class="arbol-data">
-						<svg-icon type="arboles.Ceibo"></svg-icon>
-						<span class="arbol-nombre">Ceibo</span>
 						<span class="arbol-count">9</span>
+						<svg-icon type="hoja5"></svg-icon>
+						<span class="arbol-nombre">Ceibo</span>
 					</div>
-				</scroll-items>
+					<div class="arbol-data">
+						<span class="arbol-count">5</span>
+						<svg-icon type="hoja6"></svg-icon>
+						<span class="arbol-nombre">Aliso</span>
+					</div>
+					<div class="arbol-data">
+						<span class="arbol-count">2</span>
+						<svg-icon type="hoja7"></svg-icon>
+						<span class="arbol-nombre">Caranday</span>
+					</div>
+					<div class="arbol-data">
+						<span class="arbol-count">3</span>
+						<svg-icon type="hoja8"></svg-icon>
+						<span class="arbol-nombre">Chica</span>
+					</div>
+					<div class="arbol-data">
+						<span class="arbol-count">7</span>
+						<svg-icon type="hoja9"></svg-icon>
+						<span class="arbol-nombre">Sen</span>
+					</div>
+					<div class="arbol-data">
+						<span class="arbol-count">1</span>
+						<svg-icon type="hoja10"></svg-icon>
+						<span class="arbol-nombre">Algarrobo</span>
+					</div>
+					<div class="arbol-data">
+						<span class="arbol-count">9</span>
+						<svg-icon type="hoja11"></svg-icon>
+						<span class="arbol-nombre">Ceibo</span>
+					</div>
+				</div>
+				<span id="arboles_data_label">Arboles de la red:</span>
 				<span id="arboles_data_total">Total: 150 arboles</span>
 			</div>
 		</header>
-		<div id="action_content">
-			<div id="action_menu" data-id="actionMenu">
-				<button id="suma_arboles_btn_content" class="active" data-target="action_content_suma">
+		<h-tabs id="sidebar_main">
+
+			<div class="tab">
+				<label id="proponer_lugar_content" data-target="action_content_lugar">
+					<svg-icon type="calendar"></svg-icon>
+					Eventos
+				</label>
+				<div data-id="action_content_lugar" class="action-content">
+					  <div id="cartel_evento">
+						    <div class="header-evento">
+						    	<svg-icon type="calendar.11"></svg-icon>
+						    	<div class="header-evento-text">
+								    <p class="info">
+								      <svg-icon type="reloj"></svg-icon>
+								      Domingo, 12:00 am
+								    </p>
+								    <h1>Festival de plantación</h1>
+						    	</div>
+						    </div>
+						    <p class="content-evento-text">
+							    Podes traer tus arboles al festival y entre musica y charlas, plantaremos un bosque!
+							  </p>
+						    <button>Ver más</button>
+					  </div>
+				</div>
+			</div>
+
+			<div class="tab">
+				<label id="suma_arboles_btn_content" class="active" data-target="action_content_suma">
 					<svg-icon type="plantin"></svg-icon>
 					Sumar arboles
-				</button>
-				<button id="proponer_lugar_content" data-target="action_content_lugar">
-					<svg-icon type="lugar"></svg-icon>
-					Donde plantar
-				</button>
-				<button id="info_btn_content" data-target="action_content_info">
+				</label>
+				<div data-id="action_content_suma" class="action-content active">
+					<div id="cartel_suma">
+						<h1>Mis árboles</h1>
+						<p class="info">Si estás cuidando arbolitos en maceta en tu casa podrás agregarlos y administrarlos.</p>
+						<button id="suma_arboles_btn" class="action-button" data-id="sumarTusArboles">
+							<svg-icon type="plantin"></svg-icon>
+							Sumá tus arboles
+						</button>
+					</div>	
+				</div>
+			</div>
+
+			<div class="tab">
+				<label id="info_btn_content" data-target="action_content_info">
 					<svg-icon type="info"></svg-icon>
 					Información
-				</button>
-			</div>
-			<div id="action_content_suma" class="action-content active">
-				<p>Si estás cuidando arbolitos en maceta en tu casa puedes mapearlos aquí</p>
-				<button id="suma_arboles_btn" class="action-button" data-id="sumarTusArboles">
-					<svg-icon type="plantin"></svg-icon>
-					Sumá tus arboles
-				</button>	
-			</div>
-			<div id="action_content_lugar" class="action-content">
-				<p>Si ves un espacio, plaza, parque, baldío, escuela, etc. donde puede crearse un bosque puedes mapearlo aquí.</p>
-				<button id="proponer_lugar" class="action-button" data-id="proponerUnLugar">
-					<svg-icon type="lugar"></svg-icon>
-					Proponé un lugar para plantar
-				</button>	
-			</div>
-			<div id="action_content_info" class="action-content">
-				<p>Estamos co-creando un Bosque mediante siembras y plantaciones colectivas en festivales y eventos, a través de una red de personas que cultivan arbolitos en sus casas.</p>
-				<button id="ver_mas_info" class="action-button" data-id="conocerMas">
-					<svg-icon type="info"></svg-icon>
-					Conocé mas
-				</button>	
+				</label>
+				<div data-id="action_content_info" class="action-content">
+					<div id="cartel_info">
+						<h1>Más información</h1>
+						<p class="info">Estamos co-creando un Bosque mediante siembras y plantaciones colectivas en festivales y eventos, a través de una red de personas que cultivan arbolitos en sus casas.</p>
+						<button id="ver_mas_info" class="action-button" data-id="conocerMas">
+							<svg-icon type="info"></svg-icon>
+							Conocé mas
+						</button>
+					</div>
+				</div>
 			</div>
 
 			<div id="sponsors">
@@ -119,9 +144,9 @@
 				<a target="_BLANK" href="https://www.facebook.com/composteras/" id="A_10"></a>
 				<a target="_BLANK" href="https://www.facebook.com/FabricaOrganica/" id="A_11"></a>
 				<a target="_BLANK" href="http://www.yocompost.com/" id="A_12"></a>
-			</div>
+			</div> 
 
-		</div>
+		</h-tabs>
 	</article>
 	<article data-id="inicioSesion" class="loguineo hide">
 		<button class="volver"><svg-icon type="arrow.left"></svg-icon> Volver</button>

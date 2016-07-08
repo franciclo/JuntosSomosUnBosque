@@ -16,7 +16,13 @@ module.exports = {
     alias: {
       'pages': path.resolve('./src/content/pages'),
       'components': path.resolve('./src/content/components'),
-      'icons': path.resolve('./src/content/assets/svg')
+      'icons': path.resolve('./src/content/assets/svg'),
+
+      'eventEmitter/EventEmitter': 'wolfy87-eventemitter/EventEmitter',
+      'get-style-property': 'desandro-get-style-property',
+      'matches-selector': 'desandro-matches-selector',
+      'classie': 'desandro-classie'
+
     },
     extensions: ['', '.js']
   },

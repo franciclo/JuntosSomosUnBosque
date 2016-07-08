@@ -8,31 +8,48 @@ body>section side-bar{
 body>section geo-map{
   flex: 1;
 }
-
 #arboles_data{
-  padding-top: 20px;
   position: relative;
+
 }
 
+.arbol-data{
+  width: 70px;
+}
+
+.flickity-prev-next-button {
+  background: rgba(156, 218, 125, 0.73)!important;
+}
+.flickity-prev-next-button.next {
+  right:0!important;
+}
+.flickity-prev-next-button.previous {
+  left:0!important;
+}
+.flickity-prev-next-button .arrow {
+  fill: #fff!important;
+}
+
+#arboles_data_label{
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  font-size: 12px;
+  color: white;
+}
 #arboles_data_total{
   position: absolute;
-  bottom: -30px;
+  bottom: -10px;
   right: 5px;
   font-size: 12px;
-  background: white;
-  color: green;
-  padding: 1px 5px;
-  border-radius: 16px;
+  color: white;
 }
 
 .arbol-data {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: relative;
+  padding: 15px;
 }
 .arbol-data:hover .arbol-nombre {visibility: visible;}
-.arbol-count { font-size: 20px; }
 .arbol-data .arbol-nombre {
   visibility: hidden;
   position: absolute;
@@ -41,84 +58,39 @@ body>section geo-map{
   text-align: center;
 }
 .arbol-data svg-icon{
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   margin-bottom: 10px;
 }
 .arbol-data svg-icon use{
   fill:#fff;
 }
-
-
-side-bar h1 {
+.arbol-count {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #ffe551;
+  color: #565656;
+  padding: 2px 6px;
+  border-radius: 13px;
+  border-radius: 13px;
+  font-size: 12px;
+  font-weight: bold;
+}
+#home_sidebar>header>h1 {
   text-align: center;
   font-weight: 100;
-  font-size: 25px;
-  margin: 20px 0;
+  font-size: 23px;
+  margin: 20px 0 28px;
+  font-family: monospace;
+  letter-spacing: 3px;
 }
-side-bar header {
-  background: #4CAF50;
+#home_sidebar>header {
+  background: #9cda7d;
   color: white;
-  padding: 5px 5px 40px;
+  padding: 5px 5px 50px;
 }
-#action_menu button:hover {
-  background: #DCDCDC;
-}
-#action_menu button {
-  color: #444;
-  font-size: 15px;
-  flex: 1;
-  border: none;
-  background: #CACACA;
-  border-radius: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-left: 1px solid #B5B5B5;
-  border-bottom: 1px solid #B5B5B5;
-}
-#action_menu button svg-icon{
-  display: block;
-  width: 25px;
-  height: 25px;
-}
-#action_menu button use{
-  fill: #444;
-}
-#action_menu button.active:hover {
-  background: #EAEAEA;
-}
-#action_menu button.active {
-  background: #EAEAEA;
-  border-bottom:none;
-  cursor: initial;
-}
-#action_content .action-content.active{
-  display: block;
-  background: #EAEAEA;
-}
-#action_content .action-content p {
-  margin: 10px 5px 15px;
-  color: #444;
-  font-size: 15px;
-  background: #FFF;
-  padding: 13px;
-}
-#action_content {
-  flex:1;
-  display: flex;
-  flex-direction: column;
-}
-#action_content .action-content{
-  display: none;
-  flex:1;
-  padding: 10px;
-}
-#action_menu {
-  height: 60px;
-  display: flex;
-}
+
 button.volver:hover {
   text-decoration: underline;
 }
@@ -154,24 +126,12 @@ button.volver svg-icon{
 
 
 
-#user_options {
-  padding: 2px
-}
-#registrarseBtn {
-  border: none;
-  background: none;
-  color: white;
-  float: right;
-  font-size: 15px;
-}
-#registrarseBtn:hover {
-  text-decoration: underline;
-}
 .action-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   font-size: 16px;
-  float: right;
+  text-align: right;
+  margin: 0;
 }
 .action-button svg-icon {
   margin-right: 5px;
@@ -179,6 +139,22 @@ button.volver svg-icon{
   width: 25px;
 }
 
+
+
+
+
+
+#cartel_info {
+  background: white;
+  box-shadow: 0px 2px 4px #555;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: right;
+}
+#cartel_info h1{
+  text-align: left;
+  font-weight: 100;
+}
 #ver_mas_info {
   border: 1px solid #3792B3;
   background: #44B2DA;
@@ -191,33 +167,119 @@ button.volver svg-icon{
 #ver_mas_info svg-icon use{
   fill:#fff;
 }
+
+
+
+
+#cartel_suma {
+  background: white;
+  box-shadow: 0px 2px 4px #555;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: right;
+}
+#cartel_suma h1{
+  text-align: left;
+  font-weight: 100;
+}
 #suma_arboles_btn:hover {
   background: #419444;
 }
 #suma_arboles_btn{
   background: #4CAF50;
-  border: 1px solid #419444;
-  color: white;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 13px;
+  border: none;
+  padding: 7px 10px;
 }
 #suma_arboles_btn use{
   fill:#fff;
 }
 
-#proponer_lugar {
-  color: #4C4C4C;
-  background: #FFE551;
-  border: 1px solid #E4CE4C;
+
+
+
+
+
+
+
+.action-content p.info {
+  text-align: left;
+  padding: 5px 0 15px;
+  font-size: 15px;
+  text-align: left;
+  margin: 0;
+  color: #555;
+  line-height: 20px;
 }
-#proponer_lugar:hover{
-  background: #E4CE4C;
+
+#cartel_evento {
+  background: white;
+  box-shadow: 0px 2px 4px #555;
+  border-radius: 3px;
+  padding: 0;
+  text-align: right;
 }
-#proponer_lugar svg-icon use{
-  fill:#4C4C4C;
+#cartel_evento button{
+  background: #ff3660;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 13px;
+  border: none;
+  padding: 7px 10px;
+  margin: 0 10px 10px 0;
 }
 
-
-
-
+#cartel_evento .header-evento {
+  display: flex;
+  padding: 10px 5px;
+}
+#cartel_evento .header-evento h1{
+  margin: 0;
+  font-size: 25px;
+  font-weight: 500;
+  text-align: left;
+}
+#cartel_evento .header-evento p.info{
+  margin: 0;
+  font-size: 13px;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+#cartel_evento .header-evento svg-icon[type="calendar.11"]{
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+#cartel_evento .header-evento svg-icon[type="calendar.11"] use{
+  fill: #5f7177;
+}
+#cartel_evento .header-evento-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#cartel_evento .header-evento-text p{
+  color: #555;
+}
+#cartel_evento .header-evento-text svg-icon{
+  height: 16px;
+  width: 16px;
+}
+#cartel_evento .header-evento-text svg use {
+  fill:#555;
+}
+#cartel_evento .content-evento-text {
+  padding: 5px 10px 15px;
+  font-size:15px;
+  text-align: left;
+  margin: 0;
+  color: #555;
+  line-height: 20px;
+}
 
 
 
@@ -282,17 +344,31 @@ button.volver svg-icon{
 
 
 
+#user_options {
+  padding: 2px
+}
+#registrarseBtn {
+  border: none;
+  background: none;
+  color: white;
+  float: right;
+  padding: 3px 7px;
+  font-size: 13px;
+}
+#registrarseBtn:hover {
+  text-decoration: underline;
+}
 #ingresarBtn:hover{
   background: #EFEFEF;
 }
 #ingresarBtn{
   background: white;
-  border-radius: 3px;
-  color: #414141;
-  padding: 4px 8px;
-  font-size: 15px;
+  border-radius: 2px;
+  color: #7b7b7b;
+  padding: 3px 7px;
+  font-size: 13px;
   cursor: pointer;
-  border: 1px solid #868686;
+  border: 1px solid #ffffff;
 }
 
 #ingresarBtn svg-icon{
@@ -405,7 +481,7 @@ form-vali > label{
   border-top: 1px solid #B5B5B5;
   padding-top: 10px;
 }
-.info{
+form-vali .info{
   font-size: 13px;
   color: #777;
   position: relative;
@@ -428,6 +504,9 @@ form-vali > label{
 
 #sponsors {
   height: 60px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 #sponsors a {
   width: 55px;

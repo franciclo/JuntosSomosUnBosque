@@ -10,7 +10,6 @@ export default function () {
 
   function init (dom) {
     // Login
-    console.log(dom)
     var signupFormNotification = St('signupForm.formNotification').value
     var loginFormNotification = St('loginForm.formNotification').value
     var resetVal
