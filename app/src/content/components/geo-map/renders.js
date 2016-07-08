@@ -5,7 +5,7 @@ export default function () {
   function init (dom) {
     var div = dom.appendChild(document.createElement('div'))
     div.id = 'mapContainer'
-    var map = window.L.map(div, {zoomControl: false}).setView([-34.52, -58.446], 13)
+    var map = window.L.map(div, {zoomControl: false}).setView([-34.55, -58.446], 13)
 
     window.L.Icon.Default.imagePath = '/images'
 

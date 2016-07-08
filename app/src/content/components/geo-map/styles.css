@@ -3,7 +3,6 @@ geo-map, geo-map>#mapContainer{
 	height: 100%;
 }
 
-
 .leaflet-popup-content-wrapper {
     border-radius: 3px;
     padding: 0;
@@ -12,82 +11,36 @@ geo-map, geo-map>#mapContainer{
   margin: 0;
 }
 
-#mapPopUp header {
-  background: #FF8435;
-  color: white;
-  padding: 12px;
-  margin: -1px;
-  text-align: center;
-}
-#mapPopUp header h1{
-  margin: 0;
-}
-#mapPopUp_datos p:last-child{
-  padding-bottom: 10px;
-}
-#mapPopUp_datos p{
-  margin: 0;
-  font-size: 14px;
-  background: #EAEAEA;
-  color: #444;
+#mapPopUp {
+  padding: 7px 4px;
   display: flex;
   align-items: center;
-  padding: 5px 10px 0;
 }
-#mapPopUp_datos p svg-icon{
-  width: 20px;
-  height: 20px;
-  margin-right:5px; 
-}
-#mapPopUp_datos p svg-icon use {
-  fill: #444;
-}
-#mapPopUp>p{
-  font-size: 14px;
-  padding: 18px 15px;
+
+#mapPopUp h1 {
   margin: 0;
-  background: #F9F9F9;
-  line-height: 26px;
-  color: #444;
+  font-weight: 100;
+  display: inline-block;
+  font-size: 20px;
 }
-#mapPopUp_action{
-  background: #F9F9F9;
-  padding: 10px;
+
+#mapPopUp>svg-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
 }
-#quiero_ayudar:hover{
-  background: #E4CE4C;
+#mapPopUp>svg-icon use{
+  fill: #5f7177;
 }
-#quiero_ayudar{
-  background: #FFE551;
-  color: #444;
-  font-size: 14px;
-  margin: 1px;
-  border: 1px solid #E4CE4C;
+#mapPopUp .map-popup-text {
+
 }
-#ver_evento_facebook:hover{
-  background: #2D59A2;
-}
-#ver_evento_facebook {
-  background: #47c;
-  border-color: #2D59A2;
-  color: white;
-  float: right;
-}
-#ver_evento_facebook svg-icon svg{
-  transform: scale(2) translateY(1px);
-  margin-right:5px; 
-}
-#ver_evento_facebook svg-icon use {
-  fill: #fff;
-}
-#ver_cronograma:hover {
-  text-decoration: underline;
-}
-#ver_cronograma {
-  border: none;
-  background: none;
+#mapPopUp .map-popup-text p {
   margin: 0;
-  padding: 0;
-  color: #F35F00;
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  color:#555;
+}
+#mapPopUp .map-popup-text use {
+  fill:#555; 
 }
