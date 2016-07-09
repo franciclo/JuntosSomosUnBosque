@@ -30,9 +30,12 @@ export default function () {
     St(dom.id + '.center')
       .on('N')
       .subscribe((center) => {
-        map.panTo(new window.L.LatLng(center[0], center[1]))
+        map.setView(new window.L.LatLng(center[0], center[1]), 13)
       })
 
+    map.on('mousedown', function (e) {
+      if (St('festival_pop.show').value) St('festival_pop.show').value = false
+    })
   }
 
   return {init}
