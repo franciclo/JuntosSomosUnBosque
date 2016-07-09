@@ -32,17 +32,20 @@ body>section geo-map{
 
 #arboles_data_label{
   position: absolute;
-  top: -5px;
+  top: -15px;
   left: 10px;
-  font-size: 12px;
+  font-size: 13px;
   color: white;
 }
 #arboles_data_total{
   position: absolute;
-  bottom: -10px;
+  bottom: -22px;
   right: 5px;
   font-size: 12px;
-  color: white;
+  color: #6c9c54;
+  background: white;
+  border-radius: 15px;
+  padding: 1px 6px;
 }
 
 .arbol-data {
@@ -88,7 +91,7 @@ body>section geo-map{
 #home_sidebar>header {
   background: #9cda7d;
   color: white;
-  padding: 5px 5px 50px;
+  padding: 5px 5px 35px;
   border-bottom: 3px solid #87bd6b;
 }
 
@@ -136,8 +139,8 @@ button.volver svg-icon{
 }
 .action-button svg-icon {
   margin-right: 5px;
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
 }
 
 

@@ -1,0 +1,231 @@
+event-pop>section{
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 2px;
+  overflow: hidden;
+  transition: 1s height linear;
+}
+
+event-pop .small-pop svg-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+event-pop .small-pop svg-icon use{
+  fill: #5f7177;
+}
+event-pop .small-pop {
+  background: white;
+  padding: 5px;
+}
+event-pop .small-pop p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  color:#555;
+}
+event-pop .small-pop use {
+  fill:#555; 
+}
+event-pop .small-pop h1 {
+  margin: 0;
+  font-weight: 100;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 16px;
+  max-width: 80px;
+}
+.leaflet-popup:hover .leaflet-popup-content-wrapper, .leaflet-popup:hover .leaflet-popup-tip{
+  background: #ff3660;
+}
+.leaflet-popup.expanded:hover .leaflet-popup-content-wrapper, .leaflet-popup.expanded:hover .leaflet-popup-tip{
+  background: #fff;
+}
+.leaflet-popup{
+  cursor: pointer;
+}
+.leaflet-popup.expanded{
+ cursor: auto; 
+}
+.leaflet-popup:hover event-pop>section {
+  height: 55px;
+}
+.leaflet-popup:hover svg-icon[type="mas"] {
+  display: block;
+}
+.leaflet-popup.expanded:hover svg-icon[type="mas"] {
+  display: none;
+}
+event-pop svg-icon[type="mas"] {
+  width: 24px;
+  height:24px;
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  margin-left: -12px;
+  z-index: 9;
+  fill:#fff;
+}
+event-pop>section>article {
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+  display: none;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -200px;
+  width: 0;
+  box-shadow: 0px 3px 10px #555;
+  border-radius: 2px;
+  background: #fff;
+  cursor: auto;
+}
+event-pop>section>article.active ~ svg-icon[type="mas"] {
+  display: none;
+}
+event-pop>section>article.active {
+  display: block;
+  height: 500px;
+  width: 400px;
+  animation: expand .5s ease-out;
+}
+event-pop>section>article.active .expanded-pop-wrapper {
+  width: 400px;
+  position: absolute;
+  top: 0;
+  animation: aparece .3s linear;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+event-pop>section>article .expanded-pop-wrapper>header{
+  background: #9cda7d;
+  color: #fff;
+  fill: #689253;
+  padding: 11px;
+}
+event-pop>section>article .expanded-pop-wrapper>header p.info{
+  margin: 0;
+  font-size: 14px;
+  color: #689253;
+}
+event-pop>section>article .expanded-pop-wrapper>header h1{
+  margin: 0;
+  font-weight: 100;
+  font-size: 30px;
+
+}
+event-pop header>svg-icon[type="close"]{
+  fill: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  cursor: pointer;
+  height: 30px;
+}
+.cronograma-wrapper {
+      display: flex;
+    flex-direction: column;
+    padding: 0 30px;
+}
+
+.fila-crono {
+    display: flex;
+    align-items: baseline;
+}
+
+span.hora-crono {
+    width: 30px;
+}
+
+span.linea-crono {
+    height: 10px;
+    width: 10px;
+    display: block;
+    border-radius: 7px;
+    position: relative;
+    left: 6px;
+    background: #ffe551;
+}
+.content-crono {
+    border-left: 2px solid #ffe551;
+    flex: 1;
+    padding-left: 13px;
+}
+
+.content-crono h2{
+  font-weight: 100;
+  margin: 30px 0 0;
+}
+
+.content-crono p{
+  margin: 0;
+}
+
+.expanded-pop-footer{
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+#quiero_ayudar:hover{
+  background: #E4CE4C;
+}
+#quiero_ayudar{
+  background: #FFE551;
+  color: #444;
+  font-size: 14px;
+  margin: 1px;
+  border: none;
+}
+#ver_evento_facebook:hover{
+  background: #2D59A2;
+}
+#ver_evento_facebook {
+  background: #47c;
+  color: white;
+  float: right;
+  border: none; 
+}
+#ver_evento_facebook svg-icon svg{
+  transform: scale(2) translateY(1px);
+  margin-right:5px; 
+}
+#ver_evento_facebook svg-icon use {
+  fill: #fff;
+}
+
+
+
+
+
+@keyframes aparece {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes expand {
+  0% {
+    height: 0px;
+    width: 80px;
+    margin-left: 0;
+  }
+
+  30% {
+    width: 400px;
+    margin-left: -200px;
+  }
+
+  100% {
+    height: 500px;
+  }
+}

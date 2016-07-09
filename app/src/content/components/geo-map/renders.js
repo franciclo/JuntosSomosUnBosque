@@ -1,4 +1,5 @@
-import popUpHtml from './template.html'
+import popUpHtml from '../event-pop/template.html'
+import St from 'state'
 import 'leaflet'
 
 export default function () {
@@ -25,6 +26,13 @@ export default function () {
     .setLatLng([-34.539, -58.446])
     .setContent(popUpHtml)
     .openOn(map)
+
+    St(dom.id + '.center')
+      .on('N')
+      .subscribe((center) => {
+        map.panTo(new window.L.LatLng(center[0], center[1]))
+      })
+
   }
 
   return {init}
