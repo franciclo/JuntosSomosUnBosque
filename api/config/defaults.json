@@ -1,0 +1,34 @@
+{
+"db": "",
+"port": 3000,
+"secret": "",
+"twitterAuth" : {
+    "consumerKey"        : "",
+    "consumerSecret"     : "",
+    "callbackURL"        : "http://localhost:3000/auth/twitter/callback"
+},
+"googleAuth" : {
+    "clientID"         : "",
+    "clientSecret"     : "",
+    "callbackURL"      : "http://localhost:3000/auth/google/callback"
+},
+"facebookAuth" : {
+    "clientID"        : "",
+    "clientSecret"    : "",
+    "callbackURL"     : "http://localhost:3000/auth/facebook/callback"
+},
+"mailer": {
+  "transport":{
+      "service": "gmail",
+      "auth": {
+        "user": "",
+        "pass": ""
+      }
+  },
+  "message": {
+    "from":"JuntosSomosUnBosque@noreply.com",
+    "subject":"Juntos Somos Un Bosque"
+  }
+}
+
+}
