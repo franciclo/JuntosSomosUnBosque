@@ -11,7 +11,7 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var session = require('express-session')
 
-mongoose.connect(config.db || process.env.MONGOLAB_URI)
+mongoose.connect(process.env.MONGOLAB_URI)
 
 require('./auth/controller')(passport)
 
