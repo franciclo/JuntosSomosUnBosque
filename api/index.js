@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 process.env.PWD = process.cwd()
 
-app.use(express.static(path.join(process.env.PWD, '..', 'app', 'public')))
+app.use(express.static(__dirname + '/../app/public')) // path.join(process.env.PWD, '..', 'app', 'public')))
 
 app.set('superSecret', config.secret)
 app.use(session({ secret: 'klj234 lkj23ñlkfoewut2if jfnf' }))
