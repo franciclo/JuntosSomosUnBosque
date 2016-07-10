@@ -1,27 +1,8 @@
+import Flickity from 'flickity'
 import St from 'state'
 import {className} from 'utils'
 
 export default function () {
-  function toggleActiveSection (dom, id) {
-    var sidebarActionButtons = dom.querySelectorAll('#action_menu button')
-    for (var i = 0; i < sidebarActionButtons.length; i++) {
-      if (sidebarActionButtons[i].getAttribute('data-target') === id) {
-        className.add(sidebarActionButtons[i], 'active')
-      } else {
-        className.remove(sidebarActionButtons[i], 'active')
-      }
-    }
-
-    var sidebarActionContent = dom.querySelectorAll('.action-content')
-    for (var y = 0; y < sidebarActionContent.length; y++) {
-      if (sidebarActionContent[y].id === id) {
-        className.add(sidebarActionContent[y], 'active')
-      } else {
-        className.remove(sidebarActionContent[y], 'active')
-      }
-    }
-  }
-
   function toggleActiveInfoSection (dom, id) {
     var infoActionButtons = dom.querySelectorAll('#mas_info_side_menu > p')
     for (var i = 0; i < infoActionButtons.length; i++) {
@@ -43,19 +24,14 @@ export default function () {
   }
 
   function init (dom) {
-    var nombre = St('user.name').value
-    dom.querySelector('[data-id="user-btn"] span').textContent = nombre
-    this.onActiveContent = St('mainApp.content')
-      .on(['N', 'E'])
-      .subscribe(function (id) {
-        toggleActiveSection(dom, id)
-      })
-
     St('masInfo.content')
       .on(['N', 'E'])
       .subscribe(function (id) {
         toggleActiveInfoSection(dom, id)
       })
+
+    var nombre = St('user.name').value
+    dom.querySelector('[data-id="user-btn"] span').textContent = nombre
 
     St('primeraVez.formNotification')
       .on('N')
@@ -67,10 +43,22 @@ export default function () {
           St('popUpBienvenido.show').value = false
         }, 2000)
       })
+
+    this.flkty = new Flickity('#arboles_data_scroll', {
+      pageDots: false,
+      contain: true
+    })
+
+    St('festival_pop.show')
+      .on('E')
+      .subscribe(function (b) {
+        className.bool(b, dom.querySelector('#cartel_evento'), 'off')
+      })
+    className.remove(document.querySelector('#asignarPlantin'), 'hide')
   }
 
   function destroy () {
-    this.onActiveContent.dispose()
+    this.onActiveContent.unsubscribe()
   }
 
   return {init, destroy}

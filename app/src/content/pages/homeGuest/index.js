@@ -26,6 +26,7 @@ import 'icons/arrow.left.svg'
 import 'icons/social.facebook.svg'
 import 'icons/social.twitter.svg'
 import 'icons/social.google.svg'
+import 'icons/caret.right.svg'
 
 import html from './index.html'
 

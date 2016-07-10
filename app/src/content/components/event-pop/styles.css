@@ -5,7 +5,6 @@ event-pop>section{
   flex-direction: column;
   border-radius: 2px;
   overflow: hidden;
-  transition: 1s height linear;
 }
 
 event-pop .small-pop svg-icon {
@@ -51,6 +50,7 @@ event-pop .small-pop h1 {
 }
 .leaflet-popup:hover event-pop>section {
   height: 55px;
+  animation: plus-up .1s linear;
 }
 .leaflet-popup:hover svg-icon[type="mas"] {
   display: block;
@@ -102,7 +102,7 @@ event-pop>section>article.active .expanded-pop-wrapper {
   flex-direction: column;
 }
 event-pop>section>article .expanded-pop-wrapper>header{
-  background: #9cda7d;
+  background: #79ce4e;
   color: #fff;
   fill: #689253;
   padding: 11px;
@@ -110,7 +110,8 @@ event-pop>section>article .expanded-pop-wrapper>header{
 event-pop>section>article .expanded-pop-wrapper>header p.info{
   margin: 0;
   font-size: 14px;
-  color: #689253;
+  color: #e4ffd7;
+  fill: #e4ffd7;
 }
 event-pop>section>article .expanded-pop-wrapper>header h1{
   margin: 0;
@@ -127,6 +128,47 @@ event-pop header>svg-icon[type="close"]{
   cursor: pointer;
   height: 30px;
 }
+
+
+
+
+
+
+
+
+
+
+.intro-wrapper button{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #ff1b4b;
+  fill: #ff1b4b;
+}
+.intro-wrapper button svg-icon{
+  height: 13px;
+}
+.intro-wrapper {
+  padding: 15px 10px;
+  height: 100%;
+  box-sizing: border-box;
+}
+.intro-wrapper p {
+  font-size: 15px;
+  color: #444;
+  margin: 10px 0 0;
+}    
+.intro-wrapper p.info {
+  font-size: 15px;
+  color: #929292;
+  font-style: italic;
+  margin: 20px 0;
+}
+
+
 .cronograma-wrapper {
       display: flex;
     flex-direction: column;
@@ -165,13 +207,16 @@ span.linea-crono {
 .content-crono p{
   margin: 0;
 }
-
+.expanded-pop-content {
+  width: 100%;
+  flex:1;
+}
 .expanded-pop-footer{
-  flex: 1;
+  height: 40px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 10px;
+  padding: 0 10px 10px;
 }
 
 #quiero_ayudar:hover{
@@ -228,4 +273,53 @@ span.linea-crono {
   100% {
     height: 500px;
   }
+}
+@keyframes plus-up {
+  0% {
+    height: 40px;
+  }
+  100% {
+    height: 55px;
+  }
+}
+@keyframes plus-down {
+  0% {
+    opacity: 55px;
+  }
+  100% {
+    opacity: 40px;
+  }
+}
+
+#asignarPlantin {
+  position: absolute;
+  top: 80px;
+  right: 30px;
+  fill: #fff;
+  border-radius: 50%;
+  background: #ff1b4b;
+  height: 50px;
+  width: 50px;
+  z-index: 9;
+}
+#asignarPlantin:hover {
+  box-shadow: 1px 1px 6px #555;
+}
+#asignarPlantin span.tt{
+  display: none;
+  position: absolute;
+  right: 50px;
+  top: 25px;
+  width: 190px;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+  padding: 2px 0;
+  border-radius: 11px;
+}
+#asignarPlantin:hover span.tt{
+  display: block;
+}
+#asignarPlantin svg-icon {
+  width: 30px;
+  height: 30px;
 }

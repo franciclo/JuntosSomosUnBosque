@@ -6,13 +6,14 @@ export default function () {
     var id = dom.id
     St(id).value = {}
     St(id + '.show').value = false
-    this.popupCliks = Rx.Observable.fromEvent(dom.querySelector('.small-pop'), 'click')
+    this.popupCliks = Rx.Observable.fromEvent(dom.parentNode.parentNode.parentNode.parentNode.querySelector('.leaflet-popup:not(.expanded)'), 'click')
       .subscribe(function () {
         St(id + '.show').value = true
       })
     this.popupCliks = Rx.Observable
       .fromEvent(dom.querySelector('svg-icon[type="close"]'), 'click')
-      .subscribe(function () {
+      .subscribe(function (e) {
+        e.preventDefault()
         St(id + '.show').value = false
       })
   }

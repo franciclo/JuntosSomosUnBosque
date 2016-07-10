@@ -83,10 +83,8 @@ body>section geo-map{
 #home_sidebar>header>h1 {
   text-align: center;
   font-weight: 100;
-  font-size: 23px;
+  font-size: 25px;
   margin: 20px 0 28px;
-  font-family: monospace;
-  letter-spacing: 3px;
 }
 #home_sidebar>header {
   background: #9cda7d;
@@ -234,7 +232,10 @@ button.volver svg-icon{
   padding: 7px 10px;
   margin: 0 10px 10px 0;
 }
-
+#cartel_evento button svg-icon{
+  fill: #fff;
+  height: 10px;
+}
 #cartel_evento .header-evento {
   display: flex;
   padding: 10px 5px;
@@ -286,9 +287,16 @@ button.volver svg-icon{
 }
 
 
-
-
-
+#cartel_evento.off *{
+  color: #8a8a8a!important;
+  fill: #777!important;
+}
+#cartel_evento.off button {
+    background: #e4e4e4!important;
+}
+#cartel_evento.off button:hover {
+  background: #c7c7c7!important;
+}
 
 
 

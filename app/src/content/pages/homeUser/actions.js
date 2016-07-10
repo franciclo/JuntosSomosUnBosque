@@ -109,6 +109,15 @@ export default function () {
       .subscribe(function () {
         window.location = '/logout'
       })
+
+    Rx.Observable.fromEvent(dom.querySelector('[data-id="evento-sidebar-mas"]'), 'click')
+    .subscribe(function () {
+      if (St('festival_pop.show').value) {
+        St('festival_pop.show').value = false
+      } else {
+        dom.querySelector('.small-pop').click()
+      }
+    })
   }
 
   function destroy (s, f) {
