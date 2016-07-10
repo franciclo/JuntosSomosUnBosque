@@ -18,7 +18,7 @@ console.log('------------------------')
 console.log('------------------------')
 console.log('------------------------')
 console.log(config.db)
-console.log(process.env.MONGOLAB_URI)
+console.log(process.env.MONGODB_URI)
 mongoose.connect(process.env.MONGOLAB_URI)
 
 require('./auth/controller')(passport)
