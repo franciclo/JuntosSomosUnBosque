@@ -20,7 +20,9 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(express.static(path.join(__dirname, '..', 'app', 'public')))
+process.env.PWD = process.cwd()
+
+app.use(express.static(path.join(process.env.PWD, '..', 'app', 'public')))
 
 app.set('superSecret', config.secret)
 app.use(session({ secret: 'klj234 lkj23ñlkfoewut2if jfnf' }))
