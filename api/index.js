@@ -1,5 +1,6 @@
 var express = require('express')
 var app = express()
+var path = require('path')
 var config = require('./config')
 var port = process.env.PORT || config.port || 3000
 var mongoose = require('mongoose')
@@ -19,7 +20,7 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(express.static('../app/public'))
+app.use(express.static(path.join(__dirname, '..', 'app', 'public')))
 
 app.set('superSecret', config.secret)
 app.use(session({ secret: 'klj234 lkj23ñlkfoewut2if jfnf' }))
