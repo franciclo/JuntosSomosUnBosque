@@ -1,5 +1,5 @@
 {
-"db": "",
+"mongodbURI": "",
 "port": 3000,
 "secret": "",
 "twitterAuth" : {

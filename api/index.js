@@ -11,7 +11,7 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var session = require('express-session')
 
-mongoose.connect(config.db || process.env.MONGODB_URI)
+mongoose.connect(config.mongodbURI)
 
 require('./auth/controller')(passport)
 
