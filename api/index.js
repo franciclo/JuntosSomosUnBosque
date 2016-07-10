@@ -11,6 +11,13 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var session = require('express-session')
 
+console.log('------------------------')
+console.log('------------------------')
+console.log('------------------------')
+console.log('------------------------')
+console.log('------------------------')
+console.log('------------------------')
+console.log(config.db)
 console.log(process.env.MONGOLAB_URI)
 mongoose.connect(process.env.MONGOLAB_URI)
 
