@@ -1,4 +1,4 @@
-﻿var server = location.hostname
+﻿var server = window.location.origin
 module.exports = function (cmd, params) {
   function getUrl () {
     var paramStr = ''
