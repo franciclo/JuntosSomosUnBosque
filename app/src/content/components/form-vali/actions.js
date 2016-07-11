@@ -62,6 +62,7 @@ export default function () {
       if (JSON.stringify(ajaxValidations) !== '{}') {
         var ajaxValidated = Request('validate', ajaxValidations)
           .then(function (results) {
+            if (!results.success) return
             var errorsByI = []
             Object.keys(results)
               .forEach(function (inputI) {
