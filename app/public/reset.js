@@ -19455,7 +19455,7 @@
 	    return new Promise(function (resolve, reject) {
 	      if (JSON.stringify(ajaxValidations) !== '{}') {
 	        var ajaxValidated = (0, _request2.default)('validate', ajaxValidations).then(function (results) {
-	          if (!results.success) return;
+	          if (!results.success) return inputsData;
 	          var errorsByI = [];
 	          Object.keys(results).forEach(function (inputI) {
 	            if (~errorsByI.indexOf(inputI)) return;
