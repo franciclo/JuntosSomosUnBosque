@@ -21,6 +21,11 @@ export default function () {
       .subscribe(function () {
         St('eventoPopContent.active').value = 'cronoSlide'
       })
+    this.popupCliks = Rx.Observable
+      .fromEvent(dom.querySelector('[data-id="volverAIntro"]'), 'click')
+      .subscribe(function () {
+        St('eventoPopContent.active').value = 'introSlide'
+      })
   }
 
   function destroy () {

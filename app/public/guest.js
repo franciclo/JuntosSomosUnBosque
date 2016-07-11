@@ -140,11 +140,11 @@
 
 	__webpack_require__(418);
 
-	var _actions = __webpack_require__(440);
+	var _actions = __webpack_require__(441);
 
 	var _actions2 = _interopRequireDefault(_actions);
 
-	var _renders = __webpack_require__(441);
+	var _renders = __webpack_require__(442);
 
 	var _renders2 = _interopRequireDefault(_renders);
 
@@ -21041,11 +21041,11 @@
 
 	__webpack_require__(425);
 
-	var _renders = __webpack_require__(436);
+	var _renders = __webpack_require__(437);
 
 	var _renders2 = _interopRequireDefault(_renders);
 
-	var _actions = __webpack_require__(439);
+	var _actions = __webpack_require__(440);
 
 	var _actions2 = _interopRequireDefault(_actions);
 
@@ -21093,15 +21093,17 @@
 
 	__webpack_require__(429);
 
+	__webpack_require__(430);
+
 	var _component = __webpack_require__(387);
 
 	var _component2 = _interopRequireDefault(_component);
 
-	var _renders = __webpack_require__(434);
+	var _renders = __webpack_require__(435);
 
 	var _renders2 = _interopRequireDefault(_renders);
 
-	var _actions = __webpack_require__(435);
+	var _actions = __webpack_require__(436);
 
 	var _actions2 = _interopRequireDefault(_actions);
 
@@ -21129,19 +21131,28 @@
 /* 429 */
 /***/ function(module, exports, __webpack_require__) {
 
+	;
+	var sprite = __webpack_require__(11);;
+	var image = "<symbol viewBox=\"0 0 100 100\" id=\"caret.left\"><path d=\"M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z\"/></symbol>";
+	module.exports = sprite.add(image, "caret.left");
+
+/***/ },
+/* 430 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
-	__webpack_require__(430);
+	__webpack_require__(431);
 
 	var _component = __webpack_require__(387);
 
 	var _component2 = _interopRequireDefault(_component);
 
-	var _actions = __webpack_require__(432);
+	var _actions = __webpack_require__(433);
 
 	var _actions2 = _interopRequireDefault(_actions);
 
-	var _renders = __webpack_require__(433);
+	var _renders = __webpack_require__(434);
 
 	var _renders2 = _interopRequireDefault(_renders);
 
@@ -21150,14 +21161,14 @@
 	(0, _component2.default)('slider-box', { actions: _actions2.default, renders: _renders2.default });
 
 /***/ },
-/* 430 */
+/* 431 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 431 */,
-/* 432 */
+/* 432 */,
+/* 433 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21182,7 +21193,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 433 */
+/* 434 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21222,7 +21233,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 434 */
+/* 435 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21266,7 +21277,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 435 */
+/* 436 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21290,6 +21301,9 @@
 	    this.popupCliks = _rxjs2.default.Observable.fromEvent(dom.querySelector('[data-id="verCronogramaBtn"]'), 'click').subscribe(function () {
 	      (0, _state2.default)('eventoPopContent.active').value = 'cronoSlide';
 	    });
+	    this.popupCliks = _rxjs2.default.Observable.fromEvent(dom.querySelector('[data-id="volverAIntro"]'), 'click').subscribe(function () {
+	      (0, _state2.default)('eventoPopContent.active').value = 'introSlide';
+	    });
 	  }
 
 	  function destroy() {
@@ -21310,7 +21324,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 436 */
+/* 437 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21351,7 +21365,7 @@
 	  return { init: init };
 	};
 
-	var _template = __webpack_require__(437);
+	var _template = __webpack_require__(438);
 
 	var _template2 = _interopRequireDefault(_template);
 
@@ -21359,18 +21373,18 @@
 
 	var _state2 = _interopRequireDefault(_state);
 
-	__webpack_require__(438);
+	__webpack_require__(439);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 437 */
+/* 438 */
 /***/ function(module, exports) {
 
-	module.exports = "<event-pop id=\"festival_pop\">\n  <section>\n    <div class=\"small-pop\">\n      <svg-icon type=\"calendar.11\"></svg-icon>\n      <h1>Festival de plantación</h1>\n    </div>\n    <svg-icon type=\"mas\"></svg-icon>\n    <article>\n      <div class=\"expanded-pop-wrapper\">\n        <header>\n              <h1>Festival de plantación</h1>\n              <p class=\"info\">\n                <svg-icon type=\"lugar\"></svg-icon>\n                Eco aldea Velatropa, Ciudad Universitaria.\n              </p>\n              <p class=\"info\">\n                <svg-icon type=\"reloj\"></svg-icon>\n                Domingo 11 de septiembre, 12:00 am\n              </p>\n              <svg-icon type=\"close\"></svg-icon>\n              <button id=\"asignarPlantin\" data-id=\"asignar_plantin\" class=\"hide\">\n                <svg-icon type=\"plantin\"></svg-icon>\n                <span class=\"tt\">Asignar arboles a este evento</span>\n              </button>\n        </header>\n        <div class=\"expanded-pop-content\">\n          <slider-box id=\"eventoPopContent\">\n            <article data-id=\"introSlide\" data-enter=\"de-izq\" class=\"de-izq active intro-wrapper\">\n              <p class=\"info\">Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.</p>\n              <p>A partir de los rituales de siembra que ofrecimos en recitales, encuentros y talleres se fue creando una gran red de cultivadores de árboles nativos y comestibles.</p>\n              <p>Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando plantaciones colectivas, cuando los arbolitos hayan crecido y estén listos para ir a tierra.</p>\n              <button data-id=\"verCronogramaBtn\">\n                Cronograma\n                <svg-icon type=\"caret.right\"></svg-icon>\n              </button>\n            </article>\n            <article data-id=\"cronoSlide\" data-enter=\"de-der\" class=\"cronograma-wrapper\">\n              <div class=\"fila-crono\">\n                <span class=\"hora-crono\">12:00</span>\n                <span class=\"linea-crono\"></span>\n                <div class=\"content-crono\">\n                  <h2>Nos juntamos</h2>\n                  <p>Empezamos con una pequeña reunion para contabilizar los arboles y organizar la jornada.</p>\n                </div>\n              </div>\n              <div class=\"fila-crono\">\n                <span class=\"hora-crono\">12:30</span>\n                <span class=\"linea-crono\"></span>\n                <div class=\"content-crono\">\n                  <h2>Charla</h2>\n                  <p>El colectivo huertero nos explicará como podemos tomar acción en comunidad.</p>\n                </div>\n              </div>\n              <div class=\"fila-crono\">\n                <span class=\"hora-crono\">13:00</span>\n                <span class=\"linea-crono\"></span>\n                <div class=\"content-crono\">\n                  <h2>Musica</h2>\n                  <p>Perota Chingo estara tocando y al final haremos una siembra colectiva.</p>\n                </div>\n              </div>\n              <div class=\"fila-crono\">\n                <span class=\"hora-crono\">15:00</span>\n                <span class=\"linea-crono\"></span>\n                <div class=\"content-crono\">\n                  <h2>Plantación</h2>\n                  <p>Ahora si! a laburar!</p>\n                </div>\n              </div>\n            </article>\n            <article data-id=\"asignSlide\" data-enter=\"de-arr\" class=\"asignación-wrapper\">\n              asignacion de arboles\n            </article>\n          </slider-box>\n        </div>\n        <div class=\"expanded-pop-footer\">\n          <button id=\"ver_evento_facebook\">\n            <svg-icon type=\"social.facebook\"></svg-icon>\n            Evento en facebook\n          </button>\n          <button id=\"quiero_ayudar\">Quiero ayudar</button>\n        </div>\n      </div>\n    </article>\n  </section>\n</event-pop>";
+	module.exports = "<event-pop id=\"festival_pop\">\n  <section>\n    <div class=\"small-pop\">\n      <svg-icon type=\"calendar.11\"></svg-icon>\n      <h1>Festival de plantación</h1>\n    </div>\n    <svg-icon type=\"mas\"></svg-icon>\n    <article>\n      <div class=\"expanded-pop-wrapper\">\n        <header>\n              <h1>Festival de plantación</h1>\n              <p class=\"info\">\n                <svg-icon type=\"lugar\"></svg-icon>\n                Eco aldea Velatropa, Ciudad Universitaria.\n              </p>\n              <p class=\"info\">\n                <svg-icon type=\"reloj\"></svg-icon>\n                Domingo 11 de septiembre, 12:00 am\n              </p>\n              <svg-icon type=\"close\"></svg-icon>\n              <button id=\"asignarPlantin\" data-id=\"asignar_plantin\" class=\"hide\">\n                <svg-icon type=\"plantin\"></svg-icon>\n                <span class=\"tt\">Asignar arboles a este evento</span>\n              </button>\n        </header>\n        <div class=\"expanded-pop-content\">\n          <slider-box id=\"eventoPopContent\">\n            <article data-id=\"introSlide\" data-enter=\"de-izq\" class=\"de-izq active intro-wrapper\">\n              <p class=\"info\">Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.</p>\n              <p>A partir de los rituales de siembra que ofrecimos en recitales, encuentros y talleres se fue creando una gran red de cultivadores de árboles nativos y comestibles.</p>\n              <p>Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando plantaciones colectivas, cuando los arbolitos hayan crecido y estén listos para ir a tierra.</p>\n              <button data-id=\"verCronogramaBtn\">\n                Cronograma\n                <svg-icon type=\"caret.right\"></svg-icon>\n              </button>\n            </article>\n            <article data-id=\"cronoSlide\" data-enter=\"de-der\" class=\"cronograma-wrapper\">\n              <button id=\"volver_a_intro\" data-id=\"volverAIntro\">\n                <svg-icon type=\"caret.left\"></svg-icon>\n                volver\n              </button>\n              <div class=\"fila-crono\">\n                <span class=\"hora-crono\">12:00</span>\n                <span class=\"linea-crono\"></span>\n                <div class=\"content-crono\">\n                  <h2>Nos juntamos</h2>\n                  <p>Empezamos con una pequeña reunion para contabilizar los arboles y organizar la jornada.</p>\n                </div>\n              </div>\n              <div class=\"fila-crono\">\n                <span class=\"hora-crono\">12:30</span>\n                <span class=\"linea-crono\"></span>\n                <div class=\"content-crono\">\n                  <h2>Charla</h2>\n                  <p>El colectivo huertero nos explicará como podemos tomar acción en comunidad.</p>\n                </div>\n              </div>\n              <div class=\"fila-crono\">\n                <span class=\"hora-crono\">13:00</span>\n                <span class=\"linea-crono\"></span>\n                <div class=\"content-crono\">\n                  <h2>Musica</h2>\n                  <p>Perota Chingo estara tocando y al final haremos una siembra colectiva.</p>\n                </div>\n              </div>\n              <div class=\"fila-crono\">\n                <span class=\"hora-crono\">15:00</span>\n                <span class=\"linea-crono\"></span>\n                <div class=\"content-crono\">\n                  <h2>Plantación</h2>\n                  <p>Ahora si! a laburar!</p>\n                </div>\n              </div>\n            </article>\n            <article data-id=\"asignSlide\" data-enter=\"de-arr\" class=\"asignación-wrapper\">\n              asignacion de arboles\n            </article>\n          </slider-box>\n        </div>\n        <div class=\"expanded-pop-footer\">\n          <button id=\"ver_evento_facebook\">\n            <svg-icon type=\"social.facebook\"></svg-icon>\n            Evento en facebook\n          </button>\n          <button id=\"quiero_ayudar\">Quiero ayudar</button>\n        </div>\n      </div>\n    </article>\n  </section>\n</event-pop>";
 
 /***/ },
-/* 438 */
+/* 439 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -30543,7 +30557,7 @@
 	}(window, document));
 
 /***/ },
-/* 439 */
+/* 440 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30573,7 +30587,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 440 */
+/* 441 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30698,7 +30712,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 441 */
+/* 442 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30750,7 +30764,7 @@
 	  return { init: init, destroy: destroy };
 	};
 
-	var _flickity = __webpack_require__(442);
+	var _flickity = __webpack_require__(443);
 
 	var _flickity2 = _interopRequireDefault(_flickity);
 
@@ -30763,7 +30777,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 442 */
+/* 443 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -30784,13 +30798,13 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(443),
-	      __webpack_require__(454),
-	      __webpack_require__(457),
-	      __webpack_require__(460),
+	      __webpack_require__(444),
+	      __webpack_require__(455),
+	      __webpack_require__(458),
 	      __webpack_require__(461),
 	      __webpack_require__(462),
-	      __webpack_require__(463)
+	      __webpack_require__(463),
+	      __webpack_require__(464)
 	    ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof exports == 'object' ) {
 	    // CommonJS
@@ -30812,7 +30826,7 @@
 
 
 /***/ },
-/* 443 */
+/* 444 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -30826,13 +30840,13 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(444),
 	      __webpack_require__(445),
 	      __webpack_require__(446),
 	      __webpack_require__(447),
-	      __webpack_require__(449),
-	      __webpack_require__(452),
-	      __webpack_require__(453)
+	      __webpack_require__(448),
+	      __webpack_require__(450),
+	      __webpack_require__(453),
+	      __webpack_require__(454)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( classie, EventEmitter, eventie, getSize, utils, Cell, animatePrototype ) {
 	      return factory( window, classie, EventEmitter, eventie, getSize, utils, Cell, animatePrototype );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -31579,7 +31593,7 @@
 
 
 /***/ },
-/* 444 */
+/* 445 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -31670,7 +31684,7 @@
 
 
 /***/ },
-/* 445 */
+/* 446 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -32148,7 +32162,7 @@
 
 
 /***/ },
-/* 446 */
+/* 447 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -32236,7 +32250,7 @@
 
 
 /***/ },
-/* 447 */
+/* 448 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -32479,7 +32493,7 @@
 	// transport
 	if ( true ) {
 	  // AMD for RequireJS
-	  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(448) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (defineGetSize), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(449) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (defineGetSize), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else if ( typeof exports === 'object' ) {
 	  // CommonJS for Component
 	  module.exports = defineGetSize( require('desandro-get-style-property') );
@@ -32492,7 +32506,7 @@
 
 
 /***/ },
-/* 448 */
+/* 449 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -32553,7 +32567,7 @@
 
 
 /***/ },
-/* 449 */
+/* 450 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -32571,8 +32585,8 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(450),
-	      __webpack_require__(451)
+	      __webpack_require__(451),
+	      __webpack_require__(452)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( docReady, matchesSelector ) {
 	      return factory( window, docReady, matchesSelector );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -32829,7 +32843,7 @@
 
 
 /***/ },
-/* 450 */
+/* 451 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -32903,7 +32917,7 @@
 	// transport
 	if ( true ) {
 	  // AMD
-	  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(446) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (defineDocReady), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(447) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (defineDocReady), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else if ( typeof exports === 'object' ) {
 	  module.exports = defineDocReady( require('eventie') );
 	} else {
@@ -32915,7 +32929,7 @@
 
 
 /***/ },
-/* 451 */
+/* 452 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -33028,7 +33042,7 @@
 
 
 /***/ },
-/* 452 */
+/* 453 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
@@ -33038,7 +33052,7 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(447)
+	      __webpack_require__(448)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( getSize ) {
 	      return factory( window, getSize );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -33127,7 +33141,7 @@
 
 
 /***/ },
-/* 453 */
+/* 454 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
@@ -33137,8 +33151,8 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(448),
-	      __webpack_require__(449)
+	      __webpack_require__(449),
+	      __webpack_require__(450)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( getStyleProperty, utils ) {
 	      return factory( window, getStyleProperty, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -33389,7 +33403,7 @@
 
 
 /***/ },
-/* 454 */
+/* 455 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
@@ -33399,11 +33413,11 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+	      __webpack_require__(445),
+	      __webpack_require__(447),
 	      __webpack_require__(444),
-	      __webpack_require__(446),
-	      __webpack_require__(443),
-	      __webpack_require__(455),
-	      __webpack_require__(449)
+	      __webpack_require__(456),
+	      __webpack_require__(450)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( classie, eventie, Flickity, Unidragger, utils ) {
 	      return factory( window, classie, eventie, Flickity, Unidragger, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -33725,7 +33739,7 @@
 
 
 /***/ },
-/* 455 */
+/* 456 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -33744,8 +33758,8 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(446),
-	      __webpack_require__(456)
+	      __webpack_require__(447),
+	      __webpack_require__(457)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( eventie, Unipointer ) {
 	      return factory( window, eventie, Unipointer );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -34097,7 +34111,7 @@
 
 
 /***/ },
-/* 456 */
+/* 457 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -34116,8 +34130,8 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(445),
-	      __webpack_require__(446)
+	      __webpack_require__(446),
+	      __webpack_require__(447)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EventEmitter, eventie ) {
 	      return factory( window, EventEmitter, eventie );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -34419,7 +34433,7 @@
 
 
 /***/ },
-/* 457 */
+/* 458 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// -------------------------- prev/next button -------------------------- //
@@ -34431,10 +34445,10 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(446),
-	      __webpack_require__(443),
-	      __webpack_require__(458),
-	      __webpack_require__(449)
+	      __webpack_require__(447),
+	      __webpack_require__(444),
+	      __webpack_require__(459),
+	      __webpack_require__(450)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( eventie, Flickity, TapListener, utils ) {
 	      return factory( window, eventie, Flickity, TapListener, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -34690,7 +34704,7 @@
 
 
 /***/ },
-/* 458 */
+/* 459 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -34708,7 +34722,7 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(459)
+	      __webpack_require__(460)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Unipointer ) {
 	      return factory( window, Unipointer );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -34810,7 +34824,7 @@
 
 
 /***/ },
-/* 459 */
+/* 460 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -34829,8 +34843,8 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(445),
-	      __webpack_require__(446)
+	      __webpack_require__(446),
+	      __webpack_require__(447)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EventEmitter, eventie ) {
 	      return factory( window, EventEmitter, eventie );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -35132,7 +35146,7 @@
 
 
 /***/ },
-/* 460 */
+/* 461 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
@@ -35142,10 +35156,10 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(446),
-	      __webpack_require__(443),
-	      __webpack_require__(458),
-	      __webpack_require__(449)
+	      __webpack_require__(447),
+	      __webpack_require__(444),
+	      __webpack_require__(459),
+	      __webpack_require__(450)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( eventie, Flickity, TapListener, utils ) {
 	      return factory( window, eventie, Flickity, TapListener, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -35321,7 +35335,7 @@
 
 
 /***/ },
-/* 461 */
+/* 462 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
@@ -35331,10 +35345,10 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(445),
 	      __webpack_require__(446),
-	      __webpack_require__(449),
-	      __webpack_require__(443)
+	      __webpack_require__(447),
+	      __webpack_require__(450),
+	      __webpack_require__(444)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EventEmitter, eventie, utils, Flickity ) {
 	      return factory( EventEmitter, eventie, utils, Flickity );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -35532,7 +35546,7 @@
 
 
 /***/ },
-/* 462 */
+/* 463 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
@@ -35542,8 +35556,8 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(443),
-	      __webpack_require__(449)
+	      __webpack_require__(444),
+	      __webpack_require__(450)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, utils ) {
 	      return factory( window, Flickity, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -35715,7 +35729,7 @@
 
 
 /***/ },
-/* 463 */
+/* 464 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( window, factory ) {
@@ -35725,10 +35739,10 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+	      __webpack_require__(445),
+	      __webpack_require__(447),
 	      __webpack_require__(444),
-	      __webpack_require__(446),
-	      __webpack_require__(443),
-	      __webpack_require__(449)
+	      __webpack_require__(450)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( classie, eventie, Flickity, utils ) {
 	      return factory( window, classie, eventie, Flickity, utils );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));

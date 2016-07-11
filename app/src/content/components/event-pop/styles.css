@@ -179,7 +179,22 @@ event-pop header>svg-icon[type="close"]{
     display: flex;
     align-items: baseline;
 }
-
+#volver_a_intro{
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  background: transparent;
+  color: #989898;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 8px 4px;
+}
+#volver_a_intro svg-icon{
+  fill: #989898;
+  width: 9px;
+  height: 9px;
+}
 span.hora-crono {
     width: 30px;
 }
@@ -198,7 +213,9 @@ span.linea-crono {
     flex: 1;
     padding-left: 13px;
 }
-
+.fila-crono:nth-of-type(1) h2{
+  margin-top: 25px;
+}
 .content-crono h2{
   font-weight: 100;
   margin: 17px 0 0;
