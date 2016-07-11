@@ -915,8 +915,8 @@ event-pop header>svg-icon[type="close"]{
 }
 #volver_a_intro{
   position: absolute;
-  left: 0;
-  top: 0;
+  right: 10px;
+  bottom: 0;
   border: none;
   background: transparent;
   color: #989898;
@@ -1044,14 +1044,15 @@ span.linea-crono {
 
 #asignarPlantin {
   position: absolute;
-  top: 80px;
-  right: 30px;
+  top: 67px;
+  right: 17px;
   fill: #fff;
   border-radius: 50%;
   background: #ff1b4b;
   height: 50px;
   width: 50px;
-  z-index: 9;
+  z-index: 10;
+  border: 1px solid #ff1b4b;
 }
 #asignarPlantin:hover {
   box-shadow: 1px 1px 6px #555;
@@ -1063,7 +1064,7 @@ span.linea-crono {
   top: 25px;
   width: 190px;
   color: #fff;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.7);
   padding: 2px 0;
   border-radius: 11px;
 }

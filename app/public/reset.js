@@ -20841,7 +20841,7 @@
 	      (0, _state2.default)(id + '.show').value = true;
 	    });
 	    this.popupCliks = _rxjs2.default.Observable.fromEvent(dom.querySelector('svg-icon[type="close"]'), 'click').subscribe(function (e) {
-	      e.preventDefault();
+	      e.stopPropagation();
 	      (0, _state2.default)(id + '.show').value = false;
 	    });
 	    this.popupCliks = _rxjs2.default.Observable.fromEvent(dom.querySelector('[data-id="verCronogramaBtn"]'), 'click').subscribe(function () {

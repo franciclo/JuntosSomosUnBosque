@@ -13,7 +13,7 @@ export default function () {
     this.popupCliks = Rx.Observable
       .fromEvent(dom.querySelector('svg-icon[type="close"]'), 'click')
       .subscribe(function (e) {
-        e.preventDefault()
+        e.stopPropagation()
         St(id + '.show').value = false
       })
     this.popupCliks = Rx.Observable
