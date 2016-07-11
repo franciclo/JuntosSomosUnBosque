@@ -16,16 +16,22 @@ export default function () {
         e.stopPropagation()
         St(id + '.show').value = false
       })
-    this.popupCliks = Rx.Observable
+    Rx.Observable
       .fromEvent(dom.querySelector('[data-id="verCronogramaBtn"]'), 'click')
       .subscribe(function () {
         St('eventoPopContent.active').value = 'cronoSlide'
       })
-    this.popupCliks = Rx.Observable
+    Rx.Observable
       .fromEvent(dom.querySelector('[data-id="volverAIntro"]'), 'click')
       .subscribe(function () {
         St('eventoPopContent.active').value = 'introSlide'
       })
+    Rx.Observable
+      .fromEvent(dom.querySelector('[data-id="asignarPlantin"]'), 'click')
+      .subscribe(function () {
+        St('eventoPopContent.active').value = 'asignSlide'
+      })
+
   }
 
   function destroy () {

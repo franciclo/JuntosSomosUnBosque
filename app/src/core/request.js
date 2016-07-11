@@ -1,4 +1,4 @@
-﻿var server = 'http://localhost:3000'
+﻿var server = location.hostname
 module.exports = function (cmd, params) {
   function getUrl () {
     var paramStr = ''

@@ -1462,7 +1462,7 @@ event-pop header>svg-icon[type="close"]{
 #volver_a_intro{
   position: absolute;
   right: 10px;
-  bottom: 0;
+  bottom: -5px;
   border: none;
   background: transparent;
   color: #989898;
@@ -1625,12 +1625,12 @@ span.linea-crono {
     width: 100%;
     position: relative;
     display: block;
+    overflow: hidden;
 }
 slider-box > article{
     position: absolute;
     top: 0;
     left: 0;
-    /*display: none!important;*/
     z-index: 0;
     background: white;
     transition: opacity .3s linear;
@@ -1640,25 +1640,23 @@ slider-box > article.active {
   opacity: 1;
   z-index: 9;
 }
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 
 .de-izq {
   transform: translate3d(-100%, 0, 0);
 }
-
-.de-der {
-  transform: translate3d(100%, 0, 0);
-}
-
 .de-izq.active {
   transform: translate3d(0, 0, 0);
   animation: deizq .3s ease-out;
 }
-
-.de-der.active {
-  transform: translate3d(0, 0, 0);
-  animation: deder .3s ease-out;
-}
-
 @keyframes deizq {
   0% {
     transform: translate3d(-100%,0,0);
@@ -1668,6 +1666,13 @@ slider-box > article.active {
   }
 }
 
+.de-der {
+  transform: translate3d(100%, 0, 0);
+}
+.de-der.active {
+  transform: translate3d(0, 0, 0);
+  animation: deder .3s ease-out;
+}
 @keyframes deder {
   0% {
     transform: translate3d(100%,0,0);
@@ -1677,11 +1682,20 @@ slider-box > article.active {
   }
 }
 
-@keyframes fade-out {
+.de-arr {
+  transform: translate3d(0, -100%, 0);
+}
+.de-arr.active {
+  transform: translate3d(0, 0, 0);
+  animation: dearr .3s ease-out;
+}
+@keyframes dearr {
   0% {
-    opacity: 1;
+    transform: translate3d(0,-100%,0);
   }
   100% {
-    opacity: 0;
+    transform: translate3d(0,0,0);
   }
 }
+
+

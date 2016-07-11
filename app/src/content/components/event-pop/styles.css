@@ -182,7 +182,7 @@ event-pop header>svg-icon[type="close"]{
 #volver_a_intro{
   position: absolute;
   right: 10px;
-  bottom: 0;
+  bottom: -5px;
   border: none;
   background: transparent;
   color: #989898;
