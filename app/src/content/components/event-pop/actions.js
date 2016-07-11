@@ -16,6 +16,11 @@ export default function () {
         e.preventDefault()
         St(id + '.show').value = false
       })
+    this.popupCliks = Rx.Observable
+      .fromEvent(dom.querySelector('[data-id="verCronogramaBtn"]'), 'click')
+      .subscribe(function () {
+        St('eventoPopContent.active').value = 'cronoSlide'
+      })
   }
 
   function destroy () {
