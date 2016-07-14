@@ -70,37 +70,12 @@ body>section geo-map{
 
 
 
-.loguineo {
-  margin: 15px;
-  justify-content: center; 
-}
-.loguineo h1{
-  color: #444;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 100;
-  margin-bottom: 33px;
-}
-
-.action-button {
-  display: inline-flex;
-  align-items: center;
-  font-size: 16px;
-  float: right;
-  margin: 0;
-}
-.action-button svg-icon {
-  margin-right: 5px;
-  height: 20px;
-  width: 20px;
-}
-
-
 #cartel_suma {
   background: white;
   border-radius: 3px;
   padding: 10px;
   text-align: left;
+  position: relative;
 }
 #cartel_suma p{
   padding: 5px 10px 15px;
@@ -117,18 +92,24 @@ body>section geo-map{
   padding: 5px 10px 0;
 }
 #suma_arboles_btn:hover {
-  background: #419444;
+  box-shadow: 0px 2px 2px #555;
 }
 #suma_arboles_btn{
-  background: #4CAF50;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 13px;
+  background: #35a700;
+  fill: #fff;
   border: none;
-  padding: 7px 10px;
+  padding: 11px;
+  display: flex;
+  align-items: center;
+  right: 50px;
+  bottom: -18px;
+  position: absolute;
+  border-radius: 100%;
+  box-shadow: 0px 2px 6px #555;
 }
-#suma_arboles_btn use{
-  fill:#fff;
+#suma_arboles_btn svg-icon{
+  height: 25px;
+  width: 25px;
 }
 
 
@@ -330,6 +311,17 @@ body>section geo-map{
 
 
 
+.loguineo {
+  margin: 15px;
+  justify-content: center; 
+}
+.loguineo h1{
+  color: #444;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 100;
+  margin-bottom: 33px;
+}
 
 #accionesUsuario>section{
   max-width: 450px;
