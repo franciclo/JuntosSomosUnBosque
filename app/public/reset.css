@@ -745,16 +745,15 @@ event-pop>section>article.active .expanded-pop-wrapper {
   flex-direction: column;
 }
 event-pop>section>article .expanded-pop-wrapper>header{
-  background: #79ce4e;
+  background: #17a000;
   color: #fff;
-  fill: #689253;
   padding: 11px;
 }
 event-pop>section>article .expanded-pop-wrapper>header p.info{
   margin: 0;
   font-size: 14px;
-  color: #e4ffd7;
-  fill: #e4ffd7;
+  color: #fff;
+  fill: #fff;
 }
 event-pop>section>article .expanded-pop-wrapper>header h1{
   margin: 0;
@@ -1061,6 +1060,21 @@ slider-box > article.active {
   }
 }
 
+.de-arr-s {
+  transform: translate3d(0, -100%, 0);
+}
+.de-arr-s.active {
+  transform: translate3d(0, 0, 0);
+  animation: dearrs .2s ease-out;
+}
+@keyframes dearrs {
+  0% {
+    transform: translate3d(0,-10%,0);
+  }
+  100% {
+    transform: translate3d(0,0,0);
+  }
+}
 
 button#ingresarBtn:hover{
   background: #EFEFEF;

@@ -8,7 +8,9 @@ export default function () {
       className.bool(
         boxSections[i].getAttribute('data-id') === activeId,
         boxSections[i],
-        boxSections[i].getAttribute('data-enter') + ' active'
+        (boxSections[i].getAttribute('data-enter')
+          ? boxSections[i].getAttribute('data-enter') + ' '
+          : '') + 'active'
       )
     }
   }

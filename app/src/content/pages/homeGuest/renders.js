@@ -1,4 +1,3 @@
-import Flickity from 'flickity'
 import St from 'state'
 import {className} from 'utils'
 
@@ -30,15 +29,20 @@ export default function () {
         toggleActiveInfoSection(dom, id)
       })
 
-    this.flkty = new Flickity('#arboles_data_scroll', {
-      pageDots: false,
-      contain: true
-    })
-
     St('festival_pop.show')
       .on('E')
       .subscribe(function (b) {
         className.bool(b, dom.querySelector('#cartel_evento'), 'off')
+      })
+
+    St('main_menu.active')
+      .on(['N', 'E'])
+      .subscribe(function (active) {
+        var menuBtns = dom.querySelectorAll('#home_sidebar header .menu>div')
+        for (var i = menuBtns.length - 1; i >= 0; i--) {
+          var b = menuBtns[i].getAttribute('data-target') === active
+          className.bool(b, menuBtns[i], 'active')
+        }
       })
   }
 

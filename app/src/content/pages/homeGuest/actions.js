@@ -4,7 +4,8 @@ import Rx from 'rxjs'
 export default function () {
   function activatePopupSection (active) {
     return function () {
-      St('sideBar.active').value = active
+      St('accionesUsuario.active').value = active
+      St('accionesUsuario.show').value = true
     }
   }
 
@@ -31,16 +32,19 @@ export default function () {
       dom.querySelector('[data-id="sumarTusArboles"]'),
       'click'
     )
-    var proponerUnLugarClicks = Rx.Observable.fromEvent(
-      dom.querySelector('[data-id="proponerUnLugar"]'),
+
+    St('main_menu').value = {}
+    Rx.Observable.fromEvent(
+      dom.querySelectorAll('#home_sidebar header .menu>div'),
       'click'
     )
+    .map((ev) => ev.currentTarget.getAttribute('data-target'))
+    .subscribe(function (target) {
+      St('sidebar_main.active').value = target
+      St('main_menu.active').value = target
+    })
 
-    var registrarseClicks = Rx.Observable.fromEvent(
-      dom.querySelector('[data-id="registrarse-btn"]'),
-      'click'
-    )
-
+// login
     var irARegistrarseClicks = Rx.Observable.fromEvent(
       dom.querySelector('[data-id="registrarse"]'),
       'click'
@@ -66,39 +70,23 @@ export default function () {
       'click'
     )
 
-    var volverAHomeClicks = Rx.Observable.fromEvent(
-      dom.querySelectorAll('.volver'),
-      'click'
-    )
 
-    var conocerMasClicks = Rx.Observable.fromEvent(
-      dom.querySelector('[data-id="conocerMas"]'),
-      'click'
-    )
 
-    this.showOlvido = olvidoClicks.subscribe(
-      activatePopupSection('forgotPassword'),
-      'click'
-    )
-
-    this.showRegistrar = Rx.Observable
-      .merge(
-        irARegistrarseClicks,
-        registrarseClicks)
+    this.showRegistrar = irARegistrarseClicks
       .subscribe(activatePopupSection('registroUsuarios'))
-
-    this.volverAHome = volverAHomeClicks.subscribe(
-      activatePopupSection('mainApp')
-    )
 
     this.showLogin = Rx.Observable
       .merge(
         ingresarClicks,
         volverDeRegisClicks,
         volverDeOlvClicks,
-        sumarTusArbolesClicks,
-        proponerUnLugarClicks)
+        sumarTusArbolesClicks)
       .subscribe(activatePopupSection('inicioSesion'))
+
+    this.showOlvido = olvidoClicks.subscribe(
+      activatePopupSection('forgotPassword'),
+      'click'
+    )
 
     this.onOlvidoSucces = St('forgot.formNotification').on('N')
       .filter(function (notification) {
@@ -110,10 +98,11 @@ export default function () {
         }, 4500)
       })
 
-    conocerMasClicks.subscribe(function () {
-      St('masInformacion.show').value = true
-      St('masInformacion.active').value = 'masInfo'
-    })
+    Rx.Observable.fromEvent(dom.querySelector('[data-id="masInfoBtn"]'), 'click')
+        .subscribe(function () {
+          St('masInformacion.show').value = true
+          St('masInformacion.active').value = 'masInfo'
+        })
 
     // Home
     St('mainApp').value = {}

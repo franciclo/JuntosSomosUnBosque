@@ -76,4 +76,19 @@ slider-box > article.active {
   }
 }
 
+.de-arr-s {
+  transform: translate3d(0, -100%, 0);
+}
+.de-arr-s.active {
+  transform: translate3d(0, 0, 0);
+  animation: dearrs .2s ease-out;
+}
+@keyframes dearrs {
+  0% {
+    transform: translate3d(0,-10%,0);
+  }
+  100% {
+    transform: translate3d(0,0,0);
+  }
+}
 

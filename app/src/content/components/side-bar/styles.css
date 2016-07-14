@@ -1,6 +1,6 @@
 side-bar{
   height: 100%;
-  background: #EAEAEA;
+  background: #fff;
   overflow: hidden;
 }
 side-bar section svg-icon[type="close"]{

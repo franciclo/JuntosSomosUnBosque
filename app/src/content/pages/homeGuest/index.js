@@ -27,6 +27,10 @@ import 'icons/social.facebook.svg'
 import 'icons/social.twitter.svg'
 import 'icons/social.google.svg'
 import 'icons/caret.right.svg'
+import 'icons/plantin.solo.svg'
+import 'icons/plantines.svg'
+import 'icons/plantines2.svg'
+import 'icons/github.svg'
 
 import html from './index.html'
 
