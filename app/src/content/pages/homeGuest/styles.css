@@ -75,8 +75,8 @@ body>section geo-map{
   padding: 11px;
   display: flex;
   align-items: center;
-  right: 50px;
-  bottom: -18px;
+  right: 29px;
+  bottom: -43px;
   position: absolute;
   border-radius: 100%;
   box-shadow: 0px 2px 6px #555;
@@ -250,30 +250,10 @@ body>section geo-map{
   color: #fff;
   padding: 3px 7px;
   font-size: 13px;
-  text-transform: uppercase;
   cursor: pointer;
   float: right;
   border: none;
 }
-
-#ingresarBtn svg-icon{
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #75CFF0;
-  border: 1px solid #75CFF0;
-  margin-right: 5px;
-  overflow: hidden;
-}
-#ingresarBtn svg-icon svg{
-  position: relative;
-  top: 4px;
-}
-#ingresarBtn svg-icon use{
-  fill:#fff;
-  transform: scale(1.8) translate(-4.5px, -3px);
-}
-
 
 
 

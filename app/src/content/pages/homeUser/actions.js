@@ -2,9 +2,10 @@ import St from 'state'
 import Rx from 'rxjs'
 
 export default function () {
-  function activateSidebarSection (active) {
+  function activatePopupSection (active) {
     return function () {
-      St('sideBar.active').value = active
+      St('accionesUsuario.active').value = active
+      St('accionesUsuario.show').value = true
     }
   }
 
@@ -13,44 +14,75 @@ export default function () {
       dom.querySelector('[data-id="sumarTusArboles"]'),
       'click'
     )
-    // var proponerUnLugarClicks = Rx.Observable.fromEvent(
-    //   dom.querySelector('[data-id="proponerUnLugar"]'),
-    //   'click'
-    // )
-    var modelInput = dom.querySelector('[data-id="model-input"]')
-    this.misArboles = sumarTusArbolesClicks.subscribe(function () {
-      var newInput = modelInput.cloneNode(true)
-      dom.querySelector('[data-id="mis-arboles-inputs"]').appendChild(newInput)
-    }
-      // activateSidebarSection('mis-arboles')
-    )
-    var userClicks = Rx.Observable.fromEvent(
-      dom.querySelector('[data-id="user-btn"]'),
+
+    St('main_menu').value = {}
+    Rx.Observable.fromEvent(
+      dom.querySelectorAll('#home_sidebar header .menu>div'),
       'click'
     )
-
-    this.showPerfil = userClicks.subscribe(
-      activateSidebarSection('perfil')
-    )
-
-    var volverAHomeClicks = Rx.Observable.fromEvent(
-      dom.querySelectorAll('.volver'),
-      'click'
-    )
-
-    this.volverAHome = volverAHomeClicks.subscribe(
-      activateSidebarSection('mainApp')
-    )
-
-    var conocerMasClicks = Rx.Observable.fromEvent(
-      dom.querySelector('[data-id="conocerMas"]'),
-      'click'
-    )
-
-    conocerMasClicks.subscribe(function () {
-      St('masInformacion.show').value = true
-      St('masInformacion.active').value = 'masInfo'
+    .map((ev) => ev.currentTarget.getAttribute('data-target'))
+    .subscribe(function (target) {
+      St('sidebar_main.active').value = target
+      St('main_menu.active').value = target
     })
+
+// login
+    var irARegistrarseClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="registrarse"]'),
+      'click'
+    )
+
+    var olvidoClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="forgotBtn"]'),
+      'click'
+    )
+
+    var ingresarClicks = Rx.Observable.fromEvent(
+      dom.querySelector('button[data-id="ingresar-btn"]'),
+      'click'
+    )
+
+    var volverDeRegisClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="volverLoginRegis"]'),
+      'click'
+    )
+
+    var volverDeOlvClicks = Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="volverLoginMail"]'),
+      'click'
+    )
+
+    this.showRegistrar = irARegistrarseClicks
+      .subscribe(activatePopupSection('registroUsuarios'))
+
+    this.showLogin = Rx.Observable
+      .merge(
+        ingresarClicks,
+        volverDeRegisClicks,
+        volverDeOlvClicks,
+        sumarTusArbolesClicks)
+      .subscribe(activatePopupSection('inicioSesion'))
+
+    this.showOlvido = olvidoClicks.subscribe(
+      activatePopupSection('forgotPassword'),
+      'click'
+    )
+
+    this.onOlvidoSucces = St('forgot.formNotification').on('N')
+      .filter(function (notification) {
+        return notification.success
+      })
+      .subscribe(function () {
+        window.setTimeout(function () {
+          St('sideBar.active').value = 'mainApp'
+        }, 4500)
+      })
+
+    Rx.Observable.fromEvent(dom.querySelector('[data-id="masInfoBtn"]'), 'click')
+        .subscribe(function () {
+          St('masInformacion.show').value = true
+          St('masInformacion.active').value = 'masInfo'
+        })
 
     // Home
     St('mainApp').value = {}
@@ -77,6 +109,15 @@ export default function () {
       .subscribe(function (active) {
         St('masInfo.content').value = active
       })
+
+    Rx.Observable.fromEvent(dom.querySelector('[data-id="evento-sidebar-mas"]'), 'click')
+    .subscribe(function () {
+      if (St('festival_pop.show').value) {
+        St('festival_pop.show').value = false
+      } else {
+        dom.querySelector('.small-pop').click()
+      }
+    })
 
     var primeraVez = !!St('primeraVezBool').value
     if (primeraVez) {
@@ -105,22 +146,58 @@ export default function () {
         St('user.location').value = v.result.location
       })
 
+    St('perfilPopup.show')
+      .on(['E', 'N'])
+      .filter((show) => show)
+      .subscribe(function () {
+        var location = St('user.location').value.split('::')
+        var div = dom.querySelector('#ubicacionLocalFormPerfil')
+        div.style.display = 'block'
+        if (this.mapPerfil) {
+          this.mapPerfil.setView([location[0], location[1]], 13)
+        } else {
+          this.mapPerfil = window.L.map(div).setView([location[0], location[1]], 13)
+        }
+        window.L.Icon.Default.imagePath = '/images'
+        window.L.tileLayer(
+          'https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ',
+          {
+            tileSize: 512,
+            zoomOffset: -1
+          })
+          .addTo(this.mapPerfil)
+
+        if (this.marker) {
+          this.marker.setLatLng([location[0], location[1]])
+        } else {
+          this.marker = window.L.marker([location[0], location[1]]).addTo(this.mapPerfil)
+        }
+        var marker = this.marker
+        dom.querySelector('[data-id="perfilLocationInput"]').value = St('user.location').value
+        this.mapPerfil.on('click', function (ev) {
+          marker.setLatLng(ev.latlng)
+          dom.querySelector('[data-id="perfilLocationInput"]').value = ev.latlng.lat.toFixed(3) + '::' + ev.latlng.lng.toFixed(3)
+        })
+      })
+
     Rx.Observable.fromEvent(dom.querySelector('[data-id="logout"]'), 'click')
       .subscribe(function () {
         window.location = '/logout'
       })
 
-    Rx.Observable.fromEvent(dom.querySelector('[data-id="evento-sidebar-mas"]'), 'click')
-    .subscribe(function () {
-      if (St('festival_pop.show').value) {
-        St('festival_pop.show').value = false
-      } else {
-        dom.querySelector('.small-pop').click()
-      }
-    })
+    Rx.Observable.fromEvent(dom.querySelector('[data-id="verPerfil"]'), 'click')
+      .subscribe(function () {
+        St('perfilPopup.active').value = 'perfil'
+        St('perfilPopup.show').value = true
+        dom.querySelector('#userDropdown [type="checkbox"]').checked = false
+      })
   }
 
   function destroy (s, f) {
+    this.showOlvido.dispose()
+    this.showRegistrar.dispose()
+    this.showLogin.dispose()
+    this.onOlvidoSucces.dispose()
   }
 
   function geoSuccess (dom, position) {

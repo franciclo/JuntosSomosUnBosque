@@ -11,7 +11,9 @@ module.exports = function (app) {
 
     if (req.isAuthenticated()) {
       var userName = 'Usuario'
-      if (req.user.google.name) {
+      if (req.user.name) {
+        userName = req.user.name
+      } else if (req.user.google.name) {
         userName = req.user.google.name
       } else if (req.user.twitter.displayName) {
         userName = req.user.twitter.displayName

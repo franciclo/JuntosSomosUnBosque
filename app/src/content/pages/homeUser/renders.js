@@ -1,4 +1,3 @@
-import Flickity from 'flickity'
 import St from 'state'
 import {className} from 'utils'
 
@@ -30,6 +29,22 @@ export default function () {
         toggleActiveInfoSection(dom, id)
       })
 
+    St('festival_pop.show')
+      .on('E')
+      .subscribe(function (b) {
+        className.bool(b, dom.querySelector('#cartel_evento'), 'off')
+      })
+
+    St('main_menu.active')
+      .on(['N', 'E'])
+      .subscribe(function (active) {
+        var menuBtns = dom.querySelectorAll('#home_sidebar header .menu>div')
+        for (var i = menuBtns.length - 1; i >= 0; i--) {
+          var b = menuBtns[i].getAttribute('data-target') === active
+          className.bool(b, menuBtns[i], 'active')
+        }
+      })
+
     var nombre = St('user.name').value
     dom.querySelector('[data-id="user-btn"] span').textContent = nombre
 
@@ -41,20 +56,27 @@ export default function () {
       .subscribe(function () {
         window.setTimeout(function () {
           St('popUpBienvenido.show').value = false
-        }, 2000)
-      })
-
-    this.flkty = new Flickity('#arboles_data_scroll', {
-      pageDots: false,
-      contain: true
-    })
-
-    St('festival_pop.show')
-      .on('E')
-      .subscribe(function (b) {
-        className.bool(b, dom.querySelector('#cartel_evento'), 'off')
+        }, 1000)
       })
     className.remove(document.querySelector('#asignarPlantin'), 'hide')
+
+    St('perfilPopup.show')
+      .on(['E', 'N'])
+      .filter((show) => show)
+      .subscribe(function () {
+        dom.querySelector('#perfilForm [data-label="nombre"]').value = St('user.name').value
+        dom.querySelector('#perfilForm [data-label="userType"] [value="' + St('user.type').value + '"]').selected = true
+      })
+
+    St('perfilForm.formNotification')
+      .on('N')
+      .filter(function (notification) {
+        return notification.success
+      })
+      .subscribe(function (data) {
+        St('user').value = data.result
+        dom.querySelector('[data-id="user-btn"] span').textContent = data.result.name
+      })
   }
 
   function destroy () {

@@ -1,85 +1,27 @@
-  body>section{
+body>section{
   display: flex;
 }
-body>section side-bar{
+body>section #sideBar{
   width: 400px;
   border-right: 1px solid #CACACA;
 }
 body>section geo-map{
   flex: 1;
 }
-#arboles_data{
-  position: relative;
 
-}
-
-.arbol-data{
-  width: 70px;
+#sideBar{
+  height: 100%;
+  background: #fff;
+  overflow: hidden;
 }
 
-.flickity-prev-next-button {
-  background: rgba(156, 218, 125, 0.73)!important;
-}
-.flickity-prev-next-button.next {
-  right:0!important;
-}
-.flickity-prev-next-button.previous {
-  left:0!important;
-}
-.flickity-prev-next-button .arrow {
-  fill: #fff!important;
+#sideBar article{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-#arboles_data_label{
-  position: absolute;
-  top: -15px;
-  left: 10px;
-  font-size: 13px;
-  color: white;
-}
-#arboles_data_total{
-  position: absolute;
-  bottom: -22px;
-  right: 5px;
-  font-size: 12px;
-  color: #6c9c54;
-  background: white;
-  border-radius: 15px;
-  padding: 1px 6px;
-}
 
-.arbol-data {
-  position: relative;
-  padding: 15px;
-}
-.arbol-data:hover .arbol-nombre {visibility: visible;}
-.arbol-data .arbol-nombre {
-  visibility: hidden;
-  position: absolute;
-  top: -30px;
-  width: 100%;
-  text-align: center;
-}
-.arbol-data svg-icon{
-  width: 50px;
-  height: 50px;
-  margin-bottom: 10px;
-}
-.arbol-data svg-icon use{
-  fill:#fff;
-}
-.arbol-count {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: #ffe551;
-  color: #565656;
-  padding: 2px 6px;
-  border-radius: 13px;
-  border-radius: 13px;
-  font-size: 12px;
-  font-weight: bold;
-}
 #home_sidebar>header>h1 {
   text-align: center;
   font-weight: 100;
@@ -87,116 +29,70 @@ body>section geo-map{
   margin: 20px 0 28px;
 }
 #home_sidebar>header {
-  background: #9cda7d;
+  position: relative;
   color: white;
-  padding: 5px 5px 35px;
-  border-bottom: 3px solid #87bd6b;
-}
-
-button.volver:hover {
-  text-decoration: underline;
-}
-button.volver {
-  border: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  color:#444;
-}
-button.volver svg-icon use{
- fill:#444; 
-}
-button.volver svg-icon{
-  width: 40px;
-  height: 40px;
+  height: 372px;
+  padding: 5px;
+  background-image: url("../../assets/jpg/fondoverde.jpg");
+  background-size: cover;
 }
 
 
 
 
-
-
-.action-button {
-  display: inline-flex;
-  align-items: center;
-  font-size: 16px;
-  text-align: right;
-  margin: 0;
-}
-.action-button svg-icon {
-  margin-right: 5px;
-  height: 20px;
-  width: 20px;
-}
-
-
-
-
-
-
-#cartel_info {
-  background: white;
-  box-shadow: 0px 2px 4px #555;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: right;
-}
-#cartel_info h1{
-  text-align: left;
-  font-weight: 100;
-}
-#ver_mas_info {
-  border: 1px solid #3792B3;
-  background: #44B2DA;
-  color: #fff;
-  cursor: pointer;
-}
-#ver_mas_info:hover{
-  background: #3792B3;
-}
-#ver_mas_info svg-icon use{
-  fill:#fff;
-}
 
 
 
 
 #cartel_suma {
   background: white;
-  box-shadow: 0px 2px 4px #555;
   border-radius: 3px;
   padding: 10px;
-  text-align: right;
+  text-align: left;
+  position: relative;
+}
+#cartel_suma p{
+  padding: 5px 10px 15px;
+  font-size:15px;
+  text-align: left;
+  margin: 0;
+  color: #555;
+  line-height: 20px;
 }
 #cartel_suma h1{
   text-align: left;
   font-weight: 100;
+  font-size: 25px;
+  padding: 5px 10px 0;
+}
+#cartel_suma p.bolder{
+  text-align: left;
+  padding: 0 10px;
+  font-size: 15px;
+  color: #555;
+  font-weight: bold;
+  margin-top: 10px;
 }
 #suma_arboles_btn:hover {
-  background: #419444;
+  box-shadow: 0px 2px 2px #555;
 }
 #suma_arboles_btn{
-  background: #4CAF50;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 13px;
+  background: #35a700;
+  fill: #fff;
   border: none;
-  padding: 7px 10px;
+  padding: 11px;
+  display: flex;
+  align-items: center;
+  right: 18px;
+  bottom: 5px;
+  position: absolute;
+  border-radius: 100%;
+  box-shadow: 0px 2px 6px #555;
 }
-#suma_arboles_btn use{
-  fill:#fff;
+#suma_arboles_btn svg-icon{
+  height: 25px;
+  width: 25px;
 }
-
-
-
-
-
-
 
 
 .action-content p.info {
@@ -211,10 +107,8 @@ button.volver svg-icon{
 
 #cartel_evento {
   background: white;
-  box-shadow: 0px 2px 4px #555;
   border-radius: 3px;
-  padding: 0;
-  text-align: right;
+  padding: 15px 5px 0;
 }
 #cartel_evento button{
   background: #ff3660;
@@ -224,23 +118,11 @@ button.volver svg-icon{
   border: none;
   padding: 7px 10px;
   margin: 0 10px 10px 0;
+  float: right;
 }
 #cartel_evento button svg-icon{
   fill: #fff;
   height: 10px;
-}
-#cartel_evento button.asignar{
-  float: left;
-  margin-left: 10px;
-  background: none;
-  font-weight: bold;
-  color: #2c8a00;
-}
-#cartel_evento button.asignar:hover{
-  background: #d3ffbf;
-}
-#cartel_evento button.menos {
-  opacity: 0.5;
 }
 #cartel_evento .header-evento {
   display: flex;
@@ -259,6 +141,14 @@ button.volver svg-icon{
   text-align: left;
   display: flex;
   align-items: center;
+}
+#cartel_evento p.bolder{
+  text-align: left;
+  padding: 0 10px;
+  font-size: 15px;
+  color: #555;
+  font-weight: bold;
+  margin-top: 10px;
 }
 #cartel_evento .header-evento svg-icon[type="calendar.11"]{
   width: 50px;
@@ -292,6 +182,7 @@ button.volver svg-icon{
   line-height: 20px;
 }
 
+
 #cartel_evento.off *{
   color: #8a8a8a!important;
   fill: #777!important;
@@ -302,27 +193,6 @@ button.volver svg-icon{
 #cartel_evento.off button:hover {
   background: #c7c7c7!important;
 }
-
-
-
-
-
-
-.arboles-inputs {
-  display: flex;
-  color:#444;
-  justify-content: space-around;
-  margin-bottom: 15px;
-  padding:10px;
-  background: rgba(0,0,0,0.1);
-}
-
-.arboles-inputs .input-group {
-  display: flex;
-  flex-direction: column;
-}
-
-
 
 
 
@@ -376,145 +246,170 @@ button.volver svg-icon{
 }
 
 
-
-
-
-
-
-button#userBtn:hover{
-  background: #EFEFEF;
+.logo {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
 }
-button#userBtn{
-  background: white;
-  border-radius: 2px;
-  color: #7b7b7b;
-  padding: 3px 7px;
-  font-size: 13px;
+.logo h1{
+  font-weight: 100;
+  font-size: 23px;
+}
+.logo svg-icon {
+  height: 100px;
+  position: relative;
+  width: 100px;
+  fill: #fff;
+}
+.logo svg-icon span{
+  position: absolute;
+  bottom: -10px;
+  right: 26px;
+  background: #ffe551;
+  color: #565656;
+  padding: 2px 6px;
+  border-radius: 13px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+
+.menu {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 0;
+}
+.menu>div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  fill: #fff;
+  padding-bottom: 5px;
   cursor: pointer;
-  border: 1px solid #ffffff;
-  display: inline-flex;
-  align-items: center;
+  border-bottom: 4px solid transparent;
+  font-size: 15px;
+  justify-content: flex-end;
 }
-
-button#userBtn svg-icon{
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #75CFF0;
-  border: 1px solid #75CFF0;
-  margin-right: 5px;
-  overflow: hidden;
-}
-
-button#userBtn svg-icon use{
-  fill:#fff;
-  transform: scale(1.8) translate(-4.5px, -3px);
-}
-
-
-
-#user_options {
-  padding: 2px
-}
-#salirBtn {
-  border: none;
-  background: none;
-  color: white;
-  float: right;
-  padding: 3px 7px;
-  font-size: 13px;
-  align-items: center;
-  display: flex;
-}
-#salirBtn:hover {
-  text-decoration: underline;
-}
-#salirBtn svg-icon {
-  width: 27px;
-  height: 27px;
-}
-#salirBtn svg-icon use {
-    fill: #fff;
-}
-
-
-
-
-.sidebar-section {
-  margin: 30px;
-  justify-content: center; 
-}
-.sidebar-section h1{
-  color:#444;
-}
-
-#sideBar a.social svg-icon{
-  width: 20px;
-  height: 20px;
-}
-#ubicacionLocalForm{
-  display: flex;
-}
-#ubicacionLocalForm button{
-  flex:1;
-  border-radius: 0;
-}
-#localForm select:hover, #ubicacionLocalForm button:hover{
-  background-color: #D4D4D4;
-}
-#ubicacionLocalForm button:first-child{
-  border-right: none;
-}
-#localForm select {
+.menu>div>svg-icon {
+  width: 30px;
   height: 30px;
-  background: #fff;
-  cursor: pointer;
-  border-radius: 3px;
-  border: 1px solid #A9A9A9;
 }
-#sideBar a.social{
-  border-radius: 3px;
+.menu>div.active {
+  border-bottom: 4px solid #ff3660;
+  font-size: 17px!important;
+  animation: none!important;
+}
+.menu>div.active svg-icon{
+  animation: none!important;
+  width: 35px!important;
+  height: 35px!important;
+}
+.menu>div:hover {
+  animation: growLett 0.1s linear;
+  font-size: 17px;
+}
+@keyframes growLett {
+  0% {
+    font-size: 16px;
+  }
+  100% {
+    font-size: 17px;
+  }
+}
+.menu>div:hover>svg-icon{
+  animation: growIc 0.1s ease-out;
+  width: 35px;
+  height: 35px;
+}
+@keyframes growIc {
+  0% {
+    width: 30px;
+    height: 30px;
+  }
+  100% {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+
+
+.footer {
   display: flex;
-  margin: 6px;
-  color: #fff;
-  text-decoration: none;
+  margin-bottom: 9px;
   align-items: center;
-  padding: 4px;
-  border:1px solid;
+}
+.footer svg-icon{
+  height: 35px;
+  width:35px;
   cursor: pointer;
 }
-
-#sideBar a.social use{
-  fill:#fff;
+.footer svg-icon[type="social.facebook"]{
+  fill:#3f75b5;
 }
-
-#sideBar a.social.fb:hover{
-  background:  #2D59A2;
+.footer svg-icon[type="social.twitter"]{
+  fill:#75cff0;
 }
-#sideBar a.social.fb{
-  background: #47c;
-  border-color: #2D59A2;
+#infoBtn svg-icon{
+  height: 20px;
+  width:20px;
 }
-
-#sideBar a.social.tw:hover{
-  background:  #0AC;
-}
-#sideBar a.social.tw{
-  background: #0cf;
-  border-color: #0AC;
-}
-
-#sideBar a.social.gl:hover{
-  background:  #AF3527;
-}
-#sideBar a.social.gl{
-  background: #d43;
-  border-color: #AF3527;
+#infoBtn {
+  float: left;
+  border: 0;
+  text-transform: uppercase;
+  display: flex;
+  font-size: 16px;
+  color: #1d97c3;
+  fill: #1d97c3;
+  align-items: center;
+  flex:1;
 }
 
 
 
 
+
+
+
+
+
+
+#cartel_evento button.asignar{
+  float: left;
+  margin-left: 3px;
+  background: none;
+  font-weight: bold;
+  color: #2c8a00;
+  font-size: 15px;
+}
+#cartel_evento button.asignar:hover{
+  background: #d3ffbf;
+}
+
+
+#userDropdown {
+  float: right;
+}
+#userBtn:hover{
+  background: #389dc1;
+}
+#userBtn{
+  background: #48bce6;
+  border-radius: 2px;
+  color: #fff;
+  fill: #fff;
+  padding: 3px 7px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+}
 
 
 
@@ -527,12 +422,15 @@ button#userBtn svg-icon use{
   display: none;
   margin-top: 15px;
 }
+#popUpBienvenido select:hover{
+  background-color: #f1f1f1;
+}
 #popUpBienvenido select {
   height: 30px;
   background: #fff;
   cursor: pointer;
   border-radius: 3px;
-  border: 1px solid #A9A9A9;
+  border: 1px solid #e5e5e5;
 }
 #popUpBienvenido [data-submit] {
   display: none;
@@ -540,36 +438,21 @@ button#userBtn svg-icon use{
 
 
 
-
-
-
-#sponsors {
-  height: 60px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+#perfilPopup section{
+  max-width: 500px; 
 }
-#sponsors a {
-  width: 55px;
-  height: 50px;
-  display: inline-block;
-  background-size: contain;
-  margin-left: 18px; 
+#ubicacionLocalFormPerfil{
+  width: 100%;
+  height: 200px;
+  margin-top: 15px;
 }
-#A_2 {
-  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/1.png") no-repeat;
-}/*#A_2*/
-
-#A_4 {
-  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/3.png") no-repeat;
-}/*#A_4*/
-
-#A_5 {
-  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/4.png") no-repeat;
-}/*#A_5*/
-#A_6 {
-  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/5.png") no-repeat;
-}/*#A_6*/
-#A_8 {
-  background: url("http://redcompostaje.org.ar/mod/theme_customizer_elgg_base/graphics//footer-logos/7.png") no-repeat;
-}/*#A_8*/
+#perfilForm select:hover{
+  background-color: #f1f1f1;
+}
+#perfilForm select {
+  height: 30px;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid #e5e5e5;
+}

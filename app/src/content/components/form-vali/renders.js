@@ -52,7 +52,7 @@ export default function () {
     if (notification.success) {
       window.setTimeout(function () {
         className.remove(notiSpam, 'show')
-      }, 4000)
+      }, 1000)
     } else {
       window.setTimeout(function () {
         className.remove(notiSpam, 'show')
@@ -67,15 +67,8 @@ export default function () {
 
     submitBtn.setAttribute('label-pasive', submitBtn.textContent)
 
-    this.onCreated = St(id)
-      .on('N')
-      .map(function (s) {
-        return inputs
-      })
-      .subscribe(function (inputs) {
-        createErrorSpans(dom, inputs)
-        createNotificationSpan(dom)
-      })
+    createErrorSpans(dom, inputs)
+    createNotificationSpan(dom)
 
     this.onErrorChange = St(id + '.errors')
       .on('N')
@@ -100,7 +93,7 @@ export default function () {
       })
       .subscribe(function (inputs) {
         clearErrors(dom, inputs)
-        clearValues(inputs)
+        // clearValues(inputs)
       })
 
     this.onLoading = St(id + '.loading')
@@ -112,7 +105,6 @@ export default function () {
   }
 
   function destroy () {
-    this.onCreated.dispose()
     this.onErrorChange.dispose()
   }
 
