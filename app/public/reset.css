@@ -4,15 +4,8 @@ html, body, body>section {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    -webkit-overflow-scrolling: touch;
 }
 body{
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default;
     font-family: sans-serif;
 }
 button{
@@ -23,8 +16,7 @@ button{
     padding: 4px 8px;
     cursor: pointer;
 }
-.hide{display:none;}
-button:focus {outline:0;}svg-icon svg{
+.hide{display:none;}svg-icon svg{
   height: inherit;
   width: inherit;
 }
@@ -997,6 +989,7 @@ slider-box > article{
     background: white;
     transition: opacity .3s linear;
     opacity: 0;
+    height: 100%;
 }
 slider-box > article.active {
   opacity: 1;

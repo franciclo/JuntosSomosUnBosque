@@ -22,11 +22,13 @@ export default function () {
     var Validator = {
       isEmail: isEmail,
       required: function (v) { return v.length !== 0 },
-      equalTo: function (v, _v) { return v === _v }
+      equalTo: function (v, _v) { return v === _v },
+      notDefault: function (v) { return v !== 'default' }
     }
     var ajaxValidations = {}
     var validationMsg = {
       required: 'Obligatorio',
+      notDefault: 'Obligatorio',
       isEmail: 'No es un mail válido',
       equalTo: 'No coincide',
       ajaxMailExist: 'El mail no existe',
@@ -167,7 +169,7 @@ export default function () {
       .publish()
     formSubmits.connect()
 
-    this.onInputChange = Rx.Observable.fromEvent(inputs, 'keydown')
+    this.onInputChange = Rx.Observable.fromEvent(inputs, 'change')
       .map(function (ev) {
         return ev.currentTarget
       })

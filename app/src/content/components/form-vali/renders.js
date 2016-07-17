@@ -32,6 +32,10 @@ export default function () {
 
   function clearValues (inputs) {
     for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].type === 'select-one') {
+        inputs[i].value = 'default'
+        continue
+      }
       inputs[i].value = ''
     }
   }
@@ -56,7 +60,7 @@ export default function () {
     } else {
       window.setTimeout(function () {
         className.remove(notiSpam, 'show')
-      }, 8000)
+      }, 1000)
     }
   }
 
@@ -93,15 +97,15 @@ export default function () {
       })
       .subscribe(function (inputs) {
         clearErrors(dom, inputs)
-        // clearValues(inputs)
+        if (dom.hasAttribute('clear-values')) clearValues(inputs)
       })
 
-    this.onLoading = St(id + '.loading')
-      .on(['N', 'E'])
-      .subscribe(function (bool) {
-        submitBtn.textContent = submitBtn
-          .getAttribute(bool ? 'label-active' : 'label-pasive')
-      })
+    // this.onLoading = St(id + '.loading')
+    //   .on(['N', 'E'])
+    //   .subscribe(function (bool) {
+    //     submitBtn.textContent = submitBtn
+    //       .getAttribute(bool ? 'label-active' : 'label-pasive')
+    //   })
   }
 
   function destroy () {

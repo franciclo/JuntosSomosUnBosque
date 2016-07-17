@@ -3,7 +3,7 @@ import {className} from 'utils'
 
 export default function () {
   function toggleActiveSection (dom, activeId) {
-    var boxSections = dom.querySelectorAll('article')
+    var boxSections = dom.parentNode.querySelectorAll('#' + dom.id + '>article')
     for (var i = 0; i < boxSections.length; i++) {
       className.bool(
         boxSections[i].getAttribute('data-id') === activeId,

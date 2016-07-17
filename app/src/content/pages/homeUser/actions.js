@@ -2,19 +2,7 @@ import St from 'state'
 import Rx from 'rxjs'
 
 export default function () {
-  function activatePopupSection (active) {
-    return function () {
-      St('accionesUsuario.active').value = active
-      St('accionesUsuario.show').value = true
-    }
-  }
-
   function init (dom) {
-    var sumarTusArbolesClicks = Rx.Observable.fromEvent(
-      dom.querySelector('[data-id="sumarTusArboles"]'),
-      'click'
-    )
-
     St('main_menu').value = {}
     Rx.Observable.fromEvent(
       dom.querySelectorAll('#home_sidebar header .menu>div'),
@@ -25,58 +13,6 @@ export default function () {
       St('sidebar_main.active').value = target
       St('main_menu.active').value = target
     })
-
-// login
-    var irARegistrarseClicks = Rx.Observable.fromEvent(
-      dom.querySelector('[data-id="registrarse"]'),
-      'click'
-    )
-
-    var olvidoClicks = Rx.Observable.fromEvent(
-      dom.querySelector('[data-id="forgotBtn"]'),
-      'click'
-    )
-
-    var ingresarClicks = Rx.Observable.fromEvent(
-      dom.querySelector('button[data-id="ingresar-btn"]'),
-      'click'
-    )
-
-    var volverDeRegisClicks = Rx.Observable.fromEvent(
-      dom.querySelector('[data-id="volverLoginRegis"]'),
-      'click'
-    )
-
-    var volverDeOlvClicks = Rx.Observable.fromEvent(
-      dom.querySelector('[data-id="volverLoginMail"]'),
-      'click'
-    )
-
-    this.showRegistrar = irARegistrarseClicks
-      .subscribe(activatePopupSection('registroUsuarios'))
-
-    this.showLogin = Rx.Observable
-      .merge(
-        ingresarClicks,
-        volverDeRegisClicks,
-        volverDeOlvClicks,
-        sumarTusArbolesClicks)
-      .subscribe(activatePopupSection('inicioSesion'))
-
-    this.showOlvido = olvidoClicks.subscribe(
-      activatePopupSection('forgotPassword'),
-      'click'
-    )
-
-    this.onOlvidoSucces = St('forgot.formNotification').on('N')
-      .filter(function (notification) {
-        return notification.success
-      })
-      .subscribe(function () {
-        window.setTimeout(function () {
-          St('sideBar.active').value = 'mainApp'
-        }, 4500)
-      })
 
     Rx.Observable.fromEvent(dom.querySelector('[data-id="masInfoBtn"]'), 'click')
         .subscribe(function () {
@@ -190,6 +126,32 @@ export default function () {
         St('perfilPopup.active').value = 'perfil'
         St('perfilPopup.show').value = true
         dom.querySelector('#userDropdown [type="checkbox"]').checked = false
+      })
+
+    St('mis_arboles_cont.active').value = 'cartelSuma'
+    Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="sumarTusArboles"]'),
+      'click'
+    )
+    .subscribe(function () {
+      St('mis_arboles_cont.active').value = 'verFormSuma'
+    })
+
+    Rx.Observable.fromEvent(
+      dom.querySelector('[data-id="volverFormSuma"]'),
+      'click'
+    )
+    .subscribe(function () {
+      St('mis_arboles_cont.active').value = 'cartelSuma'
+    })
+
+    St('form_suma.formNotification')
+      .on('N')
+      .filter(function (notification) {
+        return notification.success
+      })
+      .subscribe(function (v) {
+        St('user.arboles').value = v.result.arboles
       })
   }
 

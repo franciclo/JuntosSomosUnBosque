@@ -46,7 +46,7 @@
 
 	'use strict';
 
-	__webpack_require__(465);
+	__webpack_require__(453);
 
 	var _state = __webpack_require__(45);
 
@@ -19620,11 +19620,15 @@
 	      },
 	      equalTo: function equalTo(v, _v) {
 	        return v === _v;
+	      },
+	      notDefault: function notDefault(v) {
+	        return v !== 'default';
 	      }
 	    };
 	    var ajaxValidations = {};
 	    var validationMsg = {
 	      required: 'Obligatorio',
+	      notDefault: 'Obligatorio',
 	      isEmail: 'No es un mail válido',
 	      equalTo: 'No coincide',
 	      ajaxMailExist: 'El mail no existe',
@@ -19759,7 +19763,7 @@
 	    }).publish();
 	    formSubmits.connect();
 
-	    this.onInputChange = _rxjs2.default.Observable.fromEvent(inputs, 'keydown').map(function (ev) {
+	    this.onInputChange = _rxjs2.default.Observable.fromEvent(inputs, 'change').map(function (ev) {
 	      return ev.currentTarget;
 	    }).map(function (input) {
 	      return {
@@ -20491,6 +20495,10 @@
 
 	  function clearValues(inputs) {
 	    for (var i = 0; i < inputs.length; i++) {
+	      if (inputs[i].type === 'select-one') {
+	        inputs[i].value = 'default';
+	        continue;
+	      }
 	      inputs[i].value = '';
 	    }
 	  }
@@ -20515,7 +20523,7 @@
 	    } else {
 	      window.setTimeout(function () {
 	        _utils.className.remove(notiSpam, 'show');
-	      }, 8000);
+	      }, 1000);
 	    }
 	  }
 
@@ -20545,12 +20553,15 @@
 	      return inputs;
 	    }).subscribe(function (inputs) {
 	      clearErrors(dom, inputs);
-	      // clearValues(inputs)
+	      if (dom.hasAttribute('clear-values')) clearValues(inputs);
 	    });
 
-	    this.onLoading = (0, _state2.default)(id + '.loading').on(['N', 'E']).subscribe(function (bool) {
-	      submitBtn.textContent = submitBtn.getAttribute(bool ? 'label-active' : 'label-pasive');
-	    });
+	    // this.onLoading = St(id + '.loading')
+	    //   .on(['N', 'E'])
+	    //   .subscribe(function (bool) {
+	    //     submitBtn.textContent = submitBtn
+	    //       .getAttribute(bool ? 'label-active' : 'label-pasive')
+	    //   })
 	  }
 
 	  function destroy() {
@@ -21134,7 +21145,7 @@
 
 	exports.default = function () {
 	  function toggleActiveSection(dom, activeId) {
-	    var boxSections = dom.querySelectorAll('article');
+	    var boxSections = dom.parentNode.querySelectorAll('#' + dom.id + '>article');
 	    for (var i = 0; i < boxSections.length; i++) {
 	      _utils.className.bool(boxSections[i].getAttribute('data-id') === activeId, boxSections[i], (boxSections[i].getAttribute('data-enter') ? boxSections[i].getAttribute('data-enter') + ' ' : '') + 'active');
 	    }
@@ -30527,90 +30538,14 @@
 /* 450 */,
 /* 451 */,
 /* 452 */,
-/* 453 */,
-/* 454 */,
-/* 455 */,
-/* 456 */
-/***/ function(module, exports, __webpack_require__) {
-
-	;
-	var sprite = __webpack_require__(12);;
-	var image = "<symbol viewBox=\"0 0 76.01 76.01\" id=\"salir\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns:sodipodi=\"http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd\" xmlns:inkscape=\"http://www.inkscape.org/namespaces/inkscape\"> <metadata id=\"salir_metadata10\"> <rdf:RDF> <cc:Work rdf:about=\"\"> <dc:format>image/svg+xml</dc:format> <dc:type rdf:resource=\"http://purl.org/dc/dcmitype/StillImage\"/> </cc:Work> </rdf:RDF> </metadata> <defs id=\"salir_defs8\"/> <sodipodi:namedview pagecolor=\"#ffffff\" bordercolor=\"#666666\" borderopacity=\"1\" objecttolerance=\"10\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-width=\"640\" inkscape:window-height=\"480\" id=\"salir_namedview6\" showgrid=\"false\" inkscape:zoom=\"3.1048137\" inkscape:cx=\"32.369092\" inkscape:cy=\"38.005501\" inkscape:window-x=\"10\" inkscape:window-y=\"156\" inkscape:window-maximized=\"0\" inkscape:current-layer=\"svg2\"/> <path d=\"m 58.855857,2.8991854 0,14.9830516 -5.618645,0 0,-9.3644074 -43.08189,0 0,59.9415694 43.08189,0 0,-9.366279 5.618645,0 0,14.984923 -54.0082809,0 -0.3127712,-71.1788576 54.3210521,0 z m -39.336128,29.9698476 28.565187,0 -15.453144,-13.112042 18.73256,0 21.540009,18.730687 -21.540009,18.73256 -18.73256,0 15.453144,-13.112043 -28.565187,0 0,-11.239162 z\" id=\"salir_path4\" inkscape:connector-curvature=\"0\"/> </symbol>";
-	module.exports = sprite.add(image, "salir");
-
-/***/ },
-/* 457 */,
-/* 458 */,
-/* 459 */,
-/* 460 */
-/***/ function(module, exports, __webpack_require__) {
-
-	;
-	var sprite = __webpack_require__(12);;
-	var image = "<symbol viewBox=\"0 0 76.00 76.00\" id=\"triangle\" ><path d=\"M56.208 27.708L40.771 48.292h-1.188L24.542 27.708h31.666z\"/></symbol>";
-	module.exports = sprite.add(image, "triangle");
-
-/***/ },
-/* 461 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	__webpack_require__(462);
-
-	var _component = __webpack_require__(392);
-
-	var _component2 = _interopRequireDefault(_component);
-
-	var _renders = __webpack_require__(464);
-
-	var _renders2 = _interopRequireDefault(_renders);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	(0, _component2.default)('drop-down', { renders: _renders2.default });
-
-/***/ },
-/* 462 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 463 */,
-/* 464 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function () {
-	  function init(dom) {
-	    var checkboxG = (0, _utils.createElement)('<input type="checkbox" id="' + dom.id + '-chkbx" class="hide" />');
-	    var label = dom.querySelector('label');
-	    label.setAttribute('for', dom.id + '-chkbx');
-	    dom.insertBefore(checkboxG(), dom.querySelector('aside'));
-	  }
-
-	  function destroy() {}
-
-	  return { init: init, destroy: destroy };
-	};
-
-	var _utils = __webpack_require__(407);
-
-/***/ },
-/* 465 */
+/* 453 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	__webpack_require__(2);
 
-	__webpack_require__(466);
+	__webpack_require__(454);
 
 	__webpack_require__(9);
 
@@ -30674,9 +30609,9 @@
 
 	__webpack_require__(456);
 
-	__webpack_require__(460);
+	__webpack_require__(457);
 
-	var _index = __webpack_require__(468);
+	var _index = __webpack_require__(458);
 
 	var _index2 = _interopRequireDefault(_index);
 
@@ -30696,13 +30631,13 @@
 
 	__webpack_require__(423);
 
-	__webpack_require__(461);
+	__webpack_require__(459);
 
-	var _actions = __webpack_require__(469);
+	var _actions = __webpack_require__(463);
 
 	var _actions2 = _interopRequireDefault(_actions);
 
-	var _renders = __webpack_require__(470);
+	var _renders = __webpack_require__(464);
 
 	var _renders2 = _interopRequireDefault(_renders);
 
@@ -30711,20 +30646,65 @@
 	(0, _page2.default)('home', _index2.default, { actions: _actions2.default, renders: _renders2.default });
 
 /***/ },
-/* 466 */
+/* 454 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 467 */,
-/* 468 */
-/***/ function(module, exports) {
+/* 455 */,
+/* 456 */
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div id=\"sideBar\">\n  <article id=\"home_sidebar\">\n    <header>\n      <drop-down id=\"userDropdown\">\n        <label id=\"userBtn\" data-id=\"user-btn\">\n          <span>Usuario</span>\n          <svg-icon type=\"triangle\"></svg-icon>\n        </label>\n        <aside>\n          <ul>\n            <li data-id=\"verPerfil\">Perfil</li>\n            <li data-id=\"logout\">Salir<svg-icon type=\"salir\"></svg-icon></li>\n          </ul>\n        </aside>\n      </drop-down>\n\n      <div class=\"logo\">\n        <svg-icon type=\"plantines\">\n          <span class=\"count\">55</span>\n        </svg-icon>\n        <h1>JUNTOS<br>SOMOS UN<br>BOSQUE</h1>\n      </div>\n      <div class=\"menu\">\n        <div data-id=\"proponer_lugar_content\" data-target=\"action_content_lugar\" class=\"active\">\n          <svg-icon type=\"calendar\"></svg-icon>\n          Plantaciónes\n        </div>\n        <div data-id=\"suma_arboles_btn_content\" data-target=\"action_content_suma\">\n          <svg-icon type=\"plantin.solo\"></svg-icon>\n          Sumá tus arboles\n        </div>\n        <div data-id=\"info_btn_content\" data-target=\"action_content_red\">\n          <svg-icon type=\"plantines2\"></svg-icon>\n          La red\n        </div>\n      </div>\n    </header>\n    <slider-box id=\"sidebar_main\">\n\n      <article data-id=\"action_content_lugar\" data-enter=\"de-arr-s\" class=\"de-arr-s active\">\n        <div id=\"cartel_evento\">\n            <div class=\"header-evento\">\n              <svg-icon type=\"calendar.11\"></svg-icon>\n              <div class=\"header-evento-text\">\n                <p class=\"info\">\n                  <svg-icon type=\"reloj\"></svg-icon>\n                  Domingo, 12:00 am\n                </p>\n                <h1>Festival de plantación</h1>\n              </div>\n            </div>\n            <p class=\"content-evento-text\">\n              Estamos co-creando un Bosque mediante siembras y plantaciones colectivas en festivales y eventos, a través de una red de personas que cultivan arbolitos en sus casas.\n            </p>\n            <p class=\"bolder\">\n              Podes traer tus arboles al festival y entre musica y charlas, plantaremos un bosque!\n            </p>\n            <button class=\"asignar\" data-id=\"evento-sidebar-asignar\">Asignar arboles</button>\n            <button data-id=\"evento-sidebar-mas\">\n              Ver más\n              <svg-icon type=\"caret.right\"></svg-icon>\n            </button>\n        </div>\n      </article>\n\n      <article data-id=\"action_content_suma\" data-enter=\"de-arr-s\">\n        <div id=\"cartel_suma\">\n          <h1>Registra tus plantines</h1>\n          <p class=\"info\">Si estás cuidando arbolitos en maceta en tu casa podes registrarlos para llevar el control de tus plantines para y asignarlos a las plantaciónes que vos elijas.</p>\n          <p class=\"bolder\">\n            Agrega tus primeros plantines!\n          </p>\n          <button id=\"suma_arboles_btn\" class=\"action-button\" data-id=\"sumarTusArboles\" title=\"Sumate!\">\n            <svg-icon type=\"plantin\"></svg-icon>\n          </button>\n        </div>  \n      </article>\n\n      <article data-id=\"action_content_red\" data-enter=\"de-arr-s\">\n        <div id=\"cartel_info\">\n          <h1>Nuestros arboles</h1>\n          <p class=\"info\">work in progress...</p>\n        </div>\n      </article>\n    </slider-box>\n    <div class=\"footer\">\n        <button id=\"infoBtn\" data-id=\"masInfoBtn\">\n          <svg-icon type=\"info\"></svg-icon>\n          info\n        </button>\n\n        <svg-icon type=\"github\" title=\"Github\"></svg-icon>\n        <svg-icon type=\"social.twitter\" title=\"Twitter\"></svg-icon>\n        <svg-icon type=\"social.facebook\" title=\"Facebook\"></svg-icon>\n    </div>\n  </article>\n</div>\n<geo-map id=\"homeMap\"></geo-map>\n<pop-up id=\"masInformacion\">\n    <section>\n      <article data-id=\"masInfo\" id=\"mas_info\">\n          <div id=\"mas_info_side_menu\">\n            <p class=\"active\" data-target=\"mas_info_intro\">Introducción</p>\n            <p data-target=\"mas_info_motivacion\">¿Por qué?</p>\n            <p data-target=\"mas_info_quienessomos\">Quienes somos</p>\n          </div>\n          <div id=\"mas_info_text\">\n            <div id=\"mas_info_intro\" class=\"active\">\n              <h1>Introducción</h1>\n              En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.<br><br>\n              Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.<br><br>\n              Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.<br><br>\n              La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.<br><br>\n              Juntos, somos un BOSQUE.\n            </div>\n            <div id=\"mas_info_quienessomos\">\n              <h1>¿Quienes somos?</h1>\n              Un árbol para mi vereda es una organización sin fines de lucro que trabaja para brindar las herramientas que generan en el ser humano una re-conexión con la naturaleza.<br><br>\n\n              Buscamos incrementar el verde urbano y la conciencia ambiental enfatizando el vínculo de mutuo beneficio entre hombre y árbol, promoviendo una forma de vida basada en el respeto y entendimiento de todo lo que nos rodea.<br><br>\n\n              Motivamos a las personas a criar y plantar más árboles, a través de programas de capacitación, concientización ambiental y participación ciudadana, centrados en la producción de árboles. <br><br>\n\n              Contamos con una Red de Cultivo de especies nativas y comestibles que se está desarrollando en distintos puntos de la Capital Federal y el Gran Buenos Aires.<br><br>\n\n              Realizamos talleres en centros culturales, huertas comunitarias, jardines de infantes, escuelas primarias y secundarias, centros de rehabilitación de adicciones, centros de jubilados y unidades penitenciarias. En estos encuentros de capacitación y producción realizamos desde la siembra y las distintas etapas de vivero, hasta las técnicas de plantado y el cuidado de cada especie. <br><br>\n\n              Cada espacio donde damos un taller se convierte en un pequeño vivero productor.<br><br>\n\n              Cuidar y ver crecer un árbol es una posibilidad simple y concreta de vincularse con la naturaleza. Esta re-conexión produce cambios en las conductas de los ciudadanos sobre su entorno natural y social. <br>\n              Un barrio donde sus habitantes cultivan, plantan y cuidan árboles tiende a convertirse en un lugar más saludable, más armónico, más bello.<br><br>\n\n              Los viveros comunitarios son centros de capacitación en cultivo de árboles. En ellos enseñamos un oficio con salida laboral. Funcionan como plataforma de reunión, divulgación de prácticas sustentables, cultura y expresiones artísticas para el desarrollo del ser humano como ser natural.<br>\n              Son emprendimientos productivos que facilitan la inclusión y la reinserción de sectores sociales vulnerables.\n            </div>\n            <div id=\"mas_info_motivacion\">\n              <h1>¿Por que?</h1>\n              Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.<br>\n              La OMS propone entre 10 y 15 mts2 de espacios verdes por habitante. Al día de hoy, en Capital Federal, tenemos 6,2 mts2 promedio. Y en los barrios vulnerable esa cifra desciende a 1,5 mts2 por habitante.<br><br>\n\n              De Protesta a Propuesta Activa<br>\n              Existe un preocupación social respecto a la necesidad de tener más y mejores espacios verdes en la Ciudad. Proponemos convertir al ciudadano pasivo en un agente activo, en un criador de árboles en su balcón, patio, ventana o terraza.<br>\n              Así se genera una relación Ganar-Ganar-Ganar:<br>\n              Gana el Ciudadano: Cambia su actitud y se involucra en los temas que le importan y con el espacio público que lo rodea.<br>\n              Gana el Municipio: obtiene nuevos espacios verdes con una alta participación comunitaria y una reducción muy significativa en costos (en 2013 se pagaban $900 pesos por árbol plantado, de esta forma serían producidos por la comunidad).<br>\n              Gana el Ecosistema del que formamos parte al haber nuevo refugio y alimento para la fauna local. (Persona-Comunidad-Planeta)<br><br>\n\n              Hacia una Masa Crítica de árboles nativos<br>\n              El término “hace referencia al número de individuos involucrados en un fenómeno a partir del cual éste adquiere una dinámica propia que le permite sostenerse y crecer por sí mismo.”<br>\n              A febrero de 2016 llevamos sembrados más de 10.000 árboles y esta cifra crece semana a semana.\n            </div>\n          </div>\n      </article>\n    </section>\n</pop-up>\n<pop-up id=\"popUpBienvenido\" closable=\"false\">\n  <section>\n    <article data-id=\"bienvenido\">\n      <form-vali id=\"primeraVez\" direction=\"finishRegistration\">\n      <h1>Hola </h1>\n        <p>Antes de empezar necesitas indicar que tipo de usuario eres y tu ubicación</p>\n        <label for=\"typeLocalForm\">Tipo de usuario</label>\n        <select id=\"typeLocalForm\" data-label=\"userType\">\n          <option selected=\"true\">Persona</option>\n          <option>Vivero</option>\n          <option>Organización civil</option>\n          <option>Escuela</option>\n          <option>Centro cultural</option>\n        </select>\n        <button id=\"elegirUbicacion\">Elegir ubicación</button>\n        <div id=\"ubicacionLocalFormWelcome\">\n        </div>\n        <input type=\"hidden\" data-label=\"location\" data-id=\"locationInput\">\n        <button data-submit >Continuar</button>\n      </form-vali>\n    </article>\n  </section>\n</pop-up>\n\n<pop-up id=\"perfilPopup\">\n  <section>\n    <article data-id=\"perfil\">\n      <form-vali id=\"perfilForm\" direction=\"perfil\">\n        <label for=\"nombrePerfil\">Nombre</label>\n        <input id=\"nombrePerfil\" data-label=\"nombre\" type=\"text\">\n        <label for=\"typeLocalForm\">Tipo de usuario</label>\n        <select id=\"typeLocalForm\" data-label=\"userType\">\n          <option value=\"Persona\">Persona</option>\n          <option value=\"Vivero\">Vivero</option>\n          <option value=\"Organización civil\">Organización civil</option>\n          <option value=\"Escuela\">Escuela</option>\n          <option value=\"Centro cultural\">Centro cultural</option>\n        </select>\n        <label>Ubicación</label>\n        <div id=\"ubicacionLocalFormPerfil\">\n        </div>\n        <input type=\"hidden\" data-label=\"location\" data-id=\"perfilLocationInput\">\n        <button data-submit >Guardar</button>\n      </form-vali>\n    </article>\n  </section>\n</pop-up>";
+	;
+	var sprite = __webpack_require__(12);;
+	var image = "<symbol viewBox=\"0 0 76.01 76.01\" id=\"salir\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns:sodipodi=\"http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd\" xmlns:inkscape=\"http://www.inkscape.org/namespaces/inkscape\"> <metadata id=\"salir_metadata10\"> <rdf:RDF> <cc:Work rdf:about=\"\"> <dc:format>image/svg+xml</dc:format> <dc:type rdf:resource=\"http://purl.org/dc/dcmitype/StillImage\"/> </cc:Work> </rdf:RDF> </metadata> <defs id=\"salir_defs8\"/> <sodipodi:namedview pagecolor=\"#ffffff\" bordercolor=\"#666666\" borderopacity=\"1\" objecttolerance=\"10\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-width=\"640\" inkscape:window-height=\"480\" id=\"salir_namedview6\" showgrid=\"false\" inkscape:zoom=\"3.1048137\" inkscape:cx=\"32.369092\" inkscape:cy=\"38.005501\" inkscape:window-x=\"10\" inkscape:window-y=\"156\" inkscape:window-maximized=\"0\" inkscape:current-layer=\"svg2\"/> <path d=\"m 58.855857,2.8991854 0,14.9830516 -5.618645,0 0,-9.3644074 -43.08189,0 0,59.9415694 43.08189,0 0,-9.366279 5.618645,0 0,14.984923 -54.0082809,0 -0.3127712,-71.1788576 54.3210521,0 z m -39.336128,29.9698476 28.565187,0 -15.453144,-13.112042 18.73256,0 21.540009,18.730687 -21.540009,18.73256 -18.73256,0 15.453144,-13.112043 -28.565187,0 0,-11.239162 z\" id=\"salir_path4\" inkscape:connector-curvature=\"0\"/> </symbol>";
+	module.exports = sprite.add(image, "salir");
 
 /***/ },
-/* 469 */
+/* 457 */
+/***/ function(module, exports, __webpack_require__) {
+
+	;
+	var sprite = __webpack_require__(12);;
+	var image = "<symbol viewBox=\"0 0 76.00 76.00\" id=\"triangle\" ><path d=\"M56.208 27.708L40.771 48.292h-1.188L24.542 27.708h31.666z\"/></symbol>";
+	module.exports = sprite.add(image, "triangle");
+
+/***/ },
+/* 458 */
+/***/ function(module, exports) {
+
+	module.exports = "<div id=\"sideBar\">\n  <article id=\"home_sidebar\">\n    <header>\n      <drop-down id=\"userDropdown\">\n        <label id=\"userBtn\" data-id=\"user-btn\">\n          <span>Usuario</span>\n          <svg-icon type=\"triangle\"></svg-icon>\n        </label>\n        <aside>\n          <ul>\n            <li data-id=\"verPerfil\">Perfil</li>\n            <li data-id=\"logout\">Salir<svg-icon type=\"salir\"></svg-icon></li>\n          </ul>\n        </aside>\n      </drop-down>\n\n      <div class=\"logo\">\n        <svg-icon type=\"plantines\">\n          <span class=\"count\">55</span>\n        </svg-icon>\n        <h1>JUNTOS<br>SOMOS UN<br>BOSQUE</h1>\n      </div>\n      <div class=\"menu\">\n        <div data-id=\"proponer_lugar_content\" data-target=\"action_content_lugar\" class=\"active\">\n          <svg-icon type=\"calendar\"></svg-icon>\n          Plantaciónes\n        </div>\n        <div data-id=\"suma_arboles_btn_content\" data-target=\"action_content_suma\">\n          <svg-icon type=\"plantin.solo\"></svg-icon>\n          Sumá tus arboles\n        </div>\n        <div data-id=\"info_btn_content\" data-target=\"action_content_red\">\n          <svg-icon type=\"plantines2\"></svg-icon>\n          La red\n        </div>\n      </div>\n    </header>\n    <slider-box id=\"sidebar_main\">\n\n      <article data-id=\"action_content_lugar\" data-enter=\"de-arr-s\" class=\"de-arr-s active\">\n        <div id=\"cartel_evento\">\n            <div class=\"header-evento\">\n              <svg-icon type=\"calendar.11\"></svg-icon>\n              <div class=\"header-evento-text\">\n                <p class=\"info\">\n                  <svg-icon type=\"reloj\"></svg-icon>\n                  Domingo, 12:00 am\n                </p>\n                <h1>Festival de plantación</h1>\n              </div>\n            </div>\n            <p class=\"content-evento-text\">\n              Estamos co-creando un Bosque mediante siembras y plantaciones colectivas en festivales y eventos, a través de una red de personas que cultivan arbolitos en sus casas.\n            </p>\n            <p class=\"bolder\">\n              Podes traer tus arboles al festival y entre musica y charlas, plantaremos un bosque!\n            </p>\n            <button class=\"asignar\" data-id=\"evento-sidebar-asignar\">Asignar arboles</button>\n            <button data-id=\"evento-sidebar-mas\">\n              Ver más\n              <svg-icon type=\"caret.right\"></svg-icon>\n            </button>\n        </div>\n      </article>\n\n      <article id=\"actionContentSuma\" data-id=\"action_content_suma\" data-enter=\"de-arr-s\">\n        <slider-box id=\"mis_arboles_cont\">\n          <article id=\"cartel_suma\" data-id=\"cartelSuma\" data-enter=\"de-arr-s\">\n            <h1>Sumá tus árboles</h1>\n            <p class=\"info\">Si estás cuidando arbolitos en maceta en tu casa y querés sumarte a las plantaciones colectivas, registralos acá y después asignalos a las plantaciónes que vos elijas.</p>\n            <button id=\"suma_arboles_btn\" class=\"action-button\" data-id=\"sumarTusArboles\" title=\"Sumate!\">\n              Sumar árboles\n              <svg-icon type=\"plantin\"></svg-icon>\n            </button>\n          </article>\n          <article id=\"ver_form_suma\" data-id=\"verFormSuma\" data-enter=\"de-arr-s\">\n            <h1>Sumar árboles</h1>\n            <svg-icon type=\"close\" data-id=\"volverFormSuma\"></svg-icon>\n            <form-vali id=\"form_suma\" direction=\"arboles\" clear-values>\n              <div>\n                <label for=\"especie_select\">Especie</label>\n                <select id=\"especie_select\" data-label=\"especie\" data-rules=\"notDefault\">\n                  <option value=\"default\">Elegir...</option>\n                  <option value=\"1\">Algarrobo</option>\n                  <option value=\"2\">Paico</option>\n                  <option value=\"2\">PaicoPaicoPaico</option>\n                </select>\n              </div>\n              <div>\n                <label for=\"cantidad_input\">Cantidad</label>\n                <input type=\"number\" id=\"cantidad_input\" data-label=\"cantidad\" min=\"0\" data-rules=\"required\" />\n              </div>\n              <div>\n                <label for=\"tamagno_input\">Tamaño</label>\n                <select id=\"tamagno_input\" data-label=\"tamagno\" data-rules=\"notDefault\">\n                  <option value=\"default\">Elegir...</option>\n                  <option value=\"1\">Grande</option>\n                  <option value=\"2\">Chico</option>\n                </select>\n              </div>\n              <button data-submit>\n                <svg-icon type=\"plantin\"></svg-icon>\n              </button>\n            </form-vali>\n          </article>\n        </slider-box>\n        <div id=\"tabla_mis_arboles\">\n          <span>No hay árboles registrados</span>\n        </div>\n      </article>\n\n      <article data-id=\"action_content_red\" data-enter=\"de-arr-s\">\n        <div id=\"cartel_info\">\n          <h1>Nuestros arboles</h1>\n          <p class=\"info\">work in progress...</p>\n        </div>\n      </article>\n    </slider-box>\n    <div class=\"footer\">\n        <button id=\"infoBtn\" data-id=\"masInfoBtn\">\n          <svg-icon type=\"info\"></svg-icon>\n          info\n        </button>\n\n        <svg-icon type=\"github\" title=\"Github\"></svg-icon>\n        <svg-icon type=\"social.twitter\" title=\"Twitter\"></svg-icon>\n        <svg-icon type=\"social.facebook\" title=\"Facebook\"></svg-icon>\n    </div>\n  </article>\n</div>\n<geo-map id=\"homeMap\"></geo-map>\n<pop-up id=\"masInformacion\">\n    <section>\n      <article data-id=\"masInfo\" id=\"mas_info\">\n          <div id=\"mas_info_side_menu\">\n            <p class=\"active\" data-target=\"mas_info_intro\">Introducción</p>\n            <p data-target=\"mas_info_motivacion\">¿Por qué?</p>\n            <p data-target=\"mas_info_quienessomos\">Quienes somos</p>\n          </div>\n          <div id=\"mas_info_text\">\n            <div id=\"mas_info_intro\" class=\"active\">\n              <h1>Introducción</h1>\n              En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.<br><br>\n              Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.<br><br>\n              Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.<br><br>\n              La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.<br><br>\n              Juntos, somos un BOSQUE.\n            </div>\n            <div id=\"mas_info_quienessomos\">\n              <h1>¿Quienes somos?</h1>\n              Un árbol para mi vereda es una organización sin fines de lucro que trabaja para brindar las herramientas que generan en el ser humano una re-conexión con la naturaleza.<br><br>\n\n              Buscamos incrementar el verde urbano y la conciencia ambiental enfatizando el vínculo de mutuo beneficio entre hombre y árbol, promoviendo una forma de vida basada en el respeto y entendimiento de todo lo que nos rodea.<br><br>\n\n              Motivamos a las personas a criar y plantar más árboles, a través de programas de capacitación, concientización ambiental y participación ciudadana, centrados en la producción de árboles. <br><br>\n\n              Contamos con una Red de Cultivo de especies nativas y comestibles que se está desarrollando en distintos puntos de la Capital Federal y el Gran Buenos Aires.<br><br>\n\n              Realizamos talleres en centros culturales, huertas comunitarias, jardines de infantes, escuelas primarias y secundarias, centros de rehabilitación de adicciones, centros de jubilados y unidades penitenciarias. En estos encuentros de capacitación y producción realizamos desde la siembra y las distintas etapas de vivero, hasta las técnicas de plantado y el cuidado de cada especie. <br><br>\n\n              Cada espacio donde damos un taller se convierte en un pequeño vivero productor.<br><br>\n\n              Cuidar y ver crecer un árbol es una posibilidad simple y concreta de vincularse con la naturaleza. Esta re-conexión produce cambios en las conductas de los ciudadanos sobre su entorno natural y social. <br>\n              Un barrio donde sus habitantes cultivan, plantan y cuidan árboles tiende a convertirse en un lugar más saludable, más armónico, más bello.<br><br>\n\n              Los viveros comunitarios son centros de capacitación en cultivo de árboles. En ellos enseñamos un oficio con salida laboral. Funcionan como plataforma de reunión, divulgación de prácticas sustentables, cultura y expresiones artísticas para el desarrollo del ser humano como ser natural.<br>\n              Son emprendimientos productivos que facilitan la inclusión y la reinserción de sectores sociales vulnerables.\n            </div>\n            <div id=\"mas_info_motivacion\">\n              <h1>¿Por que?</h1>\n              Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.<br>\n              La OMS propone entre 10 y 15 mts2 de espacios verdes por habitante. Al día de hoy, en Capital Federal, tenemos 6,2 mts2 promedio. Y en los barrios vulnerable esa cifra desciende a 1,5 mts2 por habitante.<br><br>\n\n              De Protesta a Propuesta Activa<br>\n              Existe un preocupación social respecto a la necesidad de tener más y mejores espacios verdes en la Ciudad. Proponemos convertir al ciudadano pasivo en un agente activo, en un criador de árboles en su balcón, patio, ventana o terraza.<br>\n              Así se genera una relación Ganar-Ganar-Ganar:<br>\n              Gana el Ciudadano: Cambia su actitud y se involucra en los temas que le importan y con el espacio público que lo rodea.<br>\n              Gana el Municipio: obtiene nuevos espacios verdes con una alta participación comunitaria y una reducción muy significativa en costos (en 2013 se pagaban $900 pesos por árbol plantado, de esta forma serían producidos por la comunidad).<br>\n              Gana el Ecosistema del que formamos parte al haber nuevo refugio y alimento para la fauna local. (Persona-Comunidad-Planeta)<br><br>\n\n              Hacia una Masa Crítica de árboles nativos<br>\n              El término “hace referencia al número de individuos involucrados en un fenómeno a partir del cual éste adquiere una dinámica propia que le permite sostenerse y crecer por sí mismo.”<br>\n              A febrero de 2016 llevamos sembrados más de 10.000 árboles y esta cifra crece semana a semana.\n            </div>\n          </div>\n      </article>\n    </section>\n</pop-up>\n<pop-up id=\"popUpBienvenido\" closable=\"false\">\n  <section>\n    <article data-id=\"bienvenido\">\n      <form-vali id=\"primeraVez\" direction=\"finishRegistration\">\n      <h1>Hola </h1>\n        <p>Antes de empezar necesitas indicar que tipo de usuario eres y tu ubicación</p>\n        <label for=\"typeLocalForm\">Tipo de usuario</label>\n        <select id=\"typeLocalForm\" data-label=\"userType\">\n          <option selected=\"true\">Persona</option>\n          <option>Vivero</option>\n          <option>Organización civil</option>\n          <option>Escuela</option>\n          <option>Centro cultural</option>\n        </select>\n        <button id=\"elegirUbicacion\">Elegir ubicación</button>\n        <div id=\"ubicacionLocalFormWelcome\">\n        </div>\n        <input type=\"hidden\" data-label=\"location\" data-id=\"locationInput\">\n        <button data-submit >Continuar</button>\n      </form-vali>\n    </article>\n  </section>\n</pop-up>\n\n<pop-up id=\"perfilPopup\">\n  <section>\n    <article data-id=\"perfil\">\n      <form-vali id=\"perfilForm\" direction=\"perfil\">\n        <label for=\"nombrePerfil\">Nombre</label>\n        <input id=\"nombrePerfil\" data-label=\"nombre\" type=\"text\">\n        <label for=\"typeLocalForm\">Tipo de usuario</label>\n        <select id=\"typeLocalForm\" data-label=\"userType\">\n          <option value=\"Persona\">Persona</option>\n          <option value=\"Vivero\">Vivero</option>\n          <option value=\"Organización civil\">Organización civil</option>\n          <option value=\"Escuela\">Escuela</option>\n          <option value=\"Centro cultural\">Centro cultural</option>\n        </select>\n        <label>Ubicación</label>\n        <div id=\"ubicacionLocalFormPerfil\">\n        </div>\n        <input type=\"hidden\" data-label=\"location\" data-id=\"perfilLocationInput\">\n        <button data-submit >Guardar</button>\n      </form-vali>\n    </article>\n  </section>\n</pop-up>";
+
+/***/ },
+/* 459 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(460);
+
+	var _component = __webpack_require__(392);
+
+	var _component2 = _interopRequireDefault(_component);
+
+	var _renders = __webpack_require__(462);
+
+	var _renders2 = _interopRequireDefault(_renders);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	(0, _component2.default)('drop-down', { renders: _renders2.default });
+
+/***/ },
+/* 460 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 461 */,
+/* 462 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30734,47 +30714,38 @@
 	});
 
 	exports.default = function () {
-	  function activatePopupSection(active) {
-	    return function () {
-	      (0, _state2.default)('accionesUsuario.active').value = active;
-	      (0, _state2.default)('accionesUsuario.show').value = true;
-	    };
+	  function init(dom) {
+	    var checkboxG = (0, _utils.createElement)('<input type="checkbox" id="' + dom.id + '-chkbx" class="hide" />');
+	    var label = dom.querySelector('label');
+	    label.setAttribute('for', dom.id + '-chkbx');
+	    dom.insertBefore(checkboxG(), dom.querySelector('aside'));
 	  }
 
-	  function init(dom) {
-	    var sumarTusArbolesClicks = _rxjs2.default.Observable.fromEvent(dom.querySelector('[data-id="sumarTusArboles"]'), 'click');
+	  function destroy() {}
 
+	  return { init: init, destroy: destroy };
+	};
+
+	var _utils = __webpack_require__(407);
+
+/***/ },
+/* 463 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+	  function init(dom) {
 	    (0, _state2.default)('main_menu').value = {};
 	    _rxjs2.default.Observable.fromEvent(dom.querySelectorAll('#home_sidebar header .menu>div'), 'click').map(function (ev) {
 	      return ev.currentTarget.getAttribute('data-target');
 	    }).subscribe(function (target) {
 	      (0, _state2.default)('sidebar_main.active').value = target;
 	      (0, _state2.default)('main_menu.active').value = target;
-	    });
-
-	    // login
-	    var irARegistrarseClicks = _rxjs2.default.Observable.fromEvent(dom.querySelector('[data-id="registrarse"]'), 'click');
-
-	    var olvidoClicks = _rxjs2.default.Observable.fromEvent(dom.querySelector('[data-id="forgotBtn"]'), 'click');
-
-	    var ingresarClicks = _rxjs2.default.Observable.fromEvent(dom.querySelector('button[data-id="ingresar-btn"]'), 'click');
-
-	    var volverDeRegisClicks = _rxjs2.default.Observable.fromEvent(dom.querySelector('[data-id="volverLoginRegis"]'), 'click');
-
-	    var volverDeOlvClicks = _rxjs2.default.Observable.fromEvent(dom.querySelector('[data-id="volverLoginMail"]'), 'click');
-
-	    this.showRegistrar = irARegistrarseClicks.subscribe(activatePopupSection('registroUsuarios'));
-
-	    this.showLogin = _rxjs2.default.Observable.merge(ingresarClicks, volverDeRegisClicks, volverDeOlvClicks, sumarTusArbolesClicks).subscribe(activatePopupSection('inicioSesion'));
-
-	    this.showOlvido = olvidoClicks.subscribe(activatePopupSection('forgotPassword'), 'click');
-
-	    this.onOlvidoSucces = (0, _state2.default)('forgot.formNotification').on('N').filter(function (notification) {
-	      return notification.success;
-	    }).subscribe(function () {
-	      window.setTimeout(function () {
-	        (0, _state2.default)('sideBar.active').value = 'mainApp';
-	      }, 4500);
 	    });
 
 	    _rxjs2.default.Observable.fromEvent(dom.querySelector('[data-id="masInfoBtn"]'), 'click').subscribe(function () {
@@ -30872,6 +30843,21 @@
 	      (0, _state2.default)('perfilPopup.show').value = true;
 	      dom.querySelector('#userDropdown [type="checkbox"]').checked = false;
 	    });
+
+	    (0, _state2.default)('mis_arboles_cont.active').value = 'cartelSuma';
+	    _rxjs2.default.Observable.fromEvent(dom.querySelector('[data-id="sumarTusArboles"]'), 'click').subscribe(function () {
+	      (0, _state2.default)('mis_arboles_cont.active').value = 'verFormSuma';
+	    });
+
+	    _rxjs2.default.Observable.fromEvent(dom.querySelector('[data-id="volverFormSuma"]'), 'click').subscribe(function () {
+	      (0, _state2.default)('mis_arboles_cont.active').value = 'cartelSuma';
+	    });
+
+	    (0, _state2.default)('form_suma.formNotification').on('N').filter(function (notification) {
+	      return notification.success;
+	    }).subscribe(function (v) {
+	      (0, _state2.default)('user.arboles').value = v.result.arboles;
+	    });
 	  }
 
 	  function destroy(s, f) {
@@ -30916,7 +30902,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 470 */
+/* 464 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30987,6 +30973,10 @@
 	    }).subscribe(function (data) {
 	      (0, _state2.default)('user').value = data.result;
 	      dom.querySelector('[data-id="user-btn"] span').textContent = data.result.name;
+	    });
+
+	    (0, _state2.default)('mis_arboles_cont.active').on(['N', 'E']).subscribe(function (active) {
+	      dom.querySelector('#mis_arboles_cont').setAttribute('data-active', active);
 	    });
 	  }
 

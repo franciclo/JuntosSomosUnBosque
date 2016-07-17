@@ -13,6 +13,7 @@ slider-box > article{
     background: white;
     transition: opacity .3s linear;
     opacity: 0;
+    height: 100%;
 }
 slider-box > article.active {
   opacity: 1;

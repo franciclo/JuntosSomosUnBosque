@@ -77,6 +77,12 @@ export default function () {
         St('user').value = data.result
         dom.querySelector('[data-id="user-btn"] span').textContent = data.result.name
       })
+
+    St('mis_arboles_cont.active')
+      .on(['N', 'E'])
+      .subscribe(function (active) {
+        dom.querySelector('#mis_arboles_cont').setAttribute('data-active', active)
+      })
   }
 
   function destroy () {

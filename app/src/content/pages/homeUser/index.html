@@ -63,17 +63,50 @@
         </div>
       </article>
 
-      <article data-id="action_content_suma" data-enter="de-arr-s">
-        <div id="cartel_suma">
-          <h1>Registra tus plantines</h1>
-          <p class="info">Si estás cuidando arbolitos en maceta en tu casa podes registrarlos para llevar el control de tus plantines para y asignarlos a las plantaciónes que vos elijas.</p>
-          <p class="bolder">
-            Agrega tus primeros plantines!
-          </p>
-          <button id="suma_arboles_btn" class="action-button" data-id="sumarTusArboles" title="Sumate!">
-            <svg-icon type="plantin"></svg-icon>
-          </button>
-        </div>  
+      <article id="actionContentSuma" data-id="action_content_suma" data-enter="de-arr-s">
+        <slider-box id="mis_arboles_cont">
+          <article id="cartel_suma" data-id="cartelSuma" data-enter="de-arr-s">
+            <h1>Sumá tus árboles</h1>
+            <p class="info">Si estás cuidando arbolitos en maceta en tu casa y querés sumarte a las plantaciones colectivas, registralos acá y después asignalos a las plantaciónes que vos elijas.</p>
+            <button id="suma_arboles_btn" class="action-button" data-id="sumarTusArboles" title="Sumate!">
+              Sumar árboles
+              <svg-icon type="plantin"></svg-icon>
+            </button>
+          </article>
+          <article id="ver_form_suma" data-id="verFormSuma" data-enter="de-arr-s">
+            <h1>Sumar árboles</h1>
+            <svg-icon type="close" data-id="volverFormSuma"></svg-icon>
+            <form-vali id="form_suma" direction="arboles" clear-values>
+              <div>
+                <label for="especie_select">Especie</label>
+                <select id="especie_select" data-label="especie" data-rules="notDefault">
+                  <option value="default">Elegir...</option>
+                  <option value="1">Algarrobo</option>
+                  <option value="2">Paico</option>
+                  <option value="2">PaicoPaicoPaico</option>
+                </select>
+              </div>
+              <div>
+                <label for="cantidad_input">Cantidad</label>
+                <input type="number" id="cantidad_input" data-label="cantidad" min="0" data-rules="required" />
+              </div>
+              <div>
+                <label for="tamagno_input">Tamaño</label>
+                <select id="tamagno_input" data-label="tamagno" data-rules="notDefault">
+                  <option value="default">Elegir...</option>
+                  <option value="1">Grande</option>
+                  <option value="2">Chico</option>
+                </select>
+              </div>
+              <button data-submit>
+                <svg-icon type="plantin"></svg-icon>
+              </button>
+            </form-vali>
+          </article>
+        </slider-box>
+        <div id="tabla_mis_arboles">
+          <span>No hay árboles registrados</span>
+        </div>
       </article>
 
       <article data-id="action_content_red" data-enter="de-arr-s">

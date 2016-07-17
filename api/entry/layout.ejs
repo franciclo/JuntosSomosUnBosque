@@ -46,5 +46,11 @@
         window.$tate('user.location').value = '<%= location %>'
       </script>
     <% } %>
+
+    <% if (typeof arboles !== 'undefined') { %>
+      <script type="text/javascript">
+        window.$tate('user.arboles').value = JSON.parse('<%- arboles %>')
+      </script>
+    <% } %>
   </body>
 </html>

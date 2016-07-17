@@ -4,15 +4,8 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    -webkit-overflow-scrolling: touch;
 }
 body{
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default;
     font-family: sans-serif;
 }
 button{
@@ -24,4 +17,3 @@ button{
     cursor: pointer;
 }
 .hide{display:none;}
-button:focus {outline:0;}

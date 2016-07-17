@@ -19423,11 +19423,15 @@
 	      },
 	      equalTo: function equalTo(v, _v) {
 	        return v === _v;
+	      },
+	      notDefault: function notDefault(v) {
+	        return v !== 'default';
 	      }
 	    };
 	    var ajaxValidations = {};
 	    var validationMsg = {
 	      required: 'Obligatorio',
+	      notDefault: 'Obligatorio',
 	      isEmail: 'No es un mail válido',
 	      equalTo: 'No coincide',
 	      ajaxMailExist: 'El mail no existe',
@@ -19562,7 +19566,7 @@
 	    }).publish();
 	    formSubmits.connect();
 
-	    this.onInputChange = _rxjs2.default.Observable.fromEvent(inputs, 'keydown').map(function (ev) {
+	    this.onInputChange = _rxjs2.default.Observable.fromEvent(inputs, 'change').map(function (ev) {
 	      return ev.currentTarget;
 	    }).map(function (input) {
 	      return {
@@ -20294,6 +20298,10 @@
 
 	  function clearValues(inputs) {
 	    for (var i = 0; i < inputs.length; i++) {
+	      if (inputs[i].type === 'select-one') {
+	        inputs[i].value = 'default';
+	        continue;
+	      }
 	      inputs[i].value = '';
 	    }
 	  }
@@ -20318,7 +20326,7 @@
 	    } else {
 	      window.setTimeout(function () {
 	        _utils.className.remove(notiSpam, 'show');
-	      }, 8000);
+	      }, 1000);
 	    }
 	  }
 
@@ -20348,12 +20356,15 @@
 	      return inputs;
 	    }).subscribe(function (inputs) {
 	      clearErrors(dom, inputs);
-	      // clearValues(inputs)
+	      if (dom.hasAttribute('clear-values')) clearValues(inputs);
 	    });
 
-	    this.onLoading = (0, _state2.default)(id + '.loading').on(['N', 'E']).subscribe(function (bool) {
-	      submitBtn.textContent = submitBtn.getAttribute(bool ? 'label-active' : 'label-pasive');
-	    });
+	    // this.onLoading = St(id + '.loading')
+	    //   .on(['N', 'E'])
+	    //   .subscribe(function (bool) {
+	    //     submitBtn.textContent = submitBtn
+	    //       .getAttribute(bool ? 'label-active' : 'label-pasive')
+	    //   })
 	  }
 
 	  function destroy() {
@@ -20751,7 +20762,7 @@
 
 	exports.default = function () {
 	  function toggleActiveSection(dom, activeId) {
-	    var boxSections = dom.querySelectorAll('article');
+	    var boxSections = dom.parentNode.querySelectorAll('#' + dom.id + '>article');
 	    for (var i = 0; i < boxSections.length; i++) {
 	      _utils.className.bool(boxSections[i].getAttribute('data-id') === activeId, boxSections[i], (boxSections[i].getAttribute('data-enter') ? boxSections[i].getAttribute('data-enter') + ' ' : '') + 'active');
 	    }

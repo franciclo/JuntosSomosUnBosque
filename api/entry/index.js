@@ -34,7 +34,16 @@ module.exports = function (app) {
           entryFilename: 'user',
           userName: userName,
           userType: req.user.userType,
-          location: req.user.location
+          location: req.user.location,
+          arboles: JSON.stringify(req.user.arboles
+            .map(function (arbol) {
+              return {
+                especie: arbol.especie,
+                cantidad: arbol.cantidad,
+                tamagno: arbol.tamagno
+              }
+            })
+          )
         })
       }
     } else {

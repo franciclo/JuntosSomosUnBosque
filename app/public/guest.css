@@ -4,15 +4,8 @@ html, body, body>section {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    -webkit-overflow-scrolling: touch;
 }
 body{
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default;
     font-family: sans-serif;
 }
 button{
@@ -23,8 +16,7 @@ button{
     padding: 4px 8px;
     cursor: pointer;
 }
-.hide{display:none;}
-button:focus {outline:0;}body>section{
+.hide{display:none;}body>section{
   display: flex;
 }
 body>section #sideBar{
@@ -41,7 +33,7 @@ body>section geo-map{
   overflow: hidden;
 }
 
-#sideBar article{
+#sideBar>article{
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -69,7 +61,6 @@ body>section geo-map{
 
 
 
-
 #cartel_suma {
   background: white;
   border-radius: 3px;
@@ -89,28 +80,28 @@ body>section geo-map{
   text-align: left;
   font-weight: 100;
   font-size: 25px;
-  padding: 5px 10px 0;
+  padding: 5px 10px 0px;
 }
 #suma_arboles_btn:hover {
-  box-shadow: 0px 2px 2px #555;
+  background: #35a700;
 }
 #suma_arboles_btn{
   background: #35a700;
   fill: #fff;
   border: none;
-  padding: 11px;
+  color: #fff;
   display: flex;
   align-items: center;
-  right: 29px;
-  bottom: -43px;
-  position: absolute;
-  border-radius: 100%;
-  box-shadow: 0px 2px 6px #555;
+  float: right;
+  font-size: 16px;
+  margin-right: 10px;
 }
 #suma_arboles_btn svg-icon{
   height: 25px;
   width: 25px;
+  margin-left: 10px;
 }
+
 
 
 .action-content p.info {
@@ -1580,6 +1571,7 @@ slider-box > article{
     background: white;
     transition: opacity .3s linear;
     opacity: 0;
+    height: 100%;
 }
 slider-box > article.active {
   opacity: 1;

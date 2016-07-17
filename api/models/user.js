@@ -2,13 +2,20 @@ var mongoose = require('mongoose')
 var bcrypt = require('bcrypt-nodejs')
 
 var userSchema = mongoose.Schema({
+  userType: String,
+  location: String,
+  name: String,
+  arboles: [
+    {
+      tamagno: String,
+      cantidad: Number,
+      especie: String
+    }
+  ],
   primeraVez: {
     type: Boolean,
     default: true
   },
-  userType: String,
-  location: String,
-  name: String,
   local: {
     email: String,
     password: String,

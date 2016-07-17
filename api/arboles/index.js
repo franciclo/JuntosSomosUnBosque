@@ -41,4 +41,35 @@ module.exports = function (app) {
       })
     })
   })
+
+  app.get('/arboles', isLoggedIn, function (req, res) {
+    var user = req.user
+
+    var arbol = {
+      tamagno: req.query.tamagno,
+      especie: req.query.especie,
+      cantidad: req.query.cantidad
+    }
+
+    user.arboles.push(arbol)
+
+    user.save(function (err) {
+      if (err) {
+        res.json({success: false, text: 'Error al guardar los arboles'})
+      }
+      res.json({
+        success: true,
+        text: 'Arboles guardados',
+        result: {
+          arboles: user.arboles.map(function (arbol) {
+            return {
+              especie: arbol.especie,
+              cantidad: arbol.cantidad,
+              tamagno: arbol.tamagno
+            }
+          })
+        }
+      })
+    })
+  })
 }
