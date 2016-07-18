@@ -52,10 +52,21 @@ body>section geo-map{
 }
 #tabla_mis_arboles{
   text-align: center;
-  margin: 30px 20px;
+  margin: 20px 20px 0;
   padding-top: 20px;
   color: #ccc;
+  overflow: auto;
   border-top: 1px solid #eaeaea;
+}
+#tabla_mis_arboles table{
+  width: 100%;
+  color: #444;
+}
+#tabla_mis_arboles table th {
+  font-weight: 100;
+  font-size: 14px;
+  padding: 0 0 10px;
+  color: #909090;
 }
 #cartel_suma {
   background: white;
@@ -166,7 +177,42 @@ body>section geo-map{
   color: #ff6786;
 }
 #mis_arboles_cont[data-active="verFormSuma"]{
-  height: 180px;
+  height: 170px;
+}
+#mis_arboles_cont[data-active="misSuma"]{
+  height: 71px;
+  overflow: hidden;
+}
+#mis_arboles_cont[data-active="verFormSuma"] ~ #tabla_mis_arboles{
+  max-height: 145px;
+}
+#mis_arboles_cont[data-active="misSuma"] ~ #tabla_mis_arboles{
+  max-height: 230px;
+}
+#mis_suma{
+  width: 100%;
+  padding: 18px;
+  box-sizing: border-box;
+}
+#mis_suma h1 {
+  display: inline-block;
+}
+#ir_suma_arboles_btn{
+  background: #35a700;
+  padding: 5px;
+  border: none;
+  border-radius: 19px;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  fill:#fff;
+  align-self: flex-end;
+  float: right;
+  margin: 13px;
+}
+#ir_suma_arboles_btn svg-icon{
+  width: 25px;
+  height: 25px;
 }
 
 
@@ -417,7 +463,7 @@ body>section geo-map{
 
 .footer {
   display: flex;
-  margin-bottom: 9px;
+  margin: 11px 0 6px;
   align-items: center;
 }
 .footer svg-icon{

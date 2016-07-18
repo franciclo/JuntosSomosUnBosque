@@ -78,7 +78,7 @@ export default function () {
         return notification.success
       })
       .subscribe(function (v) {
-        St('user.type').value = v.result.userType
+        St('user.type').value = v.result.type
         St('user.location').value = v.result.location
       })
 
@@ -128,21 +128,28 @@ export default function () {
         dom.querySelector('#userDropdown [type="checkbox"]').checked = false
       })
 
-    St('mis_arboles_cont.active').value = 'cartelSuma'
-    Rx.Observable.fromEvent(
-      dom.querySelector('[data-id="sumarTusArboles"]'),
-      'click'
-    )
-    .subscribe(function () {
-      St('mis_arboles_cont.active').value = 'verFormSuma'
-    })
+    Rx.Observable
+      .merge(
+        Rx.Observable.fromEvent(
+          dom.querySelector('[data-id="sumarTusArboles"]'),
+          'click'
+        ),
+        Rx.Observable.fromEvent(
+          dom.querySelector('[data-id="sumarMisArboles"]'),
+          'click'
+        )
+      )
+      .subscribe(function () {
+        St('mis_arboles_cont.active').value = 'verFormSuma'
+      })
 
     Rx.Observable.fromEvent(
       dom.querySelector('[data-id="volverFormSuma"]'),
       'click'
     )
     .subscribe(function () {
-      St('mis_arboles_cont.active').value = 'cartelSuma'
+      var homeMisArboles = St('user.arboles').value ? 'misSuma' : 'cartelSuma'
+      St('mis_arboles_cont.active').value = homeMisArboles
     })
 
     St('form_suma.formNotification')
@@ -151,6 +158,7 @@ export default function () {
         return notification.success
       })
       .subscribe(function (v) {
+        St('user.arboles').value = undefined
         St('user.arboles').value = v.result.arboles
       })
   }

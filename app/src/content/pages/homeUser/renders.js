@@ -1,5 +1,5 @@
 import St from 'state'
-import {className} from 'utils'
+import {className, createElement} from 'utils'
 
 export default function () {
   function toggleActiveInfoSection (dom, id) {
@@ -83,11 +83,48 @@ export default function () {
       .subscribe(function (active) {
         dom.querySelector('#mis_arboles_cont').setAttribute('data-active', active)
       })
+
+    if (St('user.arboles').value && St('user.arboles').value.length) {
+      className.remove(dom.querySelector('#tabla_mis_arboles>table'), 'hide')
+      className.add(dom.querySelector('#tabla_mis_arboles>span'), 'hide')
+      St('mis_arboles_cont.active').value = 'misSuma'
+      dom.querySelector('[data-id="suma_arboles_btn_content"] span').textContent = 'Mis árboles'
+      renderFilaArbol(dom, St('user.arboles').value)
+    } else {
+      St('mis_arboles_cont.active').value = 'cartelSuma'
+      St('form_suma.formNotification')
+        .on('N')
+        .filter(function (notification) {
+          return notification.success
+        })
+        .subscribe(function (v) {
+          dom.querySelector('[data-id="suma_arboles_btn_content"] span').textContent = 'Mis árboles'
+        })
+    }
+
+    St('user.arboles')
+      .on(['E', 'N'])
+      .subscribe(function (arboles) {
+        dom.querySelector('#tabla_mis_arboles>table tbody').innerHTML = ''
+        renderFilaArbol(dom, arboles)
+      })
   }
 
   function destroy () {
     this.onActiveContent.unsubscribe()
   }
 
+  function renderFilaArbol (dom, arboles) {
+    var filaG = createElement('<table><td></td><td></td><td></td></table>')
+    var tablaMisArboles = dom.querySelector('#tabla_mis_arboles>table tbody')
+    arboles
+      .forEach(function (arbol) {
+        var fila = filaG().querySelector('tr')
+        fila.children[0].textContent = arbol.cantidad
+        fila.children[1].textContent = arbol.especie
+        fila.children[2].textContent = arbol.tamagno
+        tablaMisArboles.appendChild(fila)
+      })
+  }
   return {init, destroy}
 }

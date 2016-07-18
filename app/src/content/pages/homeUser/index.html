@@ -27,7 +27,7 @@
         </div>
         <div data-id="suma_arboles_btn_content" data-target="action_content_suma">
           <svg-icon type="plantin.solo"></svg-icon>
-          Sumá tus arboles
+          <span>Sumá tus arboles</span>
         </div>
         <div data-id="info_btn_content" data-target="action_content_red">
           <svg-icon type="plantines2"></svg-icon>
@@ -81,9 +81,9 @@
                 <label for="especie_select">Especie</label>
                 <select id="especie_select" data-label="especie" data-rules="notDefault">
                   <option value="default">Elegir...</option>
-                  <option value="1">Algarrobo</option>
-                  <option value="2">Paico</option>
-                  <option value="2">PaicoPaicoPaico</option>
+                  <option value="Algarrobo">Algarrobo</option>
+                  <option value="Paico">Paico</option>
+                  <option value="Suico">Suico</option>
                 </select>
               </div>
               <div>
@@ -94,8 +94,8 @@
                 <label for="tamagno_input">Tamaño</label>
                 <select id="tamagno_input" data-label="tamagno" data-rules="notDefault">
                   <option value="default">Elegir...</option>
-                  <option value="1">Grande</option>
-                  <option value="2">Chico</option>
+                  <option value="Grandes">Grande</option>
+                  <option value="Chicos">Chico</option>
                 </select>
               </div>
               <button data-submit>
@@ -103,9 +103,22 @@
               </button>
             </form-vali>
           </article>
+          <article id="mis_suma" data-id="misSuma" data-enter="de-arr-s">
+            <h1>Mis árboles</h1>
+            <button id="ir_suma_arboles_btn" data-id="sumarMisArboles">
+              <svg-icon type="plantin"></svg-icon>
+            </button>
+          </article>
         </slider-box>
         <div id="tabla_mis_arboles">
           <span>No hay árboles registrados</span>
+          <table class="hide">
+            <tr>
+              <th>Cantidad</th>
+              <th>Especie</th>
+              <th>Tamaño</th>
+            </tr>
+          </table>
         </div>
       </article>
 

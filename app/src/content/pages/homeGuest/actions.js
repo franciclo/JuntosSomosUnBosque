@@ -70,8 +70,6 @@ export default function () {
       'click'
     )
 
-
-
     this.showRegistrar = irARegistrarseClicks
       .subscribe(activatePopupSection('registroUsuarios'))
 
