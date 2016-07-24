@@ -3,19 +3,22 @@ import { className, createElement } from 'utils'
 
 export default function () {
   var createErrSpan = createElement('<span class="error-msg"></span>')
-  var createNotiSpan = createElement('<span class="notification-msg"></span>')
+  var createNotiAlert = createElement('<alert-msg class="notification-msg"></alert-msg>')
 
   function createErrorSpans (dom, inputs) {
     for (var i = 0; i < inputs.length; i++) {
       if (inputs[i].type === 'hidden') continue
+      if (!dom.querySelector('label[for=' + inputs[i].id + ']')) continue
       if (!inputs[i].id) throw new Error('form-vali error: input without id', inputs[i])
       dom.querySelector('label[for=' + inputs[i].id + ']').appendChild(createErrSpan())
     }
   }
 
   function createNotificationSpan (dom) {
+    var notiAlert = createNotiAlert()
+    notiAlert.id = dom.id + '-notification'
     dom.insertBefore(
-      createNotiSpan(),
+      notiAlert,
       dom.children[0].tagName === 'H1' ? dom.children[1] : dom.children[0]
     )
   }
@@ -49,19 +52,10 @@ export default function () {
   }
 
   function printNotification (dom, notification) {
-    var notiSpam = dom.querySelector('.notification-msg')
-    className.add(notiSpam, notification.success ? 'success' : 'error')
-    className.add(notiSpam, 'show')
-    notiSpam.textContent = notification.text
-    if (notification.success) {
-      window.setTimeout(function () {
-        className.remove(notiSpam, 'show')
-      }, 1000)
-    } else {
-      window.setTimeout(function () {
-        className.remove(notiSpam, 'show')
-      }, 1000)
-    }
+    var notiAlert = dom.querySelector('#' + dom.id + '-notification')
+    className.add(notiAlert, notification.success ? 'success' : 'error')
+    notiAlert.querySelector('span').textContent = notification.text
+    St(dom.id + '-notification.show').value = true
   }
 
   function init (dom) {
@@ -109,7 +103,7 @@ export default function () {
   }
 
   function destroy () {
-    this.onErrorChange.dispose()
+    this.onErrorChange.unsubscribe()
   }
 
   return {init, destroy}

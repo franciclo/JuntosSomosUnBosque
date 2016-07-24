@@ -16,4 +16,4 @@ button{
     padding: 4px 8px;
     cursor: pointer;
 }
-.hide{display:none;}
+.hide{display:none!important;}

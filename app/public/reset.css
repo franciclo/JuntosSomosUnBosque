@@ -16,7 +16,7 @@ button{
     padding: 4px 8px;
     cursor: pointer;
 }
-.hide{display:none;}svg-icon svg{
+.hide{display:none!important;}svg-icon svg{
   height: inherit;
   width: inherit;
 }
@@ -75,25 +75,34 @@ form-vali>.inline-input{
     align-items: center;
     margin: 1.5rem 0 0;
 }
-form-vali>span.notification-msg {
+form-vali>.notification-msg.success {
+    background: #B4E59D;
+    color: #565656;
+    fill: #565656;
+    font-weight: 700;
+}
+form-vali>.notification-msg.error {
+    background: #ec402e;
+    fill: #fff;
+    color: #fff;
+    font-weight: 700;
+}alert-msg {
     font-size: 13px;
     padding: 5px;
     border-radius: 2px;
-    border: 1px solid;
     display: none;
     text-align: center;
+    margin: 16px 0 0;
+    align-items: center;
+    justify-content: space-between;
 }
-form-vali>span.notification-msg.success {
-    background: #B4E59D;
-    border-color: #8DC373;
-    color: #565656;
+alert-msg.show {
+    display: flex;
 }
-form-vali>span.notification-msg.error {
-    border-color: transparent;
-    color: #FF0000;
-}
-form-vali>span.notification-msg.show {
-    display: block;
+alert-msg>[type="close"] {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
 }pop-up{
     width: 100%;
     height: 100%;
@@ -113,7 +122,7 @@ pop-up.active{
 	display: flex;
 }
 
-pop-up section{
+pop-up>section{
     height: auto;
     max-height: 95%;
     width: 100%;
@@ -126,21 +135,21 @@ pop-up section{
     padding: 20px;
     position: relative;
 }
-pop-up section svg-icon[type="close"]{
+pop-up>section>svg-icon[type="close"]{
     position: absolute;
     top:4px;
     right: 0;
     cursor: pointer;
 }
-pop-up section svg-icon{
+pop-up>section>svg-icon{
     height: 25px;
     width: 25px;
 }
-pop-up article{
+pop-up>section>article{
 	display: none;
 }
 
-pop-up article.active{
+pop-up>section>article.active{
 	display: block;
 }/* required styles */
 

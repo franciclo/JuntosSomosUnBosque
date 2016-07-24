@@ -45,13 +45,25 @@ module.exports = function (app) {
   app.get('/arboles', isLoggedIn, function (req, res) {
     var user = req.user
 
-    var arbol = {
+    var arbolNew = {
       tamagno: req.query.tamagno,
       especie: req.query.especie,
-      cantidad: req.query.cantidad
+      cantidad: +req.query.cantidad
     }
 
-    user.arboles.push(arbol)
+    var arbolI = user.arboles.map(function (arbol) {
+      return arbol.especie + arbol.tamagno
+    }).indexOf(arbolNew.especie + arbolNew.tamagno)
+
+    if (typeof arbolNew.cantidad !== 'number') {
+      arbolNew.cantidad = 0
+    }
+
+    if (~arbolI) {
+      user.arboles[arbolI].cantidad = user.arboles[arbolI].cantidad + arbolNew.cantidad
+    } else {
+      user.arboles.push(arbolNew)
+    }
 
     user.save(function (err) {
       if (err) {
@@ -69,6 +81,33 @@ module.exports = function (app) {
             }
           })
         }
+      })
+    })
+  })
+
+  app.get('/edit_arbol', isLoggedIn, function (req, res) {
+    var user = req.user
+
+    var arbolChg = {
+      tamagno: req.query.tamagno,
+      especie: req.query.especie,
+      cantidad: +req.query.cantidad
+    }
+
+    var arbolI = user.arboles.map(function (arbol) {
+      return arbol.especie + arbol.tamagno
+    }).indexOf(arbolChg.especie + arbolChg.tamagno)
+
+    user.arboles[arbolI].cantidad = arbolChg.cantidad
+
+    if (arbolChg.cantidad === 0) user.arboles.splice(arbolI, 1)
+    user.save(function (err) {
+      if (err) {
+        res.json({success: false, text: 'Error al guardar los arboles'})
+      }
+      res.json({
+        success: true,
+        text: 'Guardado'
       })
     })
   })

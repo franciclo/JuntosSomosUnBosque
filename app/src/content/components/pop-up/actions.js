@@ -10,7 +10,7 @@ export default function () {
       .filter((e) => e.target.tagName === 'POP-UP')
       .filter(() => dom.getAttribute('closable') !== 'false')
 
-    let closeIconClicks = Rx.Observable.fromEvent(dom.querySelector('svg-icon[type="close"]'), 'click')
+    let closeIconClicks = Rx.Observable.fromEvent(dom.querySelector('section>svg-icon[type="close"]'), 'click')
 
     this.closeCliks = Rx.Observable
       .merge(popUpClicks, closeIconClicks)

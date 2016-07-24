@@ -50,23 +50,29 @@ body>section geo-map{
 #actionContentSuma>slider-box{
   height: auto;
 }
-#tabla_mis_arboles{
+
+#lista_mis_arboles{
   text-align: center;
   margin: 20px 20px 0;
-  padding-top: 20px;
-  color: #ccc;
   overflow: auto;
-  border-top: 1px solid #eaeaea;
 }
-#tabla_mis_arboles table{
-  width: 100%;
-  color: #444;
+#lista_mis_arboles>arbol-fila>form-vali{
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 9px;
+  background: #f5f5f5;
 }
-#tabla_mis_arboles table th {
-  font-weight: 100;
-  font-size: 14px;
-  padding: 0 0 10px;
-  color: #909090;
+#lista_mis_arboles>arbol-fila:nth-child(even)>form-vali {
+  background: #e4e4e4;
+}
+#lista_mis_arboles_cabecera {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 33px 7px 7px;
+  color: #555;
+  border-top: 1px solid #ccc;
 }
 #cartel_suma {
   background: white;
@@ -157,6 +163,8 @@ body>section geo-map{
 }
 #ver_form_suma>h1 {
   padding-left: 0;
+  color: #555;
+  margin-bottom: 25px;
 }
 #ver_form_suma>svg-icon{
   position: absolute;
@@ -165,6 +173,7 @@ body>section geo-map{
   width: 30px;
   height: 30px;
   cursor: pointer;
+  fill: #555;
 }
 #ver_form_suma form-vali label {
   position: relative;
@@ -177,17 +186,17 @@ body>section geo-map{
   color: #ff6786;
 }
 #mis_arboles_cont[data-active="verFormSuma"]{
-  height: 170px;
+  height: 163px;
 }
 #mis_arboles_cont[data-active="misSuma"]{
   height: 71px;
   overflow: hidden;
 }
-#mis_arboles_cont[data-active="verFormSuma"] ~ #tabla_mis_arboles{
-  max-height: 145px;
+#mis_arboles_cont[data-active="verFormSuma"] ~ #lista_mis_arboles{
+  max-height: 343px;
 }
-#mis_arboles_cont[data-active="misSuma"] ~ #tabla_mis_arboles{
-  max-height: 230px;
+#mis_arboles_cont[data-active="misSuma"] ~ #lista_mis_arboles{
+  max-height: 430px;
 }
 #mis_suma{
   width: 100%;
@@ -196,6 +205,8 @@ body>section geo-map{
 }
 #mis_suma h1 {
   display: inline-block;
+  color: #555;
+  padding: 10px 0;
 }
 #ir_suma_arboles_btn{
   background: #35a700;
@@ -204,11 +215,10 @@ body>section geo-map{
   border-radius: 19px;
   width: 36px;
   height: 36px;
-  margin: 0;
   fill:#fff;
   align-self: flex-end;
   float: right;
-  margin: 13px;
+  margin: 13px 0;
 }
 #ir_suma_arboles_btn svg-icon{
   width: 25px;

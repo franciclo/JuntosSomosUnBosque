@@ -83,11 +83,10 @@ export default function () {
       .subscribe(function (active) {
         dom.querySelector('#mis_arboles_cont').setAttribute('data-active', active)
       })
-
+    className.add(dom.querySelector('#form_suma-notification'), 'hide')
     if (St('user.arboles').value && St('user.arboles').value.length) {
-      className.remove(dom.querySelector('#tabla_mis_arboles>table'), 'hide')
-      className.add(dom.querySelector('#tabla_mis_arboles>span'), 'hide')
       St('mis_arboles_cont.active').value = 'misSuma'
+      className.remove(dom.querySelector('#lista_mis_arboles_cabecera'), 'hide')
       dom.querySelector('[data-id="suma_arboles_btn_content"] span').textContent = 'Mis árboles'
       renderFilaArbol(dom, St('user.arboles').value)
     } else {
@@ -103,10 +102,10 @@ export default function () {
     }
 
     St('user.arboles')
-      .on(['E', 'N'])
-      .subscribe(function (arboles) {
-        dom.querySelector('#tabla_mis_arboles>table tbody').innerHTML = ''
-        renderFilaArbol(dom, arboles)
+      .on(['A'])
+      .subscribe(function (arbol) {
+        className.remove(dom.querySelector('#lista_mis_arboles_cabecera'), 'hide')
+        renderFilaArbol(dom, [arbol])
       })
   }
 
@@ -115,16 +114,18 @@ export default function () {
   }
 
   function renderFilaArbol (dom, arboles) {
-    var filaG = createElement('<table><td></td><td></td><td></td></table>')
-    var tablaMisArboles = dom.querySelector('#tabla_mis_arboles>table tbody')
+    var wrppG = createElement('<arbol-fila></arbol-fila>')
+    var tablaMisArboles = dom.querySelector('#lista_mis_arboles')
+    var frg = document.createDocumentFragment()
     arboles
       .forEach(function (arbol) {
-        var fila = filaG().querySelector('tr')
-        fila.children[0].textContent = arbol.cantidad
-        fila.children[1].textContent = arbol.especie
-        fila.children[2].textContent = arbol.tamagno
-        tablaMisArboles.appendChild(fila)
+        var wrpp = wrppG()
+        wrpp.setAttribute('data-especie', arbol.especie)
+        wrpp.setAttribute('data-tamagno', arbol.tamagno)
+        wrpp.setAttribute('data-cantidad', arbol.cantidad)
+        frg.appendChild(wrpp)
       })
+    tablaMisArboles.appendChild(frg)
   }
   return {init, destroy}
 }

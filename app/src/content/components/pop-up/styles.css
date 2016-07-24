@@ -17,7 +17,7 @@ pop-up.active{
 	display: flex;
 }
 
-pop-up section{
+pop-up>section{
     height: auto;
     max-height: 95%;
     width: 100%;
@@ -30,20 +30,20 @@ pop-up section{
     padding: 20px;
     position: relative;
 }
-pop-up section svg-icon[type="close"]{
+pop-up>section>svg-icon[type="close"]{
     position: absolute;
     top:4px;
     right: 0;
     cursor: pointer;
 }
-pop-up section svg-icon{
+pop-up>section>svg-icon{
     height: 25px;
     width: 25px;
 }
-pop-up article{
+pop-up>section>article{
 	display: none;
 }
 
-pop-up article.active{
+pop-up>section>article.active{
 	display: block;
 }

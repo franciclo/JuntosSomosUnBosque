@@ -50,23 +50,15 @@ form-vali>.inline-input{
     align-items: center;
     margin: 1.5rem 0 0;
 }
-form-vali>span.notification-msg {
-    font-size: 13px;
-    padding: 5px;
-    border-radius: 2px;
-    border: 1px solid;
-    display: none;
-    text-align: center;
-}
-form-vali>span.notification-msg.success {
+form-vali>.notification-msg.success {
     background: #B4E59D;
-    border-color: #8DC373;
     color: #565656;
+    fill: #565656;
+    font-weight: 700;
 }
-form-vali>span.notification-msg.error {
-    border-color: transparent;
-    color: #FF0000;
-}
-form-vali>span.notification-msg.show {
-    display: block;
+form-vali>.notification-msg.error {
+    background: #ec402e;
+    fill: #fff;
+    color: #fff;
+    font-weight: 700;
 }

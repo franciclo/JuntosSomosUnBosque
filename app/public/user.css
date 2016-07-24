@@ -16,10 +16,7 @@ button{
     padding: 4px 8px;
     cursor: pointer;
 }
-.hide{display:none;}/*! Flickity v1.2.1
-http://flickity.metafizzy.co
----------------------------------------------- */
-.flickity-enabled{position:relative}.flickity-enabled:focus{outline:0}.flickity-viewport{overflow:hidden;position:relative;height:100%}.flickity-slider{position:absolute;width:100%;height:100%}.flickity-enabled.is-draggable{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.flickity-enabled.is-draggable .flickity-viewport{cursor:move;cursor:-webkit-grab;cursor:grab}.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down{cursor:-webkit-grabbing;cursor:grabbing}.flickity-prev-next-button{position:absolute;top:50%;width:44px;height:44px;border:none;border-radius:50%;background:#fff;background:hsla(0,0%,100%,.75);cursor:pointer;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}.flickity-prev-next-button:hover{background:#fff}.flickity-prev-next-button:focus{outline:0;box-shadow:0 0 0 5px #09F}.flickity-prev-next-button:active{filter:alpha(opacity=60);opacity:.6}.flickity-prev-next-button.previous{left:10px}.flickity-prev-next-button.next{right:10px}.flickity-rtl .flickity-prev-next-button.previous{left:auto;right:10px}.flickity-rtl .flickity-prev-next-button.next{right:auto;left:10px}.flickity-prev-next-button:disabled{filter:alpha(opacity=30);opacity:.3;cursor:auto}.flickity-prev-next-button svg{position:absolute;left:20%;top:20%;width:60%;height:60%}.flickity-prev-next-button .arrow{fill:#333}.flickity-prev-next-button.no-svg{color:#333;font-size:26px}.flickity-page-dots{position:absolute;width:100%;bottom:-25px;padding:0;margin:0;list-style:none;text-align:center;line-height:1}.flickity-rtl .flickity-page-dots{direction:rtl}.flickity-page-dots .dot{display:inline-block;width:10px;height:10px;margin:0 8px;background:#333;border-radius:50%;filter:alpha(opacity=25);opacity:.25;cursor:pointer}.flickity-page-dots .dot.is-selected{filter:alpha(opacity=100);opacity:1}svg-icon svg{
+.hide{display:none!important;}svg-icon svg{
   height: inherit;
   width: inherit;
 }
@@ -78,25 +75,34 @@ form-vali>.inline-input{
     align-items: center;
     margin: 1.5rem 0 0;
 }
-form-vali>span.notification-msg {
+form-vali>.notification-msg.success {
+    background: #B4E59D;
+    color: #565656;
+    fill: #565656;
+    font-weight: 700;
+}
+form-vali>.notification-msg.error {
+    background: #ec402e;
+    fill: #fff;
+    color: #fff;
+    font-weight: 700;
+}alert-msg {
     font-size: 13px;
     padding: 5px;
     border-radius: 2px;
-    border: 1px solid;
     display: none;
     text-align: center;
+    margin: 16px 0 0;
+    align-items: center;
+    justify-content: space-between;
 }
-form-vali>span.notification-msg.success {
-    background: #B4E59D;
-    border-color: #8DC373;
-    color: #565656;
+alert-msg.show {
+    display: flex;
 }
-form-vali>span.notification-msg.error {
-    border-color: transparent;
-    color: #FF0000;
-}
-form-vali>span.notification-msg.show {
-    display: block;
+alert-msg>[type="close"] {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
 }pop-up{
     width: 100%;
     height: 100%;
@@ -116,7 +122,7 @@ pop-up.active{
 	display: flex;
 }
 
-pop-up section{
+pop-up>section{
     height: auto;
     max-height: 95%;
     width: 100%;
@@ -129,21 +135,21 @@ pop-up section{
     padding: 20px;
     position: relative;
 }
-pop-up section svg-icon[type="close"]{
+pop-up>section>svg-icon[type="close"]{
     position: absolute;
     top:4px;
     right: 0;
     cursor: pointer;
 }
-pop-up section svg-icon{
+pop-up>section>svg-icon{
     height: 25px;
     width: 25px;
 }
-pop-up article{
+pop-up>section>article{
 	display: none;
 }
 
-pop-up article.active{
+pop-up>section>article.active{
 	display: block;
 }h-tabs {
   position: relative;   
@@ -1212,23 +1218,29 @@ body>section geo-map{
 #actionContentSuma>slider-box{
   height: auto;
 }
-#tabla_mis_arboles{
+
+#lista_mis_arboles{
   text-align: center;
   margin: 20px 20px 0;
-  padding-top: 20px;
-  color: #ccc;
   overflow: auto;
-  border-top: 1px solid #eaeaea;
 }
-#tabla_mis_arboles table{
-  width: 100%;
-  color: #444;
+#lista_mis_arboles>arbol-fila>form-vali{
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 9px;
+  background: #f5f5f5;
 }
-#tabla_mis_arboles table th {
-  font-weight: 100;
-  font-size: 14px;
-  padding: 0 0 10px;
-  color: #909090;
+#lista_mis_arboles>arbol-fila:nth-child(even)>form-vali {
+  background: #e4e4e4;
+}
+#lista_mis_arboles_cabecera {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 33px 7px 7px;
+  color: #555;
+  border-top: 1px solid #ccc;
 }
 #cartel_suma {
   background: white;
@@ -1319,6 +1331,8 @@ body>section geo-map{
 }
 #ver_form_suma>h1 {
   padding-left: 0;
+  color: #555;
+  margin-bottom: 25px;
 }
 #ver_form_suma>svg-icon{
   position: absolute;
@@ -1327,6 +1341,7 @@ body>section geo-map{
   width: 30px;
   height: 30px;
   cursor: pointer;
+  fill: #555;
 }
 #ver_form_suma form-vali label {
   position: relative;
@@ -1339,17 +1354,17 @@ body>section geo-map{
   color: #ff6786;
 }
 #mis_arboles_cont[data-active="verFormSuma"]{
-  height: 170px;
+  height: 163px;
 }
 #mis_arboles_cont[data-active="misSuma"]{
   height: 71px;
   overflow: hidden;
 }
-#mis_arboles_cont[data-active="verFormSuma"] ~ #tabla_mis_arboles{
-  max-height: 145px;
+#mis_arboles_cont[data-active="verFormSuma"] ~ #lista_mis_arboles{
+  max-height: 343px;
 }
-#mis_arboles_cont[data-active="misSuma"] ~ #tabla_mis_arboles{
-  max-height: 230px;
+#mis_arboles_cont[data-active="misSuma"] ~ #lista_mis_arboles{
+  max-height: 430px;
 }
 #mis_suma{
   width: 100%;
@@ -1358,6 +1373,8 @@ body>section geo-map{
 }
 #mis_suma h1 {
   display: inline-block;
+  color: #555;
+  padding: 10px 0;
 }
 #ir_suma_arboles_btn{
   background: #35a700;
@@ -1366,11 +1383,10 @@ body>section geo-map{
   border-radius: 19px;
   width: 36px;
   height: 36px;
-  margin: 0;
   fill:#fff;
   align-self: flex-end;
   float: right;
-  margin: 13px;
+  margin: 13px 0;
 }
 #ir_suma_arboles_btn svg-icon{
   width: 25px;
@@ -1775,4 +1791,57 @@ drop-down aside ul li:hover {
   background: #389dc1;
   color: white;
   fill:white;
+}arbol-fila>form-vali>input[type="number"] {
+  width: 36px;
+  padding: 0;
+  margin-right: 25px;
+  border: none;
+  font-size: 17px;
+  background: transparent;
+}
+arbol-fila>form-vali>[data-submit] {
+  display: none;
+}
+arbol-fila.chg>form-vali>[data-submit] {
+  display: block;
+}
+arbol-fila>form-vali>[data-submit] {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin: 0;
+  padding: 0;
+  fill: #fff;
+  border-radius: 0;
+  width: 32px;
+  height: 100%;
+  background: #0090c5;
+  border: none;
+}
+arbol-fila>form-vali>[data-submit]>svg-icon {
+  width: 20px;
+  height: 20px;
+}
+arbol-fila>form-vali>alert-msg{
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  margin: 0;
+  width: 97%;
+}
+arbol-fila.flash>form-vali {
+  animation: flash 500ms ease-in-out;
+}
+@keyframes flash {
+  0% {
+    background: transparent;
+  }
+
+  50% {
+    background: #ffe551;
+  }
+
+  100% {
+    background: transparent;
+  }
 }

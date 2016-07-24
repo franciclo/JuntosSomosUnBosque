@@ -44,7 +44,7 @@ function query (path) {
           ~kind.indexOf(d.kind)
         })
         .map(function (d) {
-          return d.rhs
+          return d.kind === 'A' ? d.item.rhs : d.rhs
         })
     },
     get value () { return ObjectPath(stateData).get(path) },

@@ -63,9 +63,9 @@ export default function () {
         if ('geolocation' in navigator) {
           navigator.geolocation.getCurrentPosition(function (position) {
             geoSuccess(dom, position)
-          }, geoError)
+          }, geoError(dom))
         } else {
-          geoSuccess(dom, {coords: {latitude: -34.52, longitude: -58.446}})
+          geoSuccess(dom, {coords: {latitude: -34.55, longitude: -58.45}})
         }
       })
       St('popUpBienvenido.show').value = true
@@ -158,7 +158,6 @@ export default function () {
         return notification.success
       })
       .subscribe(function (v) {
-        St('user.arboles').value = undefined
         St('user.arboles').value = v.result.arboles
       })
   }
@@ -192,8 +191,11 @@ export default function () {
     })
   }
 
-  function geoError () {
-
+  function geoError (dom) {
+    geoSuccess(dom, {coords: {latitude: -34.55, longitude: -58.45}})
+    return function (err) {
+      console.error('geo error', err)
+    }
   }
 
   return {init, destroy}

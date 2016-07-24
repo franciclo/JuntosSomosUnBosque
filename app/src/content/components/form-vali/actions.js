@@ -228,9 +228,9 @@ export default function () {
   }
 
   function destroy () {
-    this.onValidationFail.dispose()
-    this.onValidationSuccess.dispose()
-    this.onInputChange.dispose()
+    this.onValidationFail.unsubscribe()
+    this.onValidationSuccess.unsubscribe()
+    this.onInputChange.unsubscribe()
   }
 
   return {init, destroy}
