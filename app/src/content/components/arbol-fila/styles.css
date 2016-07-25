@@ -35,6 +35,7 @@ arbol-fila>form-vali>alert-msg{
   left: 0px;
   margin: 0;
   width: 97%;
+  z-index: 9;
 }
 arbol-fila.flash>form-vali {
   animation: flash 500ms ease-in-out;

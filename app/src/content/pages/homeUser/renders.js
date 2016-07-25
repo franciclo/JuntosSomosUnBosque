@@ -58,7 +58,7 @@ export default function () {
           St('popUpBienvenido.show').value = false
         }, 1000)
       })
-    className.remove(document.querySelector('#asignarPlantin'), 'hide')
+    // className.remove(document.querySelector('#asignarPlantin'), 'hide')
 
     St('perfilPopup.show')
       .on(['E', 'N'])
@@ -107,6 +107,18 @@ export default function () {
         className.remove(dom.querySelector('#lista_mis_arboles_cabecera'), 'hide')
         renderFilaArbol(dom, [arbol])
       })
+    St('arbolesRed')
+      .on(['N'])
+      .subscribe(function (arboles) {
+        renderFilaArbolesRed(dom, arboles)
+        var arbolesCantidad = []
+        for (var arbol in arboles) {
+          arbolesCantidad.push(arboles[arbol].cantidad)
+        }
+        var cantidadTotal = arbolesCantidad
+          .reduce((a, b) => a + b)
+        dom.querySelector('#home_sidebar .logo svg-icon .count').textContent = cantidadTotal
+      })
   }
 
   function destroy () {
@@ -127,5 +139,19 @@ export default function () {
       })
     tablaMisArboles.appendChild(frg)
   }
+
+  function renderFilaArbolesRed (dom, arboles) {
+    var wrppG = createElement('<div class="fila-arbol"><span></span><span></span></div>')
+    var tablaArboles = dom.querySelector('#lista_arboles_red')
+    var frg = document.createDocumentFragment()
+    for (var arbol in arboles) {
+      var wrpp = wrppG()
+      wrpp.children[0].textContent = arboles[arbol].label
+      wrpp.children[1].textContent = arboles[arbol].cantidad
+      frg.appendChild(wrpp)
+    }
+    tablaArboles.appendChild(frg)
+  }
+
   return {init, destroy}
 }

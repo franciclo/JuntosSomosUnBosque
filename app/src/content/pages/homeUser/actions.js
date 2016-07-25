@@ -1,4 +1,5 @@
 import St from 'state'
+import {Request} from 'utils'
 import Rx from 'rxjs'
 
 export default function () {
@@ -159,6 +160,11 @@ export default function () {
       })
       .subscribe(function (v) {
         St('user.arboles').value = v.result.arboles
+      })
+
+    Request('todos_los_arboles')
+      .then(function (arboles) {
+        St('arbolesRed').value = arboles.result
       })
   }
 

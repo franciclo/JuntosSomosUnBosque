@@ -1,6 +1,6 @@
 import St from 'state'
 import isEmail from 'validator/lib/isEmail'
-import Request from 'request'
+import {Request} from 'utils'
 import Rx from 'rxjs'
 
 export default function () {

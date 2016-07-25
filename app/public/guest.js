@@ -703,7 +703,7 @@
 /* 30 */
 /***/ function(module, exports) {
 
-	module.exports = "<div id=\"sideBar\">\n\t<article id=\"home_sidebar\">\n\t\t<header>\n\t\t\t<button id=\"ingresarBtn\" data-id=\"ingresar-btn\">Ingresar</button>\n\t\t\t<div class=\"logo\">\n\t\t\t\t<svg-icon type=\"plantines\">\n\t\t\t\t\t<span class=\"count\">55</span>\n\t\t\t\t</svg-icon>\n\t\t\t\t<h1>JUNTOS<br>SOMOS UN<br>BOSQUE</h1>\n\t\t\t</div>\n\t\t\t<div class=\"menu\">\n\t\t\t\t<div data-id=\"proponer_lugar_content\" data-target=\"action_content_lugar\" class=\"active\">\n\t\t\t\t\t<svg-icon type=\"calendar\"></svg-icon>\n\t\t\t\t\tPlantaciónes\n\t\t\t\t</div>\n\t\t\t\t<div data-id=\"suma_arboles_btn_content\" data-target=\"action_content_suma\">\n\t\t\t\t\t<svg-icon type=\"plantin.solo\"></svg-icon>\n\t\t\t\t\tSumá tus arboles\n\t\t\t\t</div>\n\t\t\t\t<div data-id=\"info_btn_content\" data-target=\"action_content_red\">\n\t\t\t\t\t<svg-icon type=\"plantines2\"></svg-icon>\n\t\t\t\t\tLa red\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</header>\n\t\t<slider-box id=\"sidebar_main\">\n\n\t\t\t<article data-id=\"action_content_lugar\" data-enter=\"de-arr-s\" class=\"de-arr-s active\">\n\t\t\t  <div id=\"cartel_evento\">\n\t\t\t\t    <div class=\"header-evento\">\n\t\t\t\t    \t<svg-icon type=\"calendar.11\"></svg-icon>\n\t\t\t\t    \t<div class=\"header-evento-text\">\n\t\t\t\t\t\t    <p class=\"info\">\n\t\t\t\t\t\t      <svg-icon type=\"reloj\"></svg-icon>\n\t\t\t\t\t\t      Domingo, 12:00 am\n\t\t\t\t\t\t    </p>\n\t\t\t\t\t\t    <h1>Festival de plantación</h1>\n\t\t\t\t    \t</div>\n\t\t\t\t    </div>\n\t\t\t\t    <p class=\"content-evento-text\">\n\t\t\t\t    \tEstamos co-creando un Bosque mediante siembras y plantaciones colectivas en festivales y eventos, a través de una red de personas que cultivan arbolitos en sus casas.\n\t\t\t\t    </p>\n\t\t\t\t    <p class=\"bolder\">\n\t\t\t\t\t    Podes traer tus arboles al festival y entre musica y charlas, plantaremos un bosque!\n\t\t\t\t\t  </p>\n\t\t\t\t    <button data-id=\"evento-sidebar-mas\">\n\t\t\t\t    \tVer más\n\t\t\t\t    \t<svg-icon type=\"caret.right\"></svg-icon>\n\t\t\t\t    </button>\n\t\t\t  </div>\n\t\t\t</article>\n\n\t\t\t<article data-id=\"action_content_suma\" data-enter=\"de-arr-s\">\n        <div id=\"cartel_suma\">\n          <h1>Sumá tus árboles</h1>\n          <p class=\"info\">Si estás cuidando arbolitos en maceta en tu casa y querés sumarte a las plantaciones colectivas, registralos acá y después asignalos a las plantaciónes que vos elijas.</p>\n          <button id=\"suma_arboles_btn\" class=\"action-button\" data-id=\"sumarTusArboles\" title=\"Sumate!\">\n            Sumar árboles\n            <svg-icon type=\"plantin\"></svg-icon>\n          </button>\n        </div>\n\t\t\t</article>\n\n\t\t\t<article data-id=\"action_content_red\" data-enter=\"de-arr-s\">\n\t\t\t\t<div id=\"cartel_info\">\n\t\t\t\t\t<h1>Nuestros arboles</h1>\n\t\t\t\t\t<p class=\"info\">work in progress...</p>\n\t\t\t\t</div>\n\t\t\t</article>\n\t\t</slider-box>\n\t\t<div class=\"footer\">\n\t\t\t\t<button id=\"infoBtn\" data-id=\"masInfoBtn\">\n\t\t\t\t\t<svg-icon type=\"info\"></svg-icon>\n\t\t\t\t\tinfo\n\t\t\t\t</button>\n\n\t\t\t\t<svg-icon type=\"github\" title=\"Github\"></svg-icon>\n\t\t\t\t<svg-icon type=\"social.twitter\" title=\"Twitter\"></svg-icon>\n\t\t\t\t<svg-icon type=\"social.facebook\" title=\"Facebook\"></svg-icon>\n\t\t</div>\n\t</article>\n</div>\n<geo-map id=\"homeMap\"></geo-map>\n<pop-up id=\"masInformacion\">\n\t\t<section>\n\t\t\t<article data-id=\"masInfo\" id=\"mas_info\">\n\t\t\t\t\t<div id=\"mas_info_side_menu\">\n\t\t\t\t\t\t<p class=\"active\" data-target=\"mas_info_intro\">Introducción</p>\n\t\t\t\t\t\t<p data-target=\"mas_info_motivacion\">¿Por qué?</p>\n\t\t\t\t\t\t<p data-target=\"mas_info_quienessomos\">Quienes somos</p>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div id=\"mas_info_text\">\n\t\t\t\t\t\t<div id=\"mas_info_intro\" class=\"active\">\n\t\t\t\t\t\t\t<h1>Introducción</h1>\n\t\t\t\t\t\t\tEn los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.<br><br>\n\t\t\t\t\t\t\tHoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.<br><br>\n\t\t\t\t\t\t\tQueremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.<br><br>\n\t\t\t\t\t\t\tLa idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.<br><br>\n\t\t\t\t\t\t\tJuntos, somos un BOSQUE.\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"mas_info_quienessomos\">\n\t\t\t\t\t\t\t<h1>¿Quienes somos?</h1>\n\t\t\t\t\t\t\tUn árbol para mi vereda es una organización sin fines de lucro que trabaja para brindar las herramientas que generan en el ser humano una re-conexión con la naturaleza.<br><br>\n\n\t\t\t\t\t\t\tBuscamos incrementar el verde urbano y la conciencia ambiental enfatizando el vínculo de mutuo beneficio entre hombre y árbol, promoviendo una forma de vida basada en el respeto y entendimiento de todo lo que nos rodea.<br><br>\n\n\t\t\t\t\t\t\tMotivamos a las personas a criar y plantar más árboles, a través de programas de capacitación, concientización ambiental y participación ciudadana, centrados en la producción de árboles. <br><br>\n\n\t\t\t\t\t\t\tContamos con una Red de Cultivo de especies nativas y comestibles que se está desarrollando en distintos puntos de la Capital Federal y el Gran Buenos Aires.<br><br>\n\n\t\t\t\t\t\t\tRealizamos talleres en centros culturales, huertas comunitarias, jardines de infantes, escuelas primarias y secundarias, centros de rehabilitación de adicciones, centros de jubilados y unidades penitenciarias. En estos encuentros de capacitación y producción realizamos desde la siembra y las distintas etapas de vivero, hasta las técnicas de plantado y el cuidado de cada especie. <br><br>\n\n\t\t\t\t\t\t\tCada espacio donde damos un taller se convierte en un pequeño vivero productor.<br><br>\n\n\t\t\t\t\t\t\tCuidar y ver crecer un árbol es una posibilidad simple y concreta de vincularse con la naturaleza. Esta re-conexión produce cambios en las conductas de los ciudadanos sobre su entorno natural y social. <br>\n\t\t\t\t\t\t\tUn barrio donde sus habitantes cultivan, plantan y cuidan árboles tiende a convertirse en un lugar más saludable, más armónico, más bello.<br><br>\n\n\t\t\t\t\t\t\tLos viveros comunitarios son centros de capacitación en cultivo de árboles. En ellos enseñamos un oficio con salida laboral. Funcionan como plataforma de reunión, divulgación de prácticas sustentables, cultura y expresiones artísticas para el desarrollo del ser humano como ser natural.<br>\n\t\t\t\t\t\t\tSon emprendimientos productivos que facilitan la inclusión y la reinserción de sectores sociales vulnerables.\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"mas_info_motivacion\">\n\t\t\t\t\t\t\t<h1>¿Por que?</h1>\n\t\t\t\t\t\t\tQueremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.<br>\n\t\t\t\t\t\t\tLa OMS propone entre 10 y 15 mts2 de espacios verdes por habitante. Al día de hoy, en Capital Federal, tenemos 6,2 mts2 promedio. Y en los barrios vulnerable esa cifra desciende a 1,5 mts2 por habitante.<br><br>\n\n\t\t\t\t\t\t\tDe Protesta a Propuesta Activa<br>\n\t\t\t\t\t\t\tExiste un preocupación social respecto a la necesidad de tener más y mejores espacios verdes en la Ciudad. Proponemos convertir al ciudadano pasivo en un agente activo, en un criador de árboles en su balcón, patio, ventana o terraza.<br>\n\t\t\t\t\t\t\tAsí se genera una relación Ganar-Ganar-Ganar:<br>\n\t\t\t\t\t\t\tGana el Ciudadano: Cambia su actitud y se involucra en los temas que le importan y con el espacio público que lo rodea.<br>\n\t\t\t\t\t\t\tGana el Municipio: obtiene nuevos espacios verdes con una alta participación comunitaria y una reducción muy significativa en costos (en 2013 se pagaban $900 pesos por árbol plantado, de esta forma serían producidos por la comunidad).<br>\n\t\t\t\t\t\t\tGana el Ecosistema del que formamos parte al haber nuevo refugio y alimento para la fauna local. (Persona-Comunidad-Planeta)<br><br>\n\n\t\t\t\t\t\t\tHacia una Masa Crítica de árboles nativos<br>\n\t\t\t\t\t\t\tEl término “hace referencia al número de individuos involucrados en un fenómeno a partir del cual éste adquiere una dinámica propia que le permite sostenerse y crecer por sí mismo.”<br>\n\t\t\t\t\t\t\tA febrero de 2016 llevamos sembrados más de 10.000 árboles y esta cifra crece semana a semana.\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t</article>\n\t\t</section>\n</pop-up>\n<pop-up id=\"accionesUsuario\">\n\t<section>\n\t\t<article data-id=\"inicioSesion\" class=\"loguineo\">\n\t\t\t<h1>Inicio de sesión</h1>\n\t\t\t<a class=\"social fb\" href=\"auth/facebook\">\n\t\t\t\t<svg-icon type=\"social.facebook\"></svg-icon>\n\t\t\t\tIngresar con Facebook\n\t\t\t</a>\n\t\t\t<a class=\"social tw\" href=\"auth/twitter\">\n\t\t\t\t<svg-icon type=\"social.twitter\"></svg-icon>\n\t\t\t\tIngresar con Twitter\n\t\t\t</a>\n\t\t\t<a class=\"social gl\" href=\"auth/google\">\n\t\t\t\t<svg-icon type=\"social.google\"></svg-icon>\n\t\t\t\tIngresar con Google\n\t\t\t</a>\n\t\t\t<form-vali id=\"loginForm\" direction=\"login\" ajax=\"false\">\n\t\t\t\t<label for=\"emailLoginForm\">Mail</label>\n\t\t\t\t<input id=\"emailLoginForm\" data-label=\"email\" data-rules=\"required isEmail ajaxMailExist\" type=\"text\"></input>\n\t\t\t\t<label for=\"passLoginForm\" data-rules=\"required\">Contraseña</label>\n\t\t\t\t<input id=\"passLoginForm\" data-label=\"password\" type=\"password\"></input>\n\t\t\t\t<a data-id=\"forgotBtn\" class=\"registrate\">¿Olvidaste tu contraseña?</a>\n\t\t\t\t<a data-id=\"registrarse\" class=\"registrate\">¿Querés crear una cuenta?</a>\n\t\t\t\t<button data-submit label-active=\"Ingresando\">Ingresar</button>\n\t\t\t</form-vali>\n\t\t</article>\n\t\t<article data-id=\"registroUsuarios\" class=\"loguineo\">\n\t\t\t<h1>Nueva cuenta</h1>\n\t\t\t<a class=\"social fb\" href=\"auth/facebook\">\n\t\t\t\t<svg-icon type=\"social.facebook\"></svg-icon>\n\t\t\t\tRegistrate con Facebook\n\t\t\t</a>\n\t\t\t<a class=\"social tw\" href=\"auth/twitter\">\n\t\t\t\t<svg-icon type=\"social.twitter\"></svg-icon>\n\t\t\t\tRegistrate con Twitter\n\t\t\t</a>\n\t\t\t<a class=\"social gl\" href=\"auth/google\">\n\t\t\t\t<svg-icon type=\"social.google\"></svg-icon>\n\t\t\t\tRegistrate con Google\n\t\t\t</a>\n\t\t\t<form-vali id=\"signupForm\" direction=\"signup\" ajax=\"false\">\n\t\t\t\t<p class=\"info\">o creá una cuenta con tu mail</p>\n\t\t\t\t<label for=\"nameSignupForm\">Nombre</label>\n\t\t\t\t<input id=\"nameSignupForm\" data-label=\"name\" data-rules=\"required\" type=\"text\"></input>\n\t\t\t\t<label for=\"emailSignupForm\">Mail</label>\n\t\t\t\t<input id=\"emailSignupForm\" data-label=\"email\" data-rules=\"required isEmail ajaxMailDontExist\" type=\"text\"></input>\n\t\t\t\t<label for=\"passSignupForm\">Nueva contraseña</label>\n\t\t\t\t<input id=\"passSignupForm\" data-label=\"password\" data-rules=\"required\" type=\"password\"></input>\n\t\t\t\t<a data-id=\"volverLoginRegis\" class=\"registrate\">Ir a inicio de sesión</a>\n\t\t\t\t<button data-submit label-active=\"Registrando\">Registrar</button>\n\t\t\t</form-vali>\n\t\t</article>\n\t\t<article data-id=\"forgotPassword\" class=\"loguineo\">\n\t\t\t<form-vali id=\"forgot\" direction=\"forgot\">\n\t\t\t<h1>Recuperar contraseña</h1>\n\t\t\t\t<label for=\"emailForgotForm\">Mail</label>\n\t\t\t\t<input id=\"emailForgotForm\" data-label=\"email\" data-rules=\"required isEmail ajaxMailExist\" type=\"text\"></input>\n\t\t\t\t<a data-id=\"volverLoginMail\" class=\"registrate\">Ir a inicio de sesión</a>\n\t\t\t\t<button data-submit label-active=\"Enviando\" >Enviar</button>\n\t\t\t</form-vali>\n\t\t</article>\n\t</section>\n</pop-up>";
+	module.exports = "<div id=\"sideBar\">\n\t<article id=\"home_sidebar\">\n\t\t<header>\n\t\t\t<button id=\"ingresarBtn\" data-id=\"ingresar-btn\">Ingresar</button>\n\t\t\t<div class=\"logo\">\n\t\t\t\t<svg-icon type=\"plantines\">\n\t\t\t\t\t<span class=\"count\">55</span>\n\t\t\t\t</svg-icon>\n\t\t\t\t<h1>JUNTOS<br>SOMOS UN<br>BOSQUE</h1>\n\t\t\t</div>\n\t\t\t<div class=\"menu\">\n\t\t\t\t<div data-id=\"proponer_lugar_content\" data-target=\"action_content_lugar\" class=\"active\">\n\t\t\t\t\t<svg-icon type=\"calendar\"></svg-icon>\n\t\t\t\t\tPlantaciónes\n\t\t\t\t</div>\n\t\t\t\t<div data-id=\"suma_arboles_btn_content\" data-target=\"action_content_suma\">\n\t\t\t\t\t<svg-icon type=\"plantin.solo\"></svg-icon>\n\t\t\t\t\tSumá tus arboles\n\t\t\t\t</div>\n\t\t\t\t<div data-id=\"info_btn_content\" data-target=\"action_content_red\">\n\t\t\t\t\t<svg-icon type=\"plantines2\"></svg-icon>\n\t\t\t\t\tLa red\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</header>\n\t\t<slider-box id=\"sidebar_main\">\n\n\t\t\t<article data-id=\"action_content_lugar\" data-enter=\"de-arr-s\" class=\"de-arr-s active\">\n\t\t\t  <div id=\"cartel_evento\">\n\t\t\t\t    <div class=\"header-evento\">\n\t\t\t\t    \t<svg-icon type=\"calendar.11\"></svg-icon>\n\t\t\t\t    \t<div class=\"header-evento-text\">\n\t\t\t\t\t\t    <p class=\"info\">\n\t\t\t\t\t\t      <svg-icon type=\"reloj\"></svg-icon>\n\t\t\t\t\t\t      Domingo, 12:00 am\n\t\t\t\t\t\t    </p>\n\t\t\t\t\t\t    <h1>Festival de plantación</h1>\n\t\t\t\t    \t</div>\n\t\t\t\t    </div>\n\t\t\t\t    <p class=\"content-evento-text\">\n\t\t\t\t    \tEstamos co-creando un Bosque mediante siembras y plantaciones colectivas en festivales y eventos, a través de una red de personas que cultivan arbolitos en sus casas.\n\t\t\t\t    </p>\n\t\t\t\t    <p class=\"bolder\">\n\t\t\t\t\t    Podes traer tus arboles al festival y entre musica y charlas, plantaremos un bosque!\n\t\t\t\t\t  </p>\n\t\t\t\t    <button data-id=\"evento-sidebar-mas\">\n\t\t\t\t    \tVer más\n\t\t\t\t    \t<svg-icon type=\"caret.right\"></svg-icon>\n\t\t\t\t    </button>\n\t\t\t  </div>\n\t\t\t</article>\n\n\t\t\t<article data-id=\"action_content_suma\" data-enter=\"de-arr-s\">\n        <div id=\"cartel_suma\">\n          <h1>Sumá tus árboles</h1>\n          <p class=\"info\">Si estás cuidando arbolitos en maceta en tu casa y querés sumarte a las plantaciones colectivas, registralos acá y después asignalos a las plantaciónes que vos elijas.</p>\n          <button id=\"suma_arboles_btn\" class=\"action-button\" data-id=\"sumarTusArboles\" title=\"Sumate!\">\n            Sumar árboles\n            <svg-icon type=\"plantin\"></svg-icon>\n          </button>\n        </div>\n\t\t\t</article>\n\n\t\t\t<article id=\"la_red\" data-id=\"action_content_red\" data-enter=\"de-arr-s\">\n        <h1>Nuestros arboles</h1>\n        <div id=\"lista_arboles_red\">\n          <div id=\"lista_nuestros_arboles_cabecera\">\n            <span>Especie/Tamaño</span>\n            <span>Cantidad</span>\n          </div>\n        </div>\n      </article>\n\t\t</slider-box>\n\t\t<div class=\"footer\">\n\t\t\t\t<button id=\"infoBtn\" data-id=\"masInfoBtn\">\n\t\t\t\t\t<svg-icon type=\"info\"></svg-icon>\n\t\t\t\t\tinfo\n\t\t\t\t</button>\n\n\t\t\t\t<svg-icon type=\"github\" title=\"Github\"></svg-icon>\n\t\t\t\t<svg-icon type=\"social.twitter\" title=\"Twitter\"></svg-icon>\n\t\t\t\t<svg-icon type=\"social.facebook\" title=\"Facebook\"></svg-icon>\n\t\t</div>\n\t</article>\n</div>\n<geo-map id=\"homeMap\"></geo-map>\n<pop-up id=\"masInformacion\">\n\t\t<section>\n\t\t\t<article data-id=\"masInfo\" id=\"mas_info\">\n\t\t\t\t\t<div id=\"mas_info_side_menu\">\n\t\t\t\t\t\t<p class=\"active\" data-target=\"mas_info_intro\">Introducción</p>\n\t\t\t\t\t\t<p data-target=\"mas_info_motivacion\">¿Por qué?</p>\n\t\t\t\t\t\t<p data-target=\"mas_info_quienessomos\">Quienes somos</p>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div id=\"mas_info_text\">\n\t\t\t\t\t\t<div id=\"mas_info_intro\" class=\"active\">\n\t\t\t\t\t\t\t<h1>Introducción</h1>\n\t\t\t\t\t\t\tEn los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.<br><br>\n\t\t\t\t\t\t\tHoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.<br><br>\n\t\t\t\t\t\t\tQueremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.<br><br>\n\t\t\t\t\t\t\tLa idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.<br><br>\n\t\t\t\t\t\t\tJuntos, somos un BOSQUE.\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"mas_info_quienessomos\">\n\t\t\t\t\t\t\t<h1>¿Quienes somos?</h1>\n\t\t\t\t\t\t\tUn árbol para mi vereda es una organización sin fines de lucro que trabaja para brindar las herramientas que generan en el ser humano una re-conexión con la naturaleza.<br><br>\n\n\t\t\t\t\t\t\tBuscamos incrementar el verde urbano y la conciencia ambiental enfatizando el vínculo de mutuo beneficio entre hombre y árbol, promoviendo una forma de vida basada en el respeto y entendimiento de todo lo que nos rodea.<br><br>\n\n\t\t\t\t\t\t\tMotivamos a las personas a criar y plantar más árboles, a través de programas de capacitación, concientización ambiental y participación ciudadana, centrados en la producción de árboles. <br><br>\n\n\t\t\t\t\t\t\tContamos con una Red de Cultivo de especies nativas y comestibles que se está desarrollando en distintos puntos de la Capital Federal y el Gran Buenos Aires.<br><br>\n\n\t\t\t\t\t\t\tRealizamos talleres en centros culturales, huertas comunitarias, jardines de infantes, escuelas primarias y secundarias, centros de rehabilitación de adicciones, centros de jubilados y unidades penitenciarias. En estos encuentros de capacitación y producción realizamos desde la siembra y las distintas etapas de vivero, hasta las técnicas de plantado y el cuidado de cada especie. <br><br>\n\n\t\t\t\t\t\t\tCada espacio donde damos un taller se convierte en un pequeño vivero productor.<br><br>\n\n\t\t\t\t\t\t\tCuidar y ver crecer un árbol es una posibilidad simple y concreta de vincularse con la naturaleza. Esta re-conexión produce cambios en las conductas de los ciudadanos sobre su entorno natural y social. <br>\n\t\t\t\t\t\t\tUn barrio donde sus habitantes cultivan, plantan y cuidan árboles tiende a convertirse en un lugar más saludable, más armónico, más bello.<br><br>\n\n\t\t\t\t\t\t\tLos viveros comunitarios son centros de capacitación en cultivo de árboles. En ellos enseñamos un oficio con salida laboral. Funcionan como plataforma de reunión, divulgación de prácticas sustentables, cultura y expresiones artísticas para el desarrollo del ser humano como ser natural.<br>\n\t\t\t\t\t\t\tSon emprendimientos productivos que facilitan la inclusión y la reinserción de sectores sociales vulnerables.\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id=\"mas_info_motivacion\">\n\t\t\t\t\t\t\t<h1>¿Por que?</h1>\n\t\t\t\t\t\t\tQueremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.<br>\n\t\t\t\t\t\t\tLa OMS propone entre 10 y 15 mts2 de espacios verdes por habitante. Al día de hoy, en Capital Federal, tenemos 6,2 mts2 promedio. Y en los barrios vulnerable esa cifra desciende a 1,5 mts2 por habitante.<br><br>\n\n\t\t\t\t\t\t\tDe Protesta a Propuesta Activa<br>\n\t\t\t\t\t\t\tExiste un preocupación social respecto a la necesidad de tener más y mejores espacios verdes en la Ciudad. Proponemos convertir al ciudadano pasivo en un agente activo, en un criador de árboles en su balcón, patio, ventana o terraza.<br>\n\t\t\t\t\t\t\tAsí se genera una relación Ganar-Ganar-Ganar:<br>\n\t\t\t\t\t\t\tGana el Ciudadano: Cambia su actitud y se involucra en los temas que le importan y con el espacio público que lo rodea.<br>\n\t\t\t\t\t\t\tGana el Municipio: obtiene nuevos espacios verdes con una alta participación comunitaria y una reducción muy significativa en costos (en 2013 se pagaban $900 pesos por árbol plantado, de esta forma serían producidos por la comunidad).<br>\n\t\t\t\t\t\t\tGana el Ecosistema del que formamos parte al haber nuevo refugio y alimento para la fauna local. (Persona-Comunidad-Planeta)<br><br>\n\n\t\t\t\t\t\t\tHacia una Masa Crítica de árboles nativos<br>\n\t\t\t\t\t\t\tEl término “hace referencia al número de individuos involucrados en un fenómeno a partir del cual éste adquiere una dinámica propia que le permite sostenerse y crecer por sí mismo.”<br>\n\t\t\t\t\t\t\tA febrero de 2016 llevamos sembrados más de 10.000 árboles y esta cifra crece semana a semana.\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t</article>\n\t\t</section>\n</pop-up>\n<pop-up id=\"accionesUsuario\">\n\t<section>\n\t\t<article data-id=\"inicioSesion\" class=\"loguineo\">\n\t\t\t<h1>Inicio de sesión</h1>\n\t\t\t<a class=\"social fb\" href=\"auth/facebook\">\n\t\t\t\t<svg-icon type=\"social.facebook\"></svg-icon>\n\t\t\t\tIngresar con Facebook\n\t\t\t</a>\n\t\t\t<a class=\"social tw\" href=\"auth/twitter\">\n\t\t\t\t<svg-icon type=\"social.twitter\"></svg-icon>\n\t\t\t\tIngresar con Twitter\n\t\t\t</a>\n\t\t\t<a class=\"social gl\" href=\"auth/google\">\n\t\t\t\t<svg-icon type=\"social.google\"></svg-icon>\n\t\t\t\tIngresar con Google\n\t\t\t</a>\n\t\t\t<form-vali id=\"loginForm\" direction=\"login\" ajax=\"false\">\n\t\t\t\t<label for=\"emailLoginForm\">Mail</label>\n\t\t\t\t<input id=\"emailLoginForm\" data-label=\"email\" data-rules=\"required isEmail ajaxMailExist\" type=\"text\"></input>\n\t\t\t\t<label for=\"passLoginForm\" data-rules=\"required\">Contraseña</label>\n\t\t\t\t<input id=\"passLoginForm\" data-label=\"password\" type=\"password\"></input>\n\t\t\t\t<a data-id=\"forgotBtn\" class=\"registrate\">¿Olvidaste tu contraseña?</a>\n\t\t\t\t<a data-id=\"registrarse\" class=\"registrate\">¿Querés crear una cuenta?</a>\n\t\t\t\t<button data-submit label-active=\"Ingresando\">Ingresar</button>\n\t\t\t</form-vali>\n\t\t</article>\n\t\t<article data-id=\"registroUsuarios\" class=\"loguineo\">\n\t\t\t<h1>Nueva cuenta</h1>\n\t\t\t<a class=\"social fb\" href=\"auth/facebook\">\n\t\t\t\t<svg-icon type=\"social.facebook\"></svg-icon>\n\t\t\t\tRegistrate con Facebook\n\t\t\t</a>\n\t\t\t<a class=\"social tw\" href=\"auth/twitter\">\n\t\t\t\t<svg-icon type=\"social.twitter\"></svg-icon>\n\t\t\t\tRegistrate con Twitter\n\t\t\t</a>\n\t\t\t<a class=\"social gl\" href=\"auth/google\">\n\t\t\t\t<svg-icon type=\"social.google\"></svg-icon>\n\t\t\t\tRegistrate con Google\n\t\t\t</a>\n\t\t\t<form-vali id=\"signupForm\" direction=\"signup\" ajax=\"false\">\n\t\t\t\t<p class=\"info\">o creá una cuenta con tu mail</p>\n\t\t\t\t<label for=\"nameSignupForm\">Nombre</label>\n\t\t\t\t<input id=\"nameSignupForm\" data-label=\"name\" data-rules=\"required\" type=\"text\"></input>\n\t\t\t\t<label for=\"emailSignupForm\">Mail</label>\n\t\t\t\t<input id=\"emailSignupForm\" data-label=\"email\" data-rules=\"required isEmail ajaxMailDontExist\" type=\"text\"></input>\n\t\t\t\t<label for=\"passSignupForm\">Nueva contraseña</label>\n\t\t\t\t<input id=\"passSignupForm\" data-label=\"password\" data-rules=\"required\" type=\"password\"></input>\n\t\t\t\t<a data-id=\"volverLoginRegis\" class=\"registrate\">Ir a inicio de sesión</a>\n\t\t\t\t<button data-submit label-active=\"Registrando\">Registrar</button>\n\t\t\t</form-vali>\n\t\t</article>\n\t\t<article data-id=\"forgotPassword\" class=\"loguineo\">\n\t\t\t<form-vali id=\"forgot\" direction=\"forgot\">\n\t\t\t<h1>Recuperar contraseña</h1>\n\t\t\t\t<label for=\"emailForgotForm\">Mail</label>\n\t\t\t\t<input id=\"emailForgotForm\" data-label=\"email\" data-rules=\"required isEmail ajaxMailExist\" type=\"text\"></input>\n\t\t\t\t<a data-id=\"volverLoginMail\" class=\"registrate\">Ir a inicio de sesión</a>\n\t\t\t\t<button data-submit label-active=\"Enviando\" >Enviar</button>\n\t\t\t</form-vali>\n\t\t</article>\n\t</section>\n</pop-up>";
 
 /***/ },
 /* 31 */
@@ -19625,7 +19625,11 @@
 
 /***/ },
 /* 389 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/* injects from autopolyfiller-loader */
+	__webpack_require__(392);
 
 	'use strict';
 
@@ -19663,6 +19667,52 @@
 
 	  return { remove: remove, add: add, bool: bool };
 	}();
+
+	module.exports.Request = function (cmd, params) {
+	  var server = window.location.origin;
+	  function getUrl() {
+	    var paramStr = '';
+	    var cmdStr = '/' + cmd;
+
+	    if (params) {
+	      cmdStr = cmdStr + '?';
+	      for (var nom in params) {
+	        paramStr += nom + '=' + params[nom] + '&';
+	      }
+	      paramStr = paramStr.replace(/\s/g, '+').substring(0, paramStr.length - 1);
+	    }
+	    return server + cmdStr + paramStr;
+	  }
+
+	  return new Promise(function (resolve, reject) {
+	    var xhr = new window.XMLHttpRequest();
+	    var url = getUrl();
+	    console.log('request to', url);
+	    xhr.open('GET', url, true);
+
+	    xhr.onload = function () {
+	      if (xhr.status !== 200) {
+	        resolve({ success: false, text: 'Error interno', result: xhr.status });
+	        return;
+	      }
+
+	      try {
+	        var response = JSON.parse(xhr.responseText);
+	      } catch (e) {
+	        resolve({ success: false, text: 'Error interno', result: xhr.responseText });
+	        return;
+	      }
+
+	      resolve(response);
+	    };
+
+	    xhr.onerror = function (err) {
+	      resolve({ success: false, text: 'Error interno', result: JSON.stringify(err) });
+	    };
+
+	    xhr.send();
+	  });
+	};
 
 /***/ },
 /* 390 */
@@ -19777,7 +19827,7 @@
 
 	    return new Promise(function (resolve, reject) {
 	      if (JSON.stringify(ajaxValidations) !== '{}') {
-	        var ajaxValidated = (0, _request2.default)('validate', ajaxValidations).then(function (results) {
+	        var ajaxValidated = (0, _utils.Request)('validate', ajaxValidations).then(function (results) {
 	          if (!results.success) return inputsData;
 	          var errorsByI = [];
 	          Object.keys(results).forEach(function (inputI) {
@@ -19852,7 +19902,7 @@
 	    var id = dom.id;
 	    (0, _state2.default)(id + '.errors').value = [];
 	    (0, _state2.default)(id + '.loading').value = true;
-	    (0, _request2.default)(dom.getAttribute('direction'), data).then(function (response) {
+	    (0, _utils.Request)(dom.getAttribute('direction'), data).then(function (response) {
 	      (0, _state2.default)(id + '.loading').value = false;
 	      (0, _state2.default)(id + '.formNotification').value = undefined;
 	      (0, _state2.default)(id + '.formNotification').value = {
@@ -19935,9 +19985,7 @@
 
 	var _isEmail2 = _interopRequireDefault(_isEmail);
 
-	var _request = __webpack_require__(398);
-
-	var _request2 = _interopRequireDefault(_request);
+	var _utils = __webpack_require__(389);
 
 	var _rxjs = __webpack_require__(36);
 
@@ -20519,62 +20567,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 398 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/* injects from autopolyfiller-loader */
-	__webpack_require__(392);
-
-	'use strict';
-
-	var server = window.location.origin;
-	module.exports = function (cmd, params) {
-	  function getUrl() {
-	    var paramStr = '';
-	    var cmdStr = '/' + cmd;
-
-	    if (params) {
-	      cmdStr = cmdStr + '?';
-	      for (var nom in params) {
-	        paramStr += nom + '=' + params[nom] + '&';
-	      }
-	      paramStr = paramStr.replace(/\s/g, '+').substring(0, paramStr.length - 1);
-	    }
-	    return server + cmdStr + paramStr;
-	  }
-
-	  return new Promise(function (resolve, reject) {
-	    var xhr = new window.XMLHttpRequest();
-	    var url = getUrl();
-	    console.log('request to', url);
-	    xhr.open('GET', url, true);
-
-	    xhr.onload = function () {
-	      if (xhr.status !== 200) {
-	        resolve({ success: false, text: 'Error interno', result: xhr.status });
-	        return;
-	      }
-
-	      try {
-	        var response = JSON.parse(xhr.responseText);
-	      } catch (e) {
-	        resolve({ success: false, text: 'Error interno', result: xhr.responseText });
-	        return;
-	      }
-
-	      resolve(response);
-	    };
-
-	    xhr.onerror = function (err) {
-	      resolve({ success: false, text: 'Error interno', result: JSON.stringify(err) });
-	    };
-
-	    xhr.send();
-	  });
-	};
-
-/***/ },
+/* 398 */,
 /* 399 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -30708,6 +30701,10 @@
 	        dom.querySelector('.small-pop').click();
 	      }
 	    });
+
+	    (0, _utils.Request)('todos_los_arboles').then(function (arboles) {
+	      (0, _state2.default)('arbolesRed').value = arboles.result;
+	    });
 	  }
 
 	  function destroy(s, f) {
@@ -30727,6 +30724,8 @@
 	var _rxjs = __webpack_require__(36);
 
 	var _rxjs2 = _interopRequireDefault(_rxjs);
+
+	var _utils = __webpack_require__(389);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30777,6 +30776,30 @@
 	        _utils.className.bool(b, menuBtns[i], 'active');
 	      }
 	    });
+	    (0, _state2.default)('arbolesRed').on(['N']).subscribe(function (arboles) {
+	      renderFilaArbolesRed(dom, arboles);
+	      var arbolesCantidad = [];
+	      for (var arbol in arboles) {
+	        arbolesCantidad.push(arboles[arbol].cantidad);
+	      }
+	      var cantidadTotal = arbolesCantidad.reduce(function (a, b) {
+	        return a + b;
+	      });
+	      dom.querySelector('#home_sidebar .logo svg-icon .count').textContent = cantidadTotal;
+	    });
+	  }
+
+	  function renderFilaArbolesRed(dom, arboles) {
+	    var wrppG = (0, _utils.createElement)('<div class="fila-arbol"><span></span><span></span></div>');
+	    var tablaArboles = dom.querySelector('#lista_arboles_red');
+	    var frg = document.createDocumentFragment();
+	    for (var arbol in arboles) {
+	      var wrpp = wrppG();
+	      wrpp.children[0].textContent = arboles[arbol].label;
+	      wrpp.children[1].textContent = arboles[arbol].cantidad;
+	      frg.appendChild(wrpp);
+	    }
+	    tablaArboles.appendChild(frg);
 	  }
 
 	  function destroy() {

@@ -1,5 +1,6 @@
 import St from 'state'
 import Rx from 'rxjs'
+import {Request} from 'utils'
 
 export default function () {
   function activatePopupSection (active) {
@@ -136,6 +137,11 @@ export default function () {
         dom.querySelector('.small-pop').click()
       }
     })
+
+    Request('todos_los_arboles')
+      .then(function (arboles) {
+        St('arbolesRed').value = arboles.result
+      })
   }
 
   function destroy (s, f) {

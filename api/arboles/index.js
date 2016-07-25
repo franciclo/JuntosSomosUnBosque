@@ -1,4 +1,5 @@
 var isLoggedIn = require('../auth/middleware').isLoggedIn
+var User = require('../models/user')
 
 module.exports = function (app) {
   app.get('/finishRegistration', isLoggedIn, function (req, res) {
@@ -108,6 +109,38 @@ module.exports = function (app) {
       res.json({
         success: true,
         text: 'Guardado'
+      })
+    })
+  })
+
+  app.get('/todos_los_arboles', function (req, res) {
+    User.find({}, function (err, users) {
+      if (err) {
+        res.json({
+          success: false,
+          text: 'Error al buscar arboles'
+        })
+      }
+      var arboles = {}
+      users
+        .map(function (user) {
+          return user.arboles
+        })
+        .forEach(function (arbolesByUser) {
+          arbolesByUser
+            .forEach(function (arbolGroup) {
+              var bArboles = typeof arboles[arbolGroup.especie + arbolGroup.tamagno] === 'undefined'
+              var accArbol = arboles[arbolGroup.especie + arbolGroup.tamagno]
+
+              arboles[arbolGroup.especie + arbolGroup.tamagno] = {
+                label: arbolGroup.especie + ' ' + arbolGroup.tamagno,
+                cantidad: bArboles ? arbolGroup.cantidad : accArbol.cantidad + arbolGroup.cantidad
+              }
+            })
+        })
+      res.json({
+        success: true,
+        result: arboles
       })
     })
   })

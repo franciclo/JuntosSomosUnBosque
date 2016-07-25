@@ -19447,7 +19447,11 @@
 
 /***/ },
 /* 389 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/* injects from autopolyfiller-loader */
+	__webpack_require__(392);
 
 	'use strict';
 
@@ -19485,6 +19489,52 @@
 
 	  return { remove: remove, add: add, bool: bool };
 	}();
+
+	module.exports.Request = function (cmd, params) {
+	  var server = window.location.origin;
+	  function getUrl() {
+	    var paramStr = '';
+	    var cmdStr = '/' + cmd;
+
+	    if (params) {
+	      cmdStr = cmdStr + '?';
+	      for (var nom in params) {
+	        paramStr += nom + '=' + params[nom] + '&';
+	      }
+	      paramStr = paramStr.replace(/\s/g, '+').substring(0, paramStr.length - 1);
+	    }
+	    return server + cmdStr + paramStr;
+	  }
+
+	  return new Promise(function (resolve, reject) {
+	    var xhr = new window.XMLHttpRequest();
+	    var url = getUrl();
+	    console.log('request to', url);
+	    xhr.open('GET', url, true);
+
+	    xhr.onload = function () {
+	      if (xhr.status !== 200) {
+	        resolve({ success: false, text: 'Error interno', result: xhr.status });
+	        return;
+	      }
+
+	      try {
+	        var response = JSON.parse(xhr.responseText);
+	      } catch (e) {
+	        resolve({ success: false, text: 'Error interno', result: xhr.responseText });
+	        return;
+	      }
+
+	      resolve(response);
+	    };
+
+	    xhr.onerror = function (err) {
+	      resolve({ success: false, text: 'Error interno', result: JSON.stringify(err) });
+	    };
+
+	    xhr.send();
+	  });
+	};
 
 /***/ },
 /* 390 */
@@ -19599,7 +19649,7 @@
 
 	    return new Promise(function (resolve, reject) {
 	      if (JSON.stringify(ajaxValidations) !== '{}') {
-	        var ajaxValidated = (0, _request2.default)('validate', ajaxValidations).then(function (results) {
+	        var ajaxValidated = (0, _utils.Request)('validate', ajaxValidations).then(function (results) {
 	          if (!results.success) return inputsData;
 	          var errorsByI = [];
 	          Object.keys(results).forEach(function (inputI) {
@@ -19674,7 +19724,7 @@
 	    var id = dom.id;
 	    (0, _state2.default)(id + '.errors').value = [];
 	    (0, _state2.default)(id + '.loading').value = true;
-	    (0, _request2.default)(dom.getAttribute('direction'), data).then(function (response) {
+	    (0, _utils.Request)(dom.getAttribute('direction'), data).then(function (response) {
 	      (0, _state2.default)(id + '.loading').value = false;
 	      (0, _state2.default)(id + '.formNotification').value = undefined;
 	      (0, _state2.default)(id + '.formNotification').value = {
@@ -19757,9 +19807,7 @@
 
 	var _isEmail2 = _interopRequireDefault(_isEmail);
 
-	var _request = __webpack_require__(398);
-
-	var _request2 = _interopRequireDefault(_request);
+	var _utils = __webpack_require__(389);
 
 	var _rxjs = __webpack_require__(36);
 
@@ -20341,62 +20389,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 398 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/* injects from autopolyfiller-loader */
-	__webpack_require__(392);
-
-	'use strict';
-
-	var server = window.location.origin;
-	module.exports = function (cmd, params) {
-	  function getUrl() {
-	    var paramStr = '';
-	    var cmdStr = '/' + cmd;
-
-	    if (params) {
-	      cmdStr = cmdStr + '?';
-	      for (var nom in params) {
-	        paramStr += nom + '=' + params[nom] + '&';
-	      }
-	      paramStr = paramStr.replace(/\s/g, '+').substring(0, paramStr.length - 1);
-	    }
-	    return server + cmdStr + paramStr;
-	  }
-
-	  return new Promise(function (resolve, reject) {
-	    var xhr = new window.XMLHttpRequest();
-	    var url = getUrl();
-	    console.log('request to', url);
-	    xhr.open('GET', url, true);
-
-	    xhr.onload = function () {
-	      if (xhr.status !== 200) {
-	        resolve({ success: false, text: 'Error interno', result: xhr.status });
-	        return;
-	      }
-
-	      try {
-	        var response = JSON.parse(xhr.responseText);
-	      } catch (e) {
-	        resolve({ success: false, text: 'Error interno', result: xhr.responseText });
-	        return;
-	      }
-
-	      resolve(response);
-	    };
-
-	    xhr.onerror = function (err) {
-	      resolve({ success: false, text: 'Error interno', result: JSON.stringify(err) });
-	    };
-
-	    xhr.send();
-	  });
-	};
-
-/***/ },
+/* 398 */,
 /* 399 */
 /***/ function(module, exports, __webpack_require__) {
 

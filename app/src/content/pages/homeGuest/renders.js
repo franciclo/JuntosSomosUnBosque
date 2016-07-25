@@ -1,5 +1,5 @@
 import St from 'state'
-import {className} from 'utils'
+import {className, createElement} from 'utils'
 
 export default function () {
   function toggleActiveInfoSection (dom, id) {
@@ -44,6 +44,31 @@ export default function () {
           className.bool(b, menuBtns[i], 'active')
         }
       })
+    St('arbolesRed')
+      .on(['N'])
+      .subscribe(function (arboles) {
+        renderFilaArbolesRed(dom, arboles)
+        var arbolesCantidad = []
+        for (var arbol in arboles) {
+          arbolesCantidad.push(arboles[arbol].cantidad)
+        }
+        var cantidadTotal = arbolesCantidad
+          .reduce((a, b) => a + b)
+        dom.querySelector('#home_sidebar .logo svg-icon .count').textContent = cantidadTotal
+      })
+  }
+
+  function renderFilaArbolesRed (dom, arboles) {
+    var wrppG = createElement('<div class="fila-arbol"><span></span><span></span></div>')
+    var tablaArboles = dom.querySelector('#lista_arboles_red')
+    var frg = document.createDocumentFragment()
+    for (var arbol in arboles) {
+      var wrpp = wrppG()
+      wrpp.children[0].textContent = arboles[arbol].label
+      wrpp.children[1].textContent = arboles[arbol].cantidad
+      frg.appendChild(wrpp)
+    }
+    tablaArboles.appendChild(frg)
   }
 
   function destroy () {
