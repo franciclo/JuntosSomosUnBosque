@@ -103,9 +103,10 @@ export default function () {
 
     St('user.arboles')
       .on(['A'])
-      .subscribe(function (arbol) {
+      .subscribe(function (arboles) {
+        arboles = typeof arboles === 'array' ? arboles : [arboles] 
         className.remove(dom.querySelector('#lista_mis_arboles_cabecera'), 'hide')
-        renderFilaArbol(dom, [arbol])
+        renderFilaArbol(dom, arboles)
       })
     St('arbolesRed')
       .on(['N'])
@@ -116,7 +117,7 @@ export default function () {
           arbolesCantidad.push(arboles[arbol].cantidad)
         }
         var cantidadTotal = arbolesCantidad
-          .reduce((a, b) => a + b)
+          .reduce((a, b) => a + b, 0)
         dom.querySelector('#home_sidebar .logo svg-icon .count').textContent = cantidadTotal
       })
   }

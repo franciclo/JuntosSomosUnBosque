@@ -44,17 +44,29 @@ export default function () {
           className.bool(b, menuBtns[i], 'active')
         }
       })
-    St('arbolesRed')
+    St('all-users')
       .on(['N'])
-      .subscribe(function (arboles) {
+      .subscribe(function (users) {
+        var arboles = {}
+
+        users.map(function(user){
+          return user.arboles
+        })
+        .forEach(function (arbolesByUser) {
+          arbolesByUser
+            .forEach(function (arbolGroup) {
+              var bArboles = typeof arboles[arbolGroup.especie + arbolGroup.tamagno] === 'undefined'
+              var accArbol = arboles[arbolGroup.especie + arbolGroup.tamagno]
+
+              arboles[arbolGroup.especie + arbolGroup.tamagno] = {
+                label: arbolGroup.especie + ' ' + arbolGroup.tamagno,
+                cantidad: bArboles ? arbolGroup.cantidad : accArbol.cantidad + arbolGroup.cantidad,
+              }
+            })
+        })
+
         renderFilaArbolesRed(dom, arboles)
-        var arbolesCantidad = []
-        for (var arbol in arboles) {
-          arbolesCantidad.push(arboles[arbol].cantidad)
-        }
-        var cantidadTotal = arbolesCantidad
-          .reduce((a, b) => a + b)
-        dom.querySelector('#home_sidebar .logo svg-icon .count').textContent = cantidadTotal
+        renderCantidadTotal(dom, arboles)
       })
   }
 
@@ -69,6 +81,16 @@ export default function () {
       frg.appendChild(wrpp)
     }
     tablaArboles.appendChild(frg)
+  }
+
+  function renderCantidadTotal (dom, arboles) {
+    var arbolesCantidad = []
+    for (var arbol in arboles) {
+      arbolesCantidad.push(arboles[arbol].cantidad)
+    }
+    var cantidadTotal = arbolesCantidad
+      .reduce((a, b) => a + b, 0)
+    dom.querySelector('#home_sidebar .logo svg-icon .count').textContent = cantidadTotal
   }
 
   function destroy () {

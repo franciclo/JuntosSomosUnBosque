@@ -52,9 +52,9 @@ function query (path) {
   }
 }
 
-if (query('debugState').value === true) {
+if (window.localStorage.getItem('debug') === "true") {
   window.$tateViz = function () {
-    console.log('need to bind clear() copy paste this please')
+    console.log('need to bind clear()')
     console.log('window.clear = clear')
     debugger
     if (typeof window.clear === 'function') {

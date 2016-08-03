@@ -62,9 +62,14 @@ export default function () {
       Rx.Observable.fromEvent(dom.querySelector('#elegirUbicacion'), 'click')
       .subscribe(function () {
         if ('geolocation' in navigator) {
-          navigator.geolocation.getCurrentPosition(function (position) {
-            geoSuccess(dom, position)
-          }, geoError(dom))
+          try {
+            navigator.geolocation.getCurrentPosition(function (position) {
+              geoSuccess(dom, position)
+            }, geoError)
+          } catch (err) {
+            console.error('fallo geolocation')
+            geoSuccess(dom, {coords: {latitude: -34.55, longitude: -58.45}})
+          }
         } else {
           geoSuccess(dom, {coords: {latitude: -34.55, longitude: -58.45}})
         }
@@ -198,10 +203,8 @@ export default function () {
   }
 
   function geoError (dom) {
-    geoSuccess(dom, {coords: {latitude: -34.55, longitude: -58.45}})
-    return function (err) {
+
       console.error('geo error', err)
-    }
   }
 
   return {init, destroy}

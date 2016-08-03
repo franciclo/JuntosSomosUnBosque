@@ -23,10 +23,12 @@ export default function () {
       .subscribe(function (b) {
         className.bool(b, dom, 'chg')
       })
+
     var arbolI
     for (var i = dom.parentNode.children.length - 1; i >= 0; i--) {
       if (dom.parentNode.children[i] === dom) arbolI = i - 1
     }
+    var estearbol = 'user.arboles.' + arbolI + '.cantidad'
     St('user.arboles.' + arbolI + '.cantidad')
       .on(['E'])
       .subscribe(function (cantidad) {
@@ -41,6 +43,13 @@ export default function () {
       .on(['N', 'E'])
       .subscribe(function (b) {
         className.bool(b, dom, 'chg')
+      })
+
+    St(especie + '-' + tamagno + '-form.formNotification')
+      .on(['N'])
+      .filter((notification) => notification.success)
+      .subscribe((notification) => {
+        St('user.arboles.' + arbolI).value = notification.result
       })
   }
 

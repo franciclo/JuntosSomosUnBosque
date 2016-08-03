@@ -108,7 +108,14 @@ module.exports = function (app) {
       }
       res.json({
         success: true,
-        text: 'Guardado'
+        text: 'Guardado',
+        arboles: user.arboles.map(function (arbol) {
+          return {
+            especie: arbol.especie,
+            cantidad: arbol.cantidad,
+            tamagno: arbol.tamagno
+          }
+        })
       })
     })
   })
@@ -121,26 +128,26 @@ module.exports = function (app) {
           text: 'Error al buscar arboles'
         })
       }
-      var arboles = {}
-      users
+      var allUsers =  users
         .map(function (user) {
-          return user.arboles
+          return {
+            tipo: user.userType,
+            loc: user.location,
+            nombre: user.getNombre(),
+            arboles: user.arboles
+              .map(function (arbol) {
+                return {
+                  tamagno: arbol.tamagno,
+                  cantidad: arbol.cantidad,
+                  especie: arbol.especie
+                }
+              })
+          }
         })
-        .forEach(function (arbolesByUser) {
-          arbolesByUser
-            .forEach(function (arbolGroup) {
-              var bArboles = typeof arboles[arbolGroup.especie + arbolGroup.tamagno] === 'undefined'
-              var accArbol = arboles[arbolGroup.especie + arbolGroup.tamagno]
-
-              arboles[arbolGroup.especie + arbolGroup.tamagno] = {
-                label: arbolGroup.especie + ' ' + arbolGroup.tamagno,
-                cantidad: bArboles ? arbolGroup.cantidad : accArbol.cantidad + arbolGroup.cantidad
-              }
-            })
-        })
+        
       res.json({
         success: true,
-        result: arboles
+        result: allUsers
       })
     })
   })
