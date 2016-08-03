@@ -108,22 +108,30 @@ export default function () {
         className.remove(dom.querySelector('#lista_mis_arboles_cabecera'), 'hide')
         renderFilaArbol(dom, arboles)
       })
-    St('arbolesRed')
+    St('all-users')
       .on(['N'])
-      .subscribe(function (arboles) {
-        renderFilaArbolesRed(dom, arboles)
-        var arbolesCantidad = []
-        for (var arbol in arboles) {
-          arbolesCantidad.push(arboles[arbol].cantidad)
-        }
-        var cantidadTotal = arbolesCantidad
-          .reduce((a, b) => a + b, 0)
-        dom.querySelector('#home_sidebar .logo svg-icon .count').textContent = cantidadTotal
-      })
-  }
+      .subscribe(function (users) {
+        var arboles = {}
 
-  function destroy () {
-    this.onActiveContent.unsubscribe()
+        users.map(function(user){
+          return user.arboles
+        })
+        .forEach(function (arbolesByUser) {
+          arbolesByUser
+            .forEach(function (arbolGroup) {
+              var bArboles = typeof arboles[arbolGroup.especie + arbolGroup.tamagno] === 'undefined'
+              var accArbol = arboles[arbolGroup.especie + arbolGroup.tamagno]
+
+              arboles[arbolGroup.especie + arbolGroup.tamagno] = {
+                label: arbolGroup.especie + ' ' + arbolGroup.tamagno,
+                cantidad: bArboles ? arbolGroup.cantidad : accArbol.cantidad + arbolGroup.cantidad,
+              }
+            })
+        })
+
+        renderFilaArbolesRed(dom, arboles)
+        renderCantidadTotal(dom, arboles)
+      })
   }
 
   function renderFilaArbol (dom, arboles) {
@@ -152,6 +160,20 @@ export default function () {
       frg.appendChild(wrpp)
     }
     tablaArboles.appendChild(frg)
+  }
+
+  function renderCantidadTotal (dom, arboles) {
+    var arbolesCantidad = []
+    for (var arbol in arboles) {
+      arbolesCantidad.push(arboles[arbol].cantidad)
+    }
+    var cantidadTotal = arbolesCantidad
+      .reduce((a, b) => a + b, 0)
+    dom.querySelector('#home_sidebar .logo svg-icon .count').textContent = cantidadTotal
+  }
+
+  function destroy () {
+    this.onActiveContent.unsubscribe()
   }
 
   return {init, destroy}

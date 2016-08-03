@@ -3,6 +3,10 @@ geo-map, geo-map>#mapContainer{
 	height: 100%;
 }
 
+geo-map>#mapContainer svg{
+	position: static;
+}
+
 .leaflet-popup-content-wrapper {
     border-radius: 3px;
     padding: 0;
