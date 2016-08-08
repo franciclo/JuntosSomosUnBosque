@@ -140,10 +140,10 @@ export default function () {
 
     Request('todos_los_arboles')
       .then(function (result) {
-        if(result.success) {
+        if (result.success) {
           St('all-users').value = result.result
             .map(function (user) {
-              var loc = user.loc.split('::')
+              var loc = user.loc ? user.loc.split('::') : [0, 0]
               user.loc = {lat: +loc[0], lon: +loc[1]}
               return user
             })
