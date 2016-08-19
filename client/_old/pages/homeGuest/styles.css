@@ -1,0 +1,535 @@
+body>section{
+  display: flex;
+}
+body>section #sideBar{
+  width: 400px;
+  border-right: 1px solid #CACACA;
+}
+body>section geo-map{
+  flex: 1;
+}
+
+#sideBar{
+  height: 100%;
+  background: #fff;
+  overflow: hidden;
+}
+
+#sideBar>article{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+#home_sidebar>header>h1 {
+  text-align: center;
+  font-weight: 100;
+  font-size: 25px;
+  margin: 20px 0 28px;
+}
+#home_sidebar>header {
+  position: relative;
+  color: white;
+  height: 372px;
+  padding: 5px;
+  background-image: url("../../assets/jpg/fondoverde.jpg");
+  background-size: cover;
+}
+
+
+
+#la_red{
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+#la_red h1 {
+  display: inline-block;
+  color: #555;
+  padding: 10px 0;
+  text-align: left;
+  font-weight: 100;
+  font-size: 25px;
+}
+#lista_nuestros_arboles_cabecera {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px;
+  color: #555;
+  border-top: 1px solid #e8e8e8;
+}
+#lista_arboles_red{
+  overflow: auto;
+}
+#lista_arboles_red>.fila-arbol{
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px;
+  background: #f5f5f5;
+  display: flex;
+}
+#lista_arboles_red>.fila-arbol:nth-child(even) {
+  background: #e4e4e4;
+}
+#lista_mis_arboles_cabecera {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 33px 7px 7px;
+  color: #555;
+  border-top: 1px solid #ccc;
+}
+
+
+
+
+#cartel_suma {
+  background: white;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: left;
+  position: relative;
+}
+#cartel_suma p{
+  padding: 5px 10px 15px;
+  font-size:15px;
+  text-align: left;
+  margin: 0;
+  color: #555;
+  line-height: 20px;
+}
+#cartel_suma h1{
+  text-align: left;
+  font-weight: 100;
+  font-size: 25px;
+  padding: 5px 10px 0px;
+}
+#suma_arboles_btn:hover {
+  background: #35a700;
+}
+#suma_arboles_btn{
+  background: #35a700;
+  fill: #fff;
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  float: right;
+  font-size: 16px;
+  margin-right: 10px;
+}
+#suma_arboles_btn svg-icon{
+  height: 25px;
+  width: 25px;
+  margin-left: 10px;
+}
+
+
+
+.action-content p.info {
+  text-align: left;
+  padding: 5px 0 15px;
+  font-size: 15px;
+  text-align: left;
+  margin: 0;
+  color: #555;
+  line-height: 20px;
+}
+
+#cartel_evento {
+  background: white;
+  border-radius: 3px;
+  padding: 15px 5px 0;
+}
+#cartel_evento button{
+  background: #ff3660;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 13px;
+  border: none;
+  padding: 7px 10px;
+  margin: 0 10px 10px 0;
+  float: right;
+}
+#cartel_evento button svg-icon{
+  fill: #fff;
+  height: 10px;
+}
+#cartel_evento .header-evento {
+  display: flex;
+  padding: 10px 5px;
+}
+#cartel_evento .header-evento h1{
+  margin: 0;
+  font-size: 25px;
+  font-weight: 500;
+  text-align: left;
+}
+#cartel_evento .header-evento p.info{
+  margin: 0;
+  font-size: 13px;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+#cartel_evento p.bolder{
+  text-align: left;
+  padding: 0 10px;
+  font-size: 15px;
+  color: #555;
+  font-weight: bold;
+  margin-top: 10px;
+}
+#cartel_evento .header-evento svg-icon[type="calendar.11"]{
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+#cartel_evento .header-evento svg-icon[type="calendar.11"] use{
+  fill: #5f7177;
+}
+#cartel_evento .header-evento-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#cartel_evento .header-evento-text p{
+  color: #555;
+}
+#cartel_evento .header-evento-text svg-icon{
+  height: 16px;
+  width: 16px;
+}
+#cartel_evento .header-evento-text svg use {
+  fill:#555;
+}
+#cartel_evento .content-evento-text {
+  padding: 5px 10px 15px;
+  font-size:15px;
+  text-align: left;
+  margin: 0;
+  color: #555;
+  line-height: 20px;
+}
+
+
+#cartel_evento.off *{
+  color: #8a8a8a!important;
+  fill: #777!important;
+}
+#cartel_evento.off button {
+    background: #e4e4e4!important;
+}
+#cartel_evento.off button:hover {
+  background: #c7c7c7!important;
+}
+
+
+
+
+#masInformacion section{
+  width: 60%;
+  height: 85%;
+  padding:0;
+  border: none;
+}
+#masInformacion section svg-icon[type="close"] {
+  right: 14px;
+}
+#mas_info{
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+#mas_info_side_menu{
+  width: 133px;
+  text-align: right;
+  margin-right: 30px;
+  color: white;
+  background: #44B2DA;
+  padding: 82px 20px 0 0;
+}
+#mas_info_text{
+  flex: 1;
+  text-align: justify;
+  padding-right: 22px;
+  overflow: auto;
+  color:#444;
+}
+#mas_info_side_menu p {
+  margin: 0 0 10px;
+  cursor: pointer;
+}
+#mas_info_side_menu p.active {
+  text-decoration: underline;
+}
+#mas_info_text>div{
+  display: none;
+  margin-top: 30px;
+}
+#mas_info_text>.active{
+  display: block;
+}
+#mas_info_text>div>h1:first-child{
+  margin: 0 0 20px;
+  font-size: 30px;
+}
+
+
+
+
+
+#ingresarBtn:hover{
+  background: #389dc1;
+}
+#ingresarBtn{
+  background: #48bce6;
+  border-radius: 2px;
+  color: #fff;
+  padding: 3px 7px;
+  font-size: 14px;
+  cursor: pointer;
+  float: right;
+  border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+.loguineo {
+  margin: 15px;
+  justify-content: center; 
+}
+.loguineo h1{
+  color: #444;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 100;
+  margin-bottom: 33px;
+}
+
+#accionesUsuario>section{
+  max-width: 450px;
+}
+#accionesUsuario a.social svg-icon{
+  width: 20px;
+  height: 20px;
+}
+
+#accionesUsuario a.social{
+  border-radius: 3px;
+  display: flex;
+  margin: 6px;
+  color: #fff;
+  text-decoration: none;
+  align-items: center;
+  padding: 4px;
+  border:1px solid;
+  cursor: pointer;
+}
+
+#accionesUsuario a.social use{
+  fill:#fff;
+}
+
+#accionesUsuario a.social.fb:hover{
+  background:  #2D59A2;
+}
+#accionesUsuario a.social.fb{
+  background: #47c;
+  border-color: #2D59A2;
+}
+
+#accionesUsuario a.social.tw:hover{
+  background:  #0AC;
+}
+#accionesUsuario a.social.tw{
+  background: #0cf;
+  border-color: #0AC;
+}
+
+#accionesUsuario a.social.gl:hover{
+  background:  #AF3527;
+}
+#accionesUsuario a.social.gl{
+  background: #d43;
+  border-color: #AF3527;
+}
+
+
+form-vali > label{
+  color: #555;
+}
+#loginForm{
+    border-top: 1px solid #B5B5B5;
+    margin-top: 20px;
+}
+.registrate{
+    font-size: 13px;
+    color: #555;
+    position: relative;
+    margin: 8px 0 0;
+    cursor: pointer;
+    text-align: right;
+}
+
+.registrate:hover{
+  text-decoration: underline;
+}
+.nueva-cuenta:hover{
+  background: #637588
+}
+.nueva-cuenta{
+  background: #819BB7;
+  font-size: 13px;
+  margin: 10px 0;
+  border-color: #637588;
+  font-weight: bold;
+}
+#signupForm .info{
+  border-top: 1px solid #B5B5B5;
+  padding-top: 10px;
+}
+form-vali .info{
+  font-size: 13px;
+  color: #777;
+  position: relative;
+  margin: 8px 0 0;
+  text-align: center;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+}
+.logo h1{
+  font-weight: 100;
+  font-size: 23px;
+}
+.logo svg-icon {
+  height: 100px;
+  position: relative;
+  width: 100px;
+  fill: #fff;
+}
+.logo svg-icon span{
+  position: absolute;
+  bottom: -10px;
+  right: 26px;
+  background: #ffe551;
+  color: #565656;
+  padding: 2px 6px;
+  border-radius: 13px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+
+.menu {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 0;
+}
+.menu>div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  fill: #fff;
+  padding-bottom: 5px;
+  cursor: pointer;
+  border-bottom: 4px solid transparent;
+  font-size: 15px;
+  justify-content: flex-end;
+}
+.menu>div>svg-icon {
+  width: 30px;
+  height: 30px;
+}
+.menu>div.active {
+  border-bottom: 4px solid #ff3660;
+  font-size: 17px!important;
+  animation: none!important;
+}
+.menu>div.active svg-icon{
+  animation: none!important;
+  width: 35px!important;
+  height: 35px!important;
+}
+.menu>div:hover {
+  animation: growLett 0.1s linear;
+  font-size: 17px;
+}
+@keyframes growLett {
+  0% {
+    font-size: 16px;
+  }
+  100% {
+    font-size: 17px;
+  }
+}
+.menu>div:hover>svg-icon{
+  animation: growIc 0.1s ease-out;
+  width: 35px;
+  height: 35px;
+}
+@keyframes growIc {
+  0% {
+    width: 30px;
+    height: 30px;
+  }
+  100% {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+
+
+.footer {
+  display: flex;
+  margin-bottom: 9px;
+  align-items: center;
+}
+.footer svg-icon{
+  height: 35px;
+  width:35px;
+  cursor: pointer;
+}
+.footer svg-icon[type="social.facebook"]{
+  fill:#3f75b5;
+}
+.footer svg-icon[type="social.twitter"]{
+  fill:#75cff0;
+}
+#infoBtn svg-icon{
+  height: 20px;
+  width:20px;
+}
+#infoBtn {
+  float: left;
+  border: 0;
+  text-transform: uppercase;
+  display: flex;
+  font-size: 16px;
+  color: #1d97c3;
+  fill: #1d97c3;
+  align-items: center;
+  flex:1;
+}

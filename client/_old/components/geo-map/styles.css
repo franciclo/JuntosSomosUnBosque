@@ -1,0 +1,16 @@
+geo-map, geo-map>#mapContainer{
+	width: 100%;
+	height: 100%;
+}
+
+geo-map>#mapContainer svg{
+	position: static;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 3px;
+    padding: 0;
+}
+.leaflet-popup-content{
+  margin: 0;
+}

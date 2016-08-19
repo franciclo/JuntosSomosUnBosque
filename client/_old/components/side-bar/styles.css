@@ -1,0 +1,24 @@
+side-bar{
+  height: 100%;
+  background: #fff;
+  overflow: hidden;
+}
+side-bar section svg-icon[type="close"]{
+  position: absolute;
+  top:4px;
+  right: 0;
+  cursor: pointer;
+}
+side-bar article{
+  height: 100%;
+  position: relative;
+}
+side-bar article.active{
+  display: flex;
+  flex-direction: column;
+}
+side-bar article>[type="close"]{
+  position: absolute;
+  top: 0;
+  right: 0;
+}

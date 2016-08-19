@@ -1,0 +1,55 @@
+arbol-fila>form-vali>input[type="number"] {
+  width: 36px;
+  padding: 0;
+  margin-right: 25px;
+  border: none;
+  font-size: 17px;
+  background: transparent;
+}
+arbol-fila>form-vali>[data-submit] {
+  display: none;
+}
+arbol-fila.chg>form-vali>[data-submit] {
+  display: block;
+}
+arbol-fila>form-vali>[data-submit] {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin: 0;
+  padding: 0;
+  fill: #fff;
+  border-radius: 0;
+  width: 32px;
+  height: 100%;
+  background: #0090c5;
+  border: none;
+}
+arbol-fila>form-vali>[data-submit]>svg-icon {
+  width: 20px;
+  height: 20px;
+}
+arbol-fila>form-vali>alert-msg{
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  margin: 0;
+  width: 97%;
+  z-index: 9;
+}
+arbol-fila.flash>form-vali {
+  animation: flash 500ms ease-in-out;
+}
+@keyframes flash {
+  0% {
+    background: transparent;
+  }
+
+  50% {
+    background: #ffe551;
+  }
+
+  100% {
+    background: transparent;
+  }
+}

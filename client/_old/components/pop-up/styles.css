@@ -1,0 +1,49 @@
+pop-up{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.3);
+    box-sizing: border-box;
+    align-items: center;
+    z-index: 9999;
+    padding: 0 10px;
+    justify-content: center;
+	display: none;
+}
+
+pop-up.active{
+	display: flex;
+}
+
+pop-up>section{
+    height: auto;
+    max-height: 95%;
+    width: 100%;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0px 4px 10px #555;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 20px;
+    position: relative;
+}
+pop-up>section>svg-icon[type="close"]{
+    position: absolute;
+    top:4px;
+    right: 0;
+    cursor: pointer;
+}
+pop-up>section>svg-icon{
+    height: 25px;
+    width: 25px;
+}
+pop-up>section>article{
+	display: none;
+}
+
+pop-up>section>article.active{
+	display: block;
+}

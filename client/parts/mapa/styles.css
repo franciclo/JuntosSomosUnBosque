@@ -1,0 +1,7 @@
+#mapa {
+  flex: 1;
+}
+.leaflet-control-container {
+  right: 50px;
+  position: absolute;
+}

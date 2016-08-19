@@ -1,0 +1,112 @@
+#sidebar_nav {
+  display: flex;
+}
+#sidebar_nav>button{
+  cursor: pointer;
+  flex: 1;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  color: white;
+  min-height: 140px;
+  font-family: P22underground;
+}
+#sidebar_nav_plantaciones {
+  background: #ff687b;
+}
+#sidebar_nav_arbol {
+  background: #ffbfb8;
+}
+#sidebar_nav_red {
+  position: relative;
+  background: #009aff;
+}
+#sidebar_nav button.active .underline{
+  width: 77%;
+  border-top: 2px solid white;
+  margin: 5px auto 0;
+}
+#sidebar_nav button img {
+  width: auto;
+  height: 50px;
+  margin: 0 auto 20px;
+}
+#sidebar_nav .counter {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  background: #2bd873;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+#sidebar_nav>button.active {
+  font-size: 17px!important;
+  animation: none!important;
+}
+#sidebar_nav>button.active img{
+  animation: none!important;
+  height: 55px!important;
+  margin-bottom: 10px;
+}
+
+#sidebar_nav>button:hover {
+  animation: growTxt 0.1s linear;
+  font-size: 17px;
+}
+#sidebar_nav>button:hover>img{
+  animation: growImg 0.1s ease-out;
+  height: 55px;
+}
+@keyframes growTxt {
+  0% {
+    font-size: 16px;
+  }
+  100% {
+    font-size: 17px;
+  }
+}
+@keyframes growImg {
+  0% {
+    height: 50px;
+  }
+  100% {
+    height: 55px;
+  }
+}
+
+@keyframes growImgSm {
+  0% {
+    height: 30px;
+  }
+  100% {
+    height: 35px;
+  }
+}
+
+@media (max-height: 630px) {
+  #sidebar_nav>button{
+    min-height: 117px;
+  }
+  #sidebar_nav>button>img{
+    height: 30px;
+  }
+
+  #sidebar_nav>button:hover>img{
+    animation: growImgSm 0.1s ease-out;
+    height: 35px;
+  }
+  #sidebar_nav>button.active img{
+    height: 35px!important;
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,17 @@
+#sidebar_footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+#social_links a:last-child {
+  margin-left: 10px;
+}
+#social_links img {
+  height: 20px;
+}
+
+@media (max-height: 630px) {
+  #sidebar_footer>img {
+    height: 44px;
+  }
+}

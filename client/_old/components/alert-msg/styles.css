@@ -1,0 +1,18 @@
+alert-msg {
+    font-size: 13px;
+    padding: 5px;
+    border-radius: 2px;
+    display: none;
+    text-align: center;
+    margin: 16px 0 0;
+    align-items: center;
+    justify-content: space-between;
+}
+alert-msg.show {
+    display: flex;
+}
+alert-msg>[type="close"] {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}

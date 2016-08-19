@@ -1,0 +1,18 @@
+#sidebar_header {
+  display: flex;
+  justify-content: space-between;
+}
+#sidebar_header #sidebar_header_nav {
+  color: #2bd873;
+}
+#sidebar_header #sidebar_header_nav button {
+  border: none;
+  background: none;
+  color: inherit;
+  font-family: P22Underground;
+  font-size: 17px;
+  cursor: pointer;
+}
+#sidebar_header #sidebar_header_nav button:hover {
+  font-weight: bold;
+}

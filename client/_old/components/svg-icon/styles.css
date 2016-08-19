@@ -1,0 +1,8 @@
+svg-icon svg{
+  height: inherit;
+  width: inherit;
+}
+svg-icon {
+  width: 1em;
+  height: 1em;
+}
