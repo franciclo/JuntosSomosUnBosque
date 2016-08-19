@@ -6,6 +6,7 @@ import React, {Component} from 'react'
 // import Profile from './popups/profile'
 // import PrimerLogin from './popups/primer-login'
 // import Reset from './popups/reset'
+// import Flyer from './popups/flyer'
 
 export default class Popups extends Component {
   render () {
@@ -15,6 +16,7 @@ export default class Popups extends Component {
     var forgot = null
     var profile = null
     var reset = null
+    var flyer = null
 
     // if ($tate('user.primerLogin').value) {
     //   primerLogin = <PrimerLogin />
@@ -40,6 +42,7 @@ export default class Popups extends Component {
         {profile}
         {primerLogin}
         {reset}
+        {flyer}
       </div>
     )
   }

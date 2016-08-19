@@ -1,0 +1,7 @@
+.leaflet-div-icon {
+  border: none; 
+  width: 0!important;
+  height: 0!important;
+  position: relative;
+  background: none;
+}
