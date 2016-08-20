@@ -1,7 +1,7 @@
 #sidebar {
-  width: 32%;
+  width: 40%;
   min-width: 280px;
-  max-width: 440px;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   margin: 25px 25px 5px 25px;
@@ -14,4 +14,10 @@
 }
 #sidebar>h1>span {
   color: #2bd873;
+}
+
+@media (max-width: 900px) {
+  #sidebar {
+    margin: 20px 5px 5px; 
+  }
 }

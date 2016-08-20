@@ -16,13 +16,15 @@
   cursor: pointer;
   background: #ff687b;
   color: #fff;
-  text-transform: uppercase;
-  font-size: 13px;
+  font-size: 15px;
   border: none;
   padding: 7px 10px;
   margin: 0 10px 10px 0;
   float: right;
   border-radius: 3px;
+}
+#cartel_evento button:hover{
+  background: #e85e70;
 }
 #cartel_evento button img{
   height: 11px;

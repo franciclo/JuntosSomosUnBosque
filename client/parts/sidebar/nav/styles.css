@@ -12,7 +12,7 @@
   padding: 20px 0;
   color: white;
   min-height: 140px;
-  font-family: P22underground;
+  font-size: 16px;
 }
 #sidebar_nav_plantaciones {
   background: #ff687b;
@@ -34,7 +34,7 @@
   height: 50px;
   margin: 0 auto 20px;
 }
-#sidebar_nav .counter {
+#sidebar_nav_red .counter {
   position: absolute;
   top: -18px;
   right: -18px;
@@ -108,5 +108,14 @@
   #sidebar_nav>button.active img{
     height: 35px!important;
     margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  #sidebar_nav_red .counter {
+    right: 4px;
+  }  
+  #sidebar_nav {
+    margin:0 -5px;
   }
 }

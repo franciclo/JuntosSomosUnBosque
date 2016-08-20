@@ -9,8 +9,7 @@ export default class Arboles extends Component {
           <h1>Sumá tus árboles</h1>
           <p className='info'>Si estás cuidando arbolitos en maceta en tu casa y querés sumarte a las plantaciones colectivas, registralos acá y después asignalos a las plantaciónes que vos elijas.</p>
           <button id='suma_arboles_btn' className='action-button' data-id='sumarTusArboles' title='Sumate!'>
-            Sumate
-            <img src='plantin.svg' />
+            Cargá tus primeros arbolitos
           </button>
         </div>
       </article>

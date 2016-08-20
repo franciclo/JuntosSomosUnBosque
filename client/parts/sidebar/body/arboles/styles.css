@@ -22,7 +22,7 @@
   margin: 0; 
 }
 #suma_arboles_btn:hover {
-  background: #25bb64;
+  background: #28c56a;
 }
 #suma_arboles_btn{
   background: #2bd873;
@@ -36,7 +36,8 @@
   margin-right: 10px;
   cursor: pointer;
   border-radius: 3px;
-  padding: 5px 15px;
+  padding: 10px 20px;
+  font-weight: 500;
 }
 #suma_arboles_btn img{
   height: 25px;

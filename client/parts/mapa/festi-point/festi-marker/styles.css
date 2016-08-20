@@ -26,10 +26,10 @@
 #festi_marker span.triangle {
   width: 0;
   position: absolute;
-  bottom: -14px;
+  bottom: -10px;
   left: 61px;
   border-style: solid;
-  border-width: 14px 8px 0 8px;
+  border-width: 11px 8px 0 8px;
   border-color: #ff687b transparent transparent transparent;
 }
 #festi_marker .ver-mas{

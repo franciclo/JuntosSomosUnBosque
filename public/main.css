@@ -35,6 +35,9 @@ body{
 }
 body>#root>div{
   display: flex;
+}
+button {
+  font-family: P22Underground!important;
 }/* required styles */
 
 .leaflet-map-pane,
@@ -555,10 +558,10 @@ body>#root>div{
 #festi_marker span.triangle {
   width: 0;
   position: absolute;
-  bottom: -14px;
+  bottom: -10px;
   left: 61px;
   border-style: solid;
-  border-width: 14px 8px 0 8px;
+  border-width: 11px 8px 0 8px;
   border-color: #ff687b transparent transparent transparent;
 }
 #festi_marker .ver-mas{
@@ -588,10 +591,253 @@ body>#root>div{
   100% {
     top:-13px;
   }
+}#festi_pop {
+  display: none;
+}
+#festi_pop>section{
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#festi_pop svg-icon[type="mas"] {
+  width: 24px;
+  height:24px;
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  margin-left: -12px;
+  z-index: 9;
+  fill:#fff;
+}
+#festi_pop>section>article {
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+  display: none;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -200px;
+  width: 0;
+  box-shadow: 0px 3px 10px #555;
+  border-radius: 2px;
+  background: #fff;
+  cursor: auto;
+}
+#festi_pop>section>article.active ~ svg-icon[type="mas"] {
+  display: none;
+}
+#festi_pop>section>article.active {
+  display: block;
+  height: 444px;
+  width: 400px;
+  animation: expand .5s ease-out;
+}
+#festi_pop>section>article.active .expanded-pop-wrapper {
+  width: 400px;
+  position: absolute;
+  top: 0;
+  animation: aparece .3s linear;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#festi_pop>section>article .expanded-pop-wrapper>header{
+  background: #17a000;
+  color: #fff;
+  padding: 11px;
+}
+#festi_pop>section>article .expanded-pop-wrapper>header p.info{
+  margin: 0;
+  font-size: 14px;
+  color: #fff;
+  fill: #fff;
+}
+#festi_pop>section>article .expanded-pop-wrapper>header h1{
+  margin: 0;
+  font-weight: 100;
+  font-size: 30px;
+
+}
+#festi_pop header>svg-icon[type="close"]{
+  fill: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  cursor: pointer;
+  height: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+.intro-wrapper button{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #ff1b4b;
+  fill: #ff1b4b;
+}
+.intro-wrapper button svg-icon{
+  height: 13px;
+}
+.intro-wrapper {
+  padding: 15px 10px;
+  height: 100%;
+  box-sizing: border-box;
+}
+.intro-wrapper p {
+  font-size: 15px;
+  color: #444;
+  margin: 10px 0 0;
+}    
+.intro-wrapper p.info {
+  font-size: 15px;
+  color: #929292;
+  font-style: italic;
+  margin: 0 0 20px;
+}
+
+
+.cronograma-wrapper {
+      display: flex;
+    flex-direction: column;
+    padding: 0 30px;
+}
+
+.fila-crono {
+    display: flex;
+    align-items: baseline;
+}
+#volver_a_intro{
+  position: absolute;
+  right: 10px;
+  bottom: -5px;
+  border: none;
+  background: transparent;
+  color: #989898;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 8px 4px;
+}
+#volver_a_intro svg-icon{
+  fill: #989898;
+  width: 9px;
+  height: 9px;
+}
+span.hora-crono {
+    width: 30px;
+}
+
+span.linea-crono {
+    height: 10px;
+    width: 10px;
+    display: block;
+    border-radius: 7px;
+    position: relative;
+    left: 6px;
+    background: #ffe551;
+}
+.content-crono {
+    border-left: 2px solid #ffe551;
+    flex: 1;
+    padding-left: 13px;
+}
+.fila-crono:nth-of-type(1) h2{
+  margin-top: 25px;
+}
+.content-crono h2{
+  font-weight: 100;
+  margin: 17px 0 0;
+}
+
+.content-crono p{
+  margin: 0;
+}
+.expanded-pop-content {
+  width: 100%;
+  flex:1;
+}
+.expanded-pop-footer{
+  height: 40px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 10px 10px;
+}
+
+#quiero_ayudar:hover{
+  background: #E4CE4C;
+}
+#quiero_ayudar{
+  background: #FFE551;
+  color: #444;
+  font-size: 14px;
+  margin: 1px;
+  border: none;
+}
+#ver_evento_facebook:hover{
+  background: #2D59A2;
+}
+#ver_evento_facebook {
+  background: #47c;
+  color: white;
+  float: right;
+  border: none; 
+}
+#ver_evento_facebook svg-icon svg{
+  transform: scale(2) translateY(1px);
+  margin-right:5px; 
+}
+#ver_evento_facebook svg-icon use {
+  fill: #fff;
+}
+
+
+
+
+
+@keyframes aparece {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes expand {
+  0% {
+    height: 0px;
+    width: 80px;
+    margin-left: 0;
+  }
+
+  30% {
+    width: 400px;
+    margin-left: -200px;
+  }
+
+  100% {
+    height: 444px;
+  }
 }#sidebar {
-  width: 32%;
+  width: 40%;
   min-width: 280px;
-  max-width: 440px;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   margin: 25px 25px 5px 25px;
@@ -604,6 +850,12 @@ body>#root>div{
 }
 #sidebar>h1>span {
   color: #2bd873;
+}
+
+@media (max-width: 900px) {
+  #sidebar {
+    margin: 20px 5px 5px; 
+  }
 }#sidebar_header {
   display: flex;
   justify-content: space-between;
@@ -615,7 +867,6 @@ body>#root>div{
   border: none;
   background: none;
   color: inherit;
-  font-family: P22Underground;
   font-size: 17px;
   cursor: pointer;
 }
@@ -635,7 +886,7 @@ body>#root>div{
   padding: 20px 0;
   color: white;
   min-height: 140px;
-  font-family: P22underground;
+  font-size: 16px;
 }
 #sidebar_nav_plantaciones {
   background: #ff687b;
@@ -657,7 +908,7 @@ body>#root>div{
   height: 50px;
   margin: 0 auto 20px;
 }
-#sidebar_nav .counter {
+#sidebar_nav_red .counter {
   position: absolute;
   top: -18px;
   right: -18px;
@@ -731,6 +982,15 @@ body>#root>div{
   #sidebar_nav>button.active img{
     height: 35px!important;
     margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  #sidebar_nav_red .counter {
+    right: 4px;
+  }  
+  #sidebar_nav {
+    margin:0 -5px;
   }
 }#sidebar_body {
   flex:1;
@@ -851,13 +1111,15 @@ slider-box > article.active {
   cursor: pointer;
   background: #ff687b;
   color: #fff;
-  text-transform: uppercase;
-  font-size: 13px;
+  font-size: 15px;
   border: none;
   padding: 7px 10px;
   margin: 0 10px 10px 0;
   float: right;
   border-radius: 3px;
+}
+#cartel_evento button:hover{
+  background: #e85e70;
 }
 #cartel_evento button img{
   height: 11px;
@@ -958,7 +1220,7 @@ slider-box > article.active {
   margin: 0; 
 }
 #suma_arboles_btn:hover {
-  background: #25bb64;
+  background: #28c56a;
 }
 #suma_arboles_btn{
   background: #2bd873;
@@ -972,7 +1234,8 @@ slider-box > article.active {
   margin-right: 10px;
   cursor: pointer;
   border-radius: 3px;
-  padding: 5px 15px;
+  padding: 10px 20px;
+  font-weight: 500;
 }
 #suma_arboles_btn img{
   height: 25px;

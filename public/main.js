@@ -21437,11 +21437,11 @@
 
 	var _mapa2 = _interopRequireDefault(_mapa);
 
-	var _sidebar = __webpack_require__(738);
+	var _sidebar = __webpack_require__(741);
 
 	var _sidebar2 = _interopRequireDefault(_sidebar);
 
-	var _popups = __webpack_require__(767);
+	var _popups = __webpack_require__(770);
 
 	var _popups2 = _interopRequireDefault(_popups);
 
@@ -57622,9 +57622,13 @@
 
 	var _reactLeafletDivIcon2 = _interopRequireDefault(_reactLeafletDivIcon);
 
-	var _festiMarker = __webpack_require__(768);
+	var _festiMarker = __webpack_require__(738);
 
 	var _festiMarker2 = _interopRequireDefault(_festiMarker);
+
+	var _festiPop = __webpack_require__(771);
+
+	var _festiPop2 = _interopRequireDefault(_festiPop);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57649,7 +57653,12 @@
 	      return _react2.default.createElement(
 	        _reactLeafletDivIcon2.default,
 	        this.props,
-	        _react2.default.createElement(_festiMarker2.default, null)
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_festiMarker2.default, null),
+	          _react2.default.createElement(_festiPop2.default, null)
+	        )
 	      );
 	    }
 	  }]);
@@ -57792,19 +57801,88 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _header = __webpack_require__(741);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FestiMarker = function (_Component) {
+	  _inherits(FestiMarker, _Component);
+
+	  function FestiMarker() {
+	    _classCallCheck(this, FestiMarker);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FestiMarker).apply(this, arguments));
+	  }
+
+	  _createClass(FestiMarker, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'festi_marker' },
+	        _react2.default.createElement('img', { src: 'fecha.svg', alt: '24 de Septiembre' }),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'title' },
+	          'Festival de plantación'
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'ver-mas' },
+	          _react2.default.createElement('img', { src: 'caret-right.svg', alt: 'Ver mas' })
+	        ),
+	        _react2.default.createElement('span', { className: 'triangle' })
+	      );
+	    }
+	  }]);
+
+	  return FestiMarker;
+	}(_react.Component);
+
+	exports.default = FestiMarker;
+
+/***/ },
+/* 739 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 740 */,
+/* 741 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(742);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _header = __webpack_require__(744);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _nav = __webpack_require__(744);
+	var _nav = __webpack_require__(747);
 
 	var _nav2 = _interopRequireDefault(_nav);
 
-	var _body = __webpack_require__(747);
+	var _body = __webpack_require__(750);
 
 	var _body2 = _interopRequireDefault(_body);
 
-	var _footer = __webpack_require__(764);
+	var _footer = __webpack_require__(767);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
@@ -57855,14 +57933,14 @@
 	exports.default = Sidebar;
 
 /***/ },
-/* 739 */
+/* 742 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 740 */,
-/* 741 */
+/* 743 */,
+/* 744 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57873,7 +57951,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(742);
+	__webpack_require__(745);
 
 	var _react = __webpack_require__(1);
 
@@ -57940,14 +58018,14 @@
 	exports.default = Header;
 
 /***/ },
-/* 742 */
+/* 745 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 743 */,
-/* 744 */
+/* 746 */,
+/* 747 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57958,7 +58036,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(745);
+	__webpack_require__(748);
 
 	var _stateStream = __webpack_require__(180);
 
@@ -58070,14 +58148,14 @@
 	exports.default = Nav;
 
 /***/ },
-/* 745 */
+/* 748 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 746 */,
-/* 747 */
+/* 749 */,
+/* 750 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58088,23 +58166,23 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(748);
+	__webpack_require__(751);
 
-	__webpack_require__(750);
+	__webpack_require__(753);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _plantaciones = __webpack_require__(755);
+	var _plantaciones = __webpack_require__(758);
 
 	var _plantaciones2 = _interopRequireDefault(_plantaciones);
 
-	var _arboles = __webpack_require__(758);
+	var _arboles = __webpack_require__(761);
 
 	var _arboles2 = _interopRequireDefault(_arboles);
 
-	var _red = __webpack_require__(761);
+	var _red = __webpack_require__(764);
 
 	var _red2 = _interopRequireDefault(_red);
 
@@ -58144,27 +58222,27 @@
 	exports.default = Body;
 
 /***/ },
-/* 748 */
+/* 751 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 749 */,
-/* 750 */
+/* 752 */,
+/* 753 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	__webpack_require__(751);
+	__webpack_require__(754);
 
-	__webpack_require__(753);
+	__webpack_require__(756);
 
 	var _stateStream = __webpack_require__(180);
 
 	var _stateStream2 = _interopRequireDefault(_stateStream);
 
-	var _functions = __webpack_require__(754);
+	var _functions = __webpack_require__(757);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58193,21 +58271,21 @@
 	document.registerElement('slider-box', { prototype: customElement });
 
 /***/ },
-/* 751 */
+/* 754 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 752 */,
-/* 753 */
+/* 755 */,
+/* 756 */
 /***/ function(module, exports) {
 
 	/*! (C) WebReflection Mit Style License */
 	(function(e,t,n,r){"use strict";function rt(e,t){for(var n=0,r=e.length;n<r;n++)vt(e[n],t)}function it(e){for(var t=0,n=e.length,r;t<n;t++)r=e[t],nt(r,b[ot(r)])}function st(e){return function(t){j(t)&&(vt(t,e),rt(t.querySelectorAll(w),e))}}function ot(e){var t=e.getAttribute("is"),n=e.nodeName.toUpperCase(),r=S.call(y,t?v+t.toUpperCase():d+n);return t&&-1<r&&!ut(n,t)?-1:r}function ut(e,t){return-1<w.indexOf(e+'[is="'+t+'"]')}function at(e){var t=e.currentTarget,n=e.attrChange,r=e.attrName,i=e.target;Q&&(!i||i===t)&&t.attributeChangedCallback&&r!=="style"&&e.prevValue!==e.newValue&&t.attributeChangedCallback(r,n===e[a]?null:e.prevValue,n===e[l]?null:e.newValue)}function ft(e){var t=st(e);return function(e){X.push(t,e.target)}}function lt(e){K&&(K=!1,e.currentTarget.removeEventListener(h,lt)),rt((e.target||t).querySelectorAll(w),e.detail===o?o:s),B&&pt()}function ct(e,t){var n=this;q.call(n,e,t),G.call(n,{target:n})}function ht(e,t){D(e,t),et?et.observe(e,z):(J&&(e.setAttribute=ct,e[i]=Z(e),e.addEventListener(p,G)),e.addEventListener(c,at)),e.createdCallback&&Q&&(e.created=!0,e.createdCallback(),e.created=!1)}function pt(){for(var e,t=0,n=F.length;t<n;t++)e=F[t],E.contains(e)||(n--,F.splice(t--,1),vt(e,o))}function dt(e){throw new Error("A "+e+" type is already registered")}function vt(e,t){var n,r=ot(e);-1<r&&(tt(e,b[r]),r=0,t===s&&!e[s]?(e[o]=!1,e[s]=!0,r=1,B&&S.call(F,e)<0&&F.push(e)):t===o&&!e[o]&&(e[s]=!1,e[o]=!0,r=1),r&&(n=e[t+"Callback"])&&n.call(e))}if(r in t)return;var i="__"+r+(Math.random()*1e5>>0),s="attached",o="detached",u="extends",a="ADDITION",f="MODIFICATION",l="REMOVAL",c="DOMAttrModified",h="DOMContentLoaded",p="DOMSubtreeModified",d="<",v="=",m=/^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/,g=["ANNOTATION-XML","COLOR-PROFILE","FONT-FACE","FONT-FACE-SRC","FONT-FACE-URI","FONT-FACE-FORMAT","FONT-FACE-NAME","MISSING-GLYPH"],y=[],b=[],w="",E=t.documentElement,S=y.indexOf||function(e){for(var t=this.length;t--&&this[t]!==e;);return t},x=n.prototype,T=x.hasOwnProperty,N=x.isPrototypeOf,C=n.defineProperty,k=n.getOwnPropertyDescriptor,L=n.getOwnPropertyNames,A=n.getPrototypeOf,O=n.setPrototypeOf,M=!!n.__proto__,_=n.create||function mt(e){return e?(mt.prototype=e,new mt):this},D=O||(M?function(e,t){return e.__proto__=t,e}:L&&k?function(){function e(e,t){for(var n,r=L(t),i=0,s=r.length;i<s;i++)n=r[i],T.call(e,n)||C(e,n,k(t,n))}return function(t,n){do e(t,n);while((n=A(n))&&!N.call(n,t));return t}}():function(e,t){for(var n in t)e[n]=t[n];return e}),P=e.MutationObserver||e.WebKitMutationObserver,H=(e.HTMLElement||e.Element||e.Node).prototype,B=!N.call(H,E),j=B?function(e){return e.nodeType===1}:function(e){return N.call(H,e)},F=B&&[],I=H.cloneNode,q=H.setAttribute,R=H.removeAttribute,U=t.createElement,z=P&&{attributes:!0,characterData:!0,attributeOldValue:!0},W=P||function(e){J=!1,E.removeEventListener(c,W)},X,V=e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,10)},$=!1,J=!0,K=!0,Q=!0,G,Y,Z,et,tt,nt;O||M?(tt=function(e,t){N.call(t,e)||ht(e,t)},nt=ht):(tt=function(e,t){e[i]||(e[i]=n(!0),ht(e,t))},nt=tt),B?(J=!1,function(){var e=k(H,"addEventListener"),t=e.value,n=function(e){var t=new CustomEvent(c,{bubbles:!0});t.attrName=e,t.prevValue=this.getAttribute(e),t.newValue=null,t[l]=t.attrChange=2,R.call(this,e),this.dispatchEvent(t)},r=function(e,t){var n=this.hasAttribute(e),r=n&&this.getAttribute(e),i=new CustomEvent(c,{bubbles:!0});q.call(this,e,t),i.attrName=e,i.prevValue=n?r:null,i.newValue=t,n?i[f]=i.attrChange=1:i[a]=i.attrChange=0,this.dispatchEvent(i)},s=function(e){var t=e.currentTarget,n=t[i],r=e.propertyName,s;n.hasOwnProperty(r)&&(n=n[r],s=new CustomEvent(c,{bubbles:!0}),s.attrName=n.name,s.prevValue=n.value||null,s.newValue=n.value=t[r]||null,s.prevValue==null?s[a]=s.attrChange=0:s[f]=s.attrChange=1,t.dispatchEvent(s))};e.value=function(e,o,u){e===c&&this.attributeChangedCallback&&this.setAttribute!==r&&(this[i]={className:{name:"class",value:this.className}},this.setAttribute=r,this.removeAttribute=n,t.call(this,"propertychange",s)),t.call(this,e,o,u)},C(H,"addEventListener",e)}()):P||(E.addEventListener(c,W),E.setAttribute(i,1),E.removeAttribute(i),J&&(G=function(e){var t=this,n,r,s;if(t===e.target){n=t[i],t[i]=r=Z(t);for(s in r){if(!(s in n))return Y(0,t,s,n[s],r[s],a);if(r[s]!==n[s])return Y(1,t,s,n[s],r[s],f)}for(s in n)if(!(s in r))return Y(2,t,s,n[s],r[s],l)}},Y=function(e,t,n,r,i,s){var o={attrChange:e,currentTarget:t,attrName:n,prevValue:r,newValue:i};o[s]=e,at(o)},Z=function(e){for(var t,n,r={},i=e.attributes,s=0,o=i.length;s<o;s++)t=i[s],n=t.name,n!=="setAttribute"&&(r[n]=t.value);return r})),t[r]=function(n,r){c=n.toUpperCase(),$||($=!0,P?(et=function(e,t){function n(e,t){for(var n=0,r=e.length;n<r;t(e[n++]));}return new P(function(r){for(var i,s,o,u=0,a=r.length;u<a;u++)i=r[u],i.type==="childList"?(n(i.addedNodes,e),n(i.removedNodes,t)):(s=i.target,Q&&s.attributeChangedCallback&&i.attributeName!=="style"&&(o=s.getAttribute(i.attributeName),o!==i.oldValue&&s.attributeChangedCallback(i.attributeName,i.oldValue,o)))})}(st(s),st(o)),et.observe(t,{childList:!0,subtree:!0})):(X=[],V(function E(){while(X.length)X.shift().call(null,X.shift());V(E)}),t.addEventListener("DOMNodeInserted",ft(s)),t.addEventListener("DOMNodeRemoved",ft(o))),t.addEventListener(h,lt),t.addEventListener("readystatechange",lt),t.createElement=function(e,n){var r=U.apply(t,arguments),i=""+e,s=S.call(y,(n?v:d)+(n||i).toUpperCase()),o=-1<s;return n&&(r.setAttribute("is",n=n.toLowerCase()),o&&(o=ut(i.toUpperCase(),n))),Q=!t.createElement.innerHTMLHelper,o&&nt(r,b[s]),r},H.cloneNode=function(e){var t=I.call(this,!!e),n=ot(t);return-1<n&&nt(t,b[n]),e&&it(t.querySelectorAll(w)),t}),-2<S.call(y,v+c)+S.call(y,d+c)&&dt(n);if(!m.test(c)||-1<S.call(g,c))throw new Error("The type "+n+" is invalid");var i=function(){return f?t.createElement(l,c):t.createElement(l)},a=r||x,f=T.call(a,u),l=f?r[u].toUpperCase():c,c,p;return f&&-1<S.call(y,d+l)&&dt(l),p=y.push((f?v:d)+c)-1,w=w.concat(w.length?",":"",f?l+'[is="'+n.toLowerCase()+'"]':l),i.prototype=b[p]=T.call(a,"prototype")?a.prototype:_(H),rt(t.querySelectorAll(w),s),i}})(window,document,Object,"registerElement");
 
 /***/ },
-/* 754 */
+/* 757 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -58230,7 +58308,7 @@
 	exports.toggleActiveSection = toggleActiveSection;
 
 /***/ },
-/* 755 */
+/* 758 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58241,7 +58319,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(756);
+	__webpack_require__(759);
 
 	var _react = __webpack_require__(1);
 
@@ -58320,14 +58398,14 @@
 	exports.default = Plantaciones;
 
 /***/ },
-/* 756 */
+/* 759 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 757 */,
-/* 758 */
+/* 760 */,
+/* 761 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58338,7 +58416,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(759);
+	__webpack_require__(762);
 
 	var _react = __webpack_require__(1);
 
@@ -58383,8 +58461,7 @@
 	          _react2.default.createElement(
 	            'button',
 	            { id: 'suma_arboles_btn', className: 'action-button', 'data-id': 'sumarTusArboles', title: 'Sumate!' },
-	            'Sumate',
-	            _react2.default.createElement('img', { src: 'plantin.svg' })
+	            'Cargá tus primeros arbolitos'
 	          )
 	        )
 	      );
@@ -58397,14 +58474,14 @@
 	exports.default = Arboles;
 
 /***/ },
-/* 759 */
+/* 762 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 760 */,
-/* 761 */
+/* 763 */,
+/* 764 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58415,9 +58492,9 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(762);
+	__webpack_require__(765);
 
-	__webpack_require__(750);
+	__webpack_require__(753);
 
 	var _react = __webpack_require__(1);
 
@@ -58483,14 +58560,14 @@
 	exports.default = Body;
 
 /***/ },
-/* 762 */
+/* 765 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 763 */,
-/* 764 */
+/* 766 */,
+/* 767 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58501,7 +58578,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(765);
+	__webpack_require__(768);
 
 	var _react = __webpack_require__(1);
 
@@ -58559,14 +58636,14 @@
 	exports.default = Footer;
 
 /***/ },
-/* 765 */
+/* 768 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 766 */,
-/* 767 */
+/* 769 */,
+/* 770 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58654,7 +58731,7 @@
 	exports.default = Popups;
 
 /***/ },
-/* 768 */
+/* 771 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58665,7 +58742,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(769);
+	__webpack_require__(772);
 
 	var _react = __webpack_require__(1);
 
@@ -58679,44 +58756,218 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var FestiMarker = function (_Component) {
-	  _inherits(FestiMarker, _Component);
+	var FestiPop = function (_Component) {
+	  _inherits(FestiPop, _Component);
 
-	  function FestiMarker() {
-	    _classCallCheck(this, FestiMarker);
+	  function FestiPop() {
+	    _classCallCheck(this, FestiPop);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FestiMarker).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FestiPop).apply(this, arguments));
 	  }
 
-	  _createClass(FestiMarker, [{
+	  _createClass(FestiPop, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'festi_marker' },
-	        _react2.default.createElement('img', { src: 'fecha.svg', alt: '24 de Septiembre' }),
+	        { id: 'festi_pop' },
 	        _react2.default.createElement(
-	          'span',
-	          { className: 'title' },
-	          'Festival de plantación'
+	          'header',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Festival de plantación'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'info' },
+	            _react2.default.createElement('svg-icon', { type: 'lugar' }),
+	            'Eco aldea Velatropa, Ciudad Universitaria.'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'info' },
+	            _react2.default.createElement('svg-icon', { type: 'reloj' }),
+	            'Domingo 11 de septiembre, 12:00 am'
+	          ),
+	          _react2.default.createElement('svg-icon', { type: 'close' }),
+	          _react2.default.createElement(
+	            'button',
+	            { id: 'asignarPlantin', 'data-id': 'asignarPlantin', className: 'hide' },
+	            _react2.default.createElement('svg-icon', { type: 'plantin' }),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'tt' },
+	              'Asignar arboles a este evento'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'nav',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              { id: 'ver_evento_facebook' },
+	              _react2.default.createElement('svg-icon', { type: 'social.facebook' }),
+	              'Evento en facebook'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { id: 'quiero_ayudar' },
+	              'Quiero ayudar'
+	            )
+	          )
 	        ),
 	        _react2.default.createElement(
-	          'span',
-	          { className: 'ver-mas' },
-	          _react2.default.createElement('img', { src: 'caret-right.svg', alt: 'Ver mas' })
-	        ),
-	        _react2.default.createElement('span', { className: 'triangle' })
+	          'div',
+	          { className: 'expanded-pop-content' },
+	          _react2.default.createElement(
+	            'slider-box',
+	            { id: 'eventoPopContent' },
+	            _react2.default.createElement(
+	              'article',
+	              { 'data-id': 'introSlide', 'data-enter': 'de-izq', className: 'de-izq active intro-wrapper' },
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'info' },
+	                'Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'A partir de los rituales de siembra que ofrecimos en recitales, encuentros y talleres se fue creando una gran red de cultivadores de árboles nativos y comestibles.'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando plantaciones colectivas, cuando los arbolitos hayan crecido y estén listos para ir a tierra.'
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { 'data-id': 'verCronogramaBtn' },
+	                'Cronograma',
+	                _react2.default.createElement('svg-icon', { type: 'caret.right' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'article',
+	              { 'data-id': 'cronoSlide', 'data-enter': 'de-der', className: 'cronograma-wrapper' },
+	              _react2.default.createElement(
+	                'button',
+	                { id: 'volver_a_intro', 'data-id': 'volverAIntro' },
+	                _react2.default.createElement('svg-icon', { type: 'caret.left' }),
+	                'volver'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'fila-crono' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'hora-crono' },
+	                  '12:00'
+	                ),
+	                _react2.default.createElement('span', { className: 'linea-crono' }),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'content-crono' },
+	                  _react2.default.createElement(
+	                    'h2',
+	                    null,
+	                    'Nos juntamos'
+	                  ),
+	                  _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'Empezamos con una pequeña reunion para contabilizar los arboles y organizar la jornada.'
+	                  )
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'fila-crono' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'hora-crono' },
+	                  '12:30'
+	                ),
+	                _react2.default.createElement('span', { className: 'linea-crono' }),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'content-crono' },
+	                  _react2.default.createElement(
+	                    'h2',
+	                    null,
+	                    'Charla'
+	                  ),
+	                  _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'El colectivo huertero nos explicará como podemos tomar acción en comunidad.'
+	                  )
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'fila-crono' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'hora-crono' },
+	                  '13:00'
+	                ),
+	                _react2.default.createElement('span', { className: 'linea-crono' }),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'content-crono' },
+	                  _react2.default.createElement(
+	                    'h2',
+	                    null,
+	                    'Musica'
+	                  ),
+	                  _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'Perota Chingo estara tocando y al final haremos una siembra colectiva.'
+	                  )
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'fila-crono' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'hora-crono' },
+	                  '15:00'
+	                ),
+	                _react2.default.createElement('span', { className: 'linea-crono' }),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'content-crono' },
+	                  _react2.default.createElement(
+	                    'h2',
+	                    null,
+	                    'Plantación'
+	                  ),
+	                  _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'Ahora si! a laburar!'
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);
 
-	  return FestiMarker;
+	  return FestiPop;
 	}(_react.Component);
 
-	exports.default = FestiMarker;
+	exports.default = FestiPop;
 
 /***/ },
-/* 769 */
+/* 772 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
