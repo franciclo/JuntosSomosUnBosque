@@ -1,20 +1,29 @@
 import './styles.css'
+
 import 'document-register-element'
-import $tate from 'state-stream'
 import Rx from 'rxjs'
+import $tate from 'state-stream'
 
 let streams = {}
-class Modal extends HTMLDialogElement {
+class PopUp extends HTMLDialogElement {
   connectedCallback () {
-    let id = 'popups.list.' + this.getAttribute('data-path')
-    $tate(id).value = {}
-    streams[id] = {}
-    streams.popUpClicks = Rx.Observable
+    let popUpClicks = Rx.Observable
       .fromEvent(this, 'click')
       .filter((e) => e.target.tagName === 'DIALOG')
       .filter(() => this.getAttribute('closable') !== 'false')
+
+    let closeBtn = document.createElement('img')
+    closeBtn.alt = 'Cerrar'
+    closeBtn.src = 'close.svg'
+    closeBtn = this.appendChild(closeBtn)
+    let closeBtnClicks = Rx.Observable
+      .fromEvent(closeBtn, 'click')
+
+    streams.clo$e = Rx.Observable
+      .merge(popUpClicks, closeBtnClicks)
       .subscribe(() => {
-        this.close()
+        this.setAttribute('active', '')
+        $tate('popups.active').value = ''
       })
   }
 
@@ -25,28 +34,21 @@ class Modal extends HTMLDialogElement {
         streams[id][$].unsubscribe()
       })
   }
+
+  static get observedAttributes () {
+    return ['active']
+  }
+
+  attributeChangedCallback (name, oldValue, newValue) {
+    if (!this.parentNode) return
+    if (name === 'active') {
+      let open = this.getAttribute('open') === ''
+      if (newValue) {
+        if (!open) this.showModal()
+      } else {
+        if (open) this.close()
+      }
+    }
+  }
 }
-window.customElements.define('pop-up', Modal, {extends: 'dialog'})
-
-  // let closeIconClicks = Rx.Observable
-  //   .fromEvent(this.querySelector('section>svg-icon[type="close"]'), 'click')
-
-  // streams[id].closeCliks = Rx.Observable
-  //   .merge(popUpClicks, closeIconClicks)
-  //   .subscribe(function () {
-  //     $tate(id + '.show').value = false
-  //   })
-
-  // createCloseIcon(this)
-
-  // streams[id].onActive = $tate(id + '.active')
-  //   .on(['N', 'E'])
-  //   .subscribe(function (id) {
-  //     toggleActiveSection(this, id)
-  //   })
-
-  // streams[id].onShow = $tate(id + '.show')
-  //   .on(['N', 'E'])
-  //   .subscribe(function (show) {
-  //     toggleVisibility(this, show)
-  //   })
+window.customElements.define('pop-up', PopUp, {extends: 'dialog'})

@@ -23,31 +23,28 @@ export default class Nav extends Component {
     dom.querySelector('#home_sidebar .logo svg-icon .count').textContent = cantidadTotal
   }
 
-  activateNav (e) {
+  activateNav (active) {
     let navs = {
       plantaciones: false,
       arbol: false,
       red: false
     }
-    let active = e.currentTarget.id
     switch (active) {
-      case 'sidebar_nav_plantaciones':
+      case 'action_content_lugar':
         navs.plantaciones = true
-        window.$tate('sidebar.body.active')
-          .value = 'action_content_lugar'
         break
-      case 'sidebar_nav_arbol':
+      case 'action_content_suma':
         navs.arbol = true
-        window.$tate('sidebar.body.active')
-          .value = 'action_content_suma'
         break
-      case 'sidebar_nav_red':
+      case 'action_content_red':
         navs.red = true
-        window.$tate('sidebar.body.active')
-          .value = 'action_content_red'
         break
     }
-    this.setState(navs)
+    return () => {
+      window.$tate('sidebar.body.active')
+        .value = active
+      this.setState(navs)
+    }
   }
 
   render () {
@@ -56,7 +53,7 @@ export default class Nav extends Component {
         <button
           id='sidebar_nav_plantaciones'
           className={this.state.plantaciones ? 'active' : ''}
-          onClick={this.activateNav}>
+          onClick={this.activateNav('action_content_lugar')}>
           <img src='plantaciones.svg' alt='Plantaciones' />
           Plantaciones
           <span className='underline'></span>
@@ -64,7 +61,7 @@ export default class Nav extends Component {
         <button
           id='sidebar_nav_arbol'
           className={this.state.arbol ? 'active' : ''}
-          onClick={this.activateNav}>
+          onClick={this.activateNav('action_content_suma')}>
           <img src='arbol.svg' alt='Tus arboles' />
           Tus arboles
           <span className='underline'></span>
@@ -72,7 +69,7 @@ export default class Nav extends Component {
         <button
           id='sidebar_nav_red'
           className={this.state.red ? 'active' : ''}
-          onClick={this.activateNav}>
+          onClick={this.activateNav('action_content_red')}>
           <span className='counter'>{this.props.total}</span>
           <img src='red.svg' alt='Arboles de la red' />
           La red

@@ -13,7 +13,7 @@ export default class Info extends Component {
   }
   activeSection (active) {
     return () => {
-      $tate('popups.list.festi.content.active')
+      $tate('popups.list.info.content.active')
         .value = active
       this.setState({active})
     }
@@ -24,50 +24,41 @@ export default class Info extends Component {
       <dialog
         is='pop-up'
         active={this.props.active}
-        id='popup_festi'>
+        id='popup_info'>
         <div>
-          <header>
-            <img src='fecha.svg' />
-            <div className="header-info">
-              <h1>Festival de plantación</h1>
-              <p className="info">
-                <img src='lugar.svg' />
-                Eco aldea Velatropa, Ciudad Universitaria.
-              </p>
-              <p className="info">
-                <img src='reloj-fff.svg' />
-                Domingo 11 de septiembre, 12:00 am
-              </p>
-            </div>
-        </header>
           <nav>
             <button
-              id='popup_festi_nav_info'
+              id='popup_info_nav_intro'
               className={this.state.active === 'intro' ? 'active' : ''}
               onClick={this.activeSection('intro')}>
-              Info
+              Introducción
               <span className='underline'></span>
             </button>
             <button
-              id='popup_festi_nav_crono'
+              id='popup_info_nav_porq'
               className={this.state.active === 'porq' ? 'active' : ''}
               onClick={this.activeSection('porq')}>
-              Cronograma
+              ¿Por qué?
               <span className='underline'></span>
             </button>
             <button
-              id='popup_festi_nav_fb'>
-              <img src='facebook-fff.svg' />
-              Ver evento
+              id='popup_info_nav_mapa'
+              className={this.state.active === 'mapa' ? 'active' : ''}
+              onClick={this.activeSection('mapa')}>
+              Mapa
+              <span className='underline'></span>
             </button>
             <button
-              id='popup_festi_nav_ayuda'>
-              Quiero aydar
+              id='popup_info_nav_fest'
+              className={this.state.active === 'fest' ? 'active' : ''}
+              onClick={this.activeSection('fest')}>
+              Festivales
+              <span className='underline'></span>
             </button>
           </nav>
-          <slider-box data-path='popups.list.festi.content'>
+          <slider-box data-path='popups.list.info.content'>
             <article
-              id='popup_festi_content_intro'
+              id='popup_info_content_intro'
               data-id='intro'
               className='active'>
               <div className="text">
@@ -79,7 +70,7 @@ export default class Info extends Component {
               </div>
             </article>
             <article
-              id='popup_festi_content_porq'
+              id='popup_info_content_porq'
               data-id='porq'>
               <div className="text">
                 Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.<br />
@@ -98,7 +89,7 @@ export default class Info extends Component {
               </div>
             </article>
             <article
-              id='popup_festi_content_mapa'
+              id='popup_info_content_mapa'
               data-id='mapa'>
               <div className="text">
                 En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.<br /><br />
@@ -109,7 +100,7 @@ export default class Info extends Component {
               </div>
             </article>
             <article
-              id='popup_festi_content_fest'
+              id='popup_info_content_fest'
               data-id='fest'>
               <div className="text">
                 En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.<br /><br />

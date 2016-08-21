@@ -7,7 +7,9 @@ import Red from './red'
 export default class Body extends Component {
   render () {
     return (
-      <slider-box data-path='sidebar.body' id='sidebar_body'>
+      <slider-box
+        data-path='sidebar.body'
+        id='sidebar_body'>
         <Plantaciones />
         <Arboles />
         <Red {...this.props} />

@@ -7,13 +7,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="265.763"
-   height="383.78"
-   viewBox="0 0 265.763 383.78"
+   width="38"
+   height="38"
+   viewBox="0 0 38 38"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="lugar.svg">
+   sodipodi:docname="facebook-fff.svg">
   <metadata
      id="metadata10">
     <rdf:RDF>
@@ -22,7 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -37,24 +37,24 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="722"
-     inkscape:window-height="480"
+     inkscape:window-width="826"
+     inkscape:window-height="498"
      id="namedview6"
      showgrid="false"
+     inkscape:zoom="3.1052632"
+     inkscape:cx="-84.211864"
+     inkscape:cy="19.000001"
+     inkscape:window-x="25"
+     inkscape:window-y="79"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0"
-     inkscape:zoom="0.4609375"
-     inkscape:cx="133.966"
-     inkscape:cy="189.375"
-     inkscape:window-x="10"
-     inkscape:window-y="24"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     fit-margin-bottom="0" />
   <path
-     d="M 132.881,0 C 59.498,0 0,59.485 0,132.881 c 0,20.555 4.672,40.046 13.016,57.409 0.466,0.987 119.865,193.49 119.865,193.49 L 251.307,193.197 c 9.24,-18.09 14.456,-38.593 14.456,-60.316 C 265.763,59.485 206.277,0 132.881,0 Z m 0,212.61 c -44.03,0 -79.729,-35.712 -79.729,-79.729 0,-44.017 35.699,-79.729 79.73,-79.729 44.016,0 79.728,35.712 79.728,79.73 0,44.016 -35.712,79.728 -79.729,79.728 z"
+     d="M 38,6.334 C 38,3.006 34.994,0 31.667,0 L 6.334,0 C 3.004,0 0,3.006 0,6.334 L 0,31.666 C 0,34.994 3.005,38 6.334,38 L 19,38 l 0,-14 -5,0 0,-6 5,0 0,-3.156 c 0,-4.256 3.196,-8.088 7.127,-8.088 l 5.118,0 0,6.333 -5.118,0 C 25.566,13.089 25,13.731 25,14.75 l 0,3.25 6.5,0 -0.5,6 -6,0 0,14 6.667,0 C 34.994,38 38,34.994 38,31.666 L 38,6.334 Z"
      id="path4"
-     inkscape:connector-curvature="0"
-     style="fill:#ffffff" />
+     style="fill:#fffff0;fill-opacity:0"
+     inkscape:connector-curvature="0" />
 </svg>

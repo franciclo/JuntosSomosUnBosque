@@ -1,0 +1,75 @@
+#popup_info > img {
+  z-index: 999;
+}
+#popup_info > div {
+  background: white;
+  height: 90vh;
+  width: 60vw;
+  display: flex;
+}
+#popup_info > div > nav {
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+  min-width: 140px;
+}
+#popup_info > div > nav > button {
+  flex: 1;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 15px;
+  color: white;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+}
+#popup_info > div > nav > button.active .underline{
+  width: 77%;
+  border-top: 2px solid white;
+  margin: 5px auto 0;
+}
+#popup_info_nav_intro, #popup_info_content_intro {
+  background: #2bd873;
+}
+#popup_info_nav_porq, #popup_info_content_porq {
+  background: #5fedd5;
+}
+#popup_info_nav_mapa, #popup_info_content_mapa {
+  background: #ec9c55;
+}
+#popup_info_nav_fest, #popup_info_content_fest {
+  background: #ffbfb8;
+}
+#popup_info > div > slider-box > article{
+  display: flex;
+  align-items: center;
+}
+#popup_info > div > slider-box > article > .text{
+  padding: 50px;
+  font-size: 18px;
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  color: white;
+}
+#popup_info > div > nav > button.active {
+  font-size: 17px!important;
+  animation: none!important;
+}
+
+#popup_info > div > nav > button:hover {
+  animation: growTxt 0.1s linear;
+  font-size: 17px;
+}
+@keyframes growTxt {
+  0% {
+    font-size: 15px;
+  }
+  100% {
+    font-size: 17px;
+  }
+}

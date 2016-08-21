@@ -57798,6 +57798,10 @@
 
 	var _reactLeafletDivIcon2 = _interopRequireDefault(_reactLeafletDivIcon);
 
+	var _stateStream = __webpack_require__(180);
+
+	var _stateStream2 = _interopRequireDefault(_stateStream);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57816,11 +57820,6 @@
 	  }
 
 	  _createClass(FestiMarker, [{
-	    key: 'zIndexUp',
-	    value: function zIndexUp(ref) {
-	      // debugger
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -57828,7 +57827,11 @@
 	        _extends({}, this.props, { ref: this.zIndexUp }),
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'festi_marker' },
+	          {
+	            id: 'festi_marker',
+	            onClick: function onClick(e) {
+	              (0, _stateStream2.default)('popups.active').value = 'festi';
+	            } },
 	          _react2.default.createElement('img', { src: 'fecha.svg', alt: '24 de Septiembre' }),
 	          _react2.default.createElement(
 	            'span',
@@ -58166,6 +58169,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _stateStream = __webpack_require__(180);
+
+	var _stateStream2 = _interopRequireDefault(_stateStream);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58184,16 +58191,6 @@
 	  }
 
 	  _createClass(Header, [{
-	    key: 'clickMasInfo',
-	    value: function clickMasInfo(e) {
-	      console.log('click mas info sidebar header');
-	    }
-	  }, {
-	    key: 'clickIngresar',
-	    value: function clickIngresar(e) {
-	      console.log('click ingresar');
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -58206,14 +58203,18 @@
 	          _react2.default.createElement(
 	            'button',
 	            {
-	              onClick: this.clickMasInfo },
+	              onClick: function onClick(e) {
+	                (0, _stateStream2.default)('popups.active').value = 'info';
+	              } },
 	            '+ info'
 	          ),
 	          '|',
 	          _react2.default.createElement(
 	            'button',
 	            {
-	              onClick: this.clickIngresar },
+	              onClick: function onClick(e) {
+	                (0, _stateStream2.default)('popups.active').value = 'signin';
+	              } },
 	            'ingresar'
 	          )
 	        )
@@ -58290,28 +58291,29 @@
 	    }
 	  }, {
 	    key: 'activateNav',
-	    value: function activateNav(e) {
+	    value: function activateNav(active) {
+	      var _this2 = this;
+
 	      var navs = {
 	        plantaciones: false,
 	        arbol: false,
 	        red: false
 	      };
-	      var active = e.currentTarget.id;
 	      switch (active) {
-	        case 'sidebar_nav_plantaciones':
+	        case 'action_content_lugar':
 	          navs.plantaciones = true;
-	          window.$tate('sidebar.body.active').value = 'action_content_lugar';
 	          break;
-	        case 'sidebar_nav_arbol':
+	        case 'action_content_suma':
 	          navs.arbol = true;
-	          window.$tate('sidebar.body.active').value = 'action_content_suma';
 	          break;
-	        case 'sidebar_nav_red':
+	        case 'action_content_red':
 	          navs.red = true;
-	          window.$tate('sidebar.body.active').value = 'action_content_red';
 	          break;
 	      }
-	      this.setState(navs);
+	      return function () {
+	        window.$tate('sidebar.body.active').value = active;
+	        _this2.setState(navs);
+	      };
 	    }
 	  }, {
 	    key: 'render',
@@ -58324,7 +58326,7 @@
 	          {
 	            id: 'sidebar_nav_plantaciones',
 	            className: this.state.plantaciones ? 'active' : '',
-	            onClick: this.activateNav },
+	            onClick: this.activateNav('action_content_lugar') },
 	          _react2.default.createElement('img', { src: 'plantaciones.svg', alt: 'Plantaciones' }),
 	          'Plantaciones',
 	          _react2.default.createElement('span', { className: 'underline' })
@@ -58334,7 +58336,7 @@
 	          {
 	            id: 'sidebar_nav_arbol',
 	            className: this.state.arbol ? 'active' : '',
-	            onClick: this.activateNav },
+	            onClick: this.activateNav('action_content_suma') },
 	          _react2.default.createElement('img', { src: 'arbol.svg', alt: 'Tus arboles' }),
 	          'Tus arboles',
 	          _react2.default.createElement('span', { className: 'underline' })
@@ -58344,7 +58346,7 @@
 	          {
 	            id: 'sidebar_nav_red',
 	            className: this.state.red ? 'active' : '',
-	            onClick: this.activateNav },
+	            onClick: this.activateNav('action_content_red') },
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'counter' },
@@ -58424,7 +58426,9 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'slider-box',
-	        { 'data-path': 'sidebar.body', id: 'sidebar_body' },
+	        {
+	          'data-path': 'sidebar.body',
+	          id: 'sidebar_body' },
 	        _react2.default.createElement(_plantaciones2.default, null),
 	        _react2.default.createElement(_arboles2.default, null),
 	        _react2.default.createElement(_red2.default, this.props)
@@ -58563,6 +58567,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _stateStream = __webpack_require__(180);
+
+	var _stateStream2 = _interopRequireDefault(_stateStream);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58621,7 +58629,11 @@
 	          ),
 	          _react2.default.createElement(
 	            'button',
-	            { 'data-id': 'evento-sidebar-mas' },
+	            {
+	              onClick: function onClick(e) {
+	                (0, _stateStream2.default)('popups.active').value = 'festi';
+	              },
+	              'data-id': 'evento-sidebar-mas' },
 	            'Ver más',
 	            _react2.default.createElement('img', { src: 'caret-right.svg' })
 	          )
@@ -58659,6 +58671,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _stateStream = __webpack_require__(180);
+
+	var _stateStream2 = _interopRequireDefault(_stateStream);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58698,7 +58714,14 @@
 	          ),
 	          _react2.default.createElement(
 	            'button',
-	            { id: 'suma_arboles_btn', className: 'action-button', 'data-id': 'sumarTusArboles', title: 'Sumate!' },
+	            {
+	              onClick: function onClick(e) {
+	                (0, _stateStream2.default)('popups.active').value = 'signin';
+	              },
+	              id: 'suma_arboles_btn',
+	              className: 'action-button',
+	              'data-id': 'sumarTusArboles',
+	              title: 'Sumate!' },
 	            'Cargá tus primeros arbolitos'
 	          )
 	        )
@@ -58919,13 +58942,51 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	__webpack_require__(773);
+
+	var _stateStream = __webpack_require__(180);
+
+	var _stateStream2 = _interopRequireDefault(_stateStream);
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _festi = __webpack_require__(773);
+	var _signin = __webpack_require__(775);
+
+	var _signin2 = _interopRequireDefault(_signin);
+
+	var _signup = __webpack_require__(781);
+
+	var _signup2 = _interopRequireDefault(_signup);
+
+	var _forgot = __webpack_require__(784);
+
+	var _forgot2 = _interopRequireDefault(_forgot);
+
+	var _profile = __webpack_require__(787);
+
+	var _profile2 = _interopRequireDefault(_profile);
+
+	var _primerLogin = __webpack_require__(790);
+
+	var _primerLogin2 = _interopRequireDefault(_primerLogin);
+
+	var _reset = __webpack_require__(793);
+
+	var _reset2 = _interopRequireDefault(_reset);
+
+	var _flyer = __webpack_require__(796);
+
+	var _flyer2 = _interopRequireDefault(_flyer);
+
+	var _festi = __webpack_require__(799);
 
 	var _festi2 = _interopRequireDefault(_festi);
+
+	var _info = __webpack_require__(808);
+
+	var _info2 = _interopRequireDefault(_info);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58934,14 +58995,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	// import Signin from './popups/signin'
-	// import Signup from './popups/signup'
-	// import Forgot from './popups/forgot'
-	// import Profile from './popups/profile'
-	// import PrimerLogin from './popups/primer-login'
-	// import Reset from './popups/reset'
-	// import Flyer from './popups/flyer'
-
 
 	var Popups = function (_Component) {
 	  _inherits(Popups, _Component);
@@ -58949,10 +59002,26 @@
 	  function Popups() {
 	    _classCallCheck(this, Popups);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Popups).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Popups).call(this));
+
+	    _this.state = {
+	      active: null
+	    };
+	    (0, _stateStream2.default)('popups.active').value = null;
+	    _this.activeStream = (0, _stateStream2.default)('popups.active').on('E');
+	    return _this;
 	  }
 
 	  _createClass(Popups, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      this.activeStream.subscribe(function (active) {
+	        return _this2.setState({ active: active });
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var primerLogin = null;
@@ -58961,34 +59030,42 @@
 	      var forgot = null;
 	      var profile = null;
 	      var reset = null;
-	      var flyer = null;
 
-	      // if (window.$tate('user.primerLogin').value) {
-	      //   primerLogin = <PrimerLogin />
-	      // }
+	      if (window.$tate('user.primerLogin').value) {
+	        primerLogin = true;
+	      }
 
-	      // if (window.$tate('user').value) {
-	      //   signin = <Signin />
-	      //   signup = <Signup />
-	      //   forgot = <Forgot />
-	      // } else {
-	      //   profile = <Profile />
-	      // }
+	      if (!window.$tate('user').value) {
+	        signin = true;
+	        signup = true;
+	        forgot = true;
+	      } else {
+	        profile = true;
+	      }
 
-	      // if (window.$tate('user').value) {
-	      //   reset = <Reset />
-	      // }
+	      if (window.$tate('user').value) {
+	        reset = true;
+	      }
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'popups_layout' },
-	        signin,
-	        signup,
-	        forgot,
-	        profile,
-	        primerLogin,
-	        reset,
-	        flyer,
-	        _react2.default.createElement(_festi2.default, null)
+	        _react2.default.createElement(_flyer2.default, null),
+	        _react2.default.createElement(_festi2.default, {
+	          active: this.state.active === 'festi' ? 'active' : '' }),
+	        _react2.default.createElement(_info2.default, {
+	          active: this.state.active === 'info' ? 'active' : '' }),
+	        signin && _react2.default.createElement(_signin2.default, {
+	          active: this.state.active === 'signin' ? 'active' : '' }),
+	        signup && _react2.default.createElement(_signup2.default, {
+	          active: this.state.active === 'signup' ? 'active' : '' }),
+	        forgot && _react2.default.createElement(_forgot2.default, {
+	          active: this.state.active === 'forgot' ? 'active' : '' }),
+	        profile && _react2.default.createElement(_profile2.default, {
+	          active: this.state.active === 'profile' ? 'active' : '' }),
+	        primerLogin && _react2.default.createElement(_primerLogin2.default, {
+	          active: this.state.active === 'primerLogin' ? 'active' : '' }),
+	        reset && _react2.default.createElement(_reset2.default, {
+	          active: this.state.active === 'reset' ? 'active' : '' })
 	      );
 	    }
 	  }]);
@@ -59000,6 +59077,13 @@
 
 /***/ },
 /* 773 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 774 */,
+/* 775 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59010,23 +59094,13 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(774);
-
-	__webpack_require__(755);
-
 	__webpack_require__(776);
+
+	__webpack_require__(778);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _info = __webpack_require__(779);
-
-	var _info2 = _interopRequireDefault(_info);
-
-	var _crono = __webpack_require__(782);
-
-	var _crono2 = _interopRequireDefault(_crono);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59036,89 +59110,142 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Festi = function (_Component) {
-	  _inherits(Festi, _Component);
+	var Signin = function (_Component) {
+	  _inherits(Signin, _Component);
 
-	  function Festi() {
-	    _classCallCheck(this, Festi);
+	  function Signin() {
+	    _classCallCheck(this, Signin);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Festi).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Signin).apply(this, arguments));
 	  }
 
-	  _createClass(Festi, [{
+	  _createClass(Signin, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'dialog',
-	        { is: 'pop-up', 'data-path': 'festi' },
+	        {
+	          id: 'popup_signin',
+	          is: 'pop-up',
+	          active: this.props.active },
 	        _react2.default.createElement(
-	          'div',
-	          {
-	            id: 'festi_pop' },
+	          'article',
+	          { className: 'loguineo' },
 	          _react2.default.createElement(
-	            'header',
+	            'h1',
 	            null,
-	            _react2.default.createElement('img', { src: 'close.svg' }),
-	            _react2.default.createElement(
-	              'h1',
-	              null,
-	              'Festival de plantación'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              { className: 'info' },
-	              _react2.default.createElement('img', { src: 'lugar.svg' }),
-	              'Eco aldea Velatropa, Ciudad Universitaria.'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              { className: 'info' },
-	              _react2.default.createElement('img', { src: 'reloj.svg' }),
-	              'Domingo 11 de septiembre, 12:00 am'
-	            )
+	            'Inicio de sesión'
 	          ),
 	          _react2.default.createElement(
-	            'slider-box',
-	            { 'data-path': 'festi', id: 'eventoPopContent' },
-	            _react2.default.createElement(_info2.default, null),
-	            _react2.default.createElement(_crono2.default, null)
+	            'a',
+	            {
+	              className: 'social fb',
+	              href: 'auth/facebook' },
+	            _react2.default.createElement('img', { src: 'facebook.svg' }),
+	            'Ingresar con Facebook'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            {
+	              className: 'social tw',
+	              href: 'auth/twitter' },
+	            _react2.default.createElement('img', { src: 'twitter.svg' }),
+	            'Ingresar con Twitter'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            {
+	              className: 'social gl',
+	              href: 'auth/google' },
+	            _react2.default.createElement('img', { src: 'google.svg' }),
+	            'Ingresar con Google'
+	          ),
+	          _react2.default.createElement(
+	            'form-vali',
+	            {
+	              id: 'loginForm',
+	              direction: 'login',
+	              ajax: 'false' },
+	            _react2.default.createElement(
+	              'label',
+	              {
+	                htmlFor: 'emailLoginForm' },
+	              'Mail'
+	            ),
+	            _react2.default.createElement('input', {
+	              id: 'emailLoginForm',
+	              'data-label': 'email',
+	              'data-rules': 'required isEmail ajaxMailExist',
+	              type: 'text' }),
+	            _react2.default.createElement(
+	              'label',
+	              {
+	                htmlFor: 'passLoginForm',
+	                'data-rules': 'required' },
+	              'Contraseña'
+	            ),
+	            _react2.default.createElement('input', {
+	              id: 'passLoginForm',
+	              'data-label': 'password',
+	              type: 'password' }),
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                'data-id': 'forgotBtn',
+	                className: 'registrate' },
+	              '¿Olvidaste tu contraseña?'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                'data-id': 'registrarse',
+	                className: 'registrate' },
+	              '¿Querés crear una cuenta?'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                'data-submit': true,
+	                'data-label-active': 'Ingresando' },
+	              'Ingresar'
+	            )
 	          )
 	        )
 	      );
 	    }
 	  }]);
 
-	  return Festi;
+	  return Signin;
 	}(_react.Component);
 
-	exports.default = Festi;
+	exports.default = Signin;
 
 /***/ },
-/* 774 */
+/* 776 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 775 */,
-/* 776 */
+/* 777 */,
+/* 778 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(777);
+	__webpack_require__(779);
 
 	__webpack_require__(758);
-
-	var _stateStream = __webpack_require__(180);
-
-	var _stateStream2 = _interopRequireDefault(_stateStream);
 
 	var _rxjs = __webpack_require__(184);
 
 	var _rxjs2 = _interopRequireDefault(_rxjs);
+
+	var _stateStream = __webpack_require__(180);
+
+	var _stateStream2 = _interopRequireDefault(_stateStream);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59130,29 +59257,35 @@
 
 	var streams = {};
 
-	var Modal = function (_HTMLDialogElement) {
-	  _inherits(Modal, _HTMLDialogElement);
+	var PopUp = function (_HTMLDialogElement) {
+	  _inherits(PopUp, _HTMLDialogElement);
 
-	  function Modal() {
-	    _classCallCheck(this, Modal);
+	  function PopUp() {
+	    _classCallCheck(this, PopUp);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Modal).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PopUp).apply(this, arguments));
 	  }
 
-	  _createClass(Modal, [{
+	  _createClass(PopUp, [{
 	    key: 'connectedCallback',
 	    value: function connectedCallback() {
 	      var _this2 = this;
 
-	      var id = 'popups.list.' + this.getAttribute('data-path');
-	      (0, _stateStream2.default)(id).value = {};
-	      streams[id] = {};
-	      streams.popUpClicks = _rxjs2.default.Observable.fromEvent(this, 'click').filter(function (e) {
+	      var popUpClicks = _rxjs2.default.Observable.fromEvent(this, 'click').filter(function (e) {
 	        return e.target.tagName === 'DIALOG';
 	      }).filter(function () {
 	        return _this2.getAttribute('closable') !== 'false';
-	      }).subscribe(function () {
-	        _this2.close();
+	      });
+
+	      var closeBtn = document.createElement('img');
+	      closeBtn.alt = 'Cerrar';
+	      closeBtn.src = 'close.svg';
+	      closeBtn = this.appendChild(closeBtn);
+	      var closeBtnClicks = _rxjs2.default.Observable.fromEvent(closeBtn, 'click');
+
+	      streams.clo$e = _rxjs2.default.Observable.merge(popUpClicks, closeBtnClicks).subscribe(function () {
+	        _this2.setAttribute('active', '');
+	        (0, _stateStream2.default)('popups.active').value = '';
 	      });
 	    }
 	  }, {
@@ -59163,45 +59296,40 @@
 	        streams[id][$].unsubscribe();
 	      });
 	    }
+	  }, {
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback(name, oldValue, newValue) {
+	      if (!this.parentNode) return;
+	      if (name === 'active') {
+	        var open = this.getAttribute('open') === '';
+	        if (newValue) {
+	          if (!open) this.showModal();
+	        } else {
+	          if (open) this.close();
+	        }
+	      }
+	    }
+	  }], [{
+	    key: 'observedAttributes',
+	    get: function get() {
+	      return ['active'];
+	    }
 	  }]);
 
-	  return Modal;
+	  return PopUp;
 	}(HTMLDialogElement);
 
-	window.customElements.define('pop-up', Modal, { extends: 'dialog' });
-
-	// let closeIconClicks = Rx.Observable
-	//   .fromEvent(this.querySelector('section>svg-icon[type="close"]'), 'click')
-
-	// streams[id].closeCliks = Rx.Observable
-	//   .merge(popUpClicks, closeIconClicks)
-	//   .subscribe(function () {
-	//     $tate(id + '.show').value = false
-	//   })
-
-	// createCloseIcon(this)
-
-	// streams[id].onActive = $tate(id + '.active')
-	//   .on(['N', 'E'])
-	//   .subscribe(function (id) {
-	//     toggleActiveSection(this, id)
-	//   })
-
-	// streams[id].onShow = $tate(id + '.show')
-	//   .on(['N', 'E'])
-	//   .subscribe(function (show) {
-	//     toggleVisibility(this, show)
-	//   })
+	window.customElements.define('pop-up', PopUp, { extends: 'dialog' });
 
 /***/ },
-/* 777 */
+/* 779 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 778 */,
-/* 779 */
+/* 780 */,
+/* 781 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59212,7 +59340,427 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(780);
+	__webpack_require__(782);
+
+	__webpack_require__(778);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Signup = function (_Component) {
+	  _inherits(Signup, _Component);
+
+	  function Signup() {
+	    _classCallCheck(this, Signup);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Signup).apply(this, arguments));
+	  }
+
+	  _createClass(Signup, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'dialog',
+	        {
+	          is: 'pop-up',
+	          active: this.props.active },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'hola signup'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Signup;
+	}(_react.Component);
+
+	exports.default = Signup;
+
+/***/ },
+/* 782 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 783 */,
+/* 784 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(785);
+
+	__webpack_require__(778);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Forgot = function (_Component) {
+	  _inherits(Forgot, _Component);
+
+	  function Forgot() {
+	    _classCallCheck(this, Forgot);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Forgot).apply(this, arguments));
+	  }
+
+	  _createClass(Forgot, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'dialog',
+	        {
+	          is: 'pop-up',
+	          active: this.props.active },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'hola forgot'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Forgot;
+	}(_react.Component);
+
+	exports.default = Forgot;
+
+/***/ },
+/* 785 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 786 */,
+/* 787 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(788);
+
+	__webpack_require__(778);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Profile = function (_Component) {
+	  _inherits(Profile, _Component);
+
+	  function Profile() {
+	    _classCallCheck(this, Profile);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Profile).apply(this, arguments));
+	  }
+
+	  _createClass(Profile, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'dialog',
+	        {
+	          is: 'pop-up',
+	          active: this.props.active },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'hola profile'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Profile;
+	}(_react.Component);
+
+	exports.default = Profile;
+
+/***/ },
+/* 788 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 789 */,
+/* 790 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(791);
+
+	__webpack_require__(778);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PrimerLogin = function (_Component) {
+	  _inherits(PrimerLogin, _Component);
+
+	  function PrimerLogin() {
+	    _classCallCheck(this, PrimerLogin);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PrimerLogin).apply(this, arguments));
+	  }
+
+	  _createClass(PrimerLogin, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'dialog',
+	        {
+	          is: 'pop-up',
+	          active: this.props.active },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'hola primer login'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return PrimerLogin;
+	}(_react.Component);
+
+	exports.default = PrimerLogin;
+
+/***/ },
+/* 791 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 792 */,
+/* 793 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(794);
+
+	__webpack_require__(778);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Reset = function (_Component) {
+	  _inherits(Reset, _Component);
+
+	  function Reset() {
+	    _classCallCheck(this, Reset);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Reset).apply(this, arguments));
+	  }
+
+	  _createClass(Reset, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'dialog',
+	        {
+	          is: 'pop-up',
+	          active: this.props.active },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'hola reset'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Reset;
+	}(_react.Component);
+
+	exports.default = Reset;
+
+/***/ },
+/* 794 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 795 */,
+/* 796 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(797);
+
+	__webpack_require__(778);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Flyer = function (_Component) {
+	  _inherits(Flyer, _Component);
+
+	  function Flyer(props) {
+	    _classCallCheck(this, Flyer);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Flyer).call(this, props));
+
+	    _this.state = {
+	      active: false
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Flyer, [{
+	    key: 'mostrarFlyer',
+	    value: function mostrarFlyer(vistoNum) {
+	      if (!vistoNum) {
+	        vistoNum = 1;
+	        localStorage.setItem('flyerFesti', vistoNum);
+	      } else {
+	        vistoNum++;
+	        localStorage.setItem('flyerFesti', vistoNum);
+	      }
+	      return vistoNum === 1 || vistoNum === 2 ? true : Math.random() >= 0.7;
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var vistos = +localStorage.getItem('flyerFesti');
+	      this.setState({
+	        active: this.mostrarFlyer(vistos)
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'dialog',
+	        {
+	          id: 'festi_flyer',
+	          is: 'pop-up',
+	          active: this.state.active ? 'active' : '' },
+	        _react2.default.createElement('img', { src: 'flyer.svg' })
+	      );
+	    }
+	  }]);
+
+	  return Flyer;
+	}(_react.Component);
+
+	exports.default = Flyer;
+
+/***/ },
+/* 797 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 798 */,
+/* 799 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(800);
+
+	__webpack_require__(778);
 
 	var _react = __webpack_require__(1);
 
@@ -59232,35 +59780,205 @@
 	  function Info() {
 	    _classCallCheck(this, Info);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Info).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Info).call(this));
+
+	    _this.state = {
+	      active: 'intro'
+	    };
+	    _this.activeSection = _this.activeSection.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(Info, [{
+	    key: 'activeSection',
+	    value: function activeSection(active) {
+	      var _this2 = this;
+
+	      return function () {
+	        $tate('popups.list.festi.content.active').value = active;
+	        _this2.setState({ active: active });
+	      };
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'article',
-	        { 'data-id': 'introSlide', 'data-enter': 'de-izq', className: 'de-izq active intro-wrapper' },
+	        'dialog',
+	        {
+	          is: 'pop-up',
+	          active: this.props.active,
+	          id: 'popup_festi' },
 	        _react2.default.createElement(
-	          'p',
-	          { className: 'info' },
-	          'Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.'
-	        ),
-	        _react2.default.createElement(
-	          'p',
+	          'div',
 	          null,
-	          'A partir de los rituales de siembra que ofrecimos en recitales, encuentros y talleres se fue creando una gran red de cultivadores de árboles nativos y comestibles.'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando plantaciones colectivas, cuando los arbolitos hayan crecido y estén listos para ir a tierra.'
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { 'data-id': 'verCronogramaBtn' },
-	          'Cronograma',
-	          _react2.default.createElement('svg-icon', { type: 'caret.right' })
+	          _react2.default.createElement(
+	            'header',
+	            null,
+	            _react2.default.createElement('img', { src: 'fecha.svg' }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'header-info' },
+	              _react2.default.createElement(
+	                'h1',
+	                null,
+	                'Festival de plantación'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'info' },
+	                _react2.default.createElement('img', { src: 'lugar.svg' }),
+	                'Eco aldea Velatropa, Ciudad Universitaria.'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'info' },
+	                _react2.default.createElement('img', { src: 'reloj-fff.svg' }),
+	                'Domingo 11 de septiembre, 12:00 am'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'nav',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                id: 'popup_festi_nav_info',
+	                className: this.state.active === 'intro' ? 'active' : '',
+	                onClick: this.activeSection('intro') },
+	              'Info',
+	              _react2.default.createElement('span', { className: 'underline' })
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                id: 'popup_festi_nav_crono',
+	                className: this.state.active === 'porq' ? 'active' : '',
+	                onClick: this.activeSection('porq') },
+	              'Cronograma',
+	              _react2.default.createElement('span', { className: 'underline' })
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                id: 'popup_festi_nav_fb' },
+	              _react2.default.createElement('img', { src: 'facebook-fff.svg' }),
+	              'Ver evento'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                id: 'popup_festi_nav_ayuda' },
+	              'Quiero aydar'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'slider-box',
+	            { 'data-path': 'popups.list.festi.content' },
+	            _react2.default.createElement(
+	              'article',
+	              {
+	                id: 'popup_festi_content_intro',
+	                'data-id': 'intro',
+	                className: 'active' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Juntos, somos un BOSQUE.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'article',
+	              {
+	                id: 'popup_festi_content_porq',
+	                'data-id': 'porq' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.',
+	                _react2.default.createElement('br', null),
+	                'La OMS propone entre 10 y 15 mts2 de espacios verdes por habitante. Al día de hoy, en Capital Federal, tenemos 6,2 mts2 promedio. Y en los barrios vulnerable esa cifra desciende a 1,5 mts2 por habitante.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'De Protesta a Propuesta Activa',
+	                _react2.default.createElement('br', null),
+	                'Existe un preocupación social respecto a la necesidad de tener más y mejores espacios verdes en la Ciudad. Proponemos convertir al ciudadano pasivo en un agente activo, en un criador de árboles en su balcón, patio, ventana o terraza.',
+	                _react2.default.createElement('br', null),
+	                'Así se genera una relación Ganar-Ganar-Ganar:',
+	                _react2.default.createElement('br', null),
+	                'Gana el Ciudadano: Cambia su actitud y se involucra en los temas que le importan y con el espacio público que lo rodea.',
+	                _react2.default.createElement('br', null),
+	                'Gana el Municipio: obtiene nuevos espacios verdes con una alta participación comunitaria y una reducción muy significativa en costos (en 2013 se pagaban $900 pesos por árbol plantado, de esta forma serían producidos por la comunidad).',
+	                _react2.default.createElement('br', null),
+	                'Gana el Ecosistema del que formamos parte al haber nuevo refugio y alimento para la fauna local. (Persona-Comunidad-Planeta)',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Hacia una Masa Crítica de árboles nativos',
+	                _react2.default.createElement('br', null),
+	                'El término “hace referencia al número de individuos involucrados en un fenómeno a partir del cual éste adquiere una dinámica propia que le permite sostenerse y crecer por sí mismo.”',
+	                _react2.default.createElement('br', null),
+	                'A febrero de 2016 llevamos sembrados más de 10.000 árboles y esta cifra crece semana a semana.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'article',
+	              {
+	                id: 'popup_festi_content_mapa',
+	                'data-id': 'mapa' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Juntos, somos un BOSQUE.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'article',
+	              {
+	                id: 'popup_festi_content_fest',
+	                'data-id': 'fest' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Juntos, somos un BOSQUE.'
+	              )
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -59272,14 +59990,20 @@
 	exports.default = Info;
 
 /***/ },
-/* 780 */
+/* 800 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 781 */,
-/* 782 */
+/* 801 */,
+/* 802 */,
+/* 803 */,
+/* 804 */,
+/* 805 */,
+/* 806 */,
+/* 807 */,
+/* 808 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59290,7 +60014,9 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(783);
+	__webpack_require__(809);
+
+	__webpack_require__(778);
 
 	var _react = __webpack_require__(1);
 
@@ -59304,120 +60030,188 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Crono = function (_Component) {
-	  _inherits(Crono, _Component);
+	var Info = function (_Component) {
+	  _inherits(Info, _Component);
 
-	  function Crono() {
-	    _classCallCheck(this, Crono);
+	  function Info() {
+	    _classCallCheck(this, Info);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Crono).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Info).call(this));
+
+	    _this.state = {
+	      active: 'intro'
+	    };
+	    _this.activeSection = _this.activeSection.bind(_this);
+	    return _this;
 	  }
 
-	  _createClass(Crono, [{
+	  _createClass(Info, [{
+	    key: 'activeSection',
+	    value: function activeSection(active) {
+	      var _this2 = this;
+
+	      return function () {
+	        $tate('popups.list.info.content.active').value = active;
+	        _this2.setState({ active: active });
+	      };
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'article',
-	        { 'data-id': 'cronoSlide', 'data-enter': 'de-der', className: 'cronograma-wrapper' },
-	        _react2.default.createElement(
-	          'button',
-	          { id: 'volver_a_intro', 'data-id': 'volverAIntro' },
-	          _react2.default.createElement('svg-icon', { type: 'caret.left' }),
-	          'volver'
-	        ),
+	        'dialog',
+	        {
+	          is: 'pop-up',
+	          active: this.props.active,
+	          id: 'popup_info' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'fila-crono' },
+	          null,
 	          _react2.default.createElement(
-	            'span',
-	            { className: 'hora-crono' },
-	            '12:00'
-	          ),
-	          _react2.default.createElement('span', { className: 'linea-crono' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'content-crono' },
+	            'nav',
+	            null,
 	            _react2.default.createElement(
-	              'h2',
-	              null,
-	              'Nos juntamos'
+	              'button',
+	              {
+	                id: 'popup_info_nav_intro',
+	                className: this.state.active === 'intro' ? 'active' : '',
+	                onClick: this.activeSection('intro') },
+	              'Introducción',
+	              _react2.default.createElement('span', { className: 'underline' })
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              'Empezamos con una pequeña reunion para contabilizar los arboles y organizar la jornada.'
+	              'button',
+	              {
+	                id: 'popup_info_nav_porq',
+	                className: this.state.active === 'porq' ? 'active' : '',
+	                onClick: this.activeSection('porq') },
+	              '¿Por qué?',
+	              _react2.default.createElement('span', { className: 'underline' })
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                id: 'popup_info_nav_mapa',
+	                className: this.state.active === 'mapa' ? 'active' : '',
+	                onClick: this.activeSection('mapa') },
+	              'Mapa',
+	              _react2.default.createElement('span', { className: 'underline' })
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                id: 'popup_info_nav_fest',
+	                className: this.state.active === 'fest' ? 'active' : '',
+	                onClick: this.activeSection('fest') },
+	              'Festivales',
+	              _react2.default.createElement('span', { className: 'underline' })
 	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'fila-crono' },
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'hora-crono' },
-	            '12:30'
 	          ),
-	          _react2.default.createElement('span', { className: 'linea-crono' }),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'content-crono' },
+	            'slider-box',
+	            { 'data-path': 'popups.list.info.content' },
 	            _react2.default.createElement(
-	              'h2',
-	              null,
-	              'Charla'
+	              'article',
+	              {
+	                id: 'popup_info_content_intro',
+	                'data-id': 'intro',
+	                className: 'active' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Juntos, somos un BOSQUE.'
+	              )
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              'El colectivo huertero nos explicará como podemos tomar acción en comunidad.'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'fila-crono' },
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'hora-crono' },
-	            '13:00'
-	          ),
-	          _react2.default.createElement('span', { className: 'linea-crono' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'content-crono' },
-	            _react2.default.createElement(
-	              'h2',
-	              null,
-	              'Musica'
+	              'article',
+	              {
+	                id: 'popup_info_content_porq',
+	                'data-id': 'porq' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.',
+	                _react2.default.createElement('br', null),
+	                'La OMS propone entre 10 y 15 mts2 de espacios verdes por habitante. Al día de hoy, en Capital Federal, tenemos 6,2 mts2 promedio. Y en los barrios vulnerable esa cifra desciende a 1,5 mts2 por habitante.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'De Protesta a Propuesta Activa',
+	                _react2.default.createElement('br', null),
+	                'Existe un preocupación social respecto a la necesidad de tener más y mejores espacios verdes en la Ciudad. Proponemos convertir al ciudadano pasivo en un agente activo, en un criador de árboles en su balcón, patio, ventana o terraza.',
+	                _react2.default.createElement('br', null),
+	                'Así se genera una relación Ganar-Ganar-Ganar:',
+	                _react2.default.createElement('br', null),
+	                'Gana el Ciudadano: Cambia su actitud y se involucra en los temas que le importan y con el espacio público que lo rodea.',
+	                _react2.default.createElement('br', null),
+	                'Gana el Municipio: obtiene nuevos espacios verdes con una alta participación comunitaria y una reducción muy significativa en costos (en 2013 se pagaban $900 pesos por árbol plantado, de esta forma serían producidos por la comunidad).',
+	                _react2.default.createElement('br', null),
+	                'Gana el Ecosistema del que formamos parte al haber nuevo refugio y alimento para la fauna local. (Persona-Comunidad-Planeta)',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Hacia una Masa Crítica de árboles nativos',
+	                _react2.default.createElement('br', null),
+	                'El término “hace referencia al número de individuos involucrados en un fenómeno a partir del cual éste adquiere una dinámica propia que le permite sostenerse y crecer por sí mismo.”',
+	                _react2.default.createElement('br', null),
+	                'A febrero de 2016 llevamos sembrados más de 10.000 árboles y esta cifra crece semana a semana.'
+	              )
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              'Perota Chingo estara tocando y al final haremos una siembra colectiva.'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'fila-crono' },
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'hora-crono' },
-	            '15:00'
-	          ),
-	          _react2.default.createElement('span', { className: 'linea-crono' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'content-crono' },
-	            _react2.default.createElement(
-	              'h2',
-	              null,
-	              'Plantación'
+	              'article',
+	              {
+	                id: 'popup_info_content_mapa',
+	                'data-id': 'mapa' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Juntos, somos un BOSQUE.'
+	              )
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              'Ahora si! a laburar!'
+	              'article',
+	              {
+	                id: 'popup_info_content_fest',
+	                'data-id': 'fest' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Juntos, somos un BOSQUE.'
+	              )
 	            )
 	          )
 	        )
@@ -59425,13 +60219,13 @@
 	    }
 	  }]);
 
-	  return Crono;
+	  return Info;
 	}(_react.Component);
 
-	exports.default = Crono;
+	exports.default = Info;
 
 /***/ },
-/* 783 */
+/* 809 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

@@ -1,5 +1,6 @@
 import './styles.css'
 import React, {Component} from 'react'
+import $tate from 'state-stream'
 
 export default class Arboles extends Component {
   render () {
@@ -8,7 +9,14 @@ export default class Arboles extends Component {
         <div id='cartel_suma'>
           <h1>Sumá tus árboles</h1>
           <p className='info'>Si estás cuidando arbolitos en maceta en tu casa y querés sumarte a las plantaciones colectivas, registralos acá y después asignalos a las plantaciónes que vos elijas.</p>
-          <button id='suma_arboles_btn' className='action-button' data-id='sumarTusArboles' title='Sumate!'>
+          <button
+            onClick={(e) => {
+              $tate('popups.active').value = 'signin'
+            }}
+            id='suma_arboles_btn'
+            className='action-button'
+            data-id='sumarTusArboles'
+            title='Sumate!'>
             Cargá tus primeros arbolitos
           </button>
         </div>

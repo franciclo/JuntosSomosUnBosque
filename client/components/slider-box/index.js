@@ -1,4 +1,5 @@
 import './styles.css'
+
 import 'document-register-element'
 import $t from 'state-stream'
 import {toggleActiveSection} from './functions'
