@@ -22,14 +22,16 @@
     "postcss-loader": "^0.10.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
-    "react-leaflet": "^0.12.1",
+    "react-leaflet": "^0.11.5",
+    "react-leaflet-div-icon": "^1.0.1",
     "rxjs": "^5.0.0-beta.7",
     "state-stream": "^1.0.8",
     "style-loader": "^0.13.1",
     "svg-sprite-loader": "0.0.19",
     "url-loader": "^0.5.7",
     "validator": "^5.2.0",
-    "webpack": "^1.13.0"
+    "webpack": "^1.13.0",
+    "whatwg-fetch": "^1.0.0"
   },
   "dependencies": {
     "async": "^2.0.0-rc.6",

@@ -12,8 +12,9 @@
     <div id="root"></div>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript">
-      window.$tate().value = <%= JSON.stringify(state) %>
+      <% for(key in state) { %>
+        window.$tate('<%= key %>').value = <%- JSON.stringify(state[key]) %>
+      <% } %>
     </script>
-
   </body>
 </html>

@@ -22,7 +22,7 @@ customElement.detachedCallback = function () {
   var id = this.getAttribute('data-path')
   Object.keys(streams[id])
     .forEach(function ($) {
-      $.unsubscribe()
+      streams[id][$].unsubscribe()
     })
 }
 

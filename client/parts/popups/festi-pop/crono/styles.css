@@ -1,0 +1,55 @@
+.cronograma-wrapper {
+      display: flex;
+    flex-direction: column;
+    padding: 0 30px;
+}
+
+.fila-crono {
+    display: flex;
+    align-items: baseline;
+}
+#volver_a_intro{
+  position: absolute;
+  right: 10px;
+  bottom: -5px;
+  border: none;
+  background: transparent;
+  color: #989898;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 8px 4px;
+}
+#volver_a_intro svg-icon{
+  fill: #989898;
+  width: 9px;
+  height: 9px;
+}
+span.hora-crono {
+    width: 30px;
+}
+
+span.linea-crono {
+    height: 10px;
+    width: 10px;
+    display: block;
+    border-radius: 7px;
+    position: relative;
+    left: 6px;
+    background: #ffe551;
+}
+.content-crono {
+    border-left: 2px solid #ffe551;
+    flex: 1;
+    padding-left: 13px;
+}
+.fila-crono:nth-of-type(1) h2{
+  margin-top: 25px;
+}
+.content-crono h2{
+  font-weight: 100;
+  margin: 17px 0 0;
+}
+
+.content-crono p{
+  margin: 0;
+}

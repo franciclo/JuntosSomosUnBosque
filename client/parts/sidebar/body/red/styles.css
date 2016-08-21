@@ -26,10 +26,12 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 9px 0;
-  background: #f5f5f5;
+  padding: 9px;
+  /*background: #009aff;*/
   display: flex;
+  border-bottom: 2px solid white;
+  color: white;
 }
-#lista_arboles_red>.fila-arbol:nth-child(even) {
-  background: #e4e4e4;
-}
+/*#lista_arboles_red>.fila-arbol:nth-child(odd) {
+  background: #2bd873;
+}*/

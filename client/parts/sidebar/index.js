@@ -12,8 +12,14 @@ export default class Sidebar extends Component {
       <div id='sidebar'>
         <Header />
         <h1>JUNTOS SOMOS UN <span>BOSQUE</span></h1>
-        <Nav />
-        <Body />
+        <Nav
+          total={
+            Object.keys(this.props.arboles)
+              .reduce((acc, key) => {
+                return this.props.arboles[key] + acc
+              }, 0)
+          }/>
+        <Body {...this.props} />
         <Footer />
       </div>
     )

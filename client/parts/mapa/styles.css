@@ -5,3 +5,6 @@
   right: 50px;
   position: absolute;
 }
+.leaflet-container {
+  background: #75cff0;
+}

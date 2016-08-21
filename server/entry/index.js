@@ -1,5 +1,6 @@
 var path = require('path')
 var $tate = require('state-stream')
+var User = require('../models/user')
 
 module.exports = function (app) {
   app.set('view engine', 'ejs')
@@ -12,7 +13,7 @@ module.exports = function (app) {
     }
 
     if (req.isAuthenticated()) {
-      $tate('user').value = {
+      $tate('yo').value = {
         primerLogin: req.user.primerLogin,
         name: req.user.getNombre(),
         type: req.user.userType,
@@ -27,8 +28,37 @@ module.exports = function (app) {
           })
       }
     }
-    res.render('layout', {
-      state: $tate().value
+
+    User.find({}, function (err, users) {
+      if (err) {
+        res.json({
+          success: false,
+          text: 'Error al buscar arboles'
+        })
+      }
+      $tate('red').value = users
+        .map(function (user) {
+          return {
+            tipo: user.userType,
+            location: {
+              lat: user.location ? user.location.split('::')[0] : 0,
+              lng: user.location ? user.location.split('::')[1] : 0
+            },
+            nombre: user.getNombre(),
+            arboles: user.arboles
+              .map(function (arbol) {
+                return {
+                  tamagno: arbol.tamagno,
+                  cantidad: arbol.cantidad,
+                  especie: arbol.especie
+                }
+              })
+          }
+        })
+
+      res.render('layout', {
+        state: $tate().value
+      })
     })
   })
 }

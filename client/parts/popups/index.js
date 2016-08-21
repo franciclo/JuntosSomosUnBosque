@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-// import $tate from 'state-stream'
 // import Signin from './popups/signin'
 // import Signup from './popups/signup'
 // import Forgot from './popups/forgot'
@@ -18,11 +17,11 @@ export default class Popups extends Component {
     var reset = null
     var flyer = null
 
-    // if ($tate('user.primerLogin').value) {
+    // if (window.$tate('user.primerLogin').value) {
     //   primerLogin = <PrimerLogin />
     // }
 
-    // if ($tate('user').value) {
+    // if (window.$tate('user').value) {
     //   signin = <Signin />
     //   signup = <Signup />
     //   forgot = <Forgot />
@@ -30,7 +29,7 @@ export default class Popups extends Component {
     //   profile = <Profile />
     // }
 
-    // if ($tate('user').value) {
+    // if (window.$tate('user').value) {
     //   reset = <Reset />
     // }
 

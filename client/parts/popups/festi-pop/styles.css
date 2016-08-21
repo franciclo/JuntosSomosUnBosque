@@ -1,0 +1,125 @@
+
+.festi-popup {
+  width: auto;
+  height: auto;
+}
+.festi-popup .leaflet-popup-tip-container {
+  display: none;
+}
+.festi-popup .leaflet-popup-content-wrapper {
+  box-shadow: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#festi_pop{
+  display: none;
+  bottom: 13px;
+  background: white;
+  left: -14vw;
+  width: 36vw;
+
+  overflow: hidden;
+}
+#festi_pop.active {
+  display: block;
+  animation: expand .5s ease-in;
+  height: 90vh;
+}
+
+@keyframes expand {
+  0% {
+    height: 0;
+  }
+
+  100% {
+    height: 90vh;
+  }
+}
+
+
+
+
+
+
+
+
+#festi_pop>header{
+  background: #17a000;
+  color: #fff;
+  padding: 11px;
+}
+#festi_pop>header p.info{
+  margin: 0;
+  font-size: 14px;
+  color: #fff;
+  fill: #fff;
+}
+#festi_pop>header p.info img {
+  height: 22px;
+}
+#festi_pop>header h1{
+  margin: 0;
+  font-weight: 100;
+  font-size: 30px;
+
+}
+#festi_pop header>img[src="close.svg"]{
+  fill: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  cursor: pointer;
+  height: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*#festi_pop {
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+  display: none;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -200px;
+  width: 0;
+  box-shadow: 0px 3px 10px #555;
+  border-radius: 2px;
+  background: #fff;
+  cursor: auto;
+}
+#festi_pop.active .expanded-pop-wrapper {
+  width: 400px;
+  position: absolute;
+  top: 0;
+  animation: aparece .3s linear;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+@keyframes aparece {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+*/

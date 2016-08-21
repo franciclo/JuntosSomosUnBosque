@@ -1,0 +1,70 @@
+.leaflet-div-icon {
+  border: none; 
+  width: 0!important;
+  height: 0!important;
+  position: relative;
+  background: none;
+}
+#festi_marker {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  background: #fff;
+  font-family: P22Underground;
+  width: 138px;
+  margin-left: -61px;
+  align-items: center;
+  justify-content: center;
+}
+#festi_marker img {
+  width: 30px;
+  height: auto;
+  margin: 5px;
+}
+#festi_marker span.title {
+    color: #fff;
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: 500;
+    padding: 4px 7px;
+    background: #ff687b;
+}
+#festi_marker span.triangle {
+  width: 0;
+  position: absolute;
+  bottom: -8px;
+  left: 59px;
+  border-style: solid;
+  border-width: 11px 8px 0 8px;
+  border-color: #ff687b transparent transparent transparent;
+}
+#festi_marker .ver-mas{
+  position: absolute;
+  width: 98px;
+  right: 0;
+  top: 0px;
+  background: #ff687b;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  color: white;
+}
+#festi_marker .ver-mas img{
+  transform: rotate(-90deg);
+  height: 9px;
+  width: 13px;
+  margin: 4px 0 0 5px;
+}
+#festi_marker:hover .ver-mas {
+  animation: sube 100ms ease-in;
+  top: -18px;
+}
+@keyframes sube {
+  0% {
+    top:0;
+  }
+  100% {
+    top:-18px;
+  }
+}
