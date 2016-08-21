@@ -30,7 +30,8 @@ export default class Mapa extends Component {
           url='https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ'
         />
         <FestiMarker
-          position={position} />
+          position={position}
+          className='festi-marker' />
         {
           this.props.red
             .map((user, i) => {

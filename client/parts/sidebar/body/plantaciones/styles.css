@@ -22,6 +22,7 @@
   margin: 0 10px 10px 0;
   float: right;
   border-radius: 3px;
+  font-weight: 500;
 }
 #cartel_evento button:hover{
   background: #e85e70;

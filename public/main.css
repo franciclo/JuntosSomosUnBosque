@@ -533,6 +533,9 @@ button {
   position: relative;
   background: none;
 }
+.festi-marker {
+  z-index: 999!important;
+}
 #festi_marker {
   display: flex;
   position: absolute;
@@ -900,6 +903,7 @@ slider-box > article.active {
   margin: 0 10px 10px 0;
   float: right;
   border-radius: 3px;
+  font-weight: 500;
 }
 #cartel_evento button:hover{
   background: #e85e70;

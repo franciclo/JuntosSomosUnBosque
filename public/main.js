@@ -40314,7 +40314,8 @@
 	          url: 'https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ'
 	        }),
 	        _react2.default.createElement(_festiMarker2.default, {
-	          position: position }),
+	          position: position,
+	          className: 'festi-marker' }),
 	        this.props.red.map(function (user, i) {
 	          return _react2.default.createElement(_userMarker2.default, {
 	            position: user.location,

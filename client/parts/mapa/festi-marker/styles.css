@@ -5,6 +5,9 @@
   position: relative;
   background: none;
 }
+.festi-marker {
+  z-index: 999!important;
+}
 #festi_marker {
   display: flex;
   position: absolute;
