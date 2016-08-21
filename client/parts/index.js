@@ -10,7 +10,7 @@ export default class Main extends Component {
   constructor () {
     super()
     this.state = {
-      arboles: {},
+      arboles: [],
       red: []
     }
     this.redData = window.$tate('red').on('N')
@@ -22,13 +22,22 @@ export default class Main extends Component {
         .map((usu) => usu.arboles || [])
         .reduce((acc, arboles) => {
           arboles.forEach(function (arbol) {
-            let subTotal = arbol.especie + '-' + arbol.tamagno
-            acc[subTotal] = acc[subTotal]
-              ? acc[subTotal] + arbol.cantidad
-              : arbol.cantidad
+            let label = arbol.especie + ' ' + arbol.tamagno
+            let ind = acc.map((a) => a.label).indexOf(label)
+            if (~ind) {
+              acc[ind].cantidad += arbol.cantidad
+            } else {
+              acc.push({
+                cantidad: arbol.cantidad,
+                label: label
+              })
+            }
           })
           return acc
-        }, {})
+        }, [])
+        .sort((a, b) => {
+          return b.cantidad - a.cantidad
+        })
 
       let red = data
         .map((user) => {

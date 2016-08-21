@@ -16,7 +16,6 @@ export default class Body extends Component {
     return colors[(colors.length - 1) < k ? 0 : k]
   }
   render () {
-    let arboles = this.props.arboles
     return (
       <article data-id='action_content_red' data-enter='de-arr-s'>
         <div id='la_red'>
@@ -27,15 +26,15 @@ export default class Body extends Component {
               <span>Cantidad</span>
             </div>
             {
-              Object.keys(arboles)
-                .map((tipo, i) => {
+              this.props.arboles
+                .map((arbol, i) => {
                   return (
                     <div
-                      key={tipo}
+                      key={i}
                       style={{background: this.rainbow(i)}}
                       className='fila-arbol'>
-                      <span>{tipo.replace('-', ' ')}</span>
-                      <span>{this.props.arboles[tipo]}</span>
+                      <span>{arbol.label}</span>
+                      <span>{arbol.cantidad}</span>
                     </div>
                   )
                 })

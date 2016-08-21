@@ -14,11 +14,11 @@ export default class Sidebar extends Component {
         <h1>JUNTOS SOMOS UN <span>BOSQUE</span></h1>
         <Nav
           total={
-            Object.keys(this.props.arboles)
-              .reduce((acc, key) => {
-                return this.props.arboles[key] + acc
+            this.props.arboles
+              .reduce((acc, arbol) => {
+                return arbol.cantidad + acc
               }, 0)
-          }/>
+          } />
         <Body {...this.props} />
         <Footer />
       </div>

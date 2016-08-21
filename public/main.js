@@ -21462,7 +21462,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this));
 
 	    _this.state = {
-	      arboles: {},
+	      arboles: [],
 	      red: []
 	    };
 	    _this.redData = window.$tate('red').on('N');
@@ -21479,11 +21479,23 @@
 	          return usu.arboles || [];
 	        }).reduce(function (acc, arboles) {
 	          arboles.forEach(function (arbol) {
-	            var subTotal = arbol.especie + '-' + arbol.tamagno;
-	            acc[subTotal] = acc[subTotal] ? acc[subTotal] + arbol.cantidad : arbol.cantidad;
+	            var label = arbol.especie + ' ' + arbol.tamagno;
+	            var ind = acc.map(function (a) {
+	              return a.label;
+	            }).indexOf(label);
+	            if (~ind) {
+	              acc[ind].cantidad += arbol.cantidad;
+	            } else {
+	              acc.push({
+	                cantidad: arbol.cantidad,
+	                label: label
+	              });
+	            }
 	          });
 	          return acc;
-	        }, {});
+	        }, []).sort(function (a, b) {
+	          return b.cantidad - a.cantidad;
+	        });
 
 	        var red = data.map(function (user) {
 	          user.arboles = user.arboles.reduce(function (acc, arbol) {
@@ -58100,8 +58112,6 @@
 	  _createClass(Sidebar, [{
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'sidebar' },
@@ -58117,8 +58127,8 @@
 	          )
 	        ),
 	        _react2.default.createElement(_nav2.default, {
-	          total: Object.keys(this.props.arboles).reduce(function (acc, key) {
-	            return _this2.props.arboles[key] + acc;
+	          total: this.props.arboles.reduce(function (acc, arbol) {
+	            return arbol.cantidad + acc;
 	          }, 0) }),
 	        _react2.default.createElement(_body2.default, this.props),
 	        _react2.default.createElement(_footer2.default, null)
@@ -58733,7 +58743,6 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      var arboles = this.props.arboles;
 	      return _react2.default.createElement(
 	        'article',
 	        { 'data-id': 'action_content_red', 'data-enter': 'de-arr-s' },
@@ -58762,22 +58771,22 @@
 	                'Cantidad'
 	              )
 	            ),
-	            Object.keys(arboles).map(function (tipo, i) {
+	            this.props.arboles.map(function (arbol, i) {
 	              return _react2.default.createElement(
 	                'div',
 	                {
-	                  key: tipo,
+	                  key: i,
 	                  style: { background: _this2.rainbow(i) },
 	                  className: 'fila-arbol' },
 	                _react2.default.createElement(
 	                  'span',
 	                  null,
-	                  tipo.replace('-', ' ')
+	                  arbol.label
 	                ),
 	                _react2.default.createElement(
 	                  'span',
 	                  null,
-	                  _this2.props.arboles[tipo]
+	                  arbol.cantidad
 	                )
 	              );
 	            })
