@@ -799,19 +799,12 @@ slider-box > article{
   opacity: 0;
   height: 100%;
   width: 100%;
+  display: none;
 }
 slider-box > article.active {
   opacity: 1;
   z-index: 9;
-}
-/* OUT */
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+  display: block;
 }
 
 /* IN */
