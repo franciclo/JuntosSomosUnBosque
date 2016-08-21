@@ -1,20 +1,5 @@
 
-.festi-popup {
-  width: auto;
-  height: auto;
-}
-.festi-popup .leaflet-popup-tip-container {
-  display: none;
-}
-.festi-popup .leaflet-popup-content-wrapper {
-  box-shadow: none;
-  border-radius: 0;
-  margin: 0;
-  padding: 0;
-}
-
 #festi_pop{
-  display: none;
   bottom: 13px;
   background: white;
   left: -14vw;

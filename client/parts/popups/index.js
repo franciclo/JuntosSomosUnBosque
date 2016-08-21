@@ -6,6 +6,7 @@ import React, {Component} from 'react'
 // import PrimerLogin from './popups/primer-login'
 // import Reset from './popups/reset'
 // import Flyer from './popups/flyer'
+import Festi from './festi'
 
 export default class Popups extends Component {
   render () {
@@ -32,7 +33,6 @@ export default class Popups extends Component {
     // if (window.$tate('user').value) {
     //   reset = <Reset />
     // }
-
     return (
       <div id='popups_layout'>
         {signin}
@@ -42,6 +42,7 @@ export default class Popups extends Component {
         {primerLogin}
         {reset}
         {flyer}
+        <Festi />
       </div>
     )
   }
