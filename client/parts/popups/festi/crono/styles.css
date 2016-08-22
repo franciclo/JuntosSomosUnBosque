@@ -1,7 +1,7 @@
-.cronograma-wrapper {
-      display: flex;
-    flex-direction: column;
-    padding: 0 30px;
+#popup_festi_content_crono {
+  padding: 0 50px;
+  box-sizing: border-box;
+  color: #555;
 }
 
 .fila-crono {

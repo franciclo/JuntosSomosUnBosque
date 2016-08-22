@@ -5,21 +5,20 @@
   background: white;
   height: 90vh;
   width: 45vw;
+  min-width: 620px;
   display: flex;
   flex-direction: column;
 }
-
-
+/* HEADER */
 #popup_festi > div > header {
   display: flex;
   align-items: center;
-  height: 200px;
+  min-height: 109px;
 }
 #popup_festi > div > header img[src="fecha.svg"]{
-  height: 100px;
+  height: 80px;
   margin: 0 20px;
 }
-
 #popup_festi > div > header .header-info{
   background: #ff687b;
   flex: 1;
@@ -32,21 +31,27 @@
 }
 #popup_festi > div > header .header-info h1{
   margin: 0;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 500;
 }
 #popup_festi > div > header .header-info p{
   margin: 0;
-  font-size: 20px;
+  font-size: 15px;
 }
 #popup_festi > div > header .info img{
-  height: 20px;
+  height: 14px;
+  position: relative;
+  top: 2px;
+  width: 20px;
+  left: -2px;
 }
-
+/* NAV */
 #popup_festi > div > nav {
   display: flex;
+  height: 60px;
 }
-#popup_festi > div > nav > button {
+#popup_festi > div > nav > button,
+#popup_festi > div > nav > a {
   flex: 1;
   text-transform: uppercase;
   font-weight: 500;
@@ -54,42 +59,45 @@
   color: white;
   border: none;
   display: flex;
+  justify-content: center;
+  cursor: pointer;
+  align-items: center;
+  text-decoration: none;
+}
+#popup_festi > div > nav > button.nav {
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  outline: none;
 }
 #popup_festi > div > nav > button.active .underline{
   width: 77%;
   border-top: 2px solid white;
   margin: 5px auto 0;
 }
-#popup_festi > div > nav > button.active {
-  font-size: 17px!important;
-  animation: none!important;
+#popup_festi_nav_fb img {
+  height: 14px;
+  margin-right: 5px;
 }
 
-#popup_festi > div > nav > button:hover {
-  animation: growTxt 0.1s linear;
-  font-size: 17px;
+#popup_festi_nav_info {
+  background: #ff7d5f;
 }
-@keyframes growTxt {
-  0% {
-    font-size: 15px;
-  }
-  100% {
-    font-size: 17px;
-  }
+#popup_festi_nav_crono {
+  background: #fff478;
+  color:#555!important;
+}
+#popup_festi_nav_crono.active .underline {
+  border-color: #555!important;
+}
+#popup_festi_nav_fb {
+  background: #153add;
+}
+#popup_festi_nav_ayuda {
+  background: #ff3642;
 }
 
 
-
-
-
-
-
-#popup_festi > div > slider-box > article{
+/* CONTENT */
+/*#popup_festi > div > slider-box > article{
   display: flex;
   align-items: center;
 }
@@ -100,4 +108,4 @@
   overflow: auto;
   box-sizing: border-box;
   color: white;
-}
+}*/

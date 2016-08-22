@@ -5,7 +5,9 @@ import React, {Component} from 'react'
 export default class Crono extends Component {
   render () {
     return (
-      <article data-id='cronoSlide' data-enter='de-der' className='cronograma-wrapper'>
+      <article
+        data-id='crono'
+        id='popup_festi_content_crono'>
         <button id='volver_a_intro' data-id='volverAIntro'>
           <svg-icon type='caret.left'></svg-icon>
           volver

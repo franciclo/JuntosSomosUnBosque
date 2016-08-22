@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -7,28 +9,21 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="51.632"
-   height="51.632999"
-   viewBox="0 0 51.632 51.632999"
-   id="svg2"
    version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="512px"
+   height="512px"
+   viewBox="0 0 512 512"
+   enable-background="new 0 0 512 512"
+   xml:space="preserve"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="reloj-fff.svg">
-  <metadata
-     id="metadata10">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs8" />
-  <sodipodi:namedview
+   sodipodi:docname="reloj-fff.svg"><metadata
+     id="metadata9"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+     id="defs7" /><sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1"
@@ -37,24 +32,17 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="751"
+     inkscape:window-width="640"
      inkscape:window-height="480"
-     id="namedview6"
+     id="namedview5"
      showgrid="false"
-     inkscape:zoom="3.1052632"
-     inkscape:cx="-16.370441"
-     inkscape:cy="27.400001"
-     inkscape:window-x="149"
+     inkscape:zoom="0.4609375"
+     inkscape:cx="256"
+     inkscape:cy="256"
+     inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0" />
-  <path
-     d="m 25.816,0 c 14.258,0 25.816,11.558 25.816,25.816 0,14.258 -11.558,25.817 -25.816,25.817 C 11.558,51.633 0,40.073 0,25.816 0,11.558 11.558,0 25.816,0 Z m 0,6.454 c -10.694,0 -19.362,8.669 -19.362,19.362 0,10.694 8.668,19.363 19.362,19.363 10.694,0 19.362,-8.67 19.362,-19.363 0,-10.693 -8.668,-19.362 -19.362,-19.362 z m -0.645,5.163 a 2.582,2.582 0 0 1 2.581,2.582 l 0,9.681 9.681,0 a 2.582,2.582 0 0 1 2.583,2.583 l 0,1.29"
-     id="path4"
-     style="fill:#ffffff;fill-opacity:1"
-     inkscape:connector-curvature="0" />
-</svg>
+     inkscape:current-layer="Layer_1" /><path
+     d="M256,0C114.609,0,0,114.625,0,256s114.609,256,256,256c141.375,0,256-114.625,256-256S397.375,0,256,0z M256,448  c-105.875,0-192-86.125-192-192S150.125,64,256,64s192,86.125,192,192S361.875,448,256,448z M416,256c0,17.688-14.313,32-32,32H256  c-17.672,0-32-14.313-32-32V128c0-17.688,14.328-32,32-32s32,14.313,32,32v96h96C401.688,224,416,238.313,416,256z"
+     id="path3"
+     style="fill:#ffffff" /></svg>

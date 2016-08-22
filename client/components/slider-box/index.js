@@ -1,17 +1,16 @@
 import './styles.css'
 
 import 'document-register-element'
-import $t from 'state-stream'
 import {toggleActiveSection} from './functions'
 
 let streams = {}
-class SliderBox extends HTMLElement {
+class SliderBox extends window.HTMLElement {
   connectedCallback () {
     let id = this.getAttribute('data-path')
-    $t(id).value = {}
+    window.$tate(id).value = {}
     streams[id] = {}
 
-    streams[id].activate = $t(id + '.active')
+    streams[id].activate = window.$tate(id + '.active')
       .on(['N', 'E'])
       .subscribe((active) => {
         toggleActiveSection(this, active)

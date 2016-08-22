@@ -2,10 +2,9 @@ import './styles.css'
 
 import 'document-register-element'
 import Rx from 'rxjs'
-import $tate from 'state-stream'
 
 let streams = {}
-class PopUp extends HTMLDialogElement {
+class PopUp extends window.HTMLDialogElement {
   connectedCallback () {
     let popUpClicks = Rx.Observable
       .fromEvent(this, 'click')
@@ -14,7 +13,9 @@ class PopUp extends HTMLDialogElement {
 
     let closeBtn = document.createElement('img')
     closeBtn.alt = 'Cerrar'
-    closeBtn.src = 'close.svg'
+    closeBtn.src = this.getAttribute('data-icon') === 'fff'
+      ? 'close-fff.svg'
+      : 'close.svg'
     closeBtn = this.appendChild(closeBtn)
     let closeBtnClicks = Rx.Observable
       .fromEvent(closeBtn, 'click')
@@ -23,7 +24,7 @@ class PopUp extends HTMLDialogElement {
       .merge(popUpClicks, closeBtnClicks)
       .subscribe(() => {
         this.setAttribute('active', '')
-        $tate('popups.active').value = ''
+        window.$tate('popups.active').value = ''
       })
   }
 

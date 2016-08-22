@@ -1,6 +1,5 @@
 import './styles.css'
 import React, {Component} from 'react'
-import $tate from 'state-stream'
 
 export default class Plantaciones extends Component {
   render () {
@@ -25,7 +24,7 @@ export default class Plantaciones extends Component {
           </p>
           <button
             onClick={
-              (e) => { $tate('popups.active').value = 'festi' }
+              (e) => { window.$tate('popups.active').value = 'festi' }
             }
             data-id='evento-sidebar-mas'>
             Ver más

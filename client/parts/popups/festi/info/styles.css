@@ -1,4 +1,4 @@
-.intro-wrapper button{
+#popup_festi_content_info button{
   position: absolute;
   bottom: 0;
   right: 0;
@@ -8,20 +8,20 @@
   color: #ff1b4b;
   fill: #ff1b4b;
 }
-.intro-wrapper button svg-icon{
+#popup_festi_content_info button svg-icon{
   height: 13px;
 }
-.intro-wrapper {
+#popup_festi_content_info {
   padding: 15px 10px;
   height: 100%;
   box-sizing: border-box;
 }
-.intro-wrapper p {
+#popup_festi_content_info p {
   font-size: 15px;
   color: #444;
   margin: 10px 0 0;
 }    
-.intro-wrapper p.info {
+#popup_festi_content_info p.info {
   font-size: 15px;
   color: #929292;
   font-style: italic;

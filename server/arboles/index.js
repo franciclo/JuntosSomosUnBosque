@@ -128,7 +128,7 @@ module.exports = function (app) {
           text: 'Error al buscar arboles'
         })
       }
-      var allUsers =  users
+      var allUsers = users
         .map(function (user) {
           return {
             tipo: user.userType,
@@ -144,11 +144,17 @@ module.exports = function (app) {
               })
           }
         })
-        
+
       res.json({
         success: true,
         result: allUsers
       })
+    })
+  })
+  app.post('/lala', function (req, res) {
+    res.json({
+      success: true,
+      result: {ola: 'holaa'}
     })
   })
 }
