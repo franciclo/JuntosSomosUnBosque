@@ -58511,7 +58511,7 @@
 /***/ function(module, exports) {
 
 	/*! (C) WebReflection Mit Style License */
-	(function(e,t,n,r){"use strict";function bt(){var e=ut.splice(0,ut.length);at=0;while(e.length)e.shift().call(null,e.shift())}function wt(e,t){for(var n=0,r=e.length;n<r;n++)_t(e[n],t)}function Et(e){for(var t=0,n=e.length,r;t<n;t++)r=e[t],yt(r,w[xt(r)])}function St(e){return function(t){K(t)&&(_t(t,e),wt(t.querySelectorAll(E),e))}}function xt(e){var t=Z.call(e,"is"),n=e.nodeName.toUpperCase(),r=x.call(b,t?m+t.toUpperCase():v+n);return t&&-1<r&&!Tt(n,t)?-1:r}function Tt(e,t){return-1<E.indexOf(e+'[is="'+t+'"]')}function Nt(e){var t=e.currentTarget,n=e.attrChange,r=e.attrName,i=e.target;ht&&(!i||i===t)&&t.attributeChangedCallback&&r!=="style"&&e.prevValue!==e.newValue&&t.attributeChangedCallback(r,n===e[f]?null:e.prevValue,n===e[c]?null:e.newValue)}function Ct(e){var t=St(e);return function(e){ut.push(t,e.target),at&&clearTimeout(at),at=setTimeout(bt,1)}}function kt(e){ct&&(ct=!1,e.currentTarget.removeEventListener(p,kt)),wt((e.target||t).querySelectorAll(E),e.detail===u?u:o),$&&Ot()}function Lt(e,t){var n=this;nt.call(n,e,t),pt.call(n,{target:n})}function At(e,t){W(e,t),mt?mt.observe(e,st):(lt&&(e.setAttribute=Lt,e[s]=vt(e),e.addEventListener(d,pt)),e.addEventListener(h,Nt)),e.createdCallback&&ht&&(e.created=!0,e.createdCallback(),e.created=!1)}function Ot(){for(var e,t=0,n=Q.length;t<n;t++)e=Q[t],S.contains(e)||(n--,Q.splice(t--,1),_t(e,u))}function Mt(e){throw new Error("A "+e+" type is already registered")}function _t(e,t){var n,r=xt(e);-1<r&&(gt(e,w[r]),r=0,t===o&&!e[o]?(e[u]=!1,e[o]=!0,r=1,$&&x.call(Q,e)<0&&Q.push(e)):t===u&&!e[u]&&(e[o]=!1,e[u]=!0,r=1),r&&(n=e[t+"Callback"])&&n.call(e))}function Dt(){}function Pt(e,n,i){var s=i&&i[a]||"",o=n.prototype,u=z(o),f=n.observedAttributes||Array.prototype,l={prototype:u};J(u,"createdCallback",{value:function(){I?I=!1:this[D]||(this[D]=!0,new n(this))}}),J(u,"attributeChangedCallback",{value:function(e){-1<x.call(f,e)&&o.attributeChangedCallback.apply(this,arguments)}}),o.connectedCallback&&J(u,"attachedCallback",{value:o.connectedCallback}),o.disconnectedCallback&&J(u,"detachedCallback",{value:o.disconnectedCallback}),s&&(l[a]=s),t[r](e,l),e=e.toUpperCase(),q[e]={constructor:n,create:s?[s,e]:[e]},U.set(n,e),Bt(e),R[e].r()}function Ht(e){var t=q[e.toUpperCase()];return t&&t.constructor}function Bt(e){return e=e.toUpperCase(),e in R||(R[e]={},R[e].p=new F(function(t){R[e].r=t})),R[e].p}function jt(){P&&delete e.customElements,k(e,"customElements",{configurable:!0,value:new Dt}),k(e,"CustomElementsRegistry",{configurable:!0,value:Dt});for(var n=function(n){var r=e[n];r&&(e[n]=function(n){return n||(n=this),n[D]||(I=!0,n=t.createElement.apply(t,q[U.get(n.constructor)].create),I=!1,n[D]=!0),n},J(e[n].prototype=z(r.prototype),"constructor",{configurable:!0,writable:!0,value:e[n]}))},r=i.get(/^HTML/),s=r.length;s--;n(r[s]));t.createElement=function(e,t){var n=typeof t=="string"?t:t&&t.is||"";return n?it.call(this,e,n):it.call(this,e)}}var i=function(e){var t=/^[A-Z]+[a-z]/,r=function(e){var t=[],n;for(n in s)e.test(n)&&t.push(n);return t},i=function(e,t){t=t.toLowerCase(),t in s||(s[e]=(s[e]||[]).concat(t),s[t]=s[t.toUpperCase()]=e)},s=(n.create||n)(null),o={},u,a,f,l;for(a in e)for(l in e[a]){f=e[a][l],s[l]=f;for(u=0;u<f.length;u++)s[f[u].toLowerCase()]=s[f[u].toUpperCase()]=l}return o.get=function(n){return typeof n=="string"?s[n]||(t.test(n)?[]:""):r(n)},o.set=function(n,r){return t.test(n)?i(n,r):i(r,n),o},o}({collections:{HTMLAllCollection:["all"],HTMLCollection:["forms"],HTMLFormControlsCollection:["elements"],HTMLOptionsCollection:["options"]},elements:{Element:["element"],HTMLAnchorElement:["a"],HTMLAppletElement:["applet"],HTMLAreaElement:["area"],HTMLAttachmentElement:["attachment"],HTMLAudioElement:["audio"],HTMLBRElement:["br"],HTMLBaseElement:["base"],HTMLBodyElement:["body"],HTMLButtonElement:["button"],HTMLCanvasElement:["canvas"],HTMLContentElement:["content"],HTMLDListElement:["dl"],HTMLDataElement:["data"],HTMLDataListElement:["datalist"],HTMLDetailsElement:["details"],HTMLDialogElement:["dialog"],HTMLDirectoryElement:["dir"],HTMLDivElement:["div"],HTMLDocument:["document"],HTMLElement:["element","abbr","address","article","aside","b","bdi","bdo","cite","code","command","dd","dfn","dt","em","figcaption","figure","footer","header","i","kbd","mark","nav","noscript","rp","rt","ruby","s","samp","section","small","strong","sub","summary","sup","u","var","wbr"],HTMLEmbedElement:["embed"],HTMLFieldSetElement:["fieldset"],HTMLFontElement:["font"],HTMLFormElement:["form"],HTMLFrameElement:["frame"],HTMLFrameSetElement:["frameset"],HTMLHRElement:["hr"],HTMLHeadElement:["head"],HTMLHeadingElement:["h1","h2","h3","h4","h5","h6"],HTMLHtmlElement:["html"],HTMLIFrameElement:["iframe"],HTMLImageElement:["img"],HTMLInputElement:["input"],HTMLKeygenElement:["keygen"],HTMLLIElement:["li"],HTMLLabelElement:["label"],HTMLLegendElement:["legend"],HTMLLinkElement:["link"],HTMLMapElement:["map"],HTMLMarqueeElement:["marquee"],HTMLMediaElement:["media"],HTMLMenuElement:["menu"],HTMLMenuItemElement:["menuitem"],HTMLMetaElement:["meta"],HTMLMeterElement:["meter"],HTMLModElement:["del","ins"],HTMLOListElement:["ol"],HTMLObjectElement:["object"],HTMLOptGroupElement:["optgroup"],HTMLOptionElement:["option"],HTMLOutputElement:["output"],HTMLParagraphElement:["p"],HTMLParamElement:["param"],HTMLPictureElement:["picture"],HTMLPreElement:["pre"],HTMLProgressElement:["progress"],HTMLQuoteElement:["blockquote","q","quote"],HTMLScriptElement:["script"],HTMLSelectElement:["select"],HTMLShadowElement:["shadow"],HTMLSlotElement:["slot"],HTMLSourceElement:["source"],HTMLSpanElement:["span"],HTMLStyleElement:["style"],HTMLTableCaptionElement:["caption"],HTMLTableCellElement:["td","th"],HTMLTableColElement:["col","colgroup"],HTMLTableElement:["table"],HTMLTableRowElement:["tr"],HTMLTableSectionElement:["thead","tbody","tfoot"],HTMLTemplateElement:["template"],HTMLTextAreaElement:["textarea"],HTMLTimeElement:["time"],HTMLTitleElement:["title"],HTMLTrackElement:["track"],HTMLUListElement:["ul"],HTMLUnknownElement:["unknown","vhgroupv","vkeygen"],HTMLVideoElement:["video"]},nodes:{Attr:["node"],Audio:["audio"],CDATASection:["node"],CharacterData:["node"],Comment:["#comment"],Document:["#document"],DocumentFragment:["#document-fragment"],DocumentType:["node"],HTMLDocument:["#document"],Image:["img"],Option:["option"],ProcessingInstruction:["node"],ShadowRoot:["#shadow-root"],Text:["#text"],XMLDocument:["xml"]}}),s="__"+r+(Math.random()*1e5>>0),o="attached",u="detached",a="extends",f="ADDITION",l="MODIFICATION",c="REMOVAL",h="DOMAttrModified",p="DOMContentLoaded",d="DOMSubtreeModified",v="<",m="=",g=/^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/,y=["ANNOTATION-XML","COLOR-PROFILE","FONT-FACE","FONT-FACE-SRC","FONT-FACE-URI","FONT-FACE-FORMAT","FONT-FACE-NAME","MISSING-GLYPH"],b=[],w=[],E="",S=t.documentElement,x=b.indexOf||function(e){for(var t=this.length;t--&&this[t]!==e;);return t},T=n.prototype,N=T.hasOwnProperty,C=T.isPrototypeOf,k=n.defineProperty,L=n.getOwnPropertyDescriptor,A=n.getOwnPropertyNames,O=n.getPrototypeOf,M=n.setPrototypeOf,_=!!n.__proto__,D="__dreCEv1",P=e.customElements,H=!!(P&&P.define&&P.get&&P.whenDefined),B=n.create||n,j=e.Map||function(){var t=[],n=[],r;return{get:function(e){return n[x.call(t,e)]},set:function(e,i){r=x.call(t,e),r<0?n[t.push(e)-1]=i:n[r]=i}}},F=e.Promise||function(e){function i(e){n=!0;while(t.length)t.shift()(e)}var t=[],n=!1,r={"catch":function(){return r},then:function(e){return t.push(e),n&&setTimeout(i,1),r}};return e(i),r},I=!1,q=B(null),R=B(null),U=new j,z=n.create||function It(e){return e?(It.prototype=e,new It):this},W=M||(_?function(e,t){return e.__proto__=t,e}:A&&L?function(){function e(e,t){for(var n,r=A(t),i=0,s=r.length;i<s;i++)n=r[i],N.call(e,n)||k(e,n,L(t,n))}return function(t,n){do e(t,n);while((n=O(n))&&!C.call(n,t));return t}}():function(e,t){for(var n in t)e[n]=t[n];return e}),X=e.MutationObserver||e.WebKitMutationObserver,V=(e.HTMLElement||e.Element||e.Node).prototype,$=!C.call(V,S),J=$?function(e,t,n){return e[t]=n.value,e}:k,K=$?function(e){return e.nodeType===1}:function(e){return C.call(V,e)},Q=$&&[],G=V.cloneNode,Y=V.dispatchEvent,Z=V.getAttribute,et=V.hasAttribute,tt=V.removeAttribute,nt=V.setAttribute,rt=t.createElement,it=rt,st=X&&{attributes:!0,characterData:!0,attributeOldValue:!0},ot=X||function(e){lt=!1,S.removeEventListener(h,ot)},ut,at=0,ft=!1,lt=!0,ct=!0,ht=!0,pt,dt,vt,mt,gt,yt;r in t||(M||_?(gt=function(e,t){C.call(t,e)||At(e,t)},yt=At):(gt=function(e,t){e[s]||(e[s]=n(!0),At(e,t))},yt=gt),$?(lt=!1,function(){var e=L(V,"addEventListener"),t=e.value,n=function(e){var t=new CustomEvent(h,{bubbles:!0});t.attrName=e,t.prevValue=Z.call(this,e),t.newValue=null,t[c]=t.attrChange=2,tt.call(this,e),Y.call(this,t)},r=function(e,t){var n=et.call(this,e),r=n&&Z.call(this,e),i=new CustomEvent(h,{bubbles:!0});nt.call(this,e,t),i.attrName=e,i.prevValue=n?r:null,i.newValue=t,n?i[l]=i.attrChange=1:i[f]=i.attrChange=0,Y.call(this,i)},i=function(e){var t=e.currentTarget,n=t[s],r=e.propertyName,i;n.hasOwnProperty(r)&&(n=n[r],i=new CustomEvent(h,{bubbles:!0}),i.attrName=n.name,i.prevValue=n.value||null,i.newValue=n.value=t[r]||null,i.prevValue==null?i[f]=i.attrChange=0:i[l]=i.attrChange=1,Y.call(t,i))};e.value=function(e,o,u){e===h&&this.attributeChangedCallback&&this.setAttribute!==r&&(this[s]={className:{name:"class",value:this.className}},this.setAttribute=r,this.removeAttribute=n,t.call(this,"propertychange",i)),t.call(this,e,o,u)},k(V,"addEventListener",e)}()):X||(S.addEventListener(h,ot),S.setAttribute(s,1),S.removeAttribute(s),lt&&(pt=function(e){var t=this,n,r,i;if(t===e.target){n=t[s],t[s]=r=vt(t);for(i in r){if(!(i in n))return dt(0,t,i,n[i],r[i],f);if(r[i]!==n[i])return dt(1,t,i,n[i],r[i],l)}for(i in n)if(!(i in r))return dt(2,t,i,n[i],r[i],c)}},dt=function(e,t,n,r,i,s){var o={attrChange:e,currentTarget:t,attrName:n,prevValue:r,newValue:i};o[s]=e,Nt(o)},vt=function(e){for(var t,n,r={},i=e.attributes,s=0,o=i.length;s<o;s++)t=i[s],n=t.name,n!=="setAttribute"&&(r[n]=t.value);return r})),t[r]=function(n,r){c=n.toUpperCase(),ft||(ft=!0,X?(mt=function(e,t){function n(e,t){for(var n=0,r=e.length;n<r;t(e[n++]));}return new X(function(r){for(var i,s,o,u=0,a=r.length;u<a;u++)i=r[u],i.type==="childList"?(n(i.addedNodes,e),n(i.removedNodes,t)):(s=i.target,ht&&s.attributeChangedCallback&&i.attributeName!=="style"&&(o=Z.call(s,i.attributeName),o!==i.oldValue&&s.attributeChangedCallback(i.attributeName,i.oldValue,o)))})}(St(o),St(u)),mt.observe(t,{childList:!0,subtree:!0})):(ut=[],t.addEventListener("DOMNodeInserted",Ct(o)),t.addEventListener("DOMNodeRemoved",Ct(u))),t.addEventListener(p,kt),t.addEventListener("readystatechange",kt),V.cloneNode=function(e){var t=G.call(this,!!e),n=xt(t);return-1<n&&yt(t,w[n]),e&&Et(t.querySelectorAll(E)),t}),-2<x.call(b,m+c)+x.call(b,v+c)&&Mt(n);if(!g.test(c)||-1<x.call(y,c))throw new Error("The type "+n+" is invalid");var i=function(){return f?t.createElement(l,c):t.createElement(l)},s=r||T,f=N.call(s,a),l=f?r[a].toUpperCase():c,c,h;return f&&-1<x.call(b,v+l)&&Mt(l),h=b.push((f?m:v)+c)-1,E=E.concat(E.length?",":"",f?l+'[is="'+n.toLowerCase()+'"]':l),i.prototype=w[h]=N.call(s,"prototype")?s.prototype:z(V),wt(t.querySelectorAll(E),o),i},t.createElement=it=function(e,n){var r=typeof n=="string"?n:"",i=r?rt.call(t,e,r):rt.call(t,e),s=""+e,o=x.call(b,(r?m:v)+(r||s).toUpperCase()),u=-1<o;return r&&(i.setAttribute("is",r=r.toLowerCase()),u&&(u=Tt(s.toUpperCase(),r))),ht=!t.createElement.innerHTMLHelper,u&&yt(i,w[o]),i}),Dt.prototype={constructor:Dt,define:H?function(e,t,n){n?Pt(e,t,n):P.define(e,t)}:Pt,get:H?function(e){return P.get(e)||Ht(e)}:Ht,whenDefined:H?function(e){return F.race(P.whenDefined,Bt(e))}:Bt},P||jt();try{(function(e,t){t[a]="a",W(e.prototype,HTMLAnchorElement.prototype),P.define("document-register-element-a",e,t),S.insertBefore(e=new e,S.firstChild),S.removeChild(e)})(function(){},{})}catch(Ft){jt()}})(window,document,Object,"registerElement");
+	(function(e,t,n,r){"use strict";function wt(){var e=at.splice(0,at.length);ft=0;while(e.length)e.shift().call(null,e.shift())}function Et(e,t){for(var n=0,r=e.length;n<r;n++)Dt(e[n],t)}function St(e){for(var t=0,n=e.length,r;t<n;t++)r=e[t],bt(r,w[Tt(r)])}function xt(e){return function(t){Q(t)&&(Dt(t,e),Et(t.querySelectorAll(E),e))}}function Tt(e){var t=et.call(e,"is"),n=e.nodeName.toUpperCase(),r=x.call(b,t?m+t.toUpperCase():v+n);return t&&-1<r&&!Nt(n,t)?-1:r}function Nt(e,t){return-1<E.indexOf(e+'[is="'+t+'"]')}function Ct(e){var t=e.currentTarget,n=e.attrChange,r=e.attrName,i=e.target;pt&&(!i||i===t)&&t.attributeChangedCallback&&r!=="style"&&e.prevValue!==e.newValue&&t.attributeChangedCallback(r,n===e[f]?null:e.prevValue,n===e[c]?null:e.newValue)}function kt(e){var t=xt(e);return function(e){at.push(t,e.target),ft&&clearTimeout(ft),ft=setTimeout(wt,1)}}function Lt(e){ht&&(ht=!1,e.currentTarget.removeEventListener(p,Lt)),Et((e.target||t).querySelectorAll(E),e.detail===u?u:o),J&&Mt()}function At(e,t){var n=this;rt.call(n,e,t),dt.call(n,{target:n})}function Ot(e,t){X(e,t),gt?gt.observe(e,ot):(ct&&(e.setAttribute=At,e[s]=mt(e),e.addEventListener(d,dt)),e.addEventListener(h,Ct)),e.createdCallback&&pt&&(e.created=!0,e.createdCallback(),e.created=!1)}function Mt(){for(var e,t=0,n=G.length;t<n;t++)e=G[t],S.contains(e)||(n--,G.splice(t--,1),Dt(e,u))}function _t(e){throw new Error("A "+e+" type is already registered")}function Dt(e,t){var n,r=Tt(e);-1<r&&(yt(e,w[r]),r=0,t===o&&!e[o]?(e[u]=!1,e[o]=!0,r=1,J&&x.call(G,e)<0&&G.push(e)):t===u&&!e[u]&&(e[o]=!1,e[u]=!0,r=1),r&&(n=e[t+"Callback"])&&n.call(e))}function Pt(){}function Ht(e,n,i){var s=i&&i[a]||"",o=n.prototype,u=W(o),f=n.observedAttributes||L,l={prototype:u};K(u,"createdCallback",{value:function(){if(q)q=!1;else if(!this[P]){this[P]=!0,new n(this);var e=R[z.get(n)];(!B||e.create.length>1)&&jt(this)}}}),K(u,"attributeChangedCallback",{value:function(e){-1<x.call(f,e)&&o.attributeChangedCallback.apply(this,arguments)}}),o.connectedCallback&&K(u,"attachedCallback",{value:o.connectedCallback}),o.disconnectedCallback&&K(u,"detachedCallback",{value:o.disconnectedCallback}),s&&(l[a]=s),t[r](e,l),e=e.toUpperCase(),R[e]={constructor:n,create:s?[s,e]:[e]},z.set(n,e),Ft(e),U[e].r()}function Bt(e){var t=R[e.toUpperCase()];return t&&t.constructor}function jt(e){var t=e.attributeChangedCallback,n=t?e.attributes:L,r=n.length,i;while(r--)i=n[r],t.call(e,i.name||i.nodeName,null,i.value||i.nodeValue)}function Ft(e){return e=e.toUpperCase(),e in U||(U[e]={},U[e].p=new I(function(t){U[e].r=t})),U[e].p}function It(){H&&delete e.customElements,k(e,"customElements",{configurable:!0,value:new Pt}),k(e,"CustomElementRegistry",{configurable:!0,value:Pt});for(var n=function(n){var r=e[n];r&&(e[n]=function(n){var i,s;return n||(n=this),n[P]||(q=!0,i=R[z.get(n.constructor)],s=B&&i.create.length===1,n=s?Reflect.construct(r,L,i.constructor):t.createElement.apply(t,i.create),n[P]=!0,q=!1,s||jt(n)),n},(e[n].prototype=r.prototype).constructor=e[n])},r=i.get(/^HTML/),s=r.length;s--;n(r[s]));t.createElement=function(e,t){var n=typeof t=="string"?t:t&&t.is||"";return n?st.call(this,e,n):st.call(this,e)}}var i=function(e){var t=/^[A-Z]+[a-z]/,r=function(e){var t=[],n;for(n in s)e.test(n)&&t.push(n);return t},i=function(e,t){t=t.toLowerCase(),t in s||(s[e]=(s[e]||[]).concat(t),s[t]=s[t.toUpperCase()]=e)},s=(n.create||n)(null),o={},u,a,f,l;for(a in e)for(l in e[a]){f=e[a][l],s[l]=f;for(u=0;u<f.length;u++)s[f[u].toLowerCase()]=s[f[u].toUpperCase()]=l}return o.get=function(n){return typeof n=="string"?s[n]||(t.test(n)?[]:""):r(n)},o.set=function(n,r){return t.test(n)?i(n,r):i(r,n),o},o}({collections:{HTMLAllCollection:["all"],HTMLCollection:["forms"],HTMLFormControlsCollection:["elements"],HTMLOptionsCollection:["options"]},elements:{Element:["element"],HTMLAnchorElement:["a"],HTMLAppletElement:["applet"],HTMLAreaElement:["area"],HTMLAttachmentElement:["attachment"],HTMLAudioElement:["audio"],HTMLBRElement:["br"],HTMLBaseElement:["base"],HTMLBodyElement:["body"],HTMLButtonElement:["button"],HTMLCanvasElement:["canvas"],HTMLContentElement:["content"],HTMLDListElement:["dl"],HTMLDataElement:["data"],HTMLDataListElement:["datalist"],HTMLDetailsElement:["details"],HTMLDialogElement:["dialog"],HTMLDirectoryElement:["dir"],HTMLDivElement:["div"],HTMLDocument:["document"],HTMLElement:["element","abbr","address","article","aside","b","bdi","bdo","cite","code","command","dd","dfn","dt","em","figcaption","figure","footer","header","i","kbd","mark","nav","noscript","rp","rt","ruby","s","samp","section","small","strong","sub","summary","sup","u","var","wbr"],HTMLEmbedElement:["embed"],HTMLFieldSetElement:["fieldset"],HTMLFontElement:["font"],HTMLFormElement:["form"],HTMLFrameElement:["frame"],HTMLFrameSetElement:["frameset"],HTMLHRElement:["hr"],HTMLHeadElement:["head"],HTMLHeadingElement:["h1","h2","h3","h4","h5","h6"],HTMLHtmlElement:["html"],HTMLIFrameElement:["iframe"],HTMLImageElement:["img"],HTMLInputElement:["input"],HTMLKeygenElement:["keygen"],HTMLLIElement:["li"],HTMLLabelElement:["label"],HTMLLegendElement:["legend"],HTMLLinkElement:["link"],HTMLMapElement:["map"],HTMLMarqueeElement:["marquee"],HTMLMediaElement:["media"],HTMLMenuElement:["menu"],HTMLMenuItemElement:["menuitem"],HTMLMetaElement:["meta"],HTMLMeterElement:["meter"],HTMLModElement:["del","ins"],HTMLOListElement:["ol"],HTMLObjectElement:["object"],HTMLOptGroupElement:["optgroup"],HTMLOptionElement:["option"],HTMLOutputElement:["output"],HTMLParagraphElement:["p"],HTMLParamElement:["param"],HTMLPictureElement:["picture"],HTMLPreElement:["pre"],HTMLProgressElement:["progress"],HTMLQuoteElement:["blockquote","q","quote"],HTMLScriptElement:["script"],HTMLSelectElement:["select"],HTMLShadowElement:["shadow"],HTMLSlotElement:["slot"],HTMLSourceElement:["source"],HTMLSpanElement:["span"],HTMLStyleElement:["style"],HTMLTableCaptionElement:["caption"],HTMLTableCellElement:["td","th"],HTMLTableColElement:["col","colgroup"],HTMLTableElement:["table"],HTMLTableRowElement:["tr"],HTMLTableSectionElement:["thead","tbody","tfoot"],HTMLTemplateElement:["template"],HTMLTextAreaElement:["textarea"],HTMLTimeElement:["time"],HTMLTitleElement:["title"],HTMLTrackElement:["track"],HTMLUListElement:["ul"],HTMLUnknownElement:["unknown","vhgroupv","vkeygen"],HTMLVideoElement:["video"]},nodes:{Attr:["node"],Audio:["audio"],CDATASection:["node"],CharacterData:["node"],Comment:["#comment"],Document:["#document"],DocumentFragment:["#document-fragment"],DocumentType:["node"],HTMLDocument:["#document"],Image:["img"],Option:["option"],ProcessingInstruction:["node"],ShadowRoot:["#shadow-root"],Text:["#text"],XMLDocument:["xml"]}}),s="__"+r+(Math.random()*1e5>>0),o="attached",u="detached",a="extends",f="ADDITION",l="MODIFICATION",c="REMOVAL",h="DOMAttrModified",p="DOMContentLoaded",d="DOMSubtreeModified",v="<",m="=",g=/^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/,y=["ANNOTATION-XML","COLOR-PROFILE","FONT-FACE","FONT-FACE-SRC","FONT-FACE-URI","FONT-FACE-FORMAT","FONT-FACE-NAME","MISSING-GLYPH"],b=[],w=[],E="",S=t.documentElement,x=b.indexOf||function(e){for(var t=this.length;t--&&this[t]!==e;);return t},T=n.prototype,N=T.hasOwnProperty,C=T.isPrototypeOf,k=n.defineProperty,L=[],A=n.getOwnPropertyDescriptor,O=n.getOwnPropertyNames,M=n.getPrototypeOf,_=n.setPrototypeOf,D=!!n.__proto__,P="__dreCEv1",H=e.customElements,B=!!(H&&H.define&&H.get&&H.whenDefined),j=n.create||n,F=e.Map||function(){var t=[],n=[],r;return{get:function(e){return n[x.call(t,e)]},set:function(e,i){r=x.call(t,e),r<0?n[t.push(e)-1]=i:n[r]=i}}},I=e.Promise||function(e){function i(e){n=!0;while(t.length)t.shift()(e)}var t=[],n=!1,r={"catch":function(){return r},then:function(e){return t.push(e),n&&setTimeout(i,1),r}};return e(i),r},q=!1,R=j(null),U=j(null),z=new F,W=n.create||function Rt(e){return e?(Rt.prototype=e,new Rt):this},X=_||(D?function(e,t){return e.__proto__=t,e}:O&&A?function(){function e(e,t){for(var n,r=O(t),i=0,s=r.length;i<s;i++)n=r[i],N.call(e,n)||k(e,n,A(t,n))}return function(t,n){do e(t,n);while((n=M(n))&&!C.call(n,t));return t}}():function(e,t){for(var n in t)e[n]=t[n];return e}),V=e.MutationObserver||e.WebKitMutationObserver,$=(e.HTMLElement||e.Element||e.Node).prototype,J=!C.call($,S),K=J?function(e,t,n){return e[t]=n.value,e}:k,Q=J?function(e){return e.nodeType===1}:function(e){return C.call($,e)},G=J&&[],Y=$.cloneNode,Z=$.dispatchEvent,et=$.getAttribute,tt=$.hasAttribute,nt=$.removeAttribute,rt=$.setAttribute,it=t.createElement,st=it,ot=V&&{attributes:!0,characterData:!0,attributeOldValue:!0},ut=V||function(e){ct=!1,S.removeEventListener(h,ut)},at,ft=0,lt=!1,ct=!0,ht=!0,pt=!0,dt,vt,mt,gt,yt,bt;r in t||(_||D?(yt=function(e,t){C.call(t,e)||Ot(e,t)},bt=Ot):(yt=function(e,t){e[s]||(e[s]=n(!0),Ot(e,t))},bt=yt),J?(ct=!1,function(){var e=A($,"addEventListener"),t=e.value,n=function(e){var t=new CustomEvent(h,{bubbles:!0});t.attrName=e,t.prevValue=et.call(this,e),t.newValue=null,t[c]=t.attrChange=2,nt.call(this,e),Z.call(this,t)},r=function(e,t){var n=tt.call(this,e),r=n&&et.call(this,e),i=new CustomEvent(h,{bubbles:!0});rt.call(this,e,t),i.attrName=e,i.prevValue=n?r:null,i.newValue=t,n?i[l]=i.attrChange=1:i[f]=i.attrChange=0,Z.call(this,i)},i=function(e){var t=e.currentTarget,n=t[s],r=e.propertyName,i;n.hasOwnProperty(r)&&(n=n[r],i=new CustomEvent(h,{bubbles:!0}),i.attrName=n.name,i.prevValue=n.value||null,i.newValue=n.value=t[r]||null,i.prevValue==null?i[f]=i.attrChange=0:i[l]=i.attrChange=1,Z.call(t,i))};e.value=function(e,o,u){e===h&&this.attributeChangedCallback&&this.setAttribute!==r&&(this[s]={className:{name:"class",value:this.className}},this.setAttribute=r,this.removeAttribute=n,t.call(this,"propertychange",i)),t.call(this,e,o,u)},k($,"addEventListener",e)}()):V||(S.addEventListener(h,ut),S.setAttribute(s,1),S.removeAttribute(s),ct&&(dt=function(e){var t=this,n,r,i;if(t===e.target){n=t[s],t[s]=r=mt(t);for(i in r){if(!(i in n))return vt(0,t,i,n[i],r[i],f);if(r[i]!==n[i])return vt(1,t,i,n[i],r[i],l)}for(i in n)if(!(i in r))return vt(2,t,i,n[i],r[i],c)}},vt=function(e,t,n,r,i,s){var o={attrChange:e,currentTarget:t,attrName:n,prevValue:r,newValue:i};o[s]=e,Ct(o)},mt=function(e){for(var t,n,r={},i=e.attributes,s=0,o=i.length;s<o;s++)t=i[s],n=t.name,n!=="setAttribute"&&(r[n]=t.value);return r})),t[r]=function(n,r){c=n.toUpperCase(),lt||(lt=!0,V?(gt=function(e,t){function n(e,t){for(var n=0,r=e.length;n<r;t(e[n++]));}return new V(function(r){for(var i,s,o,u=0,a=r.length;u<a;u++)i=r[u],i.type==="childList"?(n(i.addedNodes,e),n(i.removedNodes,t)):(s=i.target,pt&&s.attributeChangedCallback&&i.attributeName!=="style"&&(o=et.call(s,i.attributeName),o!==i.oldValue&&s.attributeChangedCallback(i.attributeName,i.oldValue,o)))})}(xt(o),xt(u)),gt.observe(t,{childList:!0,subtree:!0})):(at=[],t.addEventListener("DOMNodeInserted",kt(o)),t.addEventListener("DOMNodeRemoved",kt(u))),t.addEventListener(p,Lt),t.addEventListener("readystatechange",Lt),$.cloneNode=function(e){var t=Y.call(this,!!e),n=Tt(t);return-1<n&&bt(t,w[n]),e&&St(t.querySelectorAll(E)),t}),-2<x.call(b,m+c)+x.call(b,v+c)&&_t(n);if(!g.test(c)||-1<x.call(y,c))throw new Error("The type "+n+" is invalid");var i=function(){return f?t.createElement(l,c):t.createElement(l)},s=r||T,f=N.call(s,a),l=f?r[a].toUpperCase():c,c,h;return f&&-1<x.call(b,v+l)&&_t(l),h=b.push((f?m:v)+c)-1,E=E.concat(E.length?",":"",f?l+'[is="'+n.toLowerCase()+'"]':l),i.prototype=w[h]=N.call(s,"prototype")?s.prototype:W($),Et(t.querySelectorAll(E),o),i},t.createElement=st=function(e,n){var r=typeof n=="string"?n:"",i=r?it.call(t,e,r):it.call(t,e),s=""+e,o=x.call(b,(r?m:v)+(r||s).toUpperCase()),u=-1<o;return r&&(i.setAttribute("is",r=r.toLowerCase()),u&&(u=Nt(s.toUpperCase(),r))),pt=!t.createElement.innerHTMLHelper,u&&bt(i,w[o]),i}),Pt.prototype={constructor:Pt,define:B?function(e,t,n){n?Ht(e,t,n):(H.define(e,t),e=e.toUpperCase(),R[e]={constructor:t,create:[e]},z.set(t,e))}:Ht,get:B?function(e){return H.get(e)||Bt(e)}:Bt,whenDefined:B?function(e){return I.race([H.whenDefined(e),Ft(e)])}:Ft},H||It();try{(function(e,n,r){n[a]="a",e.prototype=HTMLAnchorElement.prototype,H.define(r,e,n);if(t.createElement(r).getAttribute("is")!==r)throw n})(function Ut(){return Reflect.construct(HTMLAnchorElement,[],Ut)},{},"document-register-element-a")}catch(qt){It()}})(window,document,Object,"registerElement");
 
 /***/ },
 /* 759 */
@@ -58958,7 +58958,7 @@
 
 	var _festi2 = _interopRequireDefault(_festi);
 
-	var _info = __webpack_require__(802);
+	var _info = __webpack_require__(815);
 
 	var _info2 = _interopRequireDefault(_info);
 
@@ -59716,15 +59716,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _info = __webpack_require__(805);
+	var _info = __webpack_require__(802);
 
 	var _info2 = _interopRequireDefault(_info);
 
-	var _crono = __webpack_require__(808);
+	var _crono = __webpack_require__(805);
 
 	var _crono2 = _interopRequireDefault(_crono);
 
-	var _voluntariado = __webpack_require__(811);
+	var _voluntariado = __webpack_require__(808);
 
 	var _voluntariado2 = _interopRequireDefault(_voluntariado);
 
@@ -59877,189 +59877,6 @@
 
 	__webpack_require__(803);
 
-	__webpack_require__(778);
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Info = function (_Component) {
-	  _inherits(Info, _Component);
-
-	  function Info() {
-	    _classCallCheck(this, Info);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Info).call(this));
-
-	    _this.state = {
-	      active: 'intro'
-	    };
-	    _this.activeSection = _this.activeSection.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(Info, [{
-	    key: 'activeSection',
-	    value: function activeSection(active) {
-	      var _this2 = this;
-
-	      return function () {
-	        window.$tate('popups.list.info.content.active').value = active;
-	        _this2.setState({ active: active });
-	      };
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'dialog',
-	        {
-	          is: 'pop-up',
-	          active: this.props.active,
-	          id: 'popup_info' },
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'nav',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                id: 'popup_info_nav_intro',
-	                className: this.state.active === 'intro' ? 'active' : '',
-	                onClick: this.activeSection('intro') },
-	              'Introducción',
-	              _react2.default.createElement('span', { className: 'underline' })
-	            ),
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                id: 'popup_info_nav_porq',
-	                className: this.state.active === 'porq' ? 'active' : '',
-	                onClick: this.activeSection('porq') },
-	              '¿Por qué?',
-	              _react2.default.createElement('span', { className: 'underline' })
-	            ),
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                id: 'popup_info_nav_mapa',
-	                className: this.state.active === 'mapa' ? 'active' : '',
-	                onClick: this.activeSection('mapa') },
-	              'Mapa',
-	              _react2.default.createElement('span', { className: 'underline' })
-	            ),
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                id: 'popup_info_nav_fest',
-	                className: this.state.active === 'fest' ? 'active' : '',
-	                onClick: this.activeSection('fest') },
-	              'Festivales',
-	              _react2.default.createElement('span', { className: 'underline' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'slider-box',
-	            { 'data-path': 'popups.list.info.content' },
-	            _react2.default.createElement(
-	              'article',
-	              {
-	                id: 'popup_info_content_intro',
-	                'data-id': 'intro',
-	                className: 'active' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'text' },
-	                'JUNTOS SOMOS UN BOSQUE es una red de personas que cultivan árboles nativos y comestibles, con la intención de plantarlos todos juntos en festivales de plantación, creando bosques comunitarios en el espacio público. La red comparte conocimientos, inicia a nuevos cultivadores y autogestiona los festivales de plantación. "Esta semilla que crees ínfima, contiene un árbol, que contiene un bosque" Jodoroski'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'article',
-	              {
-	                id: 'popup_info_content_porq',
-	                'data-id': 'porq' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'text' },
-	                'Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable. La OMS propone entre 10 y 15 mts2 de espacios verdes por habitante. Al día de hoy, en Capital Federal, tenemos 6,2 mts2 promedio. Y en los barrios más vulnerables esa cifra desciende a 1,5 mts2 por habitante. De Protesta a Propuesta Activa Existe un preocupación social respecto a la necesidad de tener más y mejores espacios verdes en la Ciudad. Proponemos convertir al ciudadano pasivo en un agente activo, en un criador de árboles en su balcón, patio, ventana o terraza. Así se genera una relación Ganar-Ganar-Ganar: Gana el Ciudadano: Cambia su actitud y se involucra en los temas que le importan y con el espacio público que lo rodea. Gana el Municipio: obtiene nuevos espacios verdes con una alta participación comunitaria y una reducción muy significativa en costos. Gana el Ecosistema del que formamos parte al haber nuevo refugio y alimento para la fauna local. (Persona-Comunidad-Planeta) Hacia una Masa Crítica de árboles nativos El término “hace referencia al número de individuos involucrados en un fenómeno a partir del cual éste adquiere una dinámica propia que le permite sostenerse y crecer por sí mismo.”'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'article',
-	              {
-	                id: 'popup_info_content_mapa',
-	                'data-id': 'mapa' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'text' },
-	                'Este MAPA INTERACTIVO es la plataforma donde se visualiza la red. Uno puede hacerse un usuario (vivero, escuela, centro cuntural, organización civil, persona) cargar los arbolitos que tiene disponibles para la red, y asignarlos a cada festival de plantación. De esta forma, uno puede coordinar con los usiarios más cercanos para llevar los arbolitos y herramientas para concretar la plantación. Los bosques y árboles plantados quedan mapeados una vez finalizado cada evento.'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'article',
-	              {
-	                id: 'popup_info_content_fest',
-	                'data-id': 'fest' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'text' },
-	                'En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.',
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement('br', null),
-	                'Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.',
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement('br', null),
-	                'Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.',
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement('br', null),
-	                'La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.',
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement('br', null),
-	                'Juntos, somos un BOSQUE.'
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Info;
-	}(_react.Component);
-
-	exports.default = Info;
-
-/***/ },
-/* 803 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 804 */,
-/* 805 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	__webpack_require__(806);
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -60115,14 +59932,14 @@
 	exports.default = Info;
 
 /***/ },
-/* 806 */
+/* 803 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 807 */,
-/* 808 */
+/* 804 */,
+/* 805 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60133,7 +59950,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(809);
+	__webpack_require__(806);
 
 	var _react = __webpack_require__(1);
 
@@ -60276,14 +60093,14 @@
 	exports.default = Crono;
 
 /***/ },
-/* 809 */
+/* 806 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 810 */,
-/* 811 */
+/* 807 */,
+/* 808 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60294,9 +60111,9 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(812);
+	__webpack_require__(809);
 
-	__webpack_require__(814);
+	__webpack_require__(811);
 
 	var _react = __webpack_require__(1);
 
@@ -60322,10 +60139,11 @@
 	  _createClass(Voluntariado, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-
-	      this.refs.form.$ubmit.subscribe(function (res) {
-	        debugger;
-	        console.log(res);
+	      this.refs.form.onSubmit(function (data) {
+	        console.log('falsethis.refs.form.onSubmit((data) =>', data);
+	      });
+	      this.refs.form.onResponse(function (res) {
+	        console.log('this.refs.form.onResponse((res) =>', res);
 	      });
 	    }
 	  }, {
@@ -60336,7 +60154,7 @@
 	        {
 	          is: 'form-async',
 	          'data-path': 'popups.list.festi.voluntariado',
-	          'data-auto': 'true',
+	          'data-auto': 'false',
 	          action: '/lala',
 	          ref: 'form' },
 	        _react2.default.createElement('input', { type: 'text', name: 'lala', required: true }),
@@ -60357,39 +60175,31 @@
 	exports.default = Voluntariado;
 
 /***/ },
-/* 812 */
+/* 809 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 813 */,
-/* 814 */
+/* 810 */,
+/* 811 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(815);
+	__webpack_require__(812);
 
 	__webpack_require__(758);
 
-	__webpack_require__(817);
-
-	var _rxjs = __webpack_require__(184);
-
-	var _rxjs2 = _interopRequireDefault(_rxjs);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	__webpack_require__(814);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var streams = {};
 
 	var FormAsync = function (_window$HTMLFormEleme) {
 	  _inherits(FormAsync, _window$HTMLFormEleme);
@@ -60403,19 +60213,46 @@
 	  _createClass(FormAsync, [{
 	    key: 'connectedCallback',
 	    value: function connectedCallback() {
-	      var id = this.getAttribute('data-path');
-	      streams[id] = {};
-	      window.$tate(id).value = {};
+	      this.responseCallBack = null;
+	      this.submitCallBack = null;
+	      this.handleSubmit = this.handleSubmit.bind(this);
+	      this.onResponse = this.onResponse.bind(this);
+	      this.onSubmit = this.onSubmit.bind(this);
 	      this.sendForm = this.sendForm.bind(this);
-	      this.$ubmit = _rxjs2.default.Observable.fromEvent(this, 'submit').filter(function (e) {
-	        return e.target.checkValidity();
-	      }).do(function (e) {
-	        return e.preventDefault();
-	      });
-
-	      if (this.getAttribute('data-auto') !== 'false') {
-	        streams[id].$ubmit = this.$ubmit.subscribe(this.sendForm);
+	      this.addEventListener('submit', this.handleSubmit);
+	    }
+	  }, {
+	    key: 'disconnectedCallback',
+	    value: function disconnectedCallback() {
+	      this.removeEventListener('submit', this.handleSubmit);
+	    }
+	  }, {
+	    key: 'onSubmit',
+	    value: function onSubmit(cb) {
+	      this.submitCallBack = cb;
+	    }
+	  }, {
+	    key: 'onResponse',
+	    value: function onResponse(cb) {
+	      this.responseCallBack = cb;
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      var data = new window.FormData(e.target);
+	      if (e.target.getAttribute('data-auto') !== 'false') {
+	        if (this.responseCallBack) {
+	          this.responseCallBack(data);
+	        }
+	        this.sendForm(data);
+	        return;
 	      }
+	      if (this.responseCallBack) {
+	        this.responseCallBack(data);
+	        return;
+	      }
+	      console.warn('FormAsync not being handled on submit, to automatically send the form set data-auto attribute to "false"');
 	    }
 	  }, {
 	    key: 'sendForm',
@@ -60426,16 +60263,8 @@
 	      window.fetch(this.getAttribute('action'), {
 	        method: 'post',
 	        body: data
-	      }).then(function (res) {
-	        window.$tate(id + '.result').value = res;
-	      });
-	    }
-	  }, {
-	    key: 'disconnectedCallback',
-	    value: function disconnectedCallback() {
-	      var id = this.getAttribute('data-path');
-	      Object.keys(streams[id]).forEach(function ($) {
-	        streams[id][$].unsubscribe();
+	      }).then(this.responseCallBack).catch(function (err) {
+	        return console.error('FormAsync fetch fail', err);
 	      });
 	    }
 	  }]);
@@ -60446,14 +60275,14 @@
 	window.customElements.define('form-async', FormAsync, { extends: 'form' });
 
 /***/ },
-/* 815 */
+/* 812 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 816 */,
-/* 817 */
+/* 813 */,
+/* 814 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -60890,6 +60719,188 @@
 	  self.fetch.polyfill = true
 	})(typeof self !== 'undefined' ? self : this);
 
+
+/***/ },
+/* 815 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(816);
+
+	__webpack_require__(778);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Info = function (_Component) {
+	  _inherits(Info, _Component);
+
+	  function Info() {
+	    _classCallCheck(this, Info);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Info).call(this));
+
+	    _this.state = {
+	      active: 'intro'
+	    };
+	    _this.activeSection = _this.activeSection.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(Info, [{
+	    key: 'activeSection',
+	    value: function activeSection(active) {
+	      var _this2 = this;
+
+	      return function () {
+	        window.$tate('popups.list.info.content.active').value = active;
+	        _this2.setState({ active: active });
+	      };
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'dialog',
+	        {
+	          is: 'pop-up',
+	          active: this.props.active,
+	          id: 'popup_info' },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'nav',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                id: 'popup_info_nav_intro',
+	                className: this.state.active === 'intro' ? 'active' : '',
+	                onClick: this.activeSection('intro') },
+	              'Introducción',
+	              _react2.default.createElement('span', { className: 'underline' })
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                id: 'popup_info_nav_porq',
+	                className: this.state.active === 'porq' ? 'active' : '',
+	                onClick: this.activeSection('porq') },
+	              '¿Por qué?',
+	              _react2.default.createElement('span', { className: 'underline' })
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                id: 'popup_info_nav_mapa',
+	                className: this.state.active === 'mapa' ? 'active' : '',
+	                onClick: this.activeSection('mapa') },
+	              'Mapa',
+	              _react2.default.createElement('span', { className: 'underline' })
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                id: 'popup_info_nav_fest',
+	                className: this.state.active === 'fest' ? 'active' : '',
+	                onClick: this.activeSection('fest') },
+	              'Festivales',
+	              _react2.default.createElement('span', { className: 'underline' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'slider-box',
+	            { 'data-path': 'popups.list.info.content' },
+	            _react2.default.createElement(
+	              'article',
+	              {
+	                id: 'popup_info_content_intro',
+	                'data-id': 'intro',
+	                className: 'active' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'JUNTOS SOMOS UN BOSQUE es una red de personas que cultivan árboles nativos y comestibles, con la intención de plantarlos todos juntos en festivales de plantación, creando bosques comunitarios en el espacio público. La red comparte conocimientos, inicia a nuevos cultivadores y autogestiona los festivales de plantación. "Esta semilla que crees ínfima, contiene un árbol, que contiene un bosque" Jodoroski'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'article',
+	              {
+	                id: 'popup_info_content_porq',
+	                'data-id': 'porq' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable. La OMS propone entre 10 y 15 mts2 de espacios verdes por habitante. Al día de hoy, en Capital Federal, tenemos 6,2 mts2 promedio. Y en los barrios más vulnerables esa cifra desciende a 1,5 mts2 por habitante. De Protesta a Propuesta Activa Existe un preocupación social respecto a la necesidad de tener más y mejores espacios verdes en la Ciudad. Proponemos convertir al ciudadano pasivo en un agente activo, en un criador de árboles en su balcón, patio, ventana o terraza. Así se genera una relación Ganar-Ganar-Ganar: Gana el Ciudadano: Cambia su actitud y se involucra en los temas que le importan y con el espacio público que lo rodea. Gana el Municipio: obtiene nuevos espacios verdes con una alta participación comunitaria y una reducción muy significativa en costos. Gana el Ecosistema del que formamos parte al haber nuevo refugio y alimento para la fauna local. (Persona-Comunidad-Planeta) Hacia una Masa Crítica de árboles nativos El término “hace referencia al número de individuos involucrados en un fenómeno a partir del cual éste adquiere una dinámica propia que le permite sostenerse y crecer por sí mismo.”'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'article',
+	              {
+	                id: 'popup_info_content_mapa',
+	                'data-id': 'mapa' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'Este MAPA INTERACTIVO es la plataforma donde se visualiza la red. Uno puede hacerse un usuario (vivero, escuela, centro cuntural, organización civil, persona) cargar los arbolitos que tiene disponibles para la red, y asignarlos a cada festival de plantación. De esta forma, uno puede coordinar con los usiarios más cercanos para llevar los arbolitos y herramientas para concretar la plantación. Los bosques y árboles plantados quedan mapeados una vez finalizado cada evento.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'article',
+	              {
+	                id: 'popup_info_content_fest',
+	                'data-id': 'fest' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'text' },
+	                'En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement('br', null),
+	                'Juntos, somos un BOSQUE.'
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Info;
+	}(_react.Component);
+
+	exports.default = Info;
+
+/***/ },
+/* 816 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);

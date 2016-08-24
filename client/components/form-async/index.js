@@ -2,24 +2,45 @@
 
 import 'document-register-element'
 import 'whatwg-fetch'
-import Rx from 'rxjs'
 
-let streams = {}
 class FormAsync extends window.HTMLFormElement {
   connectedCallback () {
-    let id = this.getAttribute('data-path')
-    streams[id] = {}
-    window.$tate(id).value = {}
+    this.responseCallBack = null
+    this.submitCallBack = null
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.onResponse = this.onResponse.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
     this.sendForm = this.sendForm.bind(this)
-    this.$ubmit = Rx.Observable
-      .fromEvent(this, 'submit')
-      .filter(e => e.target.checkValidity())
-      .do(e => e.preventDefault())
+    this.addEventListener('submit', this.handleSubmit)
+  }
 
-    if (this.getAttribute('data-auto') !== 'false') {
-      streams[id].$ubmit = this.$ubmit
-        .subscribe(this.sendForm)
+  disconnectedCallback () {
+    this.removeEventListener('submit', this.handleSubmit)
+  }
+
+  onSubmit (cb) {
+    this.submitCallBack = cb
+  }
+
+  onResponse (cb) {
+    this.responseCallBack = cb
+  }
+
+  handleSubmit (e) {
+    e.preventDefault()
+    const data = new window.FormData(e.target)
+    if (e.target.getAttribute('data-auto') !== 'false') {
+      if(this.responseCallBack) {
+        this.responseCallBack(data)
+      }
+      this.sendForm(data)
+      return
     }
+    if(this.responseCallBack) {
+      this.responseCallBack(data)
+      return
+    }
+    console.warn('FormAsync not being handled on submit, to automatically send the form set data-auto attribute to "false"')
   }
 
   sendForm () {
@@ -31,17 +52,8 @@ class FormAsync extends window.HTMLFormElement {
         method: 'post',
         body: data
       })
-      .then((res) => {
-        window.$tate(id + '.result').value = res
-      })
-  }
-
-  disconnectedCallback () {
-    let id = this.getAttribute('data-path')
-    Object.keys(streams[id])
-      .forEach(($) => {
-        streams[id][$].unsubscribe()
-      })
+      .then(this.responseCallBack)
+      .catch(err => console.error('FormAsync fetch fail', err))
   }
 }
 window.customElements.define('form-async', FormAsync, {extends: 'form'})

@@ -5,12 +5,12 @@ import React, {Component} from 'react'
 
 export default class Voluntariado extends Component {
   componentDidMount() {
-    
-    this.refs.form.$ubmit
-      .subscribe((res) => {
-        debugger
-        console.log(res)
-      })     
+    this.refs.form.onSubmit((data) => {
+      console.log('falsethis.refs.form.onSubmit((data) =>', data)
+    })
+    this.refs.form.onResponse((res) => {
+      console.log('this.refs.form.onResponse((res) =>', res)
+    })
   }
 
   render () {
@@ -18,7 +18,7 @@ export default class Voluntariado extends Component {
       <form
         is='form-async'
         data-path='popups.list.festi.voluntariado'
-        data-auto='true'
+        data-auto='false'
         action='/lala'
         ref='form'>
         <input type='text' name='lala' required />
