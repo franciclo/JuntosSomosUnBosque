@@ -18,7 +18,7 @@ module.exports = function (app) {
         name: req.user.getNombre(),
         type: req.user.userType,
         location: req.user.location,
-        arboles: JSON.stringify(req.user.arboles)
+        arboles: req.user.arboles && req.user.arboles
           .map(function (arbol) {
             return {
               especie: arbol.especie,

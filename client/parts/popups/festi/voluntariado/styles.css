@@ -27,3 +27,12 @@
   font-style: italic;
   margin: 0 0 20px;
 }
+
+form.voluntariado-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+}

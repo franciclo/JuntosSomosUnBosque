@@ -1,10 +1,13 @@
 #popup_signin {
   max-width: 450px;
+  width: 90%;
 }
 
 .loguineo {
-  margin: 15px;
+  width: 100%;
+  padding: 15px;
   justify-content: center; 
+  box-sizing: border-box;
 }
 .loguineo h1{
   color: #444;
@@ -14,15 +17,15 @@
   margin-bottom: 33px;
 }
 
-#accionesUsuario a.social svg-icon{
-  width: 20px;
-  height: 20px;
+.loguineo a.social img{
+  height: 16px;
+  margin-right: 9px;
 }
 
-#accionesUsuario a.social{
+.loguineo a.social{
   border-radius: 3px;
   display: flex;
-  margin: 6px;
+  margin: 6px 0;
   color: #fff;
   text-decoration: none;
   align-items: center;
@@ -31,30 +34,26 @@
   cursor: pointer;
 }
 
-#accionesUsuario a.social use{
-  fill:#fff;
-}
-
-#accionesUsuario a.social.fb:hover{
+.loguineo a.social.fb:hover{
   background:  #2D59A2;
 }
-#accionesUsuario a.social.fb{
+.loguineo a.social.fb{
   background: #47c;
   border-color: #2D59A2;
 }
 
-#accionesUsuario a.social.tw:hover{
+.loguineo a.social.tw:hover{
   background:  #0AC;
 }
-#accionesUsuario a.social.tw{
+.loguineo a.social.tw{
   background: #0cf;
   border-color: #0AC;
 }
 
-#accionesUsuario a.social.gl:hover{
+.loguineo a.social.gl:hover{
   background:  #AF3527;
 }
-#accionesUsuario a.social.gl{
+.loguineo a.social.gl{
   background: #d43;
   border-color: #AF3527;
 }

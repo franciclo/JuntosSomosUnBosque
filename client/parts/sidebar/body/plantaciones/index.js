@@ -17,10 +17,10 @@ export default class Plantaciones extends Component {
             </div>
           </div>
           <p className='content-evento-text'>
-            Estamos co-creando un Bosque mediante siembras y plantaciones colectivas en festivales y eventos, a través de una red de personas que cultivan arbolitos en sus casas.
+            Estamos creando un Bosque comunitario junto a la Reserva Ecológica Costanera norte, en Ciudad Universitaria, lugar en emergencia ambiental y abandono estatal, donde vamos a realizar su inauguración civil.
           </p>
           <p className='bolder'>
-            Podes traer tus arboles al festival y entre musica y charlas, plantaremos un bosque!
+            Traé tus arboles al festival y plantemos un bosque!
           </p>
           <button
             onClick={

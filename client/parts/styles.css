@@ -39,3 +39,6 @@ body>#root>div{
 button {
   font-family: P22Underground!important;
 }
+.hide {
+  display: none;
+}

@@ -72,35 +72,29 @@ export default class Info extends Component {
               id='popup_info_content_porq'
               data-id='porq'>
               <div className='text'>
-                Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.
-                La OMS propone entre 10 y 15 mts2 de espacios verdes por habitante. Al día de hoy, en Capital Federal, tenemos 6,2 mts2 promedio. Y en los barrios más vulnerables esa cifra desciende a 1,5 mts2 por habitante.
-                
-                De Protesta a Propuesta Activa
-                Existe un preocupación social respecto a la necesidad de tener más y mejores espacios verdes en la Ciudad. Proponemos convertir al ciudadano pasivo en un agente activo, en un criador de árboles en su balcón, patio, ventana o terraza.
-                Así se genera una relación Ganar-Ganar-Ganar:
-                Gana el Ciudadano: Cambia su actitud y se involucra en los temas que le importan y con el espacio público que lo rodea.
-                Gana el Municipio: obtiene nuevos espacios verdes con una alta participación comunitaria y una reducción muy significativa en costos. Gana el Ecosistema del que formamos parte al haber nuevo refugio y alimento para la fauna local. (Persona-Comunidad-Planeta)
-                
-                Hacia una Masa Crítica de árboles nativos
-                El término “hace referencia al número de individuos involucrados en un fenómeno a partir del cual éste adquiere una dinámica propia que le permite sostenerse y crecer por sí mismo.”
+              Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.
+
+              La OMS propone entre 10 y 15 mts2 de espacios verdes por habitante. Al día de hoy, en Capital Federal, tenemos 6,2 mts2 promedio. Y en los barrios más vulnerables esa cifra desciende a 1,5 mts2 por habitante.
+
+              De Protesta a Propuesta Activa
+              Existe un preocupación social respecto a la necesidad de tener más y mejores espacios verdes en la Ciudad. Proponemos convertir al ciudadano pasivo en un agente activo, en un criador de árboles en su balcón, patio, ventana o terraza.
+
+              Hacia una Masa Crítica de árboles nativos
+              El término “hace referencia al número de individuos involucrados en un fenómeno a partir del cual éste adquiere una dinámica propia que le permite sostenerse y crecer por sí mismo.”
               </div>
             </article>
             <article
               id='popup_info_content_mapa'
               data-id='mapa'>
               <div className='text'>
-                Este MAPA INTERACTIVO es la plataforma donde se visualiza la red. Uno puede hacerse un usuario (vivero, escuela, centro cuntural, organización civil, persona) cargar los arbolitos que tiene disponibles para la red, y asignarlos a cada festival de plantación. De esta forma, uno puede coordinar con los usiarios más cercanos para llevar los arbolitos y herramientas para concretar la plantación. Los bosques y árboles plantados quedan mapeados una vez finalizado cada evento.
+                Este MAPA INTERACTIVO es la plataforma donde se visualiza la red. Uno puede hacerse un usuario (vivero, escuela, centro cutural, organización civil, persona) cargar los arbolitos que tiene disponibles para la red, y llevarlos a la plantación colectiva. De esta forma, uno puede coordinar con sus amigos más cercanos para llevar los arbolitos y herramientas para concretar la plantación. Los bosques y árboles plantados quedan mapeados una vez finalizado cada evento.
               </div>
             </article>
             <article
               id='popup_info_content_fest'
               data-id='fest'>
               <div className='text'>
-                En los distintos rituales de siembra que oficiamos en recitales, encuentros y talleres sembramos miles de arbolitos, creando una gran red de cultivadores de arbolitos nativos.<br /><br />
-                Hoy, estos miles de seres crecen en muchas casas de la ciudad, y con este evento tenemos la intención de encausar toda esta energía viva.<br /><br />
-                Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando una plantada colectiva dentro de un año, cuando los arbolitos crezcan y estén listos para ir a tierra.<br /><br />
-                La idea es que entre todos nos ayudemos; compartiendo experiencias, dudas, consejos sobre como cuidar los arbolitos y más que nada conociéndonos. Cada tanto haremos un encuentro para compartir y pasarla bien, con música, árboles, arte y alegría.<br /><br />
-                Juntos, somos un BOSQUE.
+                Los Festivales de plantación son eventos dónde las personas traen sus arbolitos para plantar un bosque comunitario, en el marco de música en vivo, charlas, talleres y encuentro de redes. Luego hacemos siembras multitudinarias de árboles desde semilla, en macetitas, para que las personas se lleven, cuiden, crien y vean crecer en sus casas, hasta que estén listos para ir a tierra y plantarlos en el próximo festival. Así es como creamos un ciclo, dónde en cada encuentro se siembra lo que se plantará en otros festivales.
               </div>
             </article>
           </slider-box>

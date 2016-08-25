@@ -1,6 +1,7 @@
 import './styles.css'
 
 import 'components/pop-up'
+import 'components/slider-box'
 import React, {Component} from 'react'
 import Info from './info'
 import Crono from './crono'
@@ -13,6 +14,7 @@ export default class Festi extends Component {
     }
     this.activeSection = this.activeSection.bind(this)
   }
+
   activeSection (active) {
     return () => {
       window.$tate('popups.list.festi.content.active')
@@ -66,13 +68,15 @@ export default class Festi extends Component {
               <span className='underline'></span>
             </button>
             <a
+              id='popup_festi_nav_fb'
               href='https://www.facebook.com/events/701647386601384/'
-              id='popup_festi_nav_fb'>
+              target='_blank'>
               <img src='facebook-fff.svg' />
               Ver evento
             </a>
           </nav>
-          <slider-box data-path='popups.list.festi.content'>
+          <slider-box
+            data-path='popups.list.festi.content'>
             <Info />
             <Crono />
             <Voluntariado />

@@ -8,7 +8,7 @@ export default class Arboles extends Component {
         <div id='cartel_suma'>
           <h1>Sumá tus árboles</h1>
           <p className='info'>
-            Si estás cuidando arbolitos nativos y/o comestibles en maceta en tu casa y querés sumarte a las plantaciones colectivas, registralos acá y después asignalos a las plantaciónes que vos elijas.
+            Si estás cuidando arbolitos nativos y/o comestibles en maceta en tu casa y querés sumarte a las plantaciones colectivas, registralos para sumarte a la red.
           </p>
           <button
             onClick={(e) => {

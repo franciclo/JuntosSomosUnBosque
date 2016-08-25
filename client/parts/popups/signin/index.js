@@ -11,12 +11,13 @@ export default class Signin extends Component {
         id='popup_signin'
         is='pop-up'
         active={this.props.active}>
-        <article className='loguineo'>
+        <div
+          className='loguineo'>
           <h1>Inicio de sesión</h1>
           <a
             className='social fb'
             href='auth/facebook'>
-            <img src='facebook.svg' />
+            <img src='facebook-fff.svg' />
             Ingresar con Facebook
           </a>
           <a
@@ -31,7 +32,8 @@ export default class Signin extends Component {
             <img src='google.svg' />
             Ingresar con Google
           </a>
-          <form-vali
+          <form
+            is='form-async'
             id='loginForm'
             direction='login'
             ajax='false'>
@@ -70,8 +72,8 @@ export default class Signin extends Component {
               data-label-active='Ingresando'>
               Ingresar
             </button>
-          </form-vali>
-        </article>
+          </form>
+        </div>
       </dialog>
     )
   }

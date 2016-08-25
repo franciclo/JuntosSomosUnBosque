@@ -11,27 +11,35 @@ class FormAsync extends window.HTMLFormElement {
     streams[id] = {}
     window.$tate(id).value = {}
     this.sendForm = this.sendForm.bind(this)
-    this.$ubmit = Rx.Observable
+    this.submitStream = Rx.Observable
       .fromEvent(this, 'submit')
       .filter(e => e.target.checkValidity())
       .do(e => e.preventDefault())
+      .map(e => new window.FormData(e.target))
 
     if (this.getAttribute('data-auto') !== 'false') {
-      streams[id].$ubmit = this.$ubmit
+      streams[id].submitStream = this.submitStream
         .subscribe(this.sendForm)
     }
   }
 
-  sendForm () {
+  sendForm (data) {
     if (!this.action) throw new Error('form-async needs action')
-    let data = new window.FormData(this)
     let id = this.getAttribute('data-path')
+
+    for (var value of data.values()) {
+       console.log(value)
+    }
+
+    let action = this.getAttribute('action')
     window.fetch(
-      this.getAttribute('action'), {
+      action,
+      {
         method: 'post',
         body: data
       })
-      .then((res) => {
+      .then(res => {
+        window.$tate(id + '.result').value = undefined
         window.$tate(id + '.result').value = res
       })
   }

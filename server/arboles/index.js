@@ -152,6 +152,8 @@ module.exports = function (app) {
     })
   })
   app.post('/lala', function (req, res) {
+    console.log(req.body)
+    console.log(req.get('content-type'))
     res.json({
       success: true,
       result: {ola: 'holaa'}
