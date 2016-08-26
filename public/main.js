@@ -60207,7 +60207,9 @@
 	    key: 'formDidMount',
 	    value: function formDidMount(form) {
 	      var sendForm = form.sendForm;
-	      form.submitStream.subscribe(sendForm);
+	      form.onSubmit(function (data) {
+	        console.log(data);
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -60219,63 +60221,94 @@
 	          'form',
 	          {
 	            is: 'form-async',
-	            'data-path': 'popups.list.festi.voluntariado',
-	            'data-auto': 'false',
 	            action: '/lala',
 	            enctype: 'multipart/form-data',
 	            'class': 'voluntariado-form',
 	            ref: this.formDidMount },
 	          _react2.default.createElement(
-	            'label',
-	            { htmlFor: '#nombre' },
-	            'Nombre'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', name: 'nombre', id: 'nombre' }),
-	          _react2.default.createElement(
-	            'label',
-	            { htmlFor: '#apellido' },
-	            'Apellido'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', name: 'apellido', id: 'apellido' }),
-	          _react2.default.createElement(
-	            'label',
-	            { htmlFor: '#mail' },
-	            'Mail'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', name: 'mail', id: 'mail' }),
-	          _react2.default.createElement(
-	            'label',
-	            { htmlFor: '#telefono' },
-	            'Telefono'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', name: 'telefono', id: 'telefono' }),
-	          _react2.default.createElement(
-	            'select',
-	            { name: 'areas' },
+	            'div',
+	            { className: 'form-row' },
 	            _react2.default.createElement(
-	              'option',
-	              null,
-	              'pre armado'
+	              'div',
+	              { className: 'form-field' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: '#nombre' },
+	                'Nombre'
+	              ),
+	              _react2.default.createElement('input', { type: 'text', name: 'nombre', id: 'nombre' })
 	            ),
 	            _react2.default.createElement(
-	              'option',
-	              null,
-	              'guardian del tiempo (orden de actividaddes)'
+	              'div',
+	              { className: 'form-field' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: '#apellido' },
+	                'Apellido'
+	              ),
+	              _react2.default.createElement('input', { type: 'text', name: 'apellido', id: 'apellido' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-field' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: '#mail' },
+	                'Mail'
+	              ),
+	              _react2.default.createElement('input', { type: 'text', name: 'mail', id: 'mail' })
 	            ),
 	            _react2.default.createElement(
-	              'option',
-	              null,
-	              'limpieza'
-	            ),
+	              'div',
+	              { className: 'form-field' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: '#telefono' },
+	                'Telefono'
+	              ),
+	              _react2.default.createElement('input', { type: 'text', name: 'telefono', id: 'telefono' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row' },
 	            _react2.default.createElement(
-	              'option',
-	              null,
-	              'difusion'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              null,
-	              'proponer una mano'
+	              'div',
+	              { className: 'form-field' },
+	              _react2.default.createElement('label', { htmlFor: '#areas' }),
+	              _react2.default.createElement(
+	                'select',
+	                { name: 'areas', id: 'areas' },
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'pre armado'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'guardian del tiempo (orden de actividaddes)'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'limpieza'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'difusion'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'proponer una mano'
+	                )
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
