@@ -59087,35 +59087,6 @@
 	          {
 	            className: 'loguineo' },
 	          _react2.default.createElement(
-	            'h1',
-	            null,
-	            'Inicio de sesión'
-	          ),
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: 'social fb',
-	              href: 'auth/facebook' },
-	            _react2.default.createElement('img', { src: 'facebook-fff.svg' }),
-	            'Ingresar con Facebook'
-	          ),
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: 'social tw',
-	              href: 'auth/twitter' },
-	            _react2.default.createElement('img', { src: 'twitter.svg' }),
-	            'Ingresar con Twitter'
-	          ),
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: 'social gl',
-	              href: 'auth/google' },
-	            _react2.default.createElement('img', { src: 'google.svg' }),
-	            'Ingresar con Google'
-	          ),
-	          _react2.default.createElement(
 	            'form',
 	            {
 	              is: 'form-async',
@@ -59123,47 +59094,92 @@
 	              direction: 'login',
 	              ajax: 'false' },
 	            _react2.default.createElement(
-	              'label',
-	              {
-	                htmlFor: 'emailLoginForm' },
-	              'Mail'
-	            ),
-	            _react2.default.createElement('input', {
-	              id: 'emailLoginForm',
-	              'data-label': 'email',
-	              'data-rules': 'required isEmail ajaxMailExist',
-	              type: 'text' }),
-	            _react2.default.createElement(
-	              'label',
-	              {
-	                htmlFor: 'passLoginForm',
-	                'data-rules': 'required' },
-	              'Contraseña'
-	            ),
-	            _react2.default.createElement('input', {
-	              id: 'passLoginForm',
-	              'data-label': 'password',
-	              type: 'password' }),
-	            _react2.default.createElement(
-	              'a',
-	              {
-	                'data-id': 'forgotBtn',
-	                className: 'registrate' },
-	              '¿Olvidaste tu contraseña?'
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              {
-	                'data-id': 'registrarse',
-	                className: 'registrate' },
-	              '¿Querés crear una cuenta?'
+	              'div',
+	              { className: 'form-row-field sociales' },
+	              _react2.default.createElement(
+	                'label',
+	                { className: 'legend' },
+	                'Ingresar usando una red social'
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                {
+	                  className: 'social fb',
+	                  href: 'auth/facebook' },
+	                _react2.default.createElement('img', { src: 'facebook-fff.svg' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                {
+	                  className: 'social tw',
+	                  href: 'auth/twitter' },
+	                _react2.default.createElement('img', { src: 'twitter.svg' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                {
+	                  className: 'social gl',
+	                  href: 'auth/google' },
+	                _react2.default.createElement('img', { src: 'google.svg' })
+	              )
 	            ),
 	            _react2.default.createElement(
-	              'button',
-	              {
-	                'data-submit': true,
-	                'data-label-active': 'Ingresando' },
-	              'Ingresar'
+	              'div',
+	              { className: 'form-row-field con-mail' },
+	              _react2.default.createElement(
+	                'label',
+	                { className: 'legend' },
+	                'Ingreso con mail'
+	              ),
+	              _react2.default.createElement(
+	                'label',
+	                {
+	                  htmlFor: 'emailLoginForm' },
+	                'Mail'
+	              ),
+	              _react2.default.createElement('input', {
+	                id: 'emailLoginForm',
+	                'data-label': 'email',
+	                'data-rules': 'required isEmail ajaxMailExist',
+	                type: 'text' })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-row-field' },
+	              _react2.default.createElement(
+	                'label',
+	                {
+	                  htmlFor: 'passLoginForm',
+	                  'data-rules': 'required' },
+	                'Contraseña'
+	              ),
+	              _react2.default.createElement('input', {
+	                id: 'passLoginForm',
+	                'data-label': 'password',
+	                type: 'password' }),
+	              _react2.default.createElement(
+	                'a',
+	                {
+	                  'data-id': 'forgotBtn',
+	                  className: 'olvido' },
+	                '¿Olvidaste tu contraseña?'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-row cuenta-buttons' },
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  className: 'crear' },
+	                'Crear cuenta'
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  type: 'submit' },
+	                'Ingresar'
+	              )
 	            )
 	          )
 	        )
@@ -60266,7 +60282,6 @@
 	                type: 'text',
 	                name: 'nombre',
 	                id: 'nombre',
-	                value: '',
 	                required: true })
 	            ),
 	            _react2.default.createElement(
@@ -60281,7 +60296,6 @@
 	                type: 'text',
 	                name: 'apellido',
 	                id: 'apellido',
-	                value: '',
 	                required: true })
 	            )
 	          ),
@@ -60300,7 +60314,6 @@
 	                type: 'email',
 	                name: 'mail',
 	                id: 'mail',
-	                value: '',
 	                required: true })
 	            ),
 	            _react2.default.createElement(
@@ -60315,7 +60328,6 @@
 	                type: 'text',
 	                name: 'telefono',
 	                id: 'telefono',
-	                value: '',
 	                required: true })
 	            )
 	          ),
@@ -60370,8 +60382,7 @@
 	            ),
 	            _react2.default.createElement('textarea', {
 	              name: 'comentario',
-	              id: 'comentario',
-	              value: '' })
+	              id: 'comentario' })
 	          ),
 	          _react2.default.createElement(
 	            'dialog',

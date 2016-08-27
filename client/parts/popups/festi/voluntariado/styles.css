@@ -13,4 +13,5 @@ form.voluntariado-form>button{
 .form-alert{
   background: #81ffbf;
   width: 100%;
+  bottom:0;
 }

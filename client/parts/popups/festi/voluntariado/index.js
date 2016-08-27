@@ -50,7 +50,6 @@ export default class Voluntariado extends Component {
                 type='text'
                 name='nombre'
                 id='nombre'
-                value=''
                 required />
             </div>
             <div className='form-field'>
@@ -59,7 +58,6 @@ export default class Voluntariado extends Component {
                 type='text'
                 name='apellido'
                 id='apellido'
-                value=''
                 required />
             </div>
           </div>
@@ -70,7 +68,6 @@ export default class Voluntariado extends Component {
                 type='email'
                 name='mail'
                 id='mail'
-                value=''
                 required />
             </div>
             <div className='form-field'>
@@ -79,7 +76,6 @@ export default class Voluntariado extends Component {
                 type='text'
                 name='telefono'
                 id='telefono'
-                value=''
                 required />
             </div>
           </div>
@@ -100,8 +96,7 @@ export default class Voluntariado extends Component {
             <label htmlFor='comentario'>Comentar:</label>
             <textarea
               name='comentario'
-              id='comentario'
-              value=''>
+              id='comentario'>
             </textarea>
           </div>
           <dialog

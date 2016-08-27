@@ -13,65 +13,74 @@ export default class Signin extends Component {
         active={this.props.active}>
         <div
           className='loguineo'>
-          <h1>Inicio de sesión</h1>
-          <a
-            className='social fb'
-            href='auth/facebook'>
-            <img src='facebook-fff.svg' />
-            Ingresar con Facebook
-          </a>
-          <a
-            className='social tw'
-            href='auth/twitter'>
-            <img src='twitter.svg' />
-            Ingresar con Twitter
-          </a>
-          <a
-            className='social gl'
-            href='auth/google'>
-            <img src='google.svg' />
-            Ingresar con Google
-          </a>
           <form
             is='form-async'
             id='loginForm'
             direction='login'
             ajax='false'>
-            <label
-              htmlFor='emailLoginForm'>
-              Mail
-            </label>
-            <input
-              id='emailLoginForm'
-              data-label='email'
-              data-rules='required isEmail ajaxMailExist'
-              type='text'>
-            </input>
-            <label
-              htmlFor='passLoginForm'
-              data-rules='required'>
-              Contraseña
-            </label>
-            <input
-              id='passLoginForm'
-              data-label='password'
-              type='password'>
-            </input>
-            <a
-              data-id='forgotBtn'
-              className='registrate'>
-              ¿Olvidaste tu contraseña?
-            </a>
-            <a
-              data-id='registrarse'
-              className='registrate'>
-              ¿Querés crear una cuenta?
-            </a>
-            <button
-              data-submit
-              data-label-active='Ingresando'>
-              Ingresar
-            </button>
+            <div className='form-row-field sociales'>
+              <label className='legend'>
+                Ingresar usando una red social
+              </label>
+              <a
+                className='social fb'
+                href='auth/facebook'>
+                <img src='facebook-fff.svg' />
+              </a>
+              <a
+                className='social tw'
+                href='auth/twitter'>
+                <img src='twitter.svg' />
+              </a>
+              <a
+                className='social gl'
+                href='auth/google'>
+                <img src='google.svg' />
+              </a>
+            </div>
+            <div className='form-row-field con-mail'>
+              <label className='legend'>
+                Ingreso con mail
+              </label>
+              <label
+                htmlFor='emailLoginForm'>
+                Mail
+              </label>
+              <input
+                id='emailLoginForm'
+                data-label='email'
+                data-rules='required isEmail ajaxMailExist'
+                type='text'>
+              </input>
+            </div>
+            <div className='form-row-field'>
+              <label
+                htmlFor='passLoginForm'
+                data-rules='required'>
+                Contraseña
+              </label>
+              <input
+                id='passLoginForm'
+                data-label='password'
+                type='password'>
+              </input>
+              <a
+                data-id='forgotBtn'
+                className='olvido'>
+                ¿Olvidaste tu contraseña?
+              </a>
+            </div>
+            <div className='form-row cuenta-buttons'>
+              <button
+                className='crear'>
+                Crear cuenta
+              </button>
+              <button
+                type='submit'>
+                Ingresar
+              </button>
+              
+            </div>
           </form>
         </div>
       </dialog>

@@ -32,12 +32,12 @@ form[is="form-async"] textarea {
     height:4rem;
     padding: 0.5rem;
 }
-form[is="form-async"] > button:hover{
+form[is="form-async"] button:hover{
     background: #008be5;
 }
-form[is="form-async"] > button {
+form[is="form-async"] button {
     cursor: pointer;
-    padding: 5px;
+    padding: 5px 10px;
     border: none;
     border-radius: 0.1rem;
     background: #009aff;
@@ -53,7 +53,7 @@ h1 {
 
 form[is="form-async"] .form-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 10px 0;
 }
 form[is="form-async"] .form-row-field {
