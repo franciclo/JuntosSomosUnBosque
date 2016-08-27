@@ -46,13 +46,6 @@ module.exports = function (app) {
             },
             nombre: user.getNombre(),
             arboles: user.arboles
-              .map(function (arbol) {
-                return {
-                  tamagno: arbol.tamagno,
-                  cantidad: arbol.cantidad,
-                  especie: arbol.especie
-                }
-              })
           }
         })
 

@@ -3,7 +3,6 @@ var app = express()
 var config = require('./config')
 var port = process.env.PORT || config.port || 3000
 var mongoose = require('mongoose')
-var path = require('path')
 
 var passport = require('passport')
 var flash = require('connect-flash')
@@ -32,7 +31,7 @@ app.use(flash())
 require('./auth/routes')(app, passport)
 require('./entry')(app)
 require('./validations')(app)
-require('./arboles')(app)
+require('./forms')(app)
 
 app.listen(port)
 console.log('Bosque en puerto ' + port)

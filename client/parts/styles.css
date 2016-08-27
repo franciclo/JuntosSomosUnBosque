@@ -40,5 +40,5 @@ button {
   font-family: P22Underground!important;
 }
 .hide {
-  display: none;
+  display: none!important;
 }

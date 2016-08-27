@@ -22,14 +22,14 @@
 #festi_marker img {
   width: 30px;
   height: auto;
-  margin: 5px;
+  margin: 0 5px;
 }
 #festi_marker span.title {
     color: #fff;
+    line-height: 15px;
     font-size: 17px;
-    line-height: 20px;
     font-weight: 500;
-    padding: 4px 7px;
+    padding: 7px;
     background: #ff687b;
 }
 #festi_marker span.triangle {

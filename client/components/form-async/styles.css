@@ -1,27 +1,36 @@
 ﻿form[is="form-async"]{
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+  box-sizing: border-box;
 }
 form[is="form-async"] label {
-    margin: 13px 0 4px;
     font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
 }
 form[is="form-async"] input,
 form[is="form-async"] textarea,
-form[is="form-async"] select-input {
-    border: 1px solid #e5e5e5;
-    border-radius: 3px;
+form[is="form-async"] select {
+    font-family: P22Underground;
+    font-size: 15px;
+    border: 1px solid #b3b3b3;
     background-color: white;
     height: 2rem;
     padding: 0 0.5rem;
     box-sizing: border-box;
+    width: 100%;
+}
+form[is="form-async"] select {
+    cursor: pointer;
+}
+form[is="form-async"] option.default {
+  display: none;
 }
 form[is="form-async"] textarea {
     height:4rem;
     padding: 0.5rem;
-}
-form[is="form-async"] > fieldset{
-    display: flex;
 }
 form[is="form-async"] > button:hover{
     background: #008be5;
@@ -29,14 +38,32 @@ form[is="form-async"] > button:hover{
 form[is="form-async"] > button {
     cursor: pointer;
     padding: 5px;
-    margin: 10px 0 0;
     border: none;
     border-radius: 0.1rem;
     background: #009aff;
     color: white;
     font-size: 1.2rem;
+  align-self: flex-end;
+  margin: 20px;
 }
 h1 {
     font-size: 20px;
     margin: 10px 0px;
+}
+
+form[is="form-async"] .form-row {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+}
+form[is="form-async"] .form-row-field {
+  margin: 10px 0px;
+  padding: 10px 20px 0;
+}
+form[is="form-async"] .form-field{
+  flex: 1;
+  padding: 10px 20px;
+}
+form[is="form-async"]>div:last-of-type {
+  flex: 1;
 }

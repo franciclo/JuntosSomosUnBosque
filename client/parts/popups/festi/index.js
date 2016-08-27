@@ -31,50 +31,52 @@ export default class Festi extends Component {
         id='popup_festi'
         data-icon='fff'>
         <div>
-          <header>
-            <img src='fecha.svg' />
-            <div className='header-info'>
-              <h1>Festival de plantación</h1>
-              <p className='info'>
-                <img src='lugar.svg' />
-                Eco aldea Velatropa, Ciudad Universitaria.
-              </p>
-              <p className='info'>
-                <img src='reloj-fff.svg' />
-                Domingo 11 de septiembre, 12:00 am
-              </p>
-            </div>
-          </header>
-          <nav>
-            <button
-              id='popup_festi_nav_info'
-              className={(this.state.active === 'info' ? 'active' : '') + ' nav'}
-              onClick={this.activeSection('info')}>
-              Info
-              <span className='underline'></span>
-            </button>
-            <button
-              id='popup_festi_nav_crono'
-              className={(this.state.active === 'crono' ? 'active' : '') + ' nav'}
-              onClick={this.activeSection('crono')}>
-              Cronograma
-              <span className='underline'></span>
-            </button>
-            <button
-              id='popup_festi_nav_ayuda'
-              className={(this.state.active === 'ayuda' ? 'active' : '') + ' nav'}
-              onClick={this.activeSection('ayuda')}>
-              Quiero ayudar
-              <span className='underline'></span>
-            </button>
-            <a
-              id='popup_festi_nav_fb'
-              href='https://www.facebook.com/events/701647386601384/'
-              target='_blank'>
-              <img src='facebook-fff.svg' />
-              Ver evento
-            </a>
-          </nav>
+          <div className='header-wrapper'>
+            <header>
+              <img src='fecha.svg' />
+              <div className='header-info'>
+                <h1>Festival de plantación</h1>
+                <p className='info'>
+                  <img src='lugar.svg' />
+                  Eco aldea Velatropa, Ciudad Universitaria.
+                </p>
+                <p className='info'>
+                  <img src='reloj-fff.svg' />
+                  Domingo 11 de septiembre, 12:00 am
+                </p>
+              </div>
+            </header>
+            <nav>
+              <button
+                id='popup_festi_nav_info'
+                className={(this.state.active === 'info' ? 'active' : '') + ' nav'}
+                onClick={this.activeSection('info')}>
+                Info
+                <span className='underline'></span>
+              </button>
+              <button
+                id='popup_festi_nav_crono'
+                className={(this.state.active === 'crono' ? 'active' : '') + ' nav'}
+                onClick={this.activeSection('crono')}>
+                Cronograma
+                <span className='underline'></span>
+              </button>
+              <button
+                id='popup_festi_nav_ayuda'
+                className={(this.state.active === 'ayuda' ? 'active' : '') + ' nav'}
+                onClick={this.activeSection('ayuda')}>
+                Quiero ayudar
+                <span className='underline'></span>
+              </button>
+              <a
+                id='popup_festi_nav_fb'
+                href='https://www.facebook.com/events/701647386601384/'
+                target='_blank'>
+                <img src='facebook-fff.svg' />
+                Ver evento
+              </a>
+            </nav>
+          </div>
           <slider-box
             data-path='popups.list.festi.content'>
             <Info />

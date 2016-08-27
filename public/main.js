@@ -59840,69 +59840,73 @@
 	          'div',
 	          null,
 	          _react2.default.createElement(
-	            'header',
-	            null,
-	            _react2.default.createElement('img', { src: 'fecha.svg' }),
+	            'div',
+	            { className: 'header-wrapper' },
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'header-info' },
+	              'header',
+	              null,
+	              _react2.default.createElement('img', { src: 'fecha.svg' }),
 	              _react2.default.createElement(
-	                'h1',
-	                null,
-	                'Festival de plantación'
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                { className: 'info' },
-	                _react2.default.createElement('img', { src: 'lugar.svg' }),
-	                'Eco aldea Velatropa, Ciudad Universitaria.'
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                { className: 'info' },
-	                _react2.default.createElement('img', { src: 'reloj-fff.svg' }),
-	                'Domingo 11 de septiembre, 12:00 am'
+	                'div',
+	                { className: 'header-info' },
+	                _react2.default.createElement(
+	                  'h1',
+	                  null,
+	                  'Festival de plantación'
+	                ),
+	                _react2.default.createElement(
+	                  'p',
+	                  { className: 'info' },
+	                  _react2.default.createElement('img', { src: 'lugar.svg' }),
+	                  'Eco aldea Velatropa, Ciudad Universitaria.'
+	                ),
+	                _react2.default.createElement(
+	                  'p',
+	                  { className: 'info' },
+	                  _react2.default.createElement('img', { src: 'reloj-fff.svg' }),
+	                  'Domingo 11 de septiembre, 12:00 am'
+	                )
 	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'nav',
-	            null,
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                id: 'popup_festi_nav_info',
-	                className: (this.state.active === 'info' ? 'active' : '') + ' nav',
-	                onClick: this.activeSection('info') },
-	              'Info',
-	              _react2.default.createElement('span', { className: 'underline' })
 	            ),
 	            _react2.default.createElement(
-	              'button',
-	              {
-	                id: 'popup_festi_nav_crono',
-	                className: (this.state.active === 'crono' ? 'active' : '') + ' nav',
-	                onClick: this.activeSection('crono') },
-	              'Cronograma',
-	              _react2.default.createElement('span', { className: 'underline' })
-	            ),
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                id: 'popup_festi_nav_ayuda',
-	                className: (this.state.active === 'ayuda' ? 'active' : '') + ' nav',
-	                onClick: this.activeSection('ayuda') },
-	              'Quiero ayudar',
-	              _react2.default.createElement('span', { className: 'underline' })
-	            ),
-	            _react2.default.createElement(
-	              'a',
-	              {
-	                id: 'popup_festi_nav_fb',
-	                href: 'https://www.facebook.com/events/701647386601384/',
-	                target: '_blank' },
-	              _react2.default.createElement('img', { src: 'facebook-fff.svg' }),
-	              'Ver evento'
+	              'nav',
+	              null,
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  id: 'popup_festi_nav_info',
+	                  className: (this.state.active === 'info' ? 'active' : '') + ' nav',
+	                  onClick: this.activeSection('info') },
+	                'Info',
+	                _react2.default.createElement('span', { className: 'underline' })
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  id: 'popup_festi_nav_crono',
+	                  className: (this.state.active === 'crono' ? 'active' : '') + ' nav',
+	                  onClick: this.activeSection('crono') },
+	                'Cronograma',
+	                _react2.default.createElement('span', { className: 'underline' })
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  id: 'popup_festi_nav_ayuda',
+	                  className: (this.state.active === 'ayuda' ? 'active' : '') + ' nav',
+	                  onClick: this.activeSection('ayuda') },
+	                'Quiero ayudar',
+	                _react2.default.createElement('span', { className: 'underline' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                {
+	                  id: 'popup_festi_nav_fb',
+	                  href: 'https://www.facebook.com/events/701647386601384/',
+	                  target: '_blank' },
+	                _react2.default.createElement('img', { src: 'facebook-fff.svg' }),
+	                'Ver evento'
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -60182,6 +60186,8 @@
 
 	__webpack_require__(811);
 
+	__webpack_require__(818);
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -60200,20 +60206,40 @@
 	  function Voluntariado() {
 	    _classCallCheck(this, Voluntariado);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Voluntariado).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Voluntariado).call(this));
+
+	    _this.state = {
+	      formAlertShow: false
+	    };
+	    _this.formDidMount = _this.formDidMount.bind(_this);
+	    _this.closeAlert = _this.closeAlert.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(Voluntariado, [{
 	    key: 'formDidMount',
 	    value: function formDidMount(form) {
-	      var sendForm = form.sendForm;
-	      form.onSubmit(function (data) {
-	        console.log(data);
+	      var _this2 = this;
+
+	      form.onResponse(function (data) {
+	        data.json().then(function (res) {
+	          console.log(res);
+	          if (_this2.state.formAlertShow) {
+	            return _this2.forceUpdate();
+	          }
+	          _this2.setState({ formAlertShow: true });
+	        });
 	      });
+	    }
+	  }, {
+	    key: 'closeAlert',
+	    value: function closeAlert(e) {
+	      this.setState({ formAlertShow: false });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var formAlertShow = this.state.formAlertShow ? 'active' : '';
 	      return _react2.default.createElement(
 	        'article',
 	        { 'data-id': 'ayuda' },
@@ -60236,7 +60262,12 @@
 	                { htmlFor: '#nombre' },
 	                'Nombre'
 	              ),
-	              _react2.default.createElement('input', { type: 'text', name: 'nombre', id: 'nombre' })
+	              _react2.default.createElement('input', {
+	                type: 'text',
+	                name: 'nombre',
+	                id: 'nombre',
+	                value: '',
+	                required: true })
 	            ),
 	            _react2.default.createElement(
 	              'div',
@@ -60246,7 +60277,12 @@
 	                { htmlFor: '#apellido' },
 	                'Apellido'
 	              ),
-	              _react2.default.createElement('input', { type: 'text', name: 'apellido', id: 'apellido' })
+	              _react2.default.createElement('input', {
+	                type: 'text',
+	                name: 'apellido',
+	                id: 'apellido',
+	                value: '',
+	                required: true })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -60260,7 +60296,12 @@
 	                { htmlFor: '#mail' },
 	                'Mail'
 	              ),
-	              _react2.default.createElement('input', { type: 'text', name: 'mail', id: 'mail' })
+	              _react2.default.createElement('input', {
+	                type: 'email',
+	                name: 'mail',
+	                id: 'mail',
+	                value: '',
+	                required: true })
 	            ),
 	            _react2.default.createElement(
 	              'div',
@@ -60270,56 +60311,87 @@
 	                { htmlFor: '#telefono' },
 	                'Telefono'
 	              ),
-	              _react2.default.createElement('input', { type: 'text', name: 'telefono', id: 'telefono' })
+	              _react2.default.createElement('input', {
+	                type: 'text',
+	                name: 'telefono',
+	                id: 'telefono',
+	                value: '',
+	                required: true })
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'form-row' },
+	            { className: 'form-row-field' },
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'form-field' },
-	              _react2.default.createElement('label', { htmlFor: '#areas' }),
+	              'label',
+	              { htmlFor: '#areas' },
+	              '¿En que nos podrías ayudar?'
+	            ),
+	            _react2.default.createElement(
+	              'select',
+	              {
+	                name: 'areas',
+	                id: 'areas',
+	                required: true },
 	              _react2.default.createElement(
-	                'select',
-	                { name: 'areas', id: 'areas' },
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  'pre armado'
-	                ),
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  'guardian del tiempo (orden de actividaddes)'
-	                ),
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  'limpieza'
-	                ),
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  'difusion'
-	                ),
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  'proponer una mano'
-	                )
+	                'option',
+	                { className: 'default' },
+	                'Elegí un area'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'Pre' },
+	                'Pre armado'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'Durante' },
+	                'Durante el evento'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'Limpieza' },
+	                'Limpieza'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'Difusion' },
+	                'Difusión'
 	              )
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'span',
-	            { className: 'hide' },
-	            'Gracias por sumarte, y ser parte de este festival autogestivo. Te vamos a estar contactando via mail.'
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'comentario' },
+	              'Comentar:'
+	            ),
+	            _react2.default.createElement('textarea', {
+	              name: 'comentario',
+	              id: 'comentario',
+	              value: '' })
+	          ),
+	          _react2.default.createElement(
+	            'dialog',
+	            {
+	              is: 'alert-msg',
+	              active: formAlertShow,
+	              'class': 'form-alert' },
+	            _react2.default.createElement('img', { src: 'close.svg', alt: 'Close', onClick: this.closeAlert }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'volu-form-alert' },
+	              'Gracias por sumarte, y ser parte de este festival autogestivo.',
+	              _react2.default.createElement('br', null),
+	              'Te vamos a estar contactando via mail.'
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'button',
 	            { type: 'submit' },
-	            'Send'
+	            'Enviar'
 	          )
 	        )
 	      );
@@ -60352,19 +60424,11 @@
 
 	__webpack_require__(814);
 
-	var _rxjs = __webpack_require__(184);
-
-	var _rxjs2 = _interopRequireDefault(_rxjs);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var streams = {};
 
 	var FormAsync = function (_window$HTMLFormEleme) {
 	  _inherits(FormAsync, _window$HTMLFormEleme);
@@ -60378,69 +60442,50 @@
 	  _createClass(FormAsync, [{
 	    key: 'connectedCallback',
 	    value: function connectedCallback() {
-	      var id = this.getAttribute('data-path');
-	      streams[id] = {};
-	      window.$tate(id).value = {};
+	      this.responseCallBack = null;
+	      this.submitCallBack = null;
+	      this.handleSubmit = this.handleSubmit.bind(this);
+	      this.onResponse = this.onResponse.bind(this);
+	      this.onSubmit = this.onSubmit.bind(this);
 	      this.sendForm = this.sendForm.bind(this);
-	      this.submitStream = _rxjs2.default.Observable.fromEvent(this, 'submit').filter(function (e) {
-	        return e.target.checkValidity();
-	      }).do(function (e) {
-	        return e.preventDefault();
-	      }).map(function (e) {
-	        return new window.FormData(e.target);
-	      });
-
-	      if (this.getAttribute('data-auto') !== 'false') {
-	        streams[id].submitStream = this.submitStream.subscribe(this.sendForm);
+	      this.addEventListener('submit', this.handleSubmit);
+	    }
+	  }, {
+	    key: 'disconnectedCallback',
+	    value: function disconnectedCallback() {
+	      this.removeEventListener('submit', this.handleSubmit);
+	    }
+	  }, {
+	    key: 'onSubmit',
+	    value: function onSubmit(cb) {
+	      this.submitCallBack = cb;
+	    }
+	  }, {
+	    key: 'onResponse',
+	    value: function onResponse(cb) {
+	      this.responseCallBack = cb;
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      var data = new window.FormData(e.target);
+	      if (this.submitCallBack) this.submitCallBack(data);
+	      if (e.target.getAttribute('data-auto') !== 'false') {
+	        this.sendForm(data);
 	      }
 	    }
 	  }, {
 	    key: 'sendForm',
 	    value: function sendForm(data) {
 	      if (!this.action) throw new Error('form-async needs action');
-	      var id = this.getAttribute('data-path');
-
-	      var _iteratorNormalCompletion = true;
-	      var _didIteratorError = false;
-	      var _iteratorError = undefined;
-
-	      try {
-	        for (var _iterator = data.values()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	          var value = _step.value;
-
-	          console.log(value);
-	        }
-	      } catch (err) {
-	        _didIteratorError = true;
-	        _iteratorError = err;
-	      } finally {
-	        try {
-	          if (!_iteratorNormalCompletion && _iterator.return) {
-	            _iterator.return();
-	          }
-	        } finally {
-	          if (_didIteratorError) {
-	            throw _iteratorError;
-	          }
-	        }
-	      }
-
 	      var action = this.getAttribute('action');
 	      window.fetch(action, {
 	        method: 'post',
 	        body: data
-	      }).then(function (res) {
-	        window.$tate(id + '.result').value = undefined;
-	        window.$tate(id + '.result').value = res;
-	      });
-	    }
-	  }, {
-	    key: 'disconnectedCallback',
-	    value: function disconnectedCallback() {
-	      var id = this.getAttribute('data-path');
-	      Object.keys(streams[id]).forEach(function ($) {
-	        streams[id][$].unsubscribe();
-	      });
+	      }).catch(function (err) {
+	        return console.error('FormAsync fetch fail', err);
+	      }).then(this.responseCallBack);
 	    }
 	  }]);
 
@@ -61061,6 +61106,65 @@
 
 /***/ },
 /* 816 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 817 */,
+/* 818 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(819);
+
+	__webpack_require__(758);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AlertMsg = function (_window$HTMLDialogEle) {
+	  _inherits(AlertMsg, _window$HTMLDialogEle);
+
+	  function AlertMsg() {
+	    _classCallCheck(this, AlertMsg);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AlertMsg).apply(this, arguments));
+	  }
+
+	  _createClass(AlertMsg, [{
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback(name, oldValue, newValue) {
+	      if (!this.parentNode) return;
+	      if (name === 'active') {
+	        var open = this.getAttribute('open') === '';
+	        if (newValue) {
+	          if (!open) this.show();
+	        } else {
+	          if (open) this.close();
+	        }
+	      }
+	    }
+	  }], [{
+	    key: 'observedAttributes',
+	    get: function get() {
+	      return ['active'];
+	    }
+	  }]);
+
+	  return AlertMsg;
+	}(window.HTMLDialogElement);
+
+	window.customElements.define('alert-msg', AlertMsg, { extends: 'dialog' });
+
+/***/ },
+/* 819 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
