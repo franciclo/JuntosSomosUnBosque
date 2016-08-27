@@ -20,11 +20,16 @@ export default class Popups extends Component {
     window.$tate('popups.active').value = null
     this.activeStream = window.$tate('popups.active').on('E')
     this.user = window.$tate('user').value
+    this.crearCuentaShow = this.crearCuentaShow.bind(this)
   }
 
   componentWillMount () {
     this.activeStream
       .subscribe((active) => this.setState({active}))
+  }
+
+  crearCuentaShow () {
+    this.setState({active: 'signup'})
   }
 
   render () {
@@ -37,6 +42,7 @@ export default class Popups extends Component {
         <Info
           active={this.state.active === 'info' ? 'active' : ''} />
         {!user && <Signin
+          crearCuentaShow={this.crearCuentaShow}
           active={this.state.active === 'signin' ? 'active' : ''} />}
         {!user && <Signup
           active={this.state.active === 'signup' ? 'active' : ''} />}

@@ -39,7 +39,7 @@ export default class Voluntariado extends Component {
       <article data-id='ayuda'>
         <form
           is='form-async'
-          action='/lala'
+          action='/voluntarios'
           enctype='multipart/form-data'
           class='voluntariado-form'
           ref={this.formDidMount}>

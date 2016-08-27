@@ -31,6 +31,15 @@ module.exports = function (app) {
       })
     }
   )
+
+
+
+
+
+
+
+
+
   // app.get('/finishRegistration', isLoggedIn, function (req, res) {
   //   var user = req.user
   //   user.primeraVez = false

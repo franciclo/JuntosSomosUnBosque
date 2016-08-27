@@ -5,19 +5,68 @@ module.exports = function (app, passport) {
   // LOCAL =======================================================================
   // =============================================================================
 
-  app.post('/signup',
+  app.post('/registro',
     passport.authenticate('local-signup', {
       successRedirect: '/',
       failureRedirect: '/'
     })
   )
 
-  app.post('/login',
-    passport.authenticate('local-login', {
-      successRedirect: '/',
-      failureRedirect: '/'
-    })
-  )
+  // app.post('/login',
+  //   passport.authenticate('local-login', {
+  //     successRedirect: '/',
+  //     failureRedirect: '/'
+  //   })
+  // )
+
+
+
+
+
+  app.post('/login', function(req, res, next) {
+    passport.authenticate('local-login', function(err, user, info) {
+      if (err) {
+        return res.json({
+          success: false,
+          result: err
+        })
+      }
+      if (!user) { 
+        return res.json({
+          success: false,
+          result: 'no user'
+        })
+      }
+      req.logIn(user, function(err) {
+        if (err) { 
+          return res.json({
+            success: false,
+            result: 'in login err'
+          })
+        }
+        return res.json({
+          success: true,
+          result: user
+        })
+      });
+    })(req, res, next);
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   app.get('/forgot', require('./controller').forgot)
 

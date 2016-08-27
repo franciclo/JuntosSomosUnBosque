@@ -4,6 +4,29 @@ import 'components/pop-up'
 import React, {Component} from 'react'
 
 export default class Signin extends Component {
+  constructor () {
+    super()
+    this.state = {
+      formAlertShow: false
+    }
+    this.formDidMount = this.formDidMount.bind(this)
+    this.closeAlert = this.closeAlert.bind(this)
+  }
+  formDidMount (form) {
+    form.onResponse(res => {
+      res.json().then(data => {
+        if (!data.success) {
+          console.log('onResponsefail', data)
+          return this.setState({formAlertShow: true})
+        }
+        console.log('onResponse', data)
+      })
+    })
+    form.onSubmit(v => { console.log('onSubmit', v) })
+  }
+  closeAlert () {
+    this.setState({formAlertShow: false})
+  }
 
   render () {
     return (
@@ -15,12 +38,11 @@ export default class Signin extends Component {
           className='loguineo'>
           <form
             is='form-async'
-            id='loginForm'
-            direction='login'
-            ajax='false'>
+            action='/login'
+            ref={this.formDidMount}>
             <div className='form-row-field sociales'>
               <label className='legend'>
-                Ingresar usando una red social
+                Ingresar con red social
               </label>
               <a
                 className='social fb'
@@ -40,28 +62,35 @@ export default class Signin extends Component {
             </div>
             <div className='form-row-field con-mail'>
               <label className='legend'>
-                Ingreso con mail
+                Ingresar con mail
               </label>
+              <dialog
+                is="alert-msg"
+                class='alert-login'
+                active={this.state.formAlertShow ? 'active' : ''}>
+                <img src="close-fff.svg" alt="Close" onClick={this.closeAlert} />
+                Datos incorrectos
+              </dialog>
               <label
-                htmlFor='emailLoginForm'>
+                htmlFor='mail'>
                 Mail
               </label>
               <input
-                id='emailLoginForm'
-                data-label='email'
-                data-rules='required isEmail ajaxMailExist'
-                type='text'>
+                name='mail'
+                id='mail'
+                type='email'
+                required>
               </input>
             </div>
             <div className='form-row-field'>
               <label
-                htmlFor='passLoginForm'
-                data-rules='required'>
+                htmlFor='pass'
+                required>
                 Contraseña
               </label>
               <input
-                id='passLoginForm'
-                data-label='password'
+                id='pass'
+                name='pass'
                 type='password'>
               </input>
               <a
@@ -72,11 +101,12 @@ export default class Signin extends Component {
             </div>
             <div className='form-row cuenta-buttons'>
               <button
-                className='crear'>
+                type='button'
+                className='crear'
+                onClick={this.props.crearCuentaShow}>
                 Crear cuenta
               </button>
-              <button
-                type='submit'>
+              <button>
                 Ingresar
               </button>
               

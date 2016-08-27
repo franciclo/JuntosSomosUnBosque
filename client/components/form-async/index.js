@@ -5,8 +5,9 @@ import 'whatwg-fetch'
 
 class FormAsync extends window.HTMLFormElement {
   connectedCallback () {
-    this.responseCallBack = null
-    this.submitCallBack = null
+    this.responseCallBack = v => v
+    this.submitCallBack = v => v
+    this.failCallBack = v => { console.warn(v); return v }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onResponse = this.onResponse.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -24,6 +25,10 @@ class FormAsync extends window.HTMLFormElement {
 
   onResponse (cb) {
     this.responseCallBack = cb
+  }
+
+  onFail (cb) {
+    this.failCallBack = cb
   }
 
   handleSubmit (e) {
@@ -44,7 +49,7 @@ class FormAsync extends window.HTMLFormElement {
         method: 'post',
         body: data
       })
-      .catch(err => console.error('FormAsync fetch fail', err))
+      .catch(err => this.failCallback(err))
       .then(this.responseCallBack)
   }
 }
