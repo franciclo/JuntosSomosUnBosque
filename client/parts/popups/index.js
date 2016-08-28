@@ -25,8 +25,12 @@ export default class Popups extends Component {
   }
 
   componentWillMount () {
-    this.activeStream
+    this.activeStream = this.activeStream
       .subscribe((active) => this.setState({active}))
+  }
+
+  componentWillUnmount() {
+    this.activeStream.unsubscribe()
   }
 
   crearCuentaShow () {
@@ -48,7 +52,8 @@ export default class Popups extends Component {
     return (
       <div id='popups_layout'>
         <Flyer
-          closePopUp={this.closePopUp} />
+          closePopUp={this.closePopUp}
+          active={this.state.active === 'flyer' ? 'active' : ''} />
         <Festi
           closePopUp={this.closePopUp}
           active={this.state.active === 'festi' ? 'active' : ''} />

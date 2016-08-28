@@ -21516,6 +21516,27 @@
 	      });
 	    }
 	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (this.mostrarFlyer()) {
+	        console.log('if (this.mostrarFlyer()) {');
+	        window.$tate('popups.active').value = 'flyer';
+	      }
+	    }
+	  }, {
+	    key: 'mostrarFlyer',
+	    value: function mostrarFlyer() {
+	      var vistoNum = +window.localStorage.getItem('flyerFesti');
+	      if (!vistoNum) {
+	        vistoNum = 1;
+	        window.localStorage.setItem('flyerFesti', vistoNum);
+	      } else {
+	        vistoNum++;
+	        window.localStorage.setItem('flyerFesti', vistoNum);
+	      }
+	      return vistoNum === 1 || vistoNum === 2 ? true : Math.random() >= 0.7;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -59010,9 +59031,14 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
-	      this.activeStream.subscribe(function (active) {
+	      this.activeStream = this.activeStream.subscribe(function (active) {
 	        return _this2.setState({ active: active });
 	      });
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.activeStream.unsubscribe();
 	    }
 	  }, {
 	    key: 'crearCuentaShow',
@@ -59039,7 +59065,8 @@
 	        'div',
 	        { id: 'popups_layout' },
 	        _react2.default.createElement(_flyer2.default, {
-	          closePopUp: this.closePopUp }),
+	          closePopUp: this.closePopUp,
+	          active: this.state.active === 'flyer' ? 'active' : '' }),
 	        _react2.default.createElement(_festi2.default, {
 	          closePopUp: this.closePopUp,
 	          active: this.state.active === 'festi' ? 'active' : '' }),
@@ -59816,38 +59843,13 @@
 	var Flyer = function (_Component) {
 	  _inherits(Flyer, _Component);
 
-	  function Flyer(props) {
+	  function Flyer() {
 	    _classCallCheck(this, Flyer);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Flyer).call(this, props));
-
-	    _this.state = {
-	      active: false
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Flyer).apply(this, arguments));
 	  }
 
 	  _createClass(Flyer, [{
-	    key: 'mostrarFlyer',
-	    value: function mostrarFlyer(vistoNum) {
-	      if (!vistoNum) {
-	        vistoNum = 1;
-	        localStorage.setItem('flyerFesti', vistoNum);
-	      } else {
-	        vistoNum++;
-	        localStorage.setItem('flyerFesti', vistoNum);
-	      }
-	      return vistoNum === 1 || vistoNum === 2 ? true : Math.random() >= 0.7;
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var vistos = +localStorage.getItem('flyerFesti');
-	      this.setState({
-	        active: this.mostrarFlyer(vistos)
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -59856,7 +59858,7 @@
 	          id: 'festi_flyer',
 	          is: 'pop-up',
 	          onClick: this.props.closePopUp,
-	          active: this.state.active ? 'active' : '' },
+	          active: this.props.active ? 'active' : '' },
 	        _react2.default.createElement(
 	          'span',
 	          {

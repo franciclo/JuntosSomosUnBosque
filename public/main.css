@@ -1179,7 +1179,9 @@ label.legend {
   box-sizing: border-box;
   margin-top: -45px;
   font-weight: 500;
-}dialog[is="pop-up"]>.close{
+}dialog[is="pop-up"]>.close,
+dialog[is="pop-up"]>img[src="close.svg"],
+dialog[is="pop-up"]>img[src="close-fff.svg"]{
   position: absolute;
   top: 10px;
   right: 10px;

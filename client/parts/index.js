@@ -59,6 +59,28 @@ export default class Main extends Component {
       this.setState({user})
     })
   }
+
+  componentDidMount() {
+    if (this.mostrarFlyer()) {
+      console.log('if (this.mostrarFlyer()) {')
+      window.$tate('popups.active').value = 'flyer'
+    }   
+  }
+
+  mostrarFlyer () {
+    let vistoNum = +window.localStorage.getItem('flyerFesti')
+    if (!vistoNum) {
+      vistoNum = 1
+      window.localStorage.setItem('flyerFesti', vistoNum)
+    } else {
+      vistoNum++
+      window.localStorage.setItem('flyerFesti', vistoNum)
+    }
+    return vistoNum === 1 || vistoNum === 2
+      ? true
+      : Math.random() >= 0.7
+  }
+
   render () {
     return (
       <div>
