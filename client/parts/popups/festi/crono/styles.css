@@ -19,11 +19,6 @@
   text-transform: uppercase;
   padding: 8px 4px;
 }
-#volver_a_intro svg-icon{
-  fill: #989898;
-  width: 9px;
-  height: 9px;
-}
 span.hora-crono {
     width: 30px;
 }
@@ -35,10 +30,10 @@ span.linea-crono {
     border-radius: 7px;
     position: relative;
     left: 6px;
-    background: #ffe551;
+    background: #009aff;
 }
 .content-crono {
-    border-left: 2px solid #ffe551;
+    border-left: 2px solid #009aff;
     flex: 1;
     padding-left: 13px;
 }

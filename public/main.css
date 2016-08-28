@@ -1179,16 +1179,16 @@ label.legend {
   box-sizing: border-box;
   margin-top: -45px;
   font-weight: 500;
-}dialog[is="pop-up"]>.close,
-dialog[is="pop-up"]>img[src="close.svg"],
-dialog[is="pop-up"]>img[src="close-fff.svg"]{
+}dialog>.close,
+dialog>img[src="close.svg"],
+dialog>img[src="close-fff.svg"]{
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
   font-size: 30px;
   line-height: 20px;
-
+  height: 10px;
 }
 dialog[is="pop-up"] {
   padding: 0;
@@ -1346,11 +1346,6 @@ dialog[is="pop-up"]::backdrop {
   text-transform: uppercase;
   padding: 8px 4px;
 }
-#volver_a_intro svg-icon{
-  fill: #989898;
-  width: 9px;
-  height: 9px;
-}
 span.hora-crono {
     width: 30px;
 }
@@ -1362,10 +1357,10 @@ span.linea-crono {
     border-radius: 7px;
     position: relative;
     left: 6px;
-    background: #ffe551;
+    background: #009aff;
 }
 .content-crono {
-    border-left: 2px solid #ffe551;
+    border-left: 2px solid #009aff;
     flex: 1;
     padding-left: 13px;
 }

@@ -93,18 +93,17 @@ export default class Voluntariado extends Component {
             </select>
           </div>
           <div className='form-row-field'>
-            <label htmlFor='comentario'>Comentar:</label>
             <textarea
               name='comentario'
-              id='comentario'>
+              placeholder='Dejá un comentario...'>
             </textarea>
           </div>
           <dialog
             is='alert-msg'
             active={formAlertShow}
             class='form-alert'>
-              <img src="close.svg" alt="Close" onClick={this.closeAlert} />
-              <div className="volu-form-alert">
+              <img src='close.svg' alt='Close' onClick={this.closeAlert} />
+              <div className='volu-form-alert'>
                 Gracias por sumarte, y ser parte de este festival autogestivo.
                 <br />Te vamos a estar contactando via mail.
               </div>

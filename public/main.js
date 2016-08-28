@@ -59996,7 +59996,7 @@
 	                  'p',
 	                  { className: 'info' },
 	                  _react2.default.createElement('img', { src: 'reloj-fff.svg' }),
-	                  'Domingo 11 de septiembre, 12:00 am'
+	                  'Sábado 24 de septiembre, 12:00 am'
 	                )
 	              )
 	            ),
@@ -60491,14 +60491,9 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'form-row-field' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'comentario' },
-	              'Comentar:'
-	            ),
 	            _react2.default.createElement('textarea', {
 	              name: 'comentario',
-	              id: 'comentario' })
+	              placeholder: 'Dejá un comentario...' })
 	          ),
 	          _react2.default.createElement(
 	            'dialog',

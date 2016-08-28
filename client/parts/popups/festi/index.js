@@ -48,7 +48,7 @@ export default class Festi extends Component {
                 </p>
                 <p className='info'>
                   <img src='reloj-fff.svg' />
-                  Domingo 11 de septiembre, 12:00 am
+                  Sábado 24 de septiembre, 12:00 am
                 </p>
               </div>
             </header>
