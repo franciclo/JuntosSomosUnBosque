@@ -4,6 +4,7 @@ form.voluntariado-form{
 form.voluntariado-form>button{
   width: 130px;
   height: 50px;
+  margin:20px;
 }
 
 .form-alert>div{

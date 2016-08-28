@@ -21462,10 +21462,12 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this));
 
 	    _this.state = {
+	      user: null,
 	      arboles: [],
 	      red: []
 	    };
 	    _this.redData = window.$tate('red').on('N');
+	    _this.userData = window.$tate('user').on('N');
 	    return _this;
 	  }
 
@@ -21508,6 +21510,11 @@
 	          red: red
 	        });
 	      });
+
+	      this.userData.subscribe(function (user) {
+	        console.log('new user', user);
+	        _this2.setState({ user: user });
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -21515,9 +21522,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_sidebar2.default, { arboles: this.state.arboles }),
+	        _react2.default.createElement(_sidebar2.default, {
+	          arboles: this.state.arboles,
+	          user: this.state.user }),
 	        _react2.default.createElement(_mapa2.default, { red: this.state.red }),
-	        _react2.default.createElement(_popups2.default, null)
+	        _react2.default.createElement(_popups2.default, { user: this.state.user })
 	      );
 	    }
 	  }]);
@@ -58114,7 +58123,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'sidebar' },
-	        _react2.default.createElement(_header2.default, null),
+	        _react2.default.createElement(_header2.default, { user: this.props.user }),
 	        _react2.default.createElement(
 	          'h1',
 	          null,
@@ -58129,7 +58138,7 @@
 	          total: this.props.arboles.reduce(function (acc, arbol) {
 	            return arbol.cantidad + acc;
 	          }, 0) }),
-	        _react2.default.createElement(_body2.default, this.props),
+	        _react2.default.createElement(_body2.default, { arboles: this.props.arboles }),
 	        _react2.default.createElement(_footer2.default, null)
 	      );
 	    }
@@ -58201,13 +58210,21 @@
 	            '+ info'
 	          ),
 	          '|',
-	          _react2.default.createElement(
+	          !this.props.user && _react2.default.createElement(
 	            'button',
 	            {
 	              onClick: function onClick(e) {
 	                window.$tate('popups.active').value = 'signin';
 	              } },
 	            'ingresar'
+	          ),
+	          this.props.user && _react2.default.createElement(
+	            'button',
+	            {
+	              onClick: function onClick(e) {
+	                window.$tate('popups.active').value = 'perfil';
+	              } },
+	            this.props.user.nombre
 	          )
 	        )
 	      );
@@ -58958,7 +58975,7 @@
 
 	var _festi2 = _interopRequireDefault(_festi);
 
-	var _info = __webpack_require__(815);
+	var _info = __webpack_require__(818);
 
 	var _info2 = _interopRequireDefault(_info);
 
@@ -58983,8 +59000,8 @@
 	    };
 	    window.$tate('popups.active').value = null;
 	    _this.activeStream = window.$tate('popups.active').on('E');
-	    _this.user = window.$tate('user').value;
 	    _this.crearCuentaShow = _this.crearCuentaShow.bind(_this);
+	    _this.loginShow = _this.loginShow.bind(_this);
 	    return _this;
 	  }
 
@@ -59003,9 +59020,13 @@
 	      this.setState({ active: 'signup' });
 	    }
 	  }, {
+	    key: 'loginShow',
+	    value: function loginShow() {
+	      this.setState({ active: 'signin' });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var user = this.user;
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'popups_layout' },
@@ -59014,18 +59035,19 @@
 	          active: this.state.active === 'festi' ? 'active' : '' }),
 	        _react2.default.createElement(_info2.default, {
 	          active: this.state.active === 'info' ? 'active' : '' }),
-	        !user && _react2.default.createElement(_signin2.default, {
+	        !this.props.user && _react2.default.createElement(_signin2.default, {
 	          crearCuentaShow: this.crearCuentaShow,
 	          active: this.state.active === 'signin' ? 'active' : '' }),
-	        !user && _react2.default.createElement(_signup2.default, {
+	        !this.props.user && _react2.default.createElement(_signup2.default, {
+	          loginShow: this.loginShow,
 	          active: this.state.active === 'signup' ? 'active' : '' }),
-	        !user && _react2.default.createElement(_forgot2.default, {
+	        !this.props.user && _react2.default.createElement(_forgot2.default, {
 	          active: this.state.active === 'forgot' ? 'active' : '' }),
-	        user && _react2.default.createElement(_profile2.default, {
+	        this.props.user && _react2.default.createElement(_profile2.default, {
 	          active: this.state.active === 'profile' ? 'active' : '' }),
-	        user && user.primerLogin && _react2.default.createElement(_primerLogin2.default, {
+	        this.props.user && this.props.user.primerLogin && _react2.default.createElement(_primerLogin2.default, {
 	          active: this.state.active === 'primerLogin' ? 'active' : '' }),
-	        user && user.reset && _react2.default.createElement(_reset2.default, {
+	        this.props.user && this.props.user.reset && _react2.default.createElement(_reset2.default, {
 	          active: this.state.active === 'reset' ? 'active' : '' })
 	      );
 	    }
@@ -59056,6 +59078,8 @@
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	__webpack_require__(776);
+
+	__webpack_require__(180);
 
 	__webpack_require__(778);
 
@@ -59092,17 +59116,16 @@
 	    value: function formDidMount(form) {
 	      var _this2 = this;
 
+	      if (!form) return;
 	      form.onResponse(function (res) {
 	        res.json().then(function (data) {
 	          if (!data.success) {
-	            console.log('onResponsefail', data);
 	            return _this2.setState({ formAlertShow: true });
+	          } else {
+	            window.$tate('user').value = undefined;
+	            window.$tate('user').value = data.result;
 	          }
-	          console.log('onResponse', data);
 	        });
-	      });
-	      form.onSubmit(function (v) {
-	        console.log('onSubmit', v);
 	      });
 	    }
 	  }, {
@@ -59194,14 +59217,14 @@
 	              _react2.default.createElement(
 	                'label',
 	                {
-	                  htmlFor: 'pass',
-	                  required: true },
+	                  htmlFor: 'pass' },
 	                'Contraseña'
 	              ),
 	              _react2.default.createElement('input', {
 	                id: 'pass',
 	                name: 'pass',
-	                type: 'password' }),
+	                type: 'password',
+	                required: true }),
 	              _react2.default.createElement(
 	                'a',
 	                {
@@ -59223,7 +59246,8 @@
 	              ),
 	              _react2.default.createElement(
 	                'button',
-	                null,
+	                {
+	                  type: 'submit' },
 	                'Ingresar'
 	              )
 	            )
@@ -59380,6 +59404,21 @@
 	  }
 
 	  _createClass(Signup, [{
+	    key: 'formDidMount',
+	    value: function formDidMount(form) {
+	      if (!form) return;
+	      form.onResponse(function (res) {
+	        res.json().then(function (data) {
+	          if (!data.success) {
+	            return console.error('registro fail', data);
+	          } else {
+	            window.$tate('user').value = undefined;
+	            window.$tate('user').value = data.result;
+	          }
+	        });
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -59389,49 +59428,79 @@
 	          active: this.props.active },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'loguineo' },
+	          { className: 'loguineo registrar' },
 	          _react2.default.createElement(
-	            'h1',
-	            null,
-	            'Nueva cuenta'
-	          ),
-	          _react2.default.createElement(
-	            'form-vali',
+	            'form',
 	            {
-	              id: 'signupForm',
-	              direction: 'signup' },
-	            _react2.default.createElement(
-	              'p',
-	              { className: 'info' },
-	              'o creá una cuenta con tu mail'
-	            ),
+	              is: 'form-async',
+	              action: '/registro',
+	              ref: this.formDidMount },
 	            _react2.default.createElement(
 	              'label',
-	              { htmlFor: 'nameSignupForm' },
-	              'Nombre'
-	            ),
-	            _react2.default.createElement('input', { id: 'nameSignupForm', 'data-label': 'name', 'data-rules': 'required', type: 'text' }),
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'emailSignupForm' },
-	              'Mail'
-	            ),
-	            _react2.default.createElement('input', { id: 'emailSignupForm', 'data-label': 'email', 'data-rules': 'required isEmail ajaxMailDontExist', type: 'text' }),
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'passSignupForm' },
-	              'Nueva contraseña'
-	            ),
-	            _react2.default.createElement('input', { id: 'passSignupForm', 'data-label': 'password', 'data-rules': 'required', type: 'password' }),
-	            _react2.default.createElement(
-	              'a',
-	              { 'data-id': 'volverLoginRegis', className: 'registrate' },
-	              'Ir a inicio de sesión'
+	              { className: 'legend' },
+	              'Nueva cuenta'
 	            ),
 	            _react2.default.createElement(
-	              'button',
-	              { type: 'submit' },
-	              'Registrar'
+	              'div',
+	              { className: 'form-row-field' },
+	              _react2.default.createElement(
+	                'label',
+	                {
+	                  htmlFor: 'name_registro' },
+	                'Nombre'
+	              ),
+	              _react2.default.createElement('input', {
+	                id: 'name_registro',
+	                type: 'text',
+	                required: true })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-row-field' },
+	              _react2.default.createElement(
+	                'label',
+	                {
+	                  htmlFor: 'email_registro' },
+	                'Mail'
+	              ),
+	              _react2.default.createElement('input', {
+	                id: 'email_registro',
+	                name: 'email',
+	                type: 'text',
+	                required: true })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-row-field' },
+	              _react2.default.createElement(
+	                'label',
+	                {
+	                  htmlFor: 'password_registro' },
+	                'Nueva contraseña'
+	              ),
+	              _react2.default.createElement('input', {
+	                id: 'password_registro',
+	                name: 'password',
+	                type: 'password',
+	                required: true })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-row-field regis-buttons' },
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  type: 'button',
+	                  className: 'volver-regis',
+	                  onClick: this.props.loginShow },
+	                '‹ volver'
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  type: 'submit' },
+	                'Registrar'
+	              )
 	            )
 	          )
 	        )
@@ -60230,7 +60299,7 @@
 
 	__webpack_require__(811);
 
-	__webpack_require__(818);
+	__webpack_require__(815);
 
 	var _react = __webpack_require__(1);
 
@@ -60481,15 +60550,9 @@
 	  _createClass(FormAsync, [{
 	    key: 'connectedCallback',
 	    value: function connectedCallback() {
-	      this.responseCallBack = function (v) {
-	        return v;
-	      };
-	      this.submitCallBack = function (v) {
-	        return v;
-	      };
-	      this.failCallBack = function (v) {
-	        console.warn(v);return v;
-	      };
+	      this.responseCallBack = null;
+	      this.submitCallBack = null;
+	      this.failCallBack = null;
 	      this.handleSubmit = this.handleSubmit.bind(this);
 	      this.onResponse = this.onResponse.bind(this);
 	      this.onSubmit = this.onSubmit.bind(this);
@@ -60521,7 +60584,7 @@
 	    value: function handleSubmit(e) {
 	      e.preventDefault();
 	      var data = new window.FormData(e.target);
-	      if (this.submitCallBack) this.submitCallBack(data);
+	      if (this.submitCallBack === 'function') this.submitCallBack(data);
 	      if (e.target.getAttribute('data-auto') !== 'false') {
 	        this.sendForm(data);
 	      }
@@ -60537,8 +60600,8 @@
 	        method: 'post',
 	        body: data
 	      }).catch(function (err) {
-	        return _this2.failCallback(err);
-	      }).then(this.responseCallBack);
+	        _this2.failCallback === 'function' && _this2.failCallback(err);
+	      }).then(typeof this.responseCallBack === 'function' && this.responseCallBack);
 	    }
 	  }]);
 
@@ -60999,13 +61062,72 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(816);
+
+	__webpack_require__(758);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AlertMsg = function (_window$HTMLDialogEle) {
+	  _inherits(AlertMsg, _window$HTMLDialogEle);
+
+	  function AlertMsg() {
+	    _classCallCheck(this, AlertMsg);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AlertMsg).apply(this, arguments));
+	  }
+
+	  _createClass(AlertMsg, [{
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback(name, oldValue, newValue) {
+	      if (!this.parentNode) return;
+	      if (name === 'active') {
+	        var open = this.getAttribute('open') === '';
+	        if (newValue) {
+	          if (!open) this.show();
+	        } else {
+	          if (open) this.close();
+	        }
+	      }
+	    }
+	  }], [{
+	    key: 'observedAttributes',
+	    get: function get() {
+	      return ['active'];
+	    }
+	  }]);
+
+	  return AlertMsg;
+	}(window.HTMLDialogElement);
+
+	window.customElements.define('alert-msg', AlertMsg, { extends: 'dialog' });
+
+/***/ },
+/* 816 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 817 */,
+/* 818 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(816);
+	__webpack_require__(819);
 
 	__webpack_require__(778);
 
@@ -61156,65 +61278,6 @@
 	}(_react.Component);
 
 	exports.default = Info;
-
-/***/ },
-/* 816 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 817 */,
-/* 818 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	__webpack_require__(819);
-
-	__webpack_require__(758);
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var AlertMsg = function (_window$HTMLDialogEle) {
-	  _inherits(AlertMsg, _window$HTMLDialogEle);
-
-	  function AlertMsg() {
-	    _classCallCheck(this, AlertMsg);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AlertMsg).apply(this, arguments));
-	  }
-
-	  _createClass(AlertMsg, [{
-	    key: 'attributeChangedCallback',
-	    value: function attributeChangedCallback(name, oldValue, newValue) {
-	      if (!this.parentNode) return;
-	      if (name === 'active') {
-	        var open = this.getAttribute('open') === '';
-	        if (newValue) {
-	          if (!open) this.show();
-	        } else {
-	          if (open) this.close();
-	        }
-	      }
-	    }
-	  }], [{
-	    key: 'observedAttributes',
-	    get: function get() {
-	      return ['active'];
-	    }
-	  }]);
-
-	  return AlertMsg;
-	}(window.HTMLDialogElement);
-
-	window.customElements.define('alert-msg', AlertMsg, { extends: 'dialog' });
 
 /***/ },
 /* 819 */

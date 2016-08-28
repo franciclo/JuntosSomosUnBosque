@@ -19,8 +19,8 @@ export default class Popups extends Component {
     }
     window.$tate('popups.active').value = null
     this.activeStream = window.$tate('popups.active').on('E')
-    this.user = window.$tate('user').value
     this.crearCuentaShow = this.crearCuentaShow.bind(this)
+    this.loginShow = this.loginShow.bind(this)
   }
 
   componentWillMount () {
@@ -32,8 +32,11 @@ export default class Popups extends Component {
     this.setState({active: 'signup'})
   }
 
+  loginShow () {
+    this.setState({active: 'signin'})
+  }
+
   render () {
-    let user = this.user
     return (
       <div id='popups_layout'>
         <Flyer />
@@ -41,19 +44,26 @@ export default class Popups extends Component {
           active={this.state.active === 'festi' ? 'active' : ''} />
         <Info
           active={this.state.active === 'info' ? 'active' : ''} />
-        {!user && <Signin
+        {!this.props.user && <Signin
           crearCuentaShow={this.crearCuentaShow}
-          active={this.state.active === 'signin' ? 'active' : ''} />}
-        {!user && <Signup
-          active={this.state.active === 'signup' ? 'active' : ''} />}
-        {!user && <Forgot
-          active={this.state.active === 'forgot' ? 'active' : ''} />}
-        {user && <Profile
-          active={this.state.active === 'profile' ? 'active' : ''} />}
-        {user && user.primerLogin && <PrimerLogin
-          active={this.state.active === 'primerLogin' ? 'active' : ''} />}
-        {user && user.reset && <Reset
-          active={this.state.active === 'reset' ? 'active' : ''} />}
+          active={this.state.active === 'signin' ? 'active' : ''} />
+        }
+        {!this.props.user && <Signup
+          loginShow={this.loginShow}
+          active={this.state.active === 'signup' ? 'active' : ''} />
+        }
+        {!this.props.user && <Forgot
+          active={this.state.active === 'forgot' ? 'active' : ''} />
+        }
+        {this.props.user && <Profile
+          active={this.state.active === 'profile' ? 'active' : ''} />
+        }
+        {this.props.user && this.props.user.primerLogin && <PrimerLogin
+          active={this.state.active === 'primerLogin' ? 'active' : ''} />
+        }
+        {this.props.user && this.props.user.reset && <Reset
+          active={this.state.active === 'reset' ? 'active' : ''} />
+        }
       </div>
     )
   }

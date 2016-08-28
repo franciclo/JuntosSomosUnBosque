@@ -7,12 +7,6 @@ module.exports = function (app) {
   app.set('views', path.resolve(__dirname))
 
   app.get('/', function (req, res) {
-    console.log(req.formNoti)
-    var formNoti = req.flash('formNotification')[0]
-    if (formNoti) {
-      $tate(formNoti.path).value = formNoti.value
-    }
-
     if (req.isAuthenticated()) {
       console.log('isAuthenticated')
       $tate('yo').value = {

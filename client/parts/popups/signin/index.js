@@ -1,5 +1,6 @@
 import './styles.css'
 
+import 'state-stream'
 import 'components/pop-up'
 import React, {Component} from 'react'
 
@@ -12,18 +13,21 @@ export default class Signin extends Component {
     this.formDidMount = this.formDidMount.bind(this)
     this.closeAlert = this.closeAlert.bind(this)
   }
+
   formDidMount (form) {
+    if (!form) return
     form.onResponse(res => {
       res.json().then(data => {
         if (!data.success) {
-          console.log('onResponsefail', data)
           return this.setState({formAlertShow: true})
+        } else {
+          window.$tate('user').value = undefined
+          window.$tate('user').value = data.result
         }
-        console.log('onResponse', data)
       })
     })
-    form.onSubmit(v => { console.log('onSubmit', v) })
   }
+
   closeAlert () {
     this.setState({formAlertShow: false})
   }
@@ -84,14 +88,14 @@ export default class Signin extends Component {
             </div>
             <div className='form-row-field'>
               <label
-                htmlFor='pass'
-                required>
+                htmlFor='pass'>
                 Contraseña
               </label>
               <input
                 id='pass'
                 name='pass'
-                type='password'>
+                type='password'
+                required>
               </input>
               <a
                 data-id='forgotBtn'
@@ -106,7 +110,8 @@ export default class Signin extends Component {
                 onClick={this.props.crearCuentaShow}>
                 Crear cuenta
               </button>
-              <button>
+              <button
+                type='submit'>
                 Ingresar
               </button>
               

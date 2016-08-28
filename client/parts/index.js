@@ -10,10 +10,12 @@ export default class Main extends Component {
   constructor () {
     super()
     this.state = {
+      user: null,
       arboles: [],
       red: []
     }
     this.redData = window.$tate('red').on('N')
+    this.userData = window.$tate('user').on('N')
   }
 
   componentWillMount () {
@@ -52,13 +54,20 @@ export default class Main extends Component {
         red
       })
     })
+
+    this.userData.subscribe(user => {
+      console.log('new user', user)
+      this.setState({user})
+    })
   }
   render () {
     return (
       <div>
-        <Sidebar arboles={this.state.arboles} />
+        <Sidebar
+          arboles={this.state.arboles}
+          user={this.state.user} />
         <Mapa red={this.state.red} />
-        <Popups />
+        <Popups user={this.state.user} />
       </div>
     )
   }

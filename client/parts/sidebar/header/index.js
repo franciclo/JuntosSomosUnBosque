@@ -15,12 +15,24 @@ export default class Header extends Component {
             + info
           </button>
           |
-          <button
-            onClick={
-              (e) => { window.$tate('popups.active').value = 'signin' }
-            }>
-            ingresar
-          </button>
+          {
+            !this.props.user &&
+              <button
+                onClick={
+                  (e) => { window.$tate('popups.active').value = 'signin' }
+                }>
+                ingresar
+              </button>
+          }
+          {
+            this.props.user &&
+              <button
+                onClick={
+                  (e) => { window.$tate('popups.active').value = 'perfil' }
+                }>
+                {this.props.user.nombre}
+              </button>
+          }
         </div>
       </div>
     )

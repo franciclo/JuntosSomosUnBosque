@@ -3,7 +3,7 @@
 var Voluntario = require('../models/voluntario')
 var upload = require('multer')()
 
-module.exports = function (app) {
+module.exports = function (app, passport) {
   app.use(upload.single())
 
   app.post('/voluntarios',
@@ -32,13 +32,87 @@ module.exports = function (app) {
     }
   )
 
+  app.post('/login',
+    function (req, res, next) {
+      passport.authenticate('local-login',
+        function (err, user, info) {
+          if (err) {
+            return res.json({
+              success: false,
+              result: err
+            })
+          }
+          if (!user) {
+            return res.json({
+              success: false,
+              result: 'no user'
+            })
+          }
+          req.logIn(user, function (err) {
+            if (err) {
+              return res.json({
+                success: false,
+                result: 'in login err'
+              })
+            }
+            return res.json({
+              success: true,
+              result: {
+                tipo: user.userType,
+                primerLogin: user.primerLogin,
+                location: {
+                  lat: user.location ? user.location.split('::')[0] : 0,
+                  lng: user.location ? user.location.split('::')[1] : 0
+                },
+                nombre: user.getNombre(),
+                arboles: user.arboles
+              }
+            })
+          })
+        })(req, res, next)
+    }
+  )
 
-
-
-
-
-
-
+  app.post('/registro',
+    function (req, res, next) {
+      passport.authenticate('local-signup',
+        function (err, user, info) {
+          if (err) {
+            return res.json({
+              success: false,
+              result: err
+            })
+          }
+          if (!user) {
+            return res.json({
+              success: false,
+              result: 'no user'
+            })
+          }
+          req.logIn(user, function (err) {
+            if (err) {
+              return res.json({
+                success: false,
+                result: 'in login err'
+              })
+            }
+            return res.json({
+              success: true,
+              result: {
+                tipo: user.userType,
+                primerLogin: user.primerLogin,
+                location: {
+                  lat: 0,
+                  lng: 0
+                },
+                nombre: user.getNombre(),
+                arboles: user.arboles
+              }
+            })
+          })
+        })(req, res, next)
+    }
+  )
 
   // app.get('/finishRegistration', isLoggedIn, function (req, res) {
   //   var user = req.user
