@@ -42,3 +42,7 @@ button {
 .hide {
   display: none!important;
 }
+dialog {
+  padding: 0;
+  border:0;
+}

@@ -23,8 +23,14 @@ export default class Info extends Component {
     return (
       <dialog
         is='pop-up'
+        onClick={this.props.closePopUp}
         active={this.props.active}
         id='popup_info'>
+        <span
+          onClick={this.props.closePopUp}
+          className='close'>
+          &times;
+        </span>
         <div>
           <nav>
             <button

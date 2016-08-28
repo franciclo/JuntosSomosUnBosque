@@ -56,7 +56,6 @@ export default class Main extends Component {
     })
 
     this.userData.subscribe(user => {
-      console.log('new user', user)
       this.setState({user})
     })
   }

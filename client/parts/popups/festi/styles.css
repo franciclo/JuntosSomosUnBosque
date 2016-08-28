@@ -84,3 +84,6 @@
   background-position: 0 -46px;
   background-image: url('~/vela.jpg');
 }
+#popup_festi .close {
+  color:white;
+}

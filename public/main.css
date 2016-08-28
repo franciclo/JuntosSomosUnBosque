@@ -41,7 +41,12 @@ button {
 }
 .hide {
   display: none!important;
-}/* required styles */
+}
+dialog {
+  padding: 0;
+  border:0;
+}
+/* required styles */
 
 .leaflet-map-pane,
 .leaflet-tile,
@@ -1174,13 +1179,13 @@ label.legend {
   box-sizing: border-box;
   margin-top: -45px;
   font-weight: 500;
-}dialog[is="pop-up"]>img[src="close.svg"],
-dialog[is="pop-up"]>img[src="close-fff.svg"]{
+}dialog[is="pop-up"]>.close{
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
-  height: 14px;
+  font-size: 30px;
+  line-height: 20px;
 
 }
 dialog[is="pop-up"] {
@@ -1194,7 +1199,7 @@ dialog[is="pop-up"] + .backdrop {
 dialog[is="pop-up"]::backdrop {
   background-color: rgba(0,0,0,0.4);
 }.registrar {
-  min-width: 300px;
+  min-width: 400px;
 }
 .regis-buttons {
   display: flex;
@@ -1289,6 +1294,9 @@ dialog[is="pop-up"]::backdrop {
   background-size: cover;
   background-position: 0 -46px;
   background-image: url('/vela.jpg');
+}
+#popup_festi .close {
+  color:white;
 }#popup_festi_content_info button{
   position: absolute;
   bottom: 0;
@@ -1453,19 +1461,7 @@ form .form-field{
 }
 form>div:last-of-type {
   flex: 1;
-}dialog[is="alert-msg"]>img[src="close.svg"],
-dialog[is="alert-msg"]>img[src="close-fff.svg"]{
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  height: 14px;
-}
-dialog[is="alert-msg"] {
-  padding: 0;
-  border:0;
-}
-#popup_info > img {
+}#popup_info > img {
   z-index: 999;
 }
 #popup_info > div {

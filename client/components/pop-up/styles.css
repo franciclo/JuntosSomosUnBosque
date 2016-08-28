@@ -1,10 +1,10 @@
-dialog[is="pop-up"]>img[src="close.svg"],
-dialog[is="pop-up"]>img[src="close-fff.svg"]{
+dialog[is="pop-up"]>.close{
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
-  height: 14px;
+  font-size: 30px;
+  line-height: 20px;
 
 }
 dialog[is="pop-up"] {

@@ -23,6 +23,9 @@ export default class Signin extends Component {
         } else {
           window.$tate('user').value = undefined
           window.$tate('user').value = data.result
+          if (data.result.primerLogin) {
+            window.$tate('popups.active').value = 'primerLogin'
+          }
         }
       })
     })
@@ -37,7 +40,13 @@ export default class Signin extends Component {
       <dialog
         id='popup_signin'
         is='pop-up'
+        onClick={this.props.closePopUp}
         active={this.props.active}>
+        <span
+          onClick={this.props.closePopUp}
+          className='close'>
+          &times;
+        </span>
         <div
           className='loguineo'>
           <form

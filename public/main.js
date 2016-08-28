@@ -21512,7 +21512,6 @@
 	      });
 
 	      this.userData.subscribe(function (user) {
-	        console.log('new user', user);
 	        _this2.setState({ user: user });
 	      });
 	    }
@@ -59002,6 +59001,7 @@
 	    _this.activeStream = window.$tate('popups.active').on('E');
 	    _this.crearCuentaShow = _this.crearCuentaShow.bind(_this);
 	    _this.loginShow = _this.loginShow.bind(_this);
+	    _this.closePopUp = _this.closePopUp.bind(_this);
 	    return _this;
 	  }
 
@@ -59025,29 +59025,46 @@
 	      this.setState({ active: 'signin' });
 	    }
 	  }, {
+	    key: 'closePopUp',
+	    value: function closePopUp(e) {
+	      if (e.target.tagName === 'DIALOG' || ~e.target.className.indexOf('close')) {
+	        window.$tate('popups.active').value = null;
+	        this.setState({ active: null });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'popups_layout' },
-	        _react2.default.createElement(_flyer2.default, null),
+	        _react2.default.createElement(_flyer2.default, {
+	          closePopUp: this.closePopUp }),
 	        _react2.default.createElement(_festi2.default, {
+	          closePopUp: this.closePopUp,
 	          active: this.state.active === 'festi' ? 'active' : '' }),
 	        _react2.default.createElement(_info2.default, {
+	          closePopUp: this.closePopUp,
 	          active: this.state.active === 'info' ? 'active' : '' }),
 	        !this.props.user && _react2.default.createElement(_signin2.default, {
+	          closePopUp: this.closePopUp,
 	          crearCuentaShow: this.crearCuentaShow,
 	          active: this.state.active === 'signin' ? 'active' : '' }),
 	        !this.props.user && _react2.default.createElement(_signup2.default, {
+	          closePopUp: this.closePopUp,
 	          loginShow: this.loginShow,
 	          active: this.state.active === 'signup' ? 'active' : '' }),
 	        !this.props.user && _react2.default.createElement(_forgot2.default, {
+	          closePopUp: this.closePopUp,
 	          active: this.state.active === 'forgot' ? 'active' : '' }),
 	        this.props.user && _react2.default.createElement(_profile2.default, {
+	          closePopUp: this.closePopUp,
 	          active: this.state.active === 'profile' ? 'active' : '' }),
 	        this.props.user && this.props.user.primerLogin && _react2.default.createElement(_primerLogin2.default, {
+	          closePopUp: this.closePopUp,
 	          active: this.state.active === 'primerLogin' ? 'active' : '' }),
 	        this.props.user && this.props.user.reset && _react2.default.createElement(_reset2.default, {
+	          closePopUp: this.closePopUp,
 	          active: this.state.active === 'reset' ? 'active' : '' })
 	      );
 	    }
@@ -59124,6 +59141,9 @@
 	          } else {
 	            window.$tate('user').value = undefined;
 	            window.$tate('user').value = data.result;
+	            if (data.result.primerLogin) {
+	              window.$tate('popups.active').value = 'primerLogin';
+	            }
 	          }
 	        });
 	      });
@@ -59141,7 +59161,15 @@
 	        {
 	          id: 'popup_signin',
 	          is: 'pop-up',
+	          onClick: this.props.closePopUp,
 	          active: this.props.active },
+	        _react2.default.createElement(
+	          'span',
+	          {
+	            onClick: this.props.closePopUp,
+	            className: 'close' },
+	          '×'
+	        ),
 	        _react2.default.createElement(
 	          'div',
 	          {
@@ -59281,19 +59309,11 @@
 
 	__webpack_require__(758);
 
-	var _rxjs = __webpack_require__(184);
-
-	var _rxjs2 = _interopRequireDefault(_rxjs);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var streams = {};
 
 	var PopUp = function (_window$HTMLDialogEle) {
 	  _inherits(PopUp, _window$HTMLDialogEle);
@@ -59305,36 +59325,6 @@
 	  }
 
 	  _createClass(PopUp, [{
-	    key: 'connectedCallback',
-	    value: function connectedCallback() {
-	      var _this2 = this;
-
-	      var popUpClicks = _rxjs2.default.Observable.fromEvent(this, 'click').filter(function (e) {
-	        return e.target.tagName === 'DIALOG';
-	      }).filter(function () {
-	        return _this2.getAttribute('closable') !== 'false';
-	      });
-
-	      var closeBtn = document.createElement('img');
-	      closeBtn.alt = 'Cerrar';
-	      closeBtn.src = this.getAttribute('data-icon') === 'fff' ? 'close-fff.svg' : 'close.svg';
-	      closeBtn = this.appendChild(closeBtn);
-	      var closeBtnClicks = _rxjs2.default.Observable.fromEvent(closeBtn, 'click');
-
-	      streams.clo$e = _rxjs2.default.Observable.merge(popUpClicks, closeBtnClicks).subscribe(function () {
-	        _this2.setAttribute('active', '');
-	        window.$tate('popups.active').value = '';
-	      });
-	    }
-	  }, {
-	    key: 'disconnectedCallback',
-	    value: function disconnectedCallback() {
-	      var id = 'popups.list.' + this.getAttribute('data-path');
-	      Object.keys(streams[id]).forEach(function ($) {
-	        streams[id][$].unsubscribe();
-	      });
-	    }
-	  }, {
 	    key: 'attributeChangedCallback',
 	    value: function attributeChangedCallback(name, oldValue, newValue) {
 	      if (!this.parentNode) return;
@@ -59414,6 +59404,9 @@
 	          } else {
 	            window.$tate('user').value = undefined;
 	            window.$tate('user').value = data.result;
+	            if (data.result.primerLogin) {
+	              window.$tate('popups.active').value = 'primerLogin';
+	            }
 	          }
 	        });
 	      });
@@ -59425,7 +59418,15 @@
 	        'dialog',
 	        {
 	          is: 'pop-up',
+	          onClick: this.props.closePopUp,
 	          active: this.props.active },
+	        _react2.default.createElement(
+	          'span',
+	          {
+	            onClick: this.props.closePopUp,
+	            className: 'close' },
+	          '×'
+	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'loguineo registrar' },
@@ -59476,7 +59477,7 @@
 	                'label',
 	                {
 	                  htmlFor: 'password_registro' },
-	                'Nueva contraseña'
+	                'Contraseña'
 	              ),
 	              _react2.default.createElement('input', {
 	                id: 'password_registro',
@@ -59499,7 +59500,7 @@
 	                'button',
 	                {
 	                  type: 'submit' },
-	                'Registrar'
+	                'Crear'
 	              )
 	            )
 	          )
@@ -59854,7 +59855,15 @@
 	        {
 	          id: 'festi_flyer',
 	          is: 'pop-up',
+	          onClick: this.props.closePopUp,
 	          active: this.state.active ? 'active' : '' },
+	        _react2.default.createElement(
+	          'span',
+	          {
+	            onClick: this.props.closePopUp,
+	            className: 'close' },
+	          '×'
+	        ),
 	        _react2.default.createElement('img', { src: 'flyer.svg' })
 	      );
 	    }
@@ -59948,7 +59957,15 @@
 	          is: 'pop-up',
 	          active: this.props.active,
 	          id: 'popup_festi',
+	          onClick: this.props.closePopUp,
 	          'data-icon': 'fff' },
+	        _react2.default.createElement(
+	          'span',
+	          {
+	            onClick: this.props.closePopUp,
+	            className: 'close' },
+	          '×'
+	        ),
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -61175,8 +61192,16 @@
 	        'dialog',
 	        {
 	          is: 'pop-up',
+	          onClick: this.props.closePopUp,
 	          active: this.props.active,
 	          id: 'popup_info' },
+	        _react2.default.createElement(
+	          'span',
+	          {
+	            onClick: this.props.closePopUp,
+	            className: 'close' },
+	          '×'
+	        ),
 	        _react2.default.createElement(
 	          'div',
 	          null,

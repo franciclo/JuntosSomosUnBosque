@@ -29,7 +29,13 @@ export default class Festi extends Component {
         is='pop-up'
         active={this.props.active}
         id='popup_festi'
+        onClick={this.props.closePopUp}
         data-icon='fff'>
+        <span
+          onClick={this.props.closePopUp}
+          className='close'>
+          &times;
+        </span>
         <div>
           <div className='header-wrapper'>
             <header>

@@ -13,6 +13,9 @@ export default class Signup extends Component {
         } else {
           window.$tate('user').value = undefined
           window.$tate('user').value = data.result
+          if (data.result.primerLogin) {
+            window.$tate('popups.active').value = 'primerLogin'
+          }
         }
       })
     })
@@ -22,7 +25,13 @@ export default class Signup extends Component {
     return (
       <dialog
         is='pop-up'
+        onClick={this.props.closePopUp}
         active={this.props.active}>
+        <span
+          onClick={this.props.closePopUp}
+          className='close'>
+          &times;
+        </span>
         <div className='loguineo registrar'>
           <form
             is='form-async'
@@ -53,7 +62,7 @@ export default class Signup extends Component {
             <div className='form-row-field'>
               <label
                 htmlFor='password_registro'>
-                Nueva contraseña
+                Contraseña
               </label>
               <input
                 id='password_registro'
@@ -70,7 +79,7 @@ export default class Signup extends Component {
               </button>
               <button
                 type='submit'>
-                Registrar
+                Crear
               </button>
             </div>
           </form>
