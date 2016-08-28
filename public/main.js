@@ -60776,7 +60776,6 @@
 	  _createClass(Voluntariado, [{
 	    key: 'render',
 	    value: function render() {
-	      var formAlertShow = this.state.formAlertShow ? 'active' : '';
 	      return _react2.default.createElement(
 	        _form2.default,
 	        {
@@ -60894,21 +60893,9 @@
 	            name: 'comentario',
 	            placeholder: 'Dejá un comentario...' })
 	        ),
-	        _react2.default.createElement(
-	          'dialog',
-	          {
-	            is: 'alert-msg',
-	            active: formAlertShow,
-	            'class': 'form-alert' },
-	          _react2.default.createElement('img', { src: 'close.svg', alt: 'Close', onClick: this.closeAlert }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'volu-form-alert' },
-	            'Gracias por sumarte, y ser parte de este festival autogestivo.',
-	            _react2.default.createElement('br', null),
-	            'Te vamos a estar contactando via mail.'
-	          )
-	        ),
+	        '// Gracias por sumarte, y ser parte de este festival autogestivo. // ',
+	        _react2.default.createElement('br', null),
+	        'Te vamos a estar contactando via mail.',
 	        _react2.default.createElement(
 	          'button',
 	          { type: 'submit' },

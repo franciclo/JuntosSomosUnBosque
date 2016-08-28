@@ -7,7 +7,6 @@ import Form from '../../form'
 
 export default class Voluntariado extends Component {
   render () {
-    const formAlertShow = this.state.formAlertShow ? 'active' : ''
     return (
       <Form
         failAlert='true'
@@ -67,16 +66,9 @@ export default class Voluntariado extends Component {
             placeholder='Dejá un comentario...'>
           </textarea>
         </div>
-        <dialog
-          is='alert-msg'
-          active={formAlertShow}
-          class='form-alert'>
-            <img src='close.svg' alt='Close' onClick={this.closeAlert} />
-            <div className='volu-form-alert'>
-              Gracias por sumarte, y ser parte de este festival autogestivo.
-              <br />Te vamos a estar contactando via mail.
-            </div>
-        </dialog>
+              // Gracias por sumarte, y ser parte de este festival autogestivo.
+              // <br />Te vamos a estar contactando via mail.
+
         <button type='submit'>Enviar</button>
       </Form>
     )
