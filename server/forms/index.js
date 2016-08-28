@@ -1,118 +1,18 @@
-// var isLoggedIn = require('../auth/middleware').isLoggedIn
-// var User = require('../models/user')
-var Voluntario = require('../models/voluntario')
 var upload = require('multer')()
 
 module.exports = function (app, passport) {
   app.use(upload.single())
 
-  app.post('/voluntarios',
-    function (req, res, next) {
-      var newVoluntario = new Voluntario()
-      newVoluntario.nombre = req.body.nombre
-      newVoluntario.apellido = req.body.apellido
-      newVoluntario.mail = req.body.mail
-      newVoluntario.telefono = req.body.telefono
-      newVoluntario.area = req.body.area
-      newVoluntario.comentario = req.body.comentario
+  app.post('/voluntarios', require('./voluntarios'))
 
-      newVoluntario.save(function (err) {
-        if (err) {
-          res.json({
-            success: false,
-            result: err
-          })
-          return
-        }
-        res.json({
-          success: true,
-          result: req.body
-        })
-      })
-    }
-  )
+  app.post('/login', require('./login')(passport))
 
-  app.post('/login',
-    function (req, res, next) {
-      passport.authenticate('local-login',
-        function (err, user, info) {
-          if (err) {
-            return res.json({
-              success: false,
-              result: err
-            })
-          }
-          if (!user) {
-            return res.json({
-              success: false,
-              result: 'no user'
-            })
-          }
-          req.logIn(user, function (err) {
-            if (err) {
-              return res.json({
-                success: false,
-                result: 'in login err'
-              })
-            }
-            return res.json({
-              success: true,
-              result: {
-                tipo: user.userType,
-                primerLogin: user.primerLogin,
-                location: {
-                  lat: user.location ? user.location.split('::')[0] : 0,
-                  lng: user.location ? user.location.split('::')[1] : 0
-                },
-                nombre: user.getNombre(),
-                arboles: user.arboles
-              }
-            })
-          })
-        })(req, res, next)
-    }
-  )
+  app.post('/registro', require('./registro')(passport))
 
-  app.post('/registro',
-    function (req, res, next) {
-      passport.authenticate('local-signup',
-        function (err, user, info) {
-          if (err) {
-            return res.json({
-              success: false,
-              result: err
-            })
-          }
-          if (!user) {
-            return res.json({
-              success: false,
-              result: 'no user'
-            })
-          }
-          req.logIn(user, function (err) {
-            if (err) {
-              return res.json({
-                success: false,
-                result: 'in login err'
-              })
-            }
-            return res.json({
-              success: true,
-              result: {
-                tipo: user.userType,
-                primerLogin: user.primerLogin,
-                location: {
-                  lat: 0,
-                  lng: 0
-                },
-                nombre: user.getNombre(),
-                arboles: user.arboles
-              }
-            })
-          })
-        })(req, res, next)
-    }
-  )
+  app.post('/forgot', require('./forgot'))
+}
+
+  // var isLoggedIn = require('../auth/middleware').isLoggedIn
 
   // app.get('/finishRegistration', isLoggedIn, function (req, res) {
   //   var user = req.user
@@ -263,4 +163,3 @@ module.exports = function (app, passport) {
   //     })
   //   })
   // })
-}

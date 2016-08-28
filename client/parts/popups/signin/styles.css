@@ -3,19 +3,6 @@
   width: 90%;
 }
 
-.loguineo {
-  width: 100%;
-  padding: 15px;
-  justify-content: center; 
-  box-sizing: border-box;
-}
-.loguineo h1{
-  color: #444;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 100;
-  margin-bottom: 33px;
-}
 .sociales {
   text-align: center;
 }
@@ -90,14 +77,4 @@ label.legend {
 .con-mail{
   border-top: 1px solid #c2c2c2;
   padding-top: 30px!important;
-}
-
-.alert-login {
-  background: #ff687b;
-  color: white;
-  padding: 10px!important;
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: -45px;
-  font-weight: 500;
 }

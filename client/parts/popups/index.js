@@ -19,9 +19,8 @@ export default class Popups extends Component {
     }
     window.$tate('popups.active').value = null
     this.activeStream = window.$tate('popups.active').on('E')
-    this.crearCuentaShow = this.crearCuentaShow.bind(this)
-    this.loginShow = this.loginShow.bind(this)
     this.closePopUp = this.closePopUp.bind(this)
+    this.activatePopUp = this.activatePopUp.bind(this)
   }
 
   componentWillMount () {
@@ -29,20 +28,22 @@ export default class Popups extends Component {
       .subscribe((active) => this.setState({active}))
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.activeStream.unsubscribe()
   }
 
-  crearCuentaShow () {
-    this.setState({active: 'signup'})
-  }
-
-  loginShow () {
-    this.setState({active: 'signin'})
+  activatePopUp (active) {
+    return () => this.setState({active})
   }
 
   closePopUp (e) {
-    if (e.target.tagName === 'DIALOG' || ~e.target.className.indexOf('close')) {
+    if (
+      (
+        e.target.tagName === 'DIALOG' &&
+        e.target.getAttribute('is') === 'pop-up'
+      ) ||
+      ~e.target.className.indexOf('pop-close')
+    ) {
       window.$tate('popups.active').value = null
       this.setState({active: null})
     }
@@ -64,20 +65,22 @@ export default class Popups extends Component {
           !this.props.user &&
             <Signin
               closePopUp={this.closePopUp}
-              crearCuentaShow={this.crearCuentaShow}
+              crearCuentaShow={this.activatePopUp('signup')}
+              forgotShow={this.activatePopUp('forgot')}
               active={this.state.active === 'signin' ? 'active' : ''} />
         }
         {
           !this.props.user &&
             <Signup
               closePopUp={this.closePopUp}
-              loginShow={this.loginShow}
+              loginShow={this.activatePopUp('signin')}
               active={this.state.active === 'signup' ? 'active' : ''} />
         }
         {
           !this.props.user &&
             <Forgot
               closePopUp={this.closePopUp}
+              loginShow={this.activatePopUp('signin')}
               active={this.state.active === 'forgot' ? 'active' : ''} />
         }
         {

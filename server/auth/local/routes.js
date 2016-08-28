@@ -5,7 +5,7 @@ module.exports = function (app, passport) {
   // LOCAL =======================================================================
   // =============================================================================
 
-  app.get('/forgot', require('./controller').forgot)
+  // app.get('/forgot', require('./controller').forgot)
 
   app.get('/recuperar-clave', require('./controller').recuperar)
 

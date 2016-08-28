@@ -1082,19 +1082,6 @@ slider-box > article.active {
   width: 90%;
 }
 
-.loguineo {
-  width: 100%;
-  padding: 15px;
-  justify-content: center; 
-  box-sizing: border-box;
-}
-.loguineo h1{
-  color: #444;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 100;
-  margin-bottom: 33px;
-}
 .sociales {
   text-align: center;
 }
@@ -1170,16 +1157,8 @@ label.legend {
   border-top: 1px solid #c2c2c2;
   padding-top: 30px!important;
 }
-
-.alert-login {
-  background: #ff687b;
-  color: white;
-  padding: 10px!important;
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: -45px;
-  font-weight: 500;
-}dialog>.close,
+dialog>.close,
+dialog>.pop-close,
 dialog>img[src="close.svg"],
 dialog>img[src="close-fff.svg"]{
   position: absolute;
@@ -1200,6 +1179,104 @@ dialog[is="pop-up"] + .backdrop {
 
 dialog[is="pop-up"]::backdrop {
   background-color: rgba(0,0,0,0.4);
+}.loguineo {
+  width: 100%;
+  padding: 15px;
+  justify-content: center; 
+  box-sizing: border-box;
+}
+.loguineo h1{
+  color: #444;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 100;
+  margin-bottom: 33px;
+}
+
+label.legend {
+  font-size: 22px!important;
+  text-align: center;
+}
+
+.alert-login {
+  background: #ff687b;
+  color: white;
+  padding: 10px!important;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: -45px;
+  font-weight: 500;
+  bottom: 0;
+  height: 50px;
+  align-items: center;
+}form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+form label {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+form input,
+form textarea,
+form select {
+    font-family: P22Underground;
+    font-size: 15px;
+    border: 1px solid #b3b3b3;
+    background-color: white;
+    height: 2rem;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+}
+form select {
+    cursor: pointer;
+}
+form option.default {
+  display: none;
+}
+form textarea {
+    height:4rem;
+    padding: 0.5rem;
+}
+form button:hover{
+    background: #008be5;
+}
+form button {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 0.1rem;
+    background: #009aff;
+    color: white;
+    font-size: 1.2rem;
+  align-self: flex-end;
+}
+h1 {
+    font-size: 20px;
+    margin: 10px 0px;
+}
+
+form .form-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+form .form-row-field {
+  margin: 10px 0px;
+  padding: 10px 20px 0;
+}
+form .form-field{
+  flex: 1;
+  padding: 10px 20px;
+}
+form>div:last-of-type {
+  flex: 1;
 }.registrar {
   min-width: 400px;
 }
@@ -1209,6 +1286,9 @@ dialog[is="pop-up"]::backdrop {
 }
 .regis-buttons .volver-regis {
   background: #aeaeae;
+}.forgot {
+  width: 360px;
+  padding-top: 10px; 
 }#festi_flyer img[src="flyer.svg"]{
   height: 90vh
 }#popup_festi > img {
@@ -1391,73 +1471,6 @@ form.voluntariado-form>button{
   background: #81ffbf;
   width: 100%;
   bottom:0;
-}form{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 100%;
-  box-sizing: border-box;
-}
-form label {
-    font-size: 14px;
-    display: block;
-    margin-bottom: 5px;
-}
-form input,
-form textarea,
-form select {
-    font-family: P22Underground;
-    font-size: 15px;
-    border: 1px solid #b3b3b3;
-    background-color: white;
-    height: 2rem;
-    padding: 0 0.5rem;
-    box-sizing: border-box;
-    width: 100%;
-}
-form select {
-    cursor: pointer;
-}
-form option.default {
-  display: none;
-}
-form textarea {
-    height:4rem;
-    padding: 0.5rem;
-}
-form button:hover{
-    background: #008be5;
-}
-form button {
-    cursor: pointer;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 0.1rem;
-    background: #009aff;
-    color: white;
-    font-size: 1.2rem;
-  align-self: flex-end;
-}
-h1 {
-    font-size: 20px;
-    margin: 10px 0px;
-}
-
-form .form-row {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
-}
-form .form-row-field {
-  margin: 10px 0px;
-  padding: 10px 20px 0;
-}
-form .form-field{
-  flex: 1;
-  padding: 10px 20px;
-}
-form>div:last-of-type {
-  flex: 1;
 }#popup_info > img {
   z-index: 999;
 }

@@ -1,4 +1,5 @@
 dialog>.close,
+dialog>.pop-close,
 dialog>img[src="close.svg"],
 dialog>img[src="close-fff.svg"]{
   position: absolute;

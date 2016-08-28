@@ -7,7 +7,6 @@ class FormAsync extends window.HTMLFormElement {
   connectedCallback () {
     this.responseCallBack = null
     this.submitCallBack = null
-    this.failCallBack = null
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onResponse = this.onResponse.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -27,17 +26,15 @@ class FormAsync extends window.HTMLFormElement {
     this.responseCallBack = cb
   }
 
-  onFail (cb) {
-    this.failCallBack = cb
-  }
-
   handleSubmit (e) {
     e.preventDefault()
     const data = new window.FormData(e.target)
     if (this.submitCallBack === 'function') this.submitCallBack(data)
     if (e.target.getAttribute('data-auto') !== 'false') {
       this.sendForm(data)
+      return
     }
+    console.warn('Form not sended', e.target)
   }
 
   sendForm (data) {
@@ -46,10 +43,11 @@ class FormAsync extends window.HTMLFormElement {
     window.fetch(
       action,
       {
+        credentials: 'same-origin',
         method: 'post',
         body: data
       })
-      .catch(err => { this.failCallback === 'function' && this.failCallback(err) })
+      .catch(err => { console.warn('Request Internal Error action="' + action + '"', err) })
       .then(typeof this.responseCallBack === 'function' && this.responseCallBack)
   }
 }
