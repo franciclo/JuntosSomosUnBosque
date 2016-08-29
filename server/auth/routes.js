@@ -1,6 +1,7 @@
 module.exports = function (app, passport) {
   app.post('/logout', function (req, res) {
-    req.logout()
+    // req.logout()
+    req.session.destroy()
     res.json({
       success: true
     })
