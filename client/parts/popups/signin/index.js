@@ -1,7 +1,7 @@
 import './styles.css'
 
 import 'state-stream'
-import 'components/pop-up'
+import 'components/dia-log'
 import React, {Component} from 'react'
 import Form from '../form'
 
@@ -9,22 +9,17 @@ export default class Signin extends Component {
   onSuccess (res) {
     window.$tate('user').value = undefined
     window.$tate('user').value = res
-    if (res.primerLogin) {
-      window.$tate('popups.active').value = 'primerLogin'
-    }
+    window.$tate('popups.active').value = res.primerLogin ? 'primerLogin' : null
   }
 
   render () {
     return (
-      <dialog
-        is='pop-up'
+      <dia-log
         id='popup_signin'
-        onClick={this.props.closePopUp}
-        active={this.props.active}>
+        data-open-modal={this.props.open}>
         <span
           onClick={this.props.closePopUp}
           className='pop-close'>
-          &times;
         </span>
         <Form
           action='login'
@@ -59,7 +54,7 @@ export default class Signin extends Component {
               Mail
             </label>
             <input
-              name='mail'
+              name='email'
               id='mail'
               type='email'
               required>
@@ -72,7 +67,7 @@ export default class Signin extends Component {
             </label>
             <input
               id='pass'
-              name='pass'
+              name='password'
               type='password'
               required>
             </input>
@@ -83,7 +78,7 @@ export default class Signin extends Component {
               ¿Olvidaste tu contraseña?
             </a>
           </div>
-          <div className='form-row cuenta-buttons'>
+          <div className='form-row-field foot-buttons'>
             <button
               type='button'
               className='crear'
@@ -96,7 +91,7 @@ export default class Signin extends Component {
             </button>
           </div>
         </Form>
-      </dialog>
+      </dia-log>
     )
   }
 }

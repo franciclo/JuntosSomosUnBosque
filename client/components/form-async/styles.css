@@ -5,6 +5,8 @@
     height: 100%;
   box-sizing: border-box;
   position: relative;
+  overflow: auto;
+  margin:0 20px;
 }
 form label {
     font-size: 15px;
@@ -54,16 +56,27 @@ h1 {
 form .form-row {
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
 }
 form .form-row-field {
-  margin: 10px 0px;
-  padding: 10px 20px 0;
+  padding: 10px 0;
 }
 form .form-field{
   flex: 1;
-  padding: 10px 20px;
+  padding: 10px 0;
+}
+form .form-field:last-child {
+  padding-left: 10px;
+}
+form .form-field:first-child {
+  padding-right: 10px;
 }
 form>div:last-of-type {
   flex: 1;
+}
+form .foot-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+form .foot-buttons .back{
+  background: #aeaeae;
 }

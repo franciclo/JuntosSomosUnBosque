@@ -21467,7 +21467,7 @@
 	      red: []
 	    };
 	    _this.redData = window.$tate('red').on('N');
-	    _this.userData = window.$tate('user').on('N');
+	    _this.userData = window.$tate('user').on(['N', 'D']);
 	    return _this;
 	  }
 
@@ -57866,13 +57866,13 @@
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'title' },
-	            'Festival de plantación'
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'ver-mas' },
-	            'Ver más',
-	            _react2.default.createElement('img', { src: 'caret-right.svg', alt: 'Ver mas' })
+	            'Festival de plantación',
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'ver-mas' },
+	              'Ver más',
+	              _react2.default.createElement('img', { src: 'caret-right.svg', alt: 'Ver mas' })
+	            )
 	          ),
 	          _react2.default.createElement('span', { className: 'triangle' })
 	        )
@@ -58195,6 +58195,10 @@
 
 	__webpack_require__(747);
 
+	__webpack_require__(824);
+
+	__webpack_require__(787);
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -58244,12 +58248,42 @@
 	            'ingresar'
 	          ),
 	          this.props.user && _react2.default.createElement(
-	            'button',
-	            {
-	              onClick: function onClick(e) {
-	                window.$tate('popups.active').value = 'perfil';
-	              } },
-	            this.props.user.nombre
+	            'drop-down',
+	            null,
+	            this.props.user.nombre,
+	            _react2.default.createElement(
+	              'dia-log',
+	              null,
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  onClick: function onClick(e) {
+	                    window.$tate('popups.active').value = 'perfil';
+	                  } },
+	                'Perfil'
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  onClick: function onClick(e) {
+	                    window.fetch('/logout', {
+	                      credentials: 'same-origin',
+	                      method: 'post'
+	                    }).then(function (res) {
+	                      res.json().then(function (result) {
+	                        if (result.success) {
+	                          window.$tate('user').value = undefined;
+	                        } else {
+	                          console.warn(result);
+	                        }
+	                      });
+	                    }).catch(function (err) {
+	                      console.warn(err);
+	                    });
+	                  } },
+	                'Salir'
+	              )
+	            )
 	          )
 	        )
 	      );
@@ -59000,7 +59034,7 @@
 
 	var _festi2 = _interopRequireDefault(_festi);
 
-	var _info = __webpack_require__(824);
+	var _info = __webpack_require__(821);
 
 	var _info2 = _interopRequireDefault(_info);
 
@@ -59022,7 +59056,7 @@
 
 	    _this.state = {
 	      user: null,
-	      active: null
+	      open: null
 	    };
 	    window.$tate('popups.active').value = null;
 	    _this.activeStream = window.$tate('popups.active').on('E');
@@ -59036,15 +59070,15 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
-	      this.activeStream = this.activeStream.subscribe(function (active) {
-	        return _this2.setState({ active: active });
+	      this.activeStream = this.activeStream.subscribe(function (open) {
+	        return _this2.setState({ open: open });
 	      });
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
 	      if (nextProps.user && nextProps.user.primerLogin) {
-	        this.setState({ active: 'primerLogin' });
+	        this.setState({ open: 'primerLogin' });
 	      }
 	    }
 	  }, {
@@ -59054,19 +59088,19 @@
 	    }
 	  }, {
 	    key: 'activatePopUp',
-	    value: function activatePopUp(active) {
+	    value: function activatePopUp(open) {
 	      var _this3 = this;
 
 	      return function () {
-	        return _this3.setState({ active: active });
+	        return _this3.setState({ open: open });
 	      };
 	    }
 	  }, {
 	    key: 'closePopUp',
 	    value: function closePopUp(e) {
-	      if (e.target.tagName === 'DIALOG' && e.target.getAttribute('is') === 'pop-up' || ~e.target.className.indexOf('pop-close')) {
+	      if (this.state.open !== 'primerLogin' && e.target.id === 'popups_layout' || ~e.target.className.indexOf('pop-close')) {
 	        window.$tate('popups.active').value = null;
-	        this.setState({ active: null });
+	        this.setState({ open: null });
 	      }
 	    }
 	  }, {
@@ -59074,37 +59108,40 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'popups_layout' },
+	        {
+	          id: 'popups_layout',
+	          className: this.state.open ? 'open' : '',
+	          onClick: this.closePopUp },
 	        _react2.default.createElement(_flyer2.default, {
 	          closePopUp: this.closePopUp,
-	          active: this.state.active === 'flyer' ? 'active' : '' }),
+	          open: this.state.open === 'flyer' ? 'open' : '' }),
 	        _react2.default.createElement(_festi2.default, {
 	          closePopUp: this.closePopUp,
-	          active: this.state.active === 'festi' ? 'active' : '' }),
+	          open: this.state.open === 'festi' ? 'open' : '' }),
 	        _react2.default.createElement(_info2.default, {
 	          closePopUp: this.closePopUp,
-	          active: this.state.active === 'info' ? 'active' : '' }),
+	          open: this.state.open === 'info' ? 'open' : '' }),
 	        !this.props.user && _react2.default.createElement(_signin2.default, {
 	          closePopUp: this.closePopUp,
 	          crearCuentaShow: this.activatePopUp('signup'),
 	          forgotShow: this.activatePopUp('forgot'),
-	          active: this.state.active === 'signin' ? 'active' : '' }),
+	          open: this.state.open === 'signin' ? 'open' : '' }),
 	        !this.props.user && _react2.default.createElement(_signup2.default, {
 	          closePopUp: this.closePopUp,
 	          loginShow: this.activatePopUp('signin'),
-	          active: this.state.active === 'signup' ? 'active' : '' }),
+	          open: this.state.open === 'signup' ? 'open' : '' }),
 	        !this.props.user && _react2.default.createElement(_forgot2.default, {
 	          closePopUp: this.closePopUp,
 	          loginShow: this.activatePopUp('signin'),
-	          active: this.state.active === 'forgot' ? 'active' : '' }),
+	          open: this.state.open === 'forgot' ? 'open' : '' }),
 	        this.props.user && _react2.default.createElement(_profile2.default, {
 	          closePopUp: this.closePopUp,
-	          active: this.state.active === 'profile' ? 'active' : '' }),
+	          open: this.state.open === 'profile' ? 'open' : '' }),
 	        this.props.user && this.props.user.primerLogin && _react2.default.createElement(_primerLogin2.default, {
-	          active: this.state.active === 'primerLogin' ? 'active' : '' }),
+	          open: this.state.open === 'primerLogin' ? 'open' : '' }),
 	        this.props.user && this.props.user.reset && _react2.default.createElement(_reset2.default, {
 	          closePopUp: this.closePopUp,
-	          active: this.state.active === 'reset' ? 'active' : '' })
+	          open: this.state.open === 'reset' ? 'open' : '' })
 	      );
 	    }
 	  }]);
@@ -59169,27 +59206,19 @@
 	    value: function onSuccess(res) {
 	      window.$tate('user').value = undefined;
 	      window.$tate('user').value = res;
-	      if (res.primerLogin) {
-	        window.$tate('popups.active').value = 'primerLogin';
-	      }
+	      window.$tate('popups.active').value = res.primerLogin ? 'primerLogin' : null;
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'dialog',
+	        'dia-log',
 	        {
-	          is: 'pop-up',
 	          id: 'popup_signin',
+	          'data-open-modal': this.props.open },
+	        _react2.default.createElement('span', {
 	          onClick: this.props.closePopUp,
-	          active: this.props.active },
-	        _react2.default.createElement(
-	          'span',
-	          {
-	            onClick: this.props.closePopUp,
-	            className: 'pop-close' },
-	          '×'
-	        ),
+	          className: 'pop-close' }),
 	        _react2.default.createElement(
 	          _form2.default,
 	          {
@@ -59241,7 +59270,7 @@
 	              'Mail'
 	            ),
 	            _react2.default.createElement('input', {
-	              name: 'mail',
+	              name: 'email',
 	              id: 'mail',
 	              type: 'email',
 	              required: true })
@@ -59257,7 +59286,7 @@
 	            ),
 	            _react2.default.createElement('input', {
 	              id: 'pass',
-	              name: 'pass',
+	              name: 'password',
 	              type: 'password',
 	              required: true }),
 	            _react2.default.createElement(
@@ -59271,7 +59300,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'form-row cuenta-buttons' },
+	            { className: 'form-row-field foot-buttons' },
 	            _react2.default.createElement(
 	              'button',
 	              {
@@ -59310,8 +59339,6 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	__webpack_require__(779);
 
 	__webpack_require__(758);
@@ -59322,43 +59349,19 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var PopUp = function (_window$HTMLDialogEle) {
-	  _inherits(PopUp, _window$HTMLDialogEle);
+	var Dialog = function (_window$HTMLElement) {
+	  _inherits(Dialog, _window$HTMLElement);
 
-	  function PopUp() {
-	    _classCallCheck(this, PopUp);
+	  function Dialog() {
+	    _classCallCheck(this, Dialog);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PopUp).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Dialog).apply(this, arguments));
 	  }
 
-	  _createClass(PopUp, [{
-	    key: 'connectedCallback',
-	    value: function connectedCallback() {
-	      if (this.getAttribute('active')) this.showModal();
-	    }
-	  }, {
-	    key: 'attributeChangedCallback',
-	    value: function attributeChangedCallback(name, oldValue, newValue) {
-	      if (name === 'active') {
-	        var open = this.getAttribute('open') === '';
-	        if (newValue) {
-	          if (!open && this.parentNode) this.showModal();
-	        } else {
-	          if (open) this.close();
-	        }
-	      }
-	    }
-	  }], [{
-	    key: 'observedAttributes',
-	    get: function get() {
-	      return ['active'];
-	    }
-	  }]);
+	  return Dialog;
+	}(window.HTMLElement);
 
-	  return PopUp;
-	}(window.HTMLDialogElement);
-
-	window.customElements.define('pop-up', PopUp, { extends: 'dialog' });
+	window.customElements.define('dia-log', Dialog);
 
 /***/ },
 /* 779 */
@@ -59383,8 +59386,6 @@
 
 	__webpack_require__(180);
 
-	__webpack_require__(778);
-
 	__webpack_require__(784);
 
 	var _react = __webpack_require__(1);
@@ -59398,6 +59399,10 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// import 'components/dia-log'
+
+	// import 'components/alert-msg'
+
 
 	var Form = function (_Component) {
 	  _inherits(Form, _Component);
@@ -59423,7 +59428,6 @@
 
 	      if (!form) return;
 	      form.onResponse(function (res) {
-	        console.log('form response', res);
 	        res.json().then(function (data) {
 	          if (data.success) {
 	            if (typeof _this2.props.onSuccess === 'function') {
@@ -59475,19 +59479,21 @@
 	            ref: this.formDidMount,
 	            'data-auto': this.props.auto || '' },
 	          _react2.default.createElement(
-	            'dialog',
+	            'dia-log',
 	            {
-	              is: 'alert-msg',
-	              'class': this.state.formClass + ' alert-login',
-	              active: this.state.formAlertShow ? 'active' : '' },
-	            _react2.default.createElement(
-	              'span',
-	              {
-	                onClick: this.closeAlert,
-	                className: 'close' },
-	              '×'
-	            ),
-	            this.state.formAlertText
+	              'class': this.state.formClass + ' alert-login alert-msg',
+	              'data-open': this.state.formAlertShow ? 'open' : '' },
+	            _react2.default.createElement('span', {
+	              onClick: this.closeAlert,
+	              className: 'close' }),
+	            this.state.formAlertText.split('\n').map(function (item, i) {
+	              return _react2.default.createElement(
+	                'span',
+	                { key: i },
+	                item,
+	                _react2.default.createElement('br', null)
+	              );
+	            })
 	          ),
 	          this.props.children
 	        )
@@ -60088,27 +60094,20 @@
 	    value: function onSuccess(res) {
 	      window.$tate('user').value = undefined;
 	      window.$tate('user').value = res;
-	      if (res.primerLogin) {
-	        window.$tate('popups.active').value = 'primerLogin';
-	      }
+	      window.$tate('popups.active').value = res.primerLogin ? 'primerLogin' : null;
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'dialog',
+	        'dia-log',
 	        {
-	          is: 'pop-up',
-	          id: 'popup_signin',
+	          id: 'popup_signup',
 	          onClick: this.props.closePopUp,
-	          active: this.props.active },
-	        _react2.default.createElement(
-	          'span',
-	          {
-	            onClick: this.props.closePopUp,
-	            className: 'pop-close' },
-	          '×'
-	        ),
+	          'data-open-modal': this.props.open },
+	        _react2.default.createElement('span', {
+	          onClick: this.props.closePopUp,
+	          className: 'pop-close' }),
 	        _react2.default.createElement(
 	          _form2.default,
 	          {
@@ -60131,6 +60130,7 @@
 	            ),
 	            _react2.default.createElement('input', {
 	              id: 'name_registro',
+	              name: 'name',
 	              type: 'text',
 	              required: true })
 	          ),
@@ -60166,12 +60166,12 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'form-row-field regis-buttons' },
+	            { className: 'form-row-field foot-buttons' },
 	            _react2.default.createElement(
 	              'button',
 	              {
 	                type: 'button',
-	                className: 'volver-regis',
+	                className: 'back',
 	                onClick: this.props.loginShow },
 	              '‹ volver'
 	            ),
@@ -60244,18 +60244,13 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'dialog',
+	        'dia-log',
 	        {
-	          is: 'pop-up',
-	          active: this.props.active,
+	          'data-open-modal': this.props.open,
 	          onClick: this.props.closePopUp },
-	        _react2.default.createElement(
-	          'span',
-	          {
-	            onClick: this.props.closePopUp,
-	            className: 'pop-close' },
-	          '×'
-	        ),
+	        _react2.default.createElement('span', {
+	          onClick: this.props.closePopUp,
+	          className: 'pop-close' }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'logineo forgot' },
@@ -60359,8 +60354,8 @@
 	      return _react2.default.createElement(
 	        'dialog',
 	        {
-	          is: 'pop-up',
-	          active: this.props.active },
+	          'data-is': 'pop-up',
+	          'data-open-modal': this.props.open },
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -60426,16 +60421,14 @@
 
 	    _this.state = {
 	      andaGeoLocal: 'geolocation' in navigator,
-	      geoLocalResult: []
+	      geoLocalResult: [-34.539, -58.446]
 	    };
 	    _this.setUbicacionLocal = _this.setUbicacionLocal.bind(_this);
+	    _this.updateLocation = _this.updateLocation.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(PrimerLogin, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {}
-	  }, {
 	    key: 'setUbicacionLocal',
 	    value: function setUbicacionLocal(e) {
 	      var _this2 = this;
@@ -60446,7 +60439,6 @@
 	            andaGeoLocal: true,
 	            geoLocalResult: [pos.coords.latitude, pos.coords.longitude]
 	          });
-	          console.log('nueva pos');
 	        }, function (err) {
 	          console.warn(err);
 	          _this2.setState({ andaGeoLocal: false });
@@ -60456,33 +60448,36 @@
 	      }
 	    }
 	  }, {
-	    key: 'onSuccess',
-	    value: function onSuccess(res) {
-	      console.log(res);
+	    key: 'updateLocation',
+	    value: function updateLocation(e) {
+	      this.setState({ geoLocalResult: [e.currentTarget.getAttribute('lat'), e.currentTarget.getAttribute('lng')] });
 	    }
 	  }, {
-	    key: 'onSubmit',
-	    value: function onSubmit(data, sf) {
-	      debugger;
+	    key: 'onSuccess',
+	    value: function onSuccess(res) {
+	      var user = window.$tate('user').value;
+	      window.$tate('user').value = undefined;
+	      user.primerLogin = false;
+	      user.userType = res.type;
+	      user.location = res.location;
+	      window.$tate('user').value = user;
+	      window.$tate('popups.active').value = null;
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'dialog',
+	        'dia-log',
 	        {
 	          id: 'primerLogin',
-	          is: 'pop-up',
-	          active: this.props.active },
+	          'data-is': 'pop-up',
+	          'data-open-modal': this.props.open },
 	        _react2.default.createElement(
 	          _form2.default,
 	          {
 	            action: '/terminar-registro',
 	            failAlert: 'true',
-	            successAlert: 'true',
-	            'data-auto': 'false',
-	            onSuccess: this.onSuccess,
-	            onSubmit: this.onSubmit },
+	            onSuccess: this.onSuccess },
 	          _react2.default.createElement(
 	            'label',
 	            { className: 'legend' },
@@ -60499,11 +60494,6 @@
 	            _react2.default.createElement(
 	              'select',
 	              { id: 'type', name: 'userType' },
-	              _react2.default.createElement(
-	                'option',
-	                { className: 'default' },
-	                'Elegí'
-	              ),
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'per' },
@@ -60536,7 +60526,7 @@
 	            { className: 'form-row-field' },
 	            _react2.default.createElement(
 	              'label',
-	              { htmlFor: 'ubicacion' },
+	              null,
 	              'Ubicación',
 	              _react2.default.createElement(
 	                'span',
@@ -60544,11 +60534,14 @@
 	                'Hace click para elegir tu ubicación'
 	              )
 	            ),
-	            _react2.default.createElement('geo-select', {
-	              name: 'ubicacion',
-	              id: 'ubicacion',
-	              point: this.state.geoLocalResult
-	            }),
+	            _react2.default.createElement(
+	              'geo-select',
+	              {
+	                onClick: this.updateLocation,
+	                lat: this.state.geoLocalResult[0],
+	                lng: this.state.geoLocalResult[1] },
+	              _react2.default.createElement('input', { type: 'hidden', name: 'location' })
+	            ),
 	            this.state.andaGeoLocal && _react2.default.createElement(
 	              'button',
 	              {
@@ -60574,45 +60567,6 @@
 
 	  return PrimerLogin;
 	}(_react.Component);
-
-	// dom.querySelector('#elegirUbicacion'), 'click')
-	//       .subscribe(function () {
-	//         if ('geolocation' in navigator) {
-	//           try {
-	//             navigator.geolocation.getCurrentPosition(function (position) {
-	//               geoSuccess(dom, position)
-	//             }, geoError)
-	//           } catch (err) {
-	//             console.error('fallo geolocation')
-	//             geoSuccess(dom, {coords: {latitude: -34.55, longitude: -58.45}})
-	//           }
-	//         } else {
-	//           geoSuccess(dom, {coords: {latitude: -34.55, longitude: -58.45}})
-	//         }
-
-
-	// geoSuccess (dom, position) {
-	//   dom.querySelector('#primeraVez [data-submit]').style.display = 'block'
-	//   dom.querySelector('#elegirUbicacion').style.display = 'none'
-	//   var div = dom.querySelector('#ubicacionLocalFormWelcome')
-	//   div.style.display = 'block'
-	//   var map = window.L.map(div).setView([position.coords.latitude, position.coords.longitude], 13)
-	//   window.L.Icon.Default.imagePath = '/images'
-	//   window.L.tileLayer(
-	//     'https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ',
-	//     {
-	//       tileSize: 512,
-	//       zoomOffset: -1
-	//     })
-	//     .addTo(map)
-	//   var marker = window.L.marker([position.coords.latitude.toFixed(3), position.coords.longitude.toFixed(3)]).addTo(map)
-	//   dom.querySelector('[data-id='locationInput']').value = position.coords.latitude.toFixed(3) + '::' + position.coords.longitude.toFixed(3)
-	//   map.on('click', function (ev) {
-	//     marker.setLatLng(ev.latlng)
-	//     dom.querySelector('[data-id='locationInput']').value = ev.latlng.lat.toFixed(3) + '::' + ev.latlng.lng.toFixed(3)
-	//   })
-	// }
-
 
 	exports.default = PrimerLogin;
 
@@ -60653,10 +60607,7 @@
 	  function GeoSelect() {
 	    _classCallCheck(this, GeoSelect);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(GeoSelect).call(this));
-
-	    _this.value = [-34.539, -58.446];
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GeoSelect).apply(this, arguments));
 	  }
 
 	  _createClass(GeoSelect, [{
@@ -60664,34 +60615,47 @@
 	    value: function connectedCallback() {
 	      var _this2 = this;
 
-	      this.map = _leaflet2.default.map(this).setView([-34.539, -58.446], 9);
-
+	      var coords = [+this.getAttribute('lat'), +this.getAttribute('lng')];
+	      this.map = _leaflet2.default.map(this).setView(coords, 9);
+	      this.querySelector('input').value = JSON.stringify(coords);
 	      window.L.tileLayer('https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ', {
 	        attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 	        tileSize: 512,
 	        zoomOffset: -1
 	      }).addTo(this.map);
-	      this.marker = _leaflet2.default.marker([-34.539, -58.446]).addTo(this.map);
+	      this.marker = _leaflet2.default.marker(coords).addTo(this.map);
 	      this.map.on('click', function (e) {
-	        _this2.marker.setLatLng(e.latlng);
-	        _this2.value = e.latlng;
+	        _this2.setAttribute('lat', e.latlng.lat);
+	        _this2.setAttribute('lng', e.latlng.lng);
 	      });
 	    }
 	  }, {
 	    key: 'attributeChangedCallback',
 	    value: function attributeChangedCallback(name, oldValue, newValue) {
-	      if (name === 'point') {
-	        if (~newValue.indexOf(',')) {
-	          var coords = newValue.split(',');
-	          this.marker.setLatLng(coords);
-	          this.map.setView(coords, 9);
-	        }
+	      if (!this.parentNode) return;
+	      switch (name) {
+	        case 'lat':
+	          if (+newValue) {
+	            var coords = [newValue, this.getAttribute('lng')];
+	            this.marker.setLatLng(coords);
+	            this.map.setView(coords);
+	            this.querySelector('input').value = JSON.stringify(coords);
+	          }
+	          break;
+	        case 'lng':
+	          if (+newValue) {
+	            var _coords = [this.getAttribute('lat'), newValue];
+	            this.marker.setLatLng(_coords);
+	            this.map.setView(_coords);
+	            this.querySelector('input').value = JSON.stringify(_coords);
+	          }
+	          break;
 	      }
 	    }
 	  }], [{
 	    key: 'observedAttributes',
 	    get: function get() {
-	      return ['point'];
+	      return ['lat', 'lng'];
 	    }
 	  }]);
 
@@ -60750,8 +60714,8 @@
 	      return _react2.default.createElement(
 	        'dialog',
 	        {
-	          is: 'pop-up',
-	          active: this.props.active },
+	          'data-is': 'pop-up',
+	          'data-open-modal': this.props.open },
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -60814,19 +60778,14 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'dialog',
+	        'dia-log',
 	        {
 	          id: 'festi_flyer',
-	          is: 'pop-up',
 	          onClick: this.props.closePopUp,
-	          active: this.props.active ? 'active' : '' },
-	        _react2.default.createElement(
-	          'span',
-	          {
-	            onClick: this.props.closePopUp,
-	            className: 'close' },
-	          '×'
-	        ),
+	          'data-open-modal': this.props.open },
+	        _react2.default.createElement('span', {
+	          onClick: this.props.closePopUp,
+	          className: 'pop-close' }),
 	        _react2.default.createElement('img', { src: 'flyer.svg' })
 	      );
 	    }
@@ -60915,20 +60874,14 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'dialog',
+	        'dia-log',
 	        {
-	          is: 'pop-up',
-	          active: this.props.active,
+	          'data-open-modal': this.props.open,
 	          id: 'popup_festi',
+	          onClick: this.props.closePopUp },
+	        _react2.default.createElement('span', {
 	          onClick: this.props.closePopUp,
-	          'data-icon': 'fff' },
-	        _react2.default.createElement(
-	          'span',
-	          {
-	            onClick: this.props.closePopUp,
-	            className: 'close' },
-	          '×'
-	        ),
+	          className: 'pop-close' }),
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -61279,8 +61232,6 @@
 
 	__webpack_require__(784);
 
-	__webpack_require__(821);
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -61422,6 +61373,11 @@
 	                'option',
 	                { value: 'Difusion' },
 	                'Difusión'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'Otra' },
+	                'Otra'
 	              )
 	            )
 	          ),
@@ -61464,72 +61420,13 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	__webpack_require__(822);
-
-	__webpack_require__(758);
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var AlertMsg = function (_window$HTMLDialogEle) {
-	  _inherits(AlertMsg, _window$HTMLDialogEle);
-
-	  function AlertMsg() {
-	    _classCallCheck(this, AlertMsg);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AlertMsg).apply(this, arguments));
-	  }
-
-	  _createClass(AlertMsg, [{
-	    key: 'attributeChangedCallback',
-	    value: function attributeChangedCallback(name, oldValue, newValue) {
-	      if (!this.parentNode) return;
-	      if (name === 'active') {
-	        var open = this.getAttribute('open') === '';
-	        if (newValue) {
-	          if (!open) this.show();
-	        } else {
-	          if (open) this.close();
-	        }
-	      }
-	    }
-	  }], [{
-	    key: 'observedAttributes',
-	    get: function get() {
-	      return ['active'];
-	    }
-	  }]);
-
-	  return AlertMsg;
-	}(window.HTMLDialogElement);
-
-	window.customElements.define('alert-msg', AlertMsg, { extends: 'dialog' });
-
-/***/ },
-/* 822 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 823 */,
-/* 824 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(825);
+	__webpack_require__(822);
 
 	__webpack_require__(778);
 
@@ -61574,19 +61471,14 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'dialog',
+	        'dia-log',
 	        {
-	          is: 'pop-up',
 	          onClick: this.props.closePopUp,
-	          active: this.props.active,
+	          'data-open-modal': this.props.open,
 	          id: 'popup_info' },
-	        _react2.default.createElement(
-	          'span',
-	          {
-	            onClick: this.props.closePopUp,
-	            className: 'close' },
-	          '×'
-	        ),
+	        _react2.default.createElement('span', {
+	          onClick: this.props.closePopUp,
+	          className: 'pop-close' }),
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -61688,6 +61580,65 @@
 	}(_react.Component);
 
 	exports.default = Info;
+
+/***/ },
+/* 822 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 823 */,
+/* 824 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(825);
+
+	__webpack_require__(758);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DropDown = function (_window$HTMLElement) {
+	  _inherits(DropDown, _window$HTMLElement);
+
+	  function DropDown() {
+	    _classCallCheck(this, DropDown);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DropDown).apply(this, arguments));
+	  }
+
+	  _createClass(DropDown, [{
+	    key: 'connectedCallback',
+	    value: function connectedCallback() {
+	      this.addEventListener('click', this.handleClick);
+	    }
+	  }, {
+	    key: 'disconnectedCallback',
+	    value: function disconnectedCallback() {
+	      this.removeEventListener('click', this.handleClick);
+	    }
+	  }, {
+	    key: 'handleClick',
+	    value: function handleClick(e) {
+	      if (e.target.tagName === 'DIA-LOG') return;
+	      var openVal = !this.getAttribute('data-open') ? 'open' : '';
+	      this.setAttribute('data-open', openVal);
+	      this.getElementsByTagName('dia-log')[0].setAttribute('data-open', openVal);
+	    }
+	  }]);
+
+	  return DropDown;
+	}(window.HTMLElement);
+
+	window.customElements.define('drop-down', DropDown);
 
 /***/ },
 /* 825 */

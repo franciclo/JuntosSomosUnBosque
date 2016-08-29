@@ -32,13 +32,13 @@ module.exports = function (app) {
         })
       }
       $tate('red').value = users
+        .filter(function (user) {
+          return user.arboles.length > 0
+        })
         .map(function (user) {
           return {
             tipo: user.userType,
-            location: {
-              lat: user.location ? user.location.split('::')[0] : 0,
-              lng: user.location ? user.location.split('::')[1] : 0
-            },
+            location: user.location,
             nombre: user.getNombre(),
             arboles: user.arboles
           }

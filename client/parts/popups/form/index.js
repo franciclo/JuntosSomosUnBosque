@@ -1,8 +1,9 @@
 import './styles.css'
 
 import 'state-stream'
-import 'components/pop-up'
+// import 'components/dia-log'
 import 'components/form-async'
+// import 'components/alert-msg'
 import React, {Component} from 'react'
 
 export default class Form extends Component {
@@ -19,7 +20,6 @@ export default class Form extends Component {
   formDidMount (form) {
     if (!form) return
     form.onResponse(res => {
-      console.log('form response', res)
       res.json().then(data => {
         if (data.success) {
           if (typeof this.props.onSuccess === 'function') {
@@ -65,21 +65,29 @@ export default class Form extends Component {
           action={this.props.action}
           ref={this.formDidMount}
           data-auto={this.props.auto || ''}>
-          <dialog
-            is='alert-msg'
-            class={this.state.formClass + ' alert-login'}
-            active={
+          <dia-log
+            class={this.state.formClass + ' alert-login alert-msg'}
+            data-open={
               this.state.formAlertShow
-                ? 'active'
+                ? 'open'
                 : ''
             }>
             <span
               onClick={this.closeAlert}
               className='close'>
-              &times;
             </span>
-            {this.state.formAlertText}
-          </dialog>
+            {
+              this.state.formAlertText.split('\n')
+                .map(function (item, i) {
+                  return (
+                    <span key={i}>
+                      {item}
+                      <br />
+                    </span>
+                  )
+                })
+            }
+          </dia-log>
           {this.props.children}
         </form>
       </div>

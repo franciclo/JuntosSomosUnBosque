@@ -31,6 +31,7 @@
     font-weight: 500;
     padding: 7px;
     background: #ff687b;
+    position: relative;
 }
 #festi_marker span.triangle {
   width: 0;
@@ -43,7 +44,7 @@
 }
 #festi_marker .ver-mas{
   position: absolute;
-  width: 98px;
+  width: 100%;
   right: 0;
   top: 0px;
   background: #ff687b;
@@ -52,6 +53,8 @@
   justify-content: center;
   font-weight: 500;
   color: white;
+  font-size: 13px;
+  line-height: 20px;
 }
 #festi_marker .ver-mas img{
   transform: rotate(-90deg);

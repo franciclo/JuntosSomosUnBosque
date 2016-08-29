@@ -1,6 +1,6 @@
 import './styles.css'
 
-import 'components/pop-up'
+import 'components/dia-log'
 import 'components/slider-box'
 import React, {Component} from 'react'
 import Info from './info'
@@ -25,16 +25,13 @@ export default class Festi extends Component {
 
   render () {
     return (
-      <dialog
-        is='pop-up'
-        active={this.props.active}
+      <dia-log
+        data-open-modal={this.props.open}
         id='popup_festi'
-        onClick={this.props.closePopUp}
-        data-icon='fff'>
+        onClick={this.props.closePopUp}>
         <span
           onClick={this.props.closePopUp}
-          className='close'>
-          &times;
+          className='pop-close'>
         </span>
         <div>
           <div className='header-wrapper'>
@@ -90,7 +87,7 @@ export default class Festi extends Component {
             <Voluntariado />
           </slider-box>
         </div>
-      </dialog>
+      </dia-log>
     )
   }
 }

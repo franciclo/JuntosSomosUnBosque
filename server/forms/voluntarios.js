@@ -21,7 +21,7 @@ module.exports = function (req, res, next) {
     res.json({
       success: true,
       result: req.body,
-      text: 'Gracias por sumarte, y ser parte de este festival autogestivo. Te vamos a estar contactando via mail.'
+      text: 'Gracias por sumarte, y ser parte de este festival autogestivo.\nTe vamos a estar contactando via mail.'
     })
   })
 }

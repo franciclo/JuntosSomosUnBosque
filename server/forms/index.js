@@ -1,3 +1,4 @@
+var isLoggedIn = require('../auth/middleware').isLoggedIn
 var upload = require('multer')()
 
 module.exports = function (app, passport) {
@@ -9,10 +10,11 @@ module.exports = function (app, passport) {
 
   app.post('/registro', require('./registro')(passport))
 
+  app.post('/terminar-registro', isLoggedIn, require('./terminar-registro'))
+
   app.post('/forgot', require('./forgot'))
 }
 
-  // var isLoggedIn = require('../auth/middleware').isLoggedIn
 
   // app.get('/finishRegistration', isLoggedIn, function (req, res) {
   //   var user = req.user

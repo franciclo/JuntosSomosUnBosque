@@ -1,9 +1,10 @@
 module.exports = function (app, passport) {
-  app.get('/logout', function (req, res) {
+  app.post('/logout', function (req, res) {
     req.logout()
-    res.redirect('/')
+    res.json({
+      success: true
+    })
   })
-
   require('./facebook/routes')(app, passport)
   require('./google/routes')(app, passport)
   require('./local/routes')(app, passport)

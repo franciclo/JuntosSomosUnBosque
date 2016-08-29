@@ -6,20 +6,22 @@ module.exports = function (passport) {
           return res.json({
             success: false,
             err: err,
-            text: 'Datos incorrectos'
+            text: 'Datos incorrectos - err'
           })
         }
         if (!user) {
           return res.json({
             success: false,
-            text: 'Datos incorrectos'
+            text: 'Datos incorrectos - no user'
           })
         }
         req.logIn(user, function (err) {
           if (err) {
+            console.log(err)
             return res.json({
               success: false,
-              text: 'Datos incorrectos'
+              text: 'Datos incorrectos - in err',
+              err: err
             })
           }
           return res.json({
@@ -27,10 +29,7 @@ module.exports = function (passport) {
             result: {
               tipo: user.userType,
               primerLogin: user.primerLogin,
-              location: {
-                lat: user.location ? user.location.split('::')[0] : 0,
-                lng: user.location ? user.location.split('::')[1] : 0
-              },
+              location: user.location,
               nombre: user.getNombre(),
               arboles: user.arboles
             }

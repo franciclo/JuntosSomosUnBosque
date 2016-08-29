@@ -1,23 +1,21 @@
 import './styles.css'
 
-import 'components/pop-up'
+import 'components/dia-log'
 import React, {Component} from 'react'
 
 export default class Flyer extends Component {
   render () {
     return (
-      <dialog
+      <dia-log
         id='festi_flyer'
-        is='pop-up'
         onClick={this.props.closePopUp}
-        active={this.props.active ? 'active' : ''}>
+        data-open-modal={this.props.open}>
         <span
           onClick={this.props.closePopUp}
-          className='close'>
-          &times;
+          className='pop-close'>
         </span>
         <img src='flyer.svg' />
-      </dialog>
+      </dia-log>
     )
   }
 }

@@ -1,7 +1,7 @@
 import './styles.css'
 
 import 'whatwg-fetch'
-import 'components/pop-up'
+import 'components/dia-log'
 import React, {Component} from 'react'
 import Form from '../form'
 
@@ -9,22 +9,18 @@ export default class Signup extends Component {
   onSuccess (res) {
     window.$tate('user').value = undefined
     window.$tate('user').value = res
-    if (res.primerLogin) {
-      window.$tate('popups.active').value = 'primerLogin'
-    }
+    window.$tate('popups.active').value = res.primerLogin ? 'primerLogin' : null
   }
 
   render () {
     return (
-      <dialog
-        is='pop-up'
-        id='popup_signin'
+      <dia-log
+        id='popup_signup'
         onClick={this.props.closePopUp}
-        active={this.props.active}>
+        data-open-modal={this.props.open}>
         <span
           onClick={this.props.closePopUp}
           className='pop-close'>
-          &times;
         </span>
         <Form
           action='/registro'
@@ -38,6 +34,7 @@ export default class Signup extends Component {
             </label>
             <input
               id='name_registro'
+              name='name'
               type='text'
               required />
           </div>
@@ -63,10 +60,10 @@ export default class Signup extends Component {
               type='password'
               required />
           </div>
-          <div className='form-row-field regis-buttons'>
+          <div className='form-row-field foot-buttons'>
             <button
               type='button'
-              className='volver-regis'
+              className='back'
               onClick={this.props.loginShow}>
               &#8249;&nbsp;volver
             </button>
@@ -76,7 +73,7 @@ export default class Signup extends Component {
             </button>
           </div>
         </Form>
-      </dialog>
+      </dia-log>
     )
   }
 }

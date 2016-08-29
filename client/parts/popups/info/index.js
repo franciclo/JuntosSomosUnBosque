@@ -1,6 +1,6 @@
 import './styles.css'
 
-import 'components/pop-up'
+import 'components/dia-log'
 import React, {Component} from 'react'
 
 export default class Info extends Component {
@@ -21,15 +21,13 @@ export default class Info extends Component {
 
   render () {
     return (
-      <dialog
-        is='pop-up'
+      <dia-log
         onClick={this.props.closePopUp}
-        active={this.props.active}
+        data-open-modal={this.props.open}
         id='popup_info'>
         <span
           onClick={this.props.closePopUp}
-          className='close'>
-          &times;
+          className='pop-close'>
         </span>
         <div>
           <nav>
@@ -105,7 +103,7 @@ export default class Info extends Component {
             </article>
           </slider-box>
         </div>
-      </dialog>
+      </dia-log>
     )
   }
 }

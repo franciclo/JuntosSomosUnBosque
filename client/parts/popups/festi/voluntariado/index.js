@@ -1,7 +1,6 @@
 import './styles.css'
 
 import 'components/form-async'
-import 'components/alert-msg'
 import React, {Component} from 'react'
 import Form from '../../form'
 
@@ -62,6 +61,7 @@ export default class Voluntariado extends Component {
               <option value='Durante'>Durante el evento</option>
               <option value='Limpieza'>Limpieza</option>
               <option value='Difusion'>Difusión</option>
+              <option value='Otra'>Otra</option>
             </select>
           </div>
           <div className='form-row-field'>

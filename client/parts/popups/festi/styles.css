@@ -1,5 +1,6 @@
-#popup_festi > img {
+#popup_festi > .pop-close {
   z-index: 999;
+  color: white;
 }
 #popup_festi > div {
   background: white;

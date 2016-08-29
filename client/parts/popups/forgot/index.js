@@ -1,20 +1,18 @@
 import './styles.css'
 
-import 'components/pop-up'
+import 'components/dia-log'
 import React, {Component} from 'react'
 import Form from '../form'
 
 export default class Forgot extends Component {
   render () {
     return (
-      <dialog
-        is='pop-up'
-        active={this.props.active}
+      <dia-log
+        data-open-modal={this.props.open}
         onClick={this.props.closePopUp}>
         <span
           onClick={this.props.closePopUp}
           className='pop-close'>
-          &times;
         </span>
         <div className='logineo forgot'>
           <Form
@@ -40,7 +38,7 @@ export default class Forgot extends Component {
             </div>
           </Form>
         </div>
-      </dialog>
+      </dia-log>
     )
   }
 }

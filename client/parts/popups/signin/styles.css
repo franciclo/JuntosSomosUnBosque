@@ -16,15 +16,15 @@ label.legend {
 }
 
 .loguineo a.social{
-    border-radius: 50%;
-    display: inline-flex;
-    margin: 6px 0;
-    color: #fff;
-    text-decoration: none;
-    padding: 9px;
-    border: 1px solid;
-    margin-right: 10px;
-    cursor: pointer;
+  border-radius: 50%;
+  display: inline-flex;
+  margin: 6px 0;
+  color: #fff;
+  text-decoration: none;
+  padding: 9px;
+  border: 1px solid;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .loguineo a.social.fb:hover{

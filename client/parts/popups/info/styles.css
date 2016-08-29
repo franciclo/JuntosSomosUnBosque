@@ -1,5 +1,5 @@
-#popup_info > img {
-  z-index: 999;
+#popup_info > .pop-close {
+  color: #fff;
 }
 #popup_info > div {
   background: white;

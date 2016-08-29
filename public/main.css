@@ -567,6 +567,7 @@ dialog {
     font-weight: 500;
     padding: 7px;
     background: #ff687b;
+    position: relative;
 }
 #festi_marker span.triangle {
   width: 0;
@@ -579,7 +580,7 @@ dialog {
 }
 #festi_marker .ver-mas{
   position: absolute;
-  width: 98px;
+  width: 100%;
   right: 0;
   top: 0px;
   background: #ff687b;
@@ -588,6 +589,8 @@ dialog {
   justify-content: center;
   font-weight: 500;
   color: white;
+  font-size: 13px;
+  line-height: 20px;
 }
 #festi_marker .ver-mas img{
   transform: rotate(-90deg);
@@ -634,7 +637,8 @@ dialog {
   max-width: 360px;
   display: flex;
   flex-direction: column;
-  margin: 25px 25px 5px 25px;
+  padding: 25px 25px 5px 25px;
+  background: #fff;
 }
 #sidebar>h1 {
   font-size: 20px;
@@ -654,18 +658,65 @@ dialog {
   display: flex;
   justify-content: space-between;
 }
-#sidebar_header #sidebar_header_nav {
+#sidebar_header_nav {
   color: #2bd873;
+  display: flex;
+  align-items: center;
 }
-#sidebar_header #sidebar_header_nav button {
+#sidebar_header_nav button,
+#sidebar_header_nav drop-down{
   border: none;
   background: none;
   color: inherit;
   font-size: 17px;
   cursor: pointer;
 }
-#sidebar_header #sidebar_header_nav button:hover {
-  font-weight: bold;
+#sidebar_header_nav button:hover,
+#sidebar_header_nav drop-down:hover{
+  font-weight: 500;
+}
+#sidebar_header_nav drop-down{
+  padding-left: 8px;
+}
+#sidebar_header_nav drop-down dia-log{
+  padding: 0;
+  top: 23px;
+  right: -15px;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  box-shadow: 0px 4px 7px 0px #aeaeae;
+}
+#sidebar_header_nav drop-down dia-log button{
+  padding: 3px 10px;
+  width: 100%;
+  text-align: left;
+}
+#sidebar_header_nav drop-down dia-log button:hover{
+  font-weight: 400;
+  background: #2bd873;
+  color:white;
+}
+drop-down:after {
+  content: "\2666";
+  line-height: 2px;
+  overflow: hidden;
+  display: inline-block;
+  height: 8px;
+  font-size: 20px;
+  margin-left: 5px;
+}
+drop-down:hover {
+  cursor: pointer;
+}
+drop-down {
+  position: relative;
+}
+drop-down dia-log{
+  position: absolute;
+  padding: 5px;
+  top: 0;
+  right: 0;
+  z-index: 9;
 }#sidebar_nav {
   display: flex;
 }
@@ -1095,15 +1146,15 @@ label.legend {
 }
 
 .loguineo a.social{
-    border-radius: 50%;
-    display: inline-flex;
-    margin: 6px 0;
-    color: #fff;
-    text-decoration: none;
-    padding: 9px;
-    border: 1px solid;
-    margin-right: 10px;
-    cursor: pointer;
+  border-radius: 50%;
+  display: inline-flex;
+  margin: 6px 0;
+  color: #fff;
+  text-decoration: none;
+  padding: 9px;
+  border: 1px solid;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .loguineo a.social.fb:hover{
@@ -1157,26 +1208,72 @@ label.legend {
   border-top: 1px solid #c2c2c2;
   padding-top: 30px!important;
 }
-dialog>.close,
-dialog>.pop-close{
+dia-log>.close,
+dia-log>.pop-close{
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
   font-size: 30px;
   line-height: 20px;
-  height: 15px;
+  height: 20px;
+  width: 20px;
+  text-align: right;
+  z-index: 99;
 }
-dialog[is="pop-up"] {
+dia-log>.close:after,
+dia-log .pop-close:after {
+  content: '\D7';
+}
+dia-log {
   padding: 0;
   border:0;
-}
-dialog[is="pop-up"] + .backdrop {
-  background-color: rgba(0,0,0,0.4);
+  display: none;
+  position: relative;
 }
 
-dialog[is="pop-up"]::backdrop {
-  background-color: rgba(0,0,0,0.4);
+dia-log.alert-msg {
+  color: white;
+  padding: 10px!important;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: 500;
+  align-items: center;
+  position: absolute;
+  bottom:9px;
+}
+dia-log.alert-msg.success {
+  background: #2bd873;
+}
+dia-log.alert-msg.fail {
+  background: #ff687b;
+} 
+
+#popups_layout{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+  background: rgba(111,111,111,0.4);
+  top: 0;
+  left: 0;
+}
+#popups_layout.open {
+  z-index: 9;
+}
+dia-log[data-open-modal="open"] {
+    display: flex;
+    background: white;
+}
+dia-log[data-open="open"] {
+  display: block;
+  background: white;
+}
+.close:after {
+  
 }.loguineo {
   width: 100%;
   padding: 15px;
@@ -1201,6 +1298,8 @@ label.legend {
     height: 100%;
   box-sizing: border-box;
   position: relative;
+  overflow: auto;
+  margin:0 20px;
 }
 form label {
     font-size: 15px;
@@ -1250,18 +1349,29 @@ h1 {
 form .form-row {
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
 }
 form .form-row-field {
-  margin: 10px 0px;
-  padding: 10px 20px 0;
+  padding: 10px 0;
 }
 form .form-field{
   flex: 1;
-  padding: 10px 20px;
+  padding: 10px 0;
+}
+form .form-field:last-child {
+  padding-left: 10px;
+}
+form .form-field:first-child {
+  padding-right: 10px;
 }
 form>div:last-of-type {
   flex: 1;
+}
+form .foot-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+form .foot-buttons .back{
+  background: #aeaeae;
 }#popup_signup {
   max-width: 450px;
   width: 90%;
@@ -1269,13 +1379,7 @@ form>div:last-of-type {
 .registrar {
   min-width: 400px;
 }
-.regis-buttons {
-  display: flex;
-  justify-content: space-between;
-}
-.regis-buttons .volver-regis {
-  background: #aeaeae;
-}.forgot {
+.forgot {
   width: 360px;
   padding-top: 10px; 
 }#primerLogin {
@@ -1307,8 +1411,9 @@ form>div:last-of-type {
   cursor: crosshair!important;
 }#festi_flyer img[src="flyer.svg"]{
   height: 90vh
-}#popup_festi > img {
+}#popup_festi > .pop-close {
   z-index: 999;
+  color: white;
 }
 #popup_festi > div {
   background: white;
@@ -1486,23 +1591,8 @@ span.linea-crono {
   background: #81ffbf;
   width: 100%;
   bottom:0;
-}*/dialog[is="alert-msg"] {
-  color: white;
-  padding: 10px!important;
-  width: 100%;
-  box-sizing: border-box;
-  font-weight: 500;
-  bottom: 9px;
-  align-items: center;
-}
-dialog[is="alert-msg"].success {
-  background: #2bd873;
-}
-dialog[is="alert-msg"].fail {
-  background: #ff687b;
-} 
-#popup_info > img {
-  z-index: 999;
+}*/#popup_info > .pop-close {
+  color: #fff;
 }
 #popup_info > div {
   background: white;

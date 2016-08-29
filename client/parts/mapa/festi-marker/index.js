@@ -13,10 +13,12 @@ export default class FestiMarker extends Component {
             (e) => { window.$tate('popups.active').value = 'festi' }
           }>
           <img src='fecha.svg' alt='24 de Septiembre' />
-          <span className='title'>Festival de plantación</span>
-          <span className='ver-mas'>
-            Ver más
-            <img src='caret-right.svg' alt='Ver mas' />
+          <span className='title'>
+            Festival de plantación
+            <span className='ver-mas'>
+              Ver más
+              <img src='caret-right.svg' alt='Ver mas' />
+            </span>
           </span>
           <span className='triangle'></span>
         </div>

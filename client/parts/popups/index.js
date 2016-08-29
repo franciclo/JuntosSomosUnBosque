@@ -16,7 +16,7 @@ export default class Popups extends Component {
     super()
     this.state = {
       user: null,
-      active: null
+      open: null
     }
     window.$tate('popups.active').value = null
     this.activeStream = window.$tate('popups.active').on('E')
@@ -26,12 +26,12 @@ export default class Popups extends Component {
 
   componentWillMount () {
     this.activeStream = this.activeStream
-      .subscribe((active) => this.setState({active}))
+      .subscribe((open) => this.setState({open}))
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.user && nextProps.user.primerLogin) {
-      this.setState({active: 'primerLogin'})
+      this.setState({open: 'primerLogin'})
     }
   }
 
@@ -39,73 +39,74 @@ export default class Popups extends Component {
     this.activeStream.unsubscribe()
   }
 
-  activatePopUp (active) {
-    return () => this.setState({active})
+  activatePopUp (open) {
+    return () => this.setState({open})
   }
 
   closePopUp (e) {
     if (
-      (
-        e.target.tagName === 'DIALOG' &&
-        e.target.getAttribute('is') === 'pop-up'
-      ) ||
+      this.state.open !== 'primerLogin' &&
+      e.target.id === 'popups_layout' ||
       ~e.target.className.indexOf('pop-close')
     ) {
       window.$tate('popups.active').value = null
-      this.setState({active: null})
+      this.setState({open: null})
     }
   }
 
   render () {
     return (
-      <div id='popups_layout'>
+      <div
+        id='popups_layout'
+        className={this.state.open ? 'open' : ''}
+        onClick={this.closePopUp}>
         <Flyer
           closePopUp={this.closePopUp}
-          active={this.state.active === 'flyer' ? 'active' : ''} />
+          open={this.state.open === 'flyer' ? 'open' : ''} />
         <Festi
           closePopUp={this.closePopUp}
-          active={this.state.active === 'festi' ? 'active' : ''} />
+          open={this.state.open === 'festi' ? 'open' : ''} />
         <Info
           closePopUp={this.closePopUp}
-          active={this.state.active === 'info' ? 'active' : ''} />
+          open={this.state.open === 'info' ? 'open' : ''} />
         {
           !this.props.user &&
             <Signin
               closePopUp={this.closePopUp}
               crearCuentaShow={this.activatePopUp('signup')}
               forgotShow={this.activatePopUp('forgot')}
-              active={this.state.active === 'signin' ? 'active' : ''} />
+              open={this.state.open === 'signin' ? 'open' : ''} />
         }
         {
           !this.props.user &&
             <Signup
               closePopUp={this.closePopUp}
               loginShow={this.activatePopUp('signin')}
-              active={this.state.active === 'signup' ? 'active' : ''} />
+              open={this.state.open === 'signup' ? 'open' : ''} />
         }
         {
           !this.props.user &&
             <Forgot
               closePopUp={this.closePopUp}
               loginShow={this.activatePopUp('signin')}
-              active={this.state.active === 'forgot' ? 'active' : ''} />
+              open={this.state.open === 'forgot' ? 'open' : ''} />
         }
         {
           this.props.user &&
             <Profile
               closePopUp={this.closePopUp}
-              active={this.state.active === 'profile' ? 'active' : ''} />
+              open={this.state.open === 'profile' ? 'open' : ''} />
         }
         {
           this.props.user && this.props.user.primerLogin &&
             <PrimerLogin
-              active={this.state.active === 'primerLogin' ? 'active' : ''} />
+              open={this.state.open === 'primerLogin' ? 'open' : ''} />
         }
         {
           this.props.user && this.props.user.reset &&
             <Reset
               closePopUp={this.closePopUp}
-              active={this.state.active === 'reset' ? 'active' : ''} />
+              open={this.state.open === 'reset' ? 'open' : ''} />
         }
       </div>
     )

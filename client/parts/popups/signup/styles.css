@@ -5,10 +5,3 @@
 .registrar {
   min-width: 400px;
 }
-.regis-buttons {
-  display: flex;
-  justify-content: space-between;
-}
-.regis-buttons .volver-regis {
-  background: #aeaeae;
-}

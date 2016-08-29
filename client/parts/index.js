@@ -15,7 +15,7 @@ export default class Main extends Component {
       red: []
     }
     this.redData = window.$tate('red').on('N')
-    this.userData = window.$tate('user').on('N')
+    this.userData = window.$tate('user').on(['N', 'D'])
   }
 
   componentWillMount () {
