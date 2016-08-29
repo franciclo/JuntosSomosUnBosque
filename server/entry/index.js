@@ -8,6 +8,7 @@ module.exports = function (app) {
 
   app.get('/', function (req, res) {
     if (req.isAuthenticated()) {
+      console.log(req.user)
       $tate('user').value = {
         primerLogin: req.user.primerLogin,
         nombre: req.user.getNombre(),

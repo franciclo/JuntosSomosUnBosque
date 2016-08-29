@@ -1,7 +1,12 @@
 module.exports = function (app, passport) {
   app.post('/logout', function (req, res) {
-    // req.logout()
-    req.session.destroy()
+    req.logout()
+    if (req.user) {
+      return res.json({
+        success: false,
+        text: 'sigue logueado'
+      })
+    }
     res.json({
       success: true
     })
