@@ -13,13 +13,15 @@ module.exports = function (req, res, next) {
     if (err) {
       res.json({
         success: false,
-        result: err
+        err: err,
+        text: 'Hubo un problema, intentá mas tarde.'
       })
       return
     }
     res.json({
       success: true,
-      result: req.body
+      result: req.body,
+      text: 'Gracias por sumarte, y ser parte de este festival autogestivo. Te vamos a estar contactando via mail.'
     })
   })
 }

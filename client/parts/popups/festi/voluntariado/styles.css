@@ -1,18 +1,17 @@
-form.voluntariado-form{
-  padding: 0 30px;
-}
-form.voluntariado-form>button{
+#ayuda-form form button[type="submit"]{
   width: 130px;
-  height: 50px;
-  margin:20px;
+  height: 37px;
+  float: right;
 }
-
-.form-alert>div{
+#ayuda-form .loguineo {
+  height: 100%;
+}
+/*#ayuda-form alert-msg>div{
   padding: 13px 30px;
   color: #555;
 }
-.form-alert{
+#ayuda-form alert-msg{
   background: #81ffbf;
   width: 100%;
   bottom:0;
-}
+}*/

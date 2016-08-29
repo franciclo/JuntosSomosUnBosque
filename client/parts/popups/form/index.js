@@ -21,7 +21,6 @@ export default class Form extends Component {
     form.onResponse(res => {
       console.log('form response', res)
       res.json().then(data => {
-
         if (data.success) {
           if (typeof this.props.onSuccess === 'function') {
             this.props.onSuccess(data.result)
@@ -44,9 +43,13 @@ export default class Form extends Component {
               formClass: 'fail'
             })
           }
-
         }
       })
+    })
+    form.onSubmit(data => {
+      if (typeof this.props.onSubmit === 'function') {
+        this.props.onSubmit(data, form.sendForm)
+      }
     })
   }
 
@@ -56,36 +59,30 @@ export default class Form extends Component {
 
   render () {
     return (
-      <dialog
-        is='pop-up'
-        onClick={this.props.closePopUp}
-        active={this.props.active}>
-        <span
-          onClick={this.props.closePopUp}
-          className='pop-close'>
-          &times;
-        </span>
-        <div
-          className='loguineo'>
-          <form
-            is='form-async'
-            action={this.props.action}
-            ref={this.formDidMount}>
-            <dialog
-                is='alert-msg'
-                class='alert-login'
-                active={this.state.formAlertShow ? 'active' : ''}>
-                <span
-                  onClick={this.closeAlert}
-                  className='close'>
-                  &times;
-                </span>
-                {this.state.formAlertText}
-            </dialog>
-            {this.props.children}
-          </form>
-        </div>
-      </dialog>
+      <div className='loguineo'>
+        <form
+          is='form-async'
+          action={this.props.action}
+          ref={this.formDidMount}
+          data-auto={this.props.auto || ''}>
+          <dialog
+            is='alert-msg'
+            class={this.state.formClass + ' alert-login'}
+            active={
+              this.state.formAlertShow
+                ? 'active'
+                : ''
+            }>
+            <span
+              onClick={this.closeAlert}
+              className='close'>
+              &times;
+            </span>
+            {this.state.formAlertText}
+          </dialog>
+          {this.props.children}
+        </form>
+      </div>
     )
   }
 }

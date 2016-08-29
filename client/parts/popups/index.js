@@ -15,6 +15,7 @@ export default class Popups extends Component {
   constructor () {
     super()
     this.state = {
+      user: null,
       active: null
     }
     window.$tate('popups.active').value = null
@@ -26,6 +27,12 @@ export default class Popups extends Component {
   componentWillMount () {
     this.activeStream = this.activeStream
       .subscribe((active) => this.setState({active}))
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.user && nextProps.user.primerLogin) {
+      this.setState({active: 'primerLogin'})
+    }
   }
 
   componentWillUnmount () {
@@ -92,7 +99,6 @@ export default class Popups extends Component {
         {
           this.props.user && this.props.user.primerLogin &&
             <PrimerLogin
-              closePopUp={this.closePopUp}
               active={this.state.active === 'primerLogin' ? 'active' : ''} />
         }
         {

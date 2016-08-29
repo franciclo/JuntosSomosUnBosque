@@ -19,7 +19,7 @@ export default class Main extends Component {
   }
 
   componentWillMount () {
-    this.redData.subscribe((data) => {
+    this.redData = this.redData.subscribe((data) => {
       let arboles = data
         .map((usu) => usu.arboles || [])
         .reduce((acc, arboles) => {
@@ -55,16 +55,19 @@ export default class Main extends Component {
       })
     })
 
-    this.userData.subscribe(user => {
+    this.userData = this.userData.subscribe(user => {
       this.setState({user})
     })
   }
+  componentWillUnmount () {
+    this.redData.unsubscribe()
+    this.userData.unsubscribe()
+  }
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.mostrarFlyer()) {
-      console.log('if (this.mostrarFlyer()) {')
       window.$tate('popups.active').value = 'flyer'
-    }   
+    }
   }
 
   mostrarFlyer () {

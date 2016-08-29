@@ -1,0 +1,23 @@
+#primerLogin {
+  max-width: 400px;
+  width: 90%;
+}
+#primerLogin button{
+  float: right;
+}
+.usar-auto-geo{
+  margin: 5px 0 0;
+  font-size: 16px;
+  padding: 5px 10px;
+  width: 100%;
+  background: #2bd873;
+  font-weight: 500;
+}
+.usar-auto-geo:hover{
+  background: #2ace6e;
+}
+.ubicacion-info {
+  float: right;
+  font-size: 13px;
+  color: #555;
+}

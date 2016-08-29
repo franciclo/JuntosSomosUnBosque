@@ -2,32 +2,25 @@ import './styles.css'
 
 import 'components/pop-up'
 import React, {Component} from 'react'
+import Form from '../form'
 
 export default class Forgot extends Component {
-  formDidMount (form) {
-    if (!form) return
-    form.onResponse(res => {
-      res.json().then(result => {
-        console.log(result)
-      })
-    })
-  }
-
   render () {
     return (
       <dialog
         is='pop-up'
-        active={this.props.active}>
+        active={this.props.active}
+        onClick={this.props.closePopUp}>
         <span
           onClick={this.props.closePopUp}
-          className='close'>
+          className='pop-close'>
           &times;
         </span>
         <div className='logineo forgot'>
-          <form
-            is='form-async'
+          <Form
             action='/forgot'
-            ref={this.formDidMount}>
+            failAlert='true'
+            successAlert='true'>
             <label className='legend'>Recuperar contraseña</label>
             <div className='form-row-field'>
               <label htmlFor='emailForgotForm'>Mail</label>
@@ -45,7 +38,7 @@ export default class Forgot extends Component {
                 Enviar
               </button>
             </div>
-          </form>
+          </Form>
         </div>
       </dialog>
     )

@@ -1,0 +1,15 @@
+dialog[is="alert-msg"] {
+  color: white;
+  padding: 10px!important;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: 500;
+  bottom: 9px;
+  align-items: center;
+}
+dialog[is="alert-msg"].success {
+  background: #2bd873;
+}
+dialog[is="alert-msg"].fail {
+  background: #ff687b;
+} 

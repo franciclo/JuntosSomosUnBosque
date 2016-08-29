@@ -1158,16 +1158,14 @@ label.legend {
   padding-top: 30px!important;
 }
 dialog>.close,
-dialog>.pop-close,
-dialog>img[src="close.svg"],
-dialog>img[src="close-fff.svg"]{
+dialog>.pop-close{
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
   font-size: 30px;
   line-height: 20px;
-  height: 10px;
+  height: 15px;
 }
 dialog[is="pop-up"] {
   padding: 0;
@@ -1196,19 +1194,6 @@ dialog[is="pop-up"]::backdrop {
 label.legend {
   font-size: 22px!important;
   text-align: center;
-}
-
-.alert-login {
-  background: #ff687b;
-  color: white;
-  padding: 10px!important;
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: -45px;
-  font-weight: 500;
-  bottom: 0;
-  height: 50px;
-  align-items: center;
 }form{
     display: flex;
     flex-direction: column;
@@ -1218,7 +1203,7 @@ label.legend {
   position: relative;
 }
 form label {
-    font-size: 14px;
+    font-size: 15px;
     display: block;
     margin-bottom: 5px;
 }
@@ -1277,7 +1262,11 @@ form .form-field{
 }
 form>div:last-of-type {
   flex: 1;
-}.registrar {
+}#popup_signup {
+  max-width: 450px;
+  width: 90%;
+}
+.registrar {
   min-width: 400px;
 }
 .regis-buttons {
@@ -1289,6 +1278,33 @@ form>div:last-of-type {
 }.forgot {
   width: 360px;
   padding-top: 10px; 
+}#primerLogin {
+  max-width: 400px;
+  width: 90%;
+}
+#primerLogin button{
+  float: right;
+}
+.usar-auto-geo{
+  margin: 5px 0 0;
+  font-size: 16px;
+  padding: 5px 10px;
+  width: 100%;
+  background: #2bd873;
+  font-weight: 500;
+}
+.usar-auto-geo:hover{
+  background: #2ace6e;
+}
+.ubicacion-info {
+  float: right;
+  font-size: 13px;
+  color: #555;
+}geo-select {
+  height: 250px;
+  width: 100%;
+  display: block;
+  cursor: crosshair!important;
 }#festi_flyer img[src="flyer.svg"]{
   height: 90vh
 }#popup_festi > img {
@@ -1454,24 +1470,38 @@ span.linea-crono {
 
 .content-crono p{
   margin: 0;
-}form.voluntariado-form{
-  padding: 0 30px;
-}
-form.voluntariado-form>button{
+}#ayuda-form form button[type="submit"]{
   width: 130px;
-  height: 50px;
-  margin:20px;
+  height: 37px;
+  float: right;
 }
-
-.form-alert>div{
+#ayuda-form .loguineo {
+  height: 100%;
+}
+/*#ayuda-form alert-msg>div{
   padding: 13px 30px;
   color: #555;
 }
-.form-alert{
+#ayuda-form alert-msg{
   background: #81ffbf;
   width: 100%;
   bottom:0;
-}#popup_info > img {
+}*/dialog[is="alert-msg"] {
+  color: white;
+  padding: 10px!important;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: 500;
+  bottom: 9px;
+  align-items: center;
+}
+dialog[is="alert-msg"].success {
+  background: #2bd873;
+}
+dialog[is="alert-msg"].fail {
+  background: #ff687b;
+} 
+#popup_info > img {
   z-index: 999;
 }
 #popup_info > div {

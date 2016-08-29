@@ -5,20 +5,22 @@ module.exports = function (passport) {
         if (err) {
           return res.json({
             success: false,
-            result: err
+            err: err,
+            text: 'Hubo un problema, intentá mas tarde.'
           })
         }
         if (!user) {
           return res.json({
             success: false,
-            result: 'no user'
+            text: 'Ese mail ya está registrado'
           })
         }
         req.logIn(user, function (err) {
           if (err) {
             return res.json({
               success: false,
-              result: 'in login err'
+              err: err,
+              text: 'Hubo un problema, intentá mas tarde.'
             })
           }
           return res.json({

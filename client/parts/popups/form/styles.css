@@ -16,16 +16,3 @@ label.legend {
   font-size: 22px!important;
   text-align: center;
 }
-
-.alert-login {
-  background: #ff687b;
-  color: white;
-  padding: 10px!important;
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: -45px;
-  font-weight: 500;
-  bottom: 0;
-  height: 50px;
-  align-items: center;
-}

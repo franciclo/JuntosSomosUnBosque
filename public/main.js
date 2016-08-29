@@ -21476,7 +21476,7 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
-	      this.redData.subscribe(function (data) {
+	      this.redData = this.redData.subscribe(function (data) {
 	        var arboles = data.map(function (usu) {
 	          return usu.arboles || [];
 	        }).reduce(function (acc, arboles) {
@@ -21511,15 +21511,20 @@
 	        });
 	      });
 
-	      this.userData.subscribe(function (user) {
+	      this.userData = this.userData.subscribe(function (user) {
 	        _this2.setState({ user: user });
 	      });
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.redData.unsubscribe();
+	      this.userData.unsubscribe();
 	    }
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      if (this.mostrarFlyer()) {
-	        console.log('if (this.mostrarFlyer()) {');
 	        window.$tate('popups.active').value = 'flyer';
 	      }
 	    }
@@ -58967,35 +58972,35 @@
 
 	var _signin2 = _interopRequireDefault(_signin);
 
-	var _signup = __webpack_require__(781);
+	var _signup = __webpack_require__(788);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
-	var _forgot = __webpack_require__(785);
+	var _forgot = __webpack_require__(791);
 
 	var _forgot2 = _interopRequireDefault(_forgot);
 
-	var _profile = __webpack_require__(788);
+	var _profile = __webpack_require__(794);
 
 	var _profile2 = _interopRequireDefault(_profile);
 
-	var _primerLogin = __webpack_require__(791);
+	var _primerLogin = __webpack_require__(797);
 
 	var _primerLogin2 = _interopRequireDefault(_primerLogin);
 
-	var _reset = __webpack_require__(794);
+	var _reset = __webpack_require__(803);
 
 	var _reset2 = _interopRequireDefault(_reset);
 
-	var _flyer = __webpack_require__(797);
+	var _flyer = __webpack_require__(806);
 
 	var _flyer2 = _interopRequireDefault(_flyer);
 
-	var _festi = __webpack_require__(800);
+	var _festi = __webpack_require__(809);
 
 	var _festi2 = _interopRequireDefault(_festi);
 
-	var _info = __webpack_require__(818);
+	var _info = __webpack_require__(824);
 
 	var _info2 = _interopRequireDefault(_info);
 
@@ -59016,6 +59021,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Popups).call(this));
 
 	    _this.state = {
+	      user: null,
 	      active: null
 	    };
 	    window.$tate('popups.active').value = null;
@@ -59033,6 +59039,13 @@
 	      this.activeStream = this.activeStream.subscribe(function (active) {
 	        return _this2.setState({ active: active });
 	      });
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.user && nextProps.user.primerLogin) {
+	        this.setState({ active: 'primerLogin' });
+	      }
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -59088,7 +59101,6 @@
 	          closePopUp: this.closePopUp,
 	          active: this.state.active === 'profile' ? 'active' : '' }),
 	        this.props.user && this.props.user.primerLogin && _react2.default.createElement(_primerLogin2.default, {
-	          closePopUp: this.closePopUp,
 	          active: this.state.active === 'primerLogin' ? 'active' : '' }),
 	        this.props.user && this.props.user.reset && _react2.default.createElement(_reset2.default, {
 	          closePopUp: this.closePopUp,
@@ -59119,8 +59131,6 @@
 	  value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	__webpack_require__(776);
@@ -59133,7 +59143,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form = __webpack_require__(821);
+	var _form = __webpack_require__(781);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -59158,8 +59168,8 @@
 	    key: 'onSuccess',
 	    value: function onSuccess(res) {
 	      window.$tate('user').value = undefined;
-	      window.$tate('user').value = res.result;
-	      if (res.result.primerLogin) {
+	      window.$tate('user').value = res;
+	      if (res.primerLogin) {
 	        window.$tate('popups.active').value = 'primerLogin';
 	      }
 	    }
@@ -59167,100 +59177,115 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        _form2.default,
-	        _extends({}, this.props, {
-	          action: 'login',
-	          onSuccess: this.onSuccess,
-	          failAlert: 'true' }),
+	        'dialog',
+	        {
+	          is: 'pop-up',
+	          id: 'popup_signin',
+	          onClick: this.props.closePopUp,
+	          active: this.props.active },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row-field sociales' },
-	          _react2.default.createElement(
-	            'label',
-	            { className: 'legend' },
-	            'Ingresar con red social'
-	          ),
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: 'social fb',
-	              href: 'auth/facebook' },
-	            _react2.default.createElement('img', { src: 'facebook-fff.svg' })
-	          ),
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: 'social tw',
-	              href: 'auth/twitter' },
-	            _react2.default.createElement('img', { src: 'twitter.svg' })
-	          ),
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: 'social gl',
-	              href: 'auth/google' },
-	            _react2.default.createElement('img', { src: 'google.svg' })
-	          )
+	          'span',
+	          {
+	            onClick: this.props.closePopUp,
+	            className: 'pop-close' },
+	          '×'
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row-field con-mail' },
+	          _form2.default,
+	          {
+	            action: 'login',
+	            onSuccess: this.onSuccess,
+	            failAlert: 'true' },
 	          _react2.default.createElement(
-	            'label',
-	            { className: 'legend' },
-	            'Ingresar con mail'
+	            'div',
+	            { className: 'form-row-field sociales' },
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'legend' },
+	              'Ingresar con red social'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'social fb',
+	                href: 'auth/facebook' },
+	              _react2.default.createElement('img', { src: 'facebook-fff.svg' })
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'social tw',
+	                href: 'auth/twitter' },
+	              _react2.default.createElement('img', { src: 'twitter.svg' })
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                className: 'social gl',
+	                href: 'auth/google' },
+	              _react2.default.createElement('img', { src: 'google.svg' })
+	            )
 	          ),
 	          _react2.default.createElement(
-	            'label',
-	            {
-	              htmlFor: 'mail' },
-	            'Mail'
-	          ),
-	          _react2.default.createElement('input', {
-	            name: 'mail',
-	            id: 'mail',
-	            type: 'email',
-	            required: true })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row-field' },
-	          _react2.default.createElement(
-	            'label',
-	            {
-	              htmlFor: 'pass' },
-	            'Contraseña'
-	          ),
-	          _react2.default.createElement('input', {
-	            id: 'pass',
-	            name: 'pass',
-	            type: 'password',
-	            required: true }),
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              'data-id': 'forgotBtn',
-	              className: 'olvido',
-	              onClick: this.props.forgotShow },
-	            '¿Olvidaste tu contraseña?'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row cuenta-buttons' },
-	          _react2.default.createElement(
-	            'button',
-	            {
-	              type: 'button',
-	              className: 'crear',
-	              onClick: this.props.crearCuentaShow },
-	            'Crear cuenta'
+	            'div',
+	            { className: 'form-row-field con-mail' },
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'legend' },
+	              'Ingresar con mail'
+	            ),
+	            _react2.default.createElement(
+	              'label',
+	              {
+	                htmlFor: 'mail' },
+	              'Mail'
+	            ),
+	            _react2.default.createElement('input', {
+	              name: 'mail',
+	              id: 'mail',
+	              type: 'email',
+	              required: true })
 	          ),
 	          _react2.default.createElement(
-	            'button',
-	            {
-	              type: 'submit' },
-	            'Ingresar'
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              {
+	                htmlFor: 'pass' },
+	              'Contraseña'
+	            ),
+	            _react2.default.createElement('input', {
+	              id: 'pass',
+	              name: 'pass',
+	              type: 'password',
+	              required: true }),
+	            _react2.default.createElement(
+	              'a',
+	              {
+	                'data-id': 'forgotBtn',
+	                className: 'olvido',
+	                onClick: this.props.forgotShow },
+	              '¿Olvidaste tu contraseña?'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row cuenta-buttons' },
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                type: 'button',
+	                className: 'crear',
+	                onClick: this.props.crearCuentaShow },
+	              'Crear cuenta'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                type: 'submit' },
+	              'Ingresar'
+	            )
 	          )
 	        )
 	      );
@@ -59307,13 +59332,17 @@
 	  }
 
 	  _createClass(PopUp, [{
+	    key: 'connectedCallback',
+	    value: function connectedCallback() {
+	      if (this.getAttribute('active')) this.showModal();
+	    }
+	  }, {
 	    key: 'attributeChangedCallback',
 	    value: function attributeChangedCallback(name, oldValue, newValue) {
-	      if (!this.parentNode) return;
 	      if (name === 'active') {
 	        var open = this.getAttribute('open') === '';
 	        if (newValue) {
-	          if (!open) this.showModal();
+	          if (!open && this.parentNode) this.showModal();
 	        } else {
 	          if (open) this.close();
 	        }
@@ -59352,17 +59381,15 @@
 
 	__webpack_require__(782);
 
-	__webpack_require__(784);
+	__webpack_require__(180);
 
 	__webpack_require__(778);
+
+	__webpack_require__(784);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _form = __webpack_require__(821);
-
-	var _form2 = _interopRequireDefault(_form);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59372,107 +59399,106 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Signup = function (_Component) {
-	  _inherits(Signup, _Component);
+	var Form = function (_Component) {
+	  _inherits(Form, _Component);
 
-	  function Signup() {
-	    _classCallCheck(this, Signup);
+	  function Form() {
+	    _classCallCheck(this, Form);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Signup).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Form).call(this));
+
+	    _this.state = {
+	      formAlertShow: false,
+	      formAlertText: ''
+	    };
+	    _this.formDidMount = _this.formDidMount.bind(_this);
+	    _this.closeAlert = _this.closeAlert.bind(_this);
+	    return _this;
 	  }
 
-	  _createClass(Signup, [{
-	    key: 'onSuccess',
-	    value: function onSuccess(res) {
-	      window.$tate('user').value = undefined;
-	      window.$tate('user').value = data.result;
-	      if (data.result.primerLogin) {
-	        window.$tate('popups.active').value = 'primerLogin';
-	      }
+	  _createClass(Form, [{
+	    key: 'formDidMount',
+	    value: function formDidMount(form) {
+	      var _this2 = this;
+
+	      if (!form) return;
+	      form.onResponse(function (res) {
+	        console.log('form response', res);
+	        res.json().then(function (data) {
+	          if (data.success) {
+	            if (typeof _this2.props.onSuccess === 'function') {
+	              _this2.props.onSuccess(data.result);
+	            }
+	            if (_this2.props.successAlert) {
+	              return _this2.setState({
+	                formAlertShow: true,
+	                formAlertText: data.text,
+	                formClass: 'success'
+	              });
+	            }
+	          } else {
+	            if (typeof _this2.props.onFail === 'function') {
+	              _this2.props.onFail(data.err);
+	            }
+	            if (_this2.props.failAlert) {
+	              return _this2.setState({
+	                formAlertShow: true,
+	                formAlertText: data.text,
+	                formClass: 'fail'
+	              });
+	            }
+	          }
+	        });
+	      });
+	      form.onSubmit(function (data) {
+	        if (typeof _this2.props.onSubmit === 'function') {
+	          _this2.props.onSubmit(data, form.sendForm);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'closeAlert',
+	    value: function closeAlert() {
+	      this.setState({ formAlertShow: false });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        _form2.default,
-	        {
-	          onSuccess: this.onSuccess,
-	          failAlert: 'true' },
+	        'div',
+	        { className: 'loguineo' },
 	        _react2.default.createElement(
-	          'label',
-	          { className: 'legend' },
-	          'Nueva cuenta'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row-field' },
+	          'form',
+	          {
+	            is: 'form-async',
+	            action: this.props.action,
+	            ref: this.formDidMount,
+	            'data-auto': this.props.auto || '' },
 	          _react2.default.createElement(
-	            'label',
+	            'dialog',
 	            {
-	              htmlFor: 'name_registro' },
-	            'Nombre'
+	              is: 'alert-msg',
+	              'class': this.state.formClass + ' alert-login',
+	              active: this.state.formAlertShow ? 'active' : '' },
+	            _react2.default.createElement(
+	              'span',
+	              {
+	                onClick: this.closeAlert,
+	                className: 'close' },
+	              '×'
+	            ),
+	            this.state.formAlertText
 	          ),
-	          _react2.default.createElement('input', {
-	            id: 'name_registro',
-	            type: 'text',
-	            required: true })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row-field' },
-	          _react2.default.createElement(
-	            'label',
-	            {
-	              htmlFor: 'email_registro' },
-	            'Mail'
-	          ),
-	          _react2.default.createElement('input', {
-	            id: 'email_registro',
-	            name: 'email',
-	            type: 'text',
-	            required: true })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row-field' },
-	          _react2.default.createElement(
-	            'label',
-	            {
-	              htmlFor: 'password_registro' },
-	            'Contraseña'
-	          ),
-	          _react2.default.createElement('input', {
-	            id: 'password_registro',
-	            name: 'password',
-	            type: 'password',
-	            required: true })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row-field regis-buttons' },
-	          _react2.default.createElement(
-	            'button',
-	            {
-	              type: 'button',
-	              className: 'volver-regis',
-	              onClick: this.props.loginShow },
-	            '‹ volver'
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            {
-	              type: 'submit' },
-	            'Crear'
-	          )
+	          this.props.children
 	        )
 	      );
 	    }
 	  }]);
 
-	  return Signup;
+	  return Form;
 	}(_react.Component);
 
-	exports.default = Signup;
+	exports.default = Form;
 
 /***/ },
 /* 782 */
@@ -59483,6 +59509,100 @@
 /***/ },
 /* 783 */,
 /* 784 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(785);
+
+	__webpack_require__(758);
+
+	__webpack_require__(787);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FormAsync = function (_window$HTMLFormEleme) {
+	  _inherits(FormAsync, _window$HTMLFormEleme);
+
+	  function FormAsync() {
+	    _classCallCheck(this, FormAsync);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FormAsync).apply(this, arguments));
+	  }
+
+	  _createClass(FormAsync, [{
+	    key: 'connectedCallback',
+	    value: function connectedCallback() {
+	      this.responseCallBack = null;
+	      this.submitCallBack = null;
+	      this.handleSubmit = this.handleSubmit.bind(this);
+	      this.onResponse = this.onResponse.bind(this);
+	      this.onSubmit = this.onSubmit.bind(this);
+	      this.sendForm = this.sendForm.bind(this);
+	      this.addEventListener('submit', this.handleSubmit);
+	    }
+	  }, {
+	    key: 'disconnectedCallback',
+	    value: function disconnectedCallback() {
+	      this.removeEventListener('submit', this.handleSubmit);
+	    }
+	  }, {
+	    key: 'onSubmit',
+	    value: function onSubmit(cb) {
+	      this.submitCallBack = cb;
+	    }
+	  }, {
+	    key: 'onResponse',
+	    value: function onResponse(cb) {
+	      this.responseCallBack = cb;
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      var data = new window.FormData(e.target);
+	      if (this.submitCallBack === 'function') this.submitCallBack(data);
+	      if (e.target.getAttribute('data-auto') !== 'false') {
+	        this.sendForm(data);
+	        return;
+	      }
+	      console.warn('Form not sended', e.target);
+	    }
+	  }, {
+	    key: 'sendForm',
+	    value: function sendForm(data) {
+	      if (!this.action) throw new Error('form-async needs action');
+	      var action = this.getAttribute('action');
+	      window.fetch(action, {
+	        credentials: 'same-origin',
+	        method: 'post',
+	        body: data
+	      }).catch(function (err) {
+	        console.warn('Request Internal Error action="' + action + '"', err);
+	      }).then(typeof this.responseCallBack === 'function' && this.responseCallBack);
+	    }
+	  }]);
+
+	  return FormAsync;
+	}(window.HTMLFormElement);
+
+	window.customElements.define('form-async', FormAsync, { extends: 'form' });
+
+/***/ },
+/* 785 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 786 */,
+/* 787 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -59921,7 +60041,7 @@
 
 
 /***/ },
-/* 785 */
+/* 788 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59932,13 +60052,176 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(786);
+	__webpack_require__(789);
+
+	__webpack_require__(787);
 
 	__webpack_require__(778);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _form = __webpack_require__(781);
+
+	var _form2 = _interopRequireDefault(_form);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Signup = function (_Component) {
+	  _inherits(Signup, _Component);
+
+	  function Signup() {
+	    _classCallCheck(this, Signup);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Signup).apply(this, arguments));
+	  }
+
+	  _createClass(Signup, [{
+	    key: 'onSuccess',
+	    value: function onSuccess(res) {
+	      window.$tate('user').value = undefined;
+	      window.$tate('user').value = res;
+	      if (res.primerLogin) {
+	        window.$tate('popups.active').value = 'primerLogin';
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'dialog',
+	        {
+	          is: 'pop-up',
+	          id: 'popup_signin',
+	          onClick: this.props.closePopUp,
+	          active: this.props.active },
+	        _react2.default.createElement(
+	          'span',
+	          {
+	            onClick: this.props.closePopUp,
+	            className: 'pop-close' },
+	          '×'
+	        ),
+	        _react2.default.createElement(
+	          _form2.default,
+	          {
+	            action: '/registro',
+	            onSuccess: this.onSuccess,
+	            failAlert: 'true' },
+	          _react2.default.createElement(
+	            'label',
+	            { className: 'legend' },
+	            'Nueva cuenta'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              {
+	                htmlFor: 'name_registro' },
+	              'Nombre'
+	            ),
+	            _react2.default.createElement('input', {
+	              id: 'name_registro',
+	              type: 'text',
+	              required: true })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              {
+	                htmlFor: 'email_registro' },
+	              'Mail'
+	            ),
+	            _react2.default.createElement('input', {
+	              id: 'email_registro',
+	              name: 'email',
+	              type: 'text',
+	              required: true })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              {
+	                htmlFor: 'password_registro' },
+	              'Contraseña'
+	            ),
+	            _react2.default.createElement('input', {
+	              id: 'password_registro',
+	              name: 'password',
+	              type: 'password',
+	              required: true })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field regis-buttons' },
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                type: 'button',
+	                className: 'volver-regis',
+	                onClick: this.props.loginShow },
+	              '‹ volver'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                type: 'submit' },
+	              'Crear'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Signup;
+	}(_react.Component);
+
+	exports.default = Signup;
+
+/***/ },
+/* 789 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 790 */,
+/* 791 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(792);
+
+	__webpack_require__(778);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _form = __webpack_require__(781);
+
+	var _form2 = _interopRequireDefault(_form);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59958,39 +60241,30 @@
 	  }
 
 	  _createClass(Forgot, [{
-	    key: 'formDidMount',
-	    value: function formDidMount(form) {
-	      if (!form) return;
-	      form.onResponse(function (res) {
-	        res.json().then(function (result) {
-	          console.log(result);
-	        });
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'dialog',
 	        {
 	          is: 'pop-up',
-	          active: this.props.active },
+	          active: this.props.active,
+	          onClick: this.props.closePopUp },
 	        _react2.default.createElement(
 	          'span',
 	          {
 	            onClick: this.props.closePopUp,
-	            className: 'close' },
+	            className: 'pop-close' },
 	          '×'
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'logineo forgot' },
 	          _react2.default.createElement(
-	            'form',
+	            _form2.default,
 	            {
-	              is: 'form-async',
 	              action: '/forgot',
-	              ref: this.formDidMount },
+	              failAlert: 'true',
+	              successAlert: 'true' },
 	            _react2.default.createElement(
 	              'label',
 	              { className: 'legend' },
@@ -60036,14 +60310,14 @@
 	exports.default = Forgot;
 
 /***/ },
-/* 786 */
+/* 792 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 787 */,
-/* 788 */
+/* 793 */,
+/* 794 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60054,7 +60328,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(789);
+	__webpack_require__(795);
 
 	__webpack_require__(778);
 
@@ -60102,14 +60376,14 @@
 	exports.default = Profile;
 
 /***/ },
-/* 789 */
+/* 795 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 790 */,
-/* 791 */
+/* 796 */,
+/* 797 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60120,13 +60394,19 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(792);
+	__webpack_require__(798);
 
 	__webpack_require__(778);
+
+	__webpack_require__(800);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _form = __webpack_require__(781);
+
+	var _form2 = _interopRequireDefault(_form);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60142,21 +60422,151 @@
 	  function PrimerLogin() {
 	    _classCallCheck(this, PrimerLogin);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PrimerLogin).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PrimerLogin).call(this));
+
+	    _this.state = {
+	      andaGeoLocal: 'geolocation' in navigator,
+	      geoLocalResult: []
+	    };
+	    _this.setUbicacionLocal = _this.setUbicacionLocal.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(PrimerLogin, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'setUbicacionLocal',
+	    value: function setUbicacionLocal(e) {
+	      var _this2 = this;
+
+	      if ('geolocation' in navigator) {
+	        navigator.geolocation.getCurrentPosition(function (pos) {
+	          _this2.setState({
+	            andaGeoLocal: true,
+	            geoLocalResult: [pos.coords.latitude, pos.coords.longitude]
+	          });
+	          console.log('nueva pos');
+	        }, function (err) {
+	          console.warn(err);
+	          _this2.setState({ andaGeoLocal: false });
+	        });
+	      } else {
+	        this.setState({ andaGeoLocal: false });
+	      }
+	    }
+	  }, {
+	    key: 'onSuccess',
+	    value: function onSuccess(res) {
+	      console.log(res);
+	    }
+	  }, {
+	    key: 'onSubmit',
+	    value: function onSubmit(data, sf) {
+	      debugger;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'dialog',
 	        {
+	          id: 'primerLogin',
 	          is: 'pop-up',
 	          active: this.props.active },
 	        _react2.default.createElement(
-	          'div',
-	          null,
-	          'hola primer login'
+	          _form2.default,
+	          {
+	            action: '/terminar-registro',
+	            failAlert: 'true',
+	            successAlert: 'true',
+	            'data-auto': 'false',
+	            onSuccess: this.onSuccess,
+	            onSubmit: this.onSubmit },
+	          _react2.default.createElement(
+	            'label',
+	            { className: 'legend' },
+	            'Completa estos datos para comenzar a usar tu cuenta.'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'type' },
+	              'Tipo de usuario'
+	            ),
+	            _react2.default.createElement(
+	              'select',
+	              { id: 'type', name: 'userType' },
+	              _react2.default.createElement(
+	                'option',
+	                { className: 'default' },
+	                'Elegí'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'per' },
+	                'Persona'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'viv' },
+	                'Vivero'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'org' },
+	                'Organización civil'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'esc' },
+	                'Escuela'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'cul' },
+	                'Centro cultural'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'ubicacion' },
+	              'Ubicación',
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'ubicacion-info' },
+	                'Hace click para elegir tu ubicación'
+	              )
+	            ),
+	            _react2.default.createElement('geo-select', {
+	              name: 'ubicacion',
+	              id: 'ubicacion',
+	              point: this.state.geoLocalResult
+	            }),
+	            this.state.andaGeoLocal && _react2.default.createElement(
+	              'button',
+	              {
+	                type: 'button',
+	                onClick: this.setUbicacionLocal,
+	                className: 'usar-auto-geo' },
+	              'Usar ubicación actual'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'button',
+	              { 'data-submit': true },
+	              'Ingresar'
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -60165,17 +60575,140 @@
 	  return PrimerLogin;
 	}(_react.Component);
 
+	// dom.querySelector('#elegirUbicacion'), 'click')
+	//       .subscribe(function () {
+	//         if ('geolocation' in navigator) {
+	//           try {
+	//             navigator.geolocation.getCurrentPosition(function (position) {
+	//               geoSuccess(dom, position)
+	//             }, geoError)
+	//           } catch (err) {
+	//             console.error('fallo geolocation')
+	//             geoSuccess(dom, {coords: {latitude: -34.55, longitude: -58.45}})
+	//           }
+	//         } else {
+	//           geoSuccess(dom, {coords: {latitude: -34.55, longitude: -58.45}})
+	//         }
+
+
+	// geoSuccess (dom, position) {
+	//   dom.querySelector('#primeraVez [data-submit]').style.display = 'block'
+	//   dom.querySelector('#elegirUbicacion').style.display = 'none'
+	//   var div = dom.querySelector('#ubicacionLocalFormWelcome')
+	//   div.style.display = 'block'
+	//   var map = window.L.map(div).setView([position.coords.latitude, position.coords.longitude], 13)
+	//   window.L.Icon.Default.imagePath = '/images'
+	//   window.L.tileLayer(
+	//     'https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ',
+	//     {
+	//       tileSize: 512,
+	//       zoomOffset: -1
+	//     })
+	//     .addTo(map)
+	//   var marker = window.L.marker([position.coords.latitude.toFixed(3), position.coords.longitude.toFixed(3)]).addTo(map)
+	//   dom.querySelector('[data-id='locationInput']').value = position.coords.latitude.toFixed(3) + '::' + position.coords.longitude.toFixed(3)
+	//   map.on('click', function (ev) {
+	//     marker.setLatLng(ev.latlng)
+	//     dom.querySelector('[data-id='locationInput']').value = ev.latlng.lat.toFixed(3) + '::' + ev.latlng.lng.toFixed(3)
+	//   })
+	// }
+
+
 	exports.default = PrimerLogin;
 
 /***/ },
-/* 792 */
+/* 798 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 793 */,
-/* 794 */
+/* 799 */,
+/* 800 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(801);
+
+	__webpack_require__(758);
+
+	var _leaflet = __webpack_require__(533);
+
+	var _leaflet2 = _interopRequireDefault(_leaflet);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var GeoSelect = function (_window$HTMLElement) {
+	  _inherits(GeoSelect, _window$HTMLElement);
+
+	  function GeoSelect() {
+	    _classCallCheck(this, GeoSelect);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(GeoSelect).call(this));
+
+	    _this.value = [-34.539, -58.446];
+	    return _this;
+	  }
+
+	  _createClass(GeoSelect, [{
+	    key: 'connectedCallback',
+	    value: function connectedCallback() {
+	      var _this2 = this;
+
+	      this.map = _leaflet2.default.map(this).setView([-34.539, -58.446], 9);
+
+	      window.L.tileLayer('https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ', {
+	        attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	        tileSize: 512,
+	        zoomOffset: -1
+	      }).addTo(this.map);
+	      this.marker = _leaflet2.default.marker([-34.539, -58.446]).addTo(this.map);
+	      this.map.on('click', function (e) {
+	        _this2.marker.setLatLng(e.latlng);
+	        _this2.value = e.latlng;
+	      });
+	    }
+	  }, {
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback(name, oldValue, newValue) {
+	      if (name === 'point') {
+	        if (~newValue.indexOf(',')) {
+	          var coords = newValue.split(',');
+	          this.marker.setLatLng(coords);
+	          this.map.setView(coords, 9);
+	        }
+	      }
+	    }
+	  }], [{
+	    key: 'observedAttributes',
+	    get: function get() {
+	      return ['point'];
+	    }
+	  }]);
+
+	  return GeoSelect;
+	}(window.HTMLElement);
+
+	window.customElements.define('geo-select', GeoSelect);
+
+/***/ },
+/* 801 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 802 */,
+/* 803 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60186,7 +60719,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(795);
+	__webpack_require__(804);
 
 	__webpack_require__(778);
 
@@ -60234,14 +60767,14 @@
 	exports.default = Reset;
 
 /***/ },
-/* 795 */
+/* 804 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 796 */,
-/* 797 */
+/* 805 */,
+/* 806 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60252,7 +60785,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(798);
+	__webpack_require__(807);
 
 	__webpack_require__(778);
 
@@ -60305,14 +60838,14 @@
 	exports.default = Flyer;
 
 /***/ },
-/* 798 */
+/* 807 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 799 */,
-/* 800 */
+/* 808 */,
+/* 809 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60323,7 +60856,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(801);
+	__webpack_require__(810);
 
 	__webpack_require__(778);
 
@@ -60333,15 +60866,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _info = __webpack_require__(803);
+	var _info = __webpack_require__(812);
 
 	var _info2 = _interopRequireDefault(_info);
 
-	var _crono = __webpack_require__(806);
+	var _crono = __webpack_require__(815);
 
 	var _crono2 = _interopRequireDefault(_crono);
 
-	var _voluntariado = __webpack_require__(809);
+	var _voluntariado = __webpack_require__(818);
 
 	var _voluntariado2 = _interopRequireDefault(_voluntariado);
 
@@ -60488,14 +61021,14 @@
 	exports.default = Festi;
 
 /***/ },
-/* 801 */
+/* 810 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 802 */,
-/* 803 */
+/* 811 */,
+/* 812 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60506,7 +61039,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(804);
+	__webpack_require__(813);
 
 	var _react = __webpack_require__(1);
 
@@ -60563,14 +61096,14 @@
 	exports.default = Info;
 
 /***/ },
-/* 804 */
+/* 813 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 805 */,
-/* 806 */
+/* 814 */,
+/* 815 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60581,7 +61114,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(807);
+	__webpack_require__(816);
 
 	var _react = __webpack_require__(1);
 
@@ -60724,14 +61257,14 @@
 	exports.default = Crono;
 
 /***/ },
-/* 807 */
+/* 816 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 808 */,
-/* 809 */
+/* 817 */,
+/* 818 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60742,17 +61275,17 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(810);
+	__webpack_require__(819);
 
-	__webpack_require__(812);
+	__webpack_require__(784);
 
-	__webpack_require__(815);
+	__webpack_require__(821);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form = __webpack_require__(821);
+	var _form = __webpack_require__(781);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -60777,129 +61310,137 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        _form2.default,
+	        'article',
 	        {
-	          failAlert: 'true',
-	          successAlert: 'true' },
+	          'data-id': 'ayuda',
+	          id: 'ayuda-form' },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row' },
+	          _form2.default,
+	          {
+	            failAlert: 'true',
+	            successAlert: 'true',
+	            action: '/voluntarios' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'form-field' },
+	            { className: 'form-row' },
 	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: '#nombre' },
-	              'Nombre'
+	              'div',
+	              { className: 'form-field' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: '#nombre' },
+	                'Nombre'
+	              ),
+	              _react2.default.createElement('input', {
+	                type: 'text',
+	                name: 'nombre',
+	                id: 'nombre',
+	                required: true })
 	            ),
-	            _react2.default.createElement('input', {
-	              type: 'text',
-	              name: 'nombre',
-	              id: 'nombre',
-	              required: true })
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-field' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: '#apellido' },
+	                'Apellido'
+	              ),
+	              _react2.default.createElement('input', {
+	                type: 'text',
+	                name: 'apellido',
+	                id: 'apellido',
+	                required: true })
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'form-field' },
+	            { className: 'form-row' },
 	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: '#apellido' },
-	              'Apellido'
+	              'div',
+	              { className: 'form-field' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: '#mail' },
+	                'Mail'
+	              ),
+	              _react2.default.createElement('input', {
+	                type: 'email',
+	                name: 'mail',
+	                id: 'mail',
+	                required: true })
 	            ),
-	            _react2.default.createElement('input', {
-	              type: 'text',
-	              name: 'apellido',
-	              id: 'apellido',
-	              required: true })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-field' },
 	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: '#mail' },
-	              'Mail'
-	            ),
-	            _react2.default.createElement('input', {
-	              type: 'email',
-	              name: 'mail',
-	              id: 'mail',
-	              required: true })
+	              'div',
+	              { className: 'form-field' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: '#telefono' },
+	                'Telefono'
+	              ),
+	              _react2.default.createElement('input', {
+	                type: 'text',
+	                name: 'telefono',
+	                id: 'telefono',
+	                required: true })
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'form-field' },
+	            { className: 'form-row-field' },
 	            _react2.default.createElement(
 	              'label',
-	              { htmlFor: '#telefono' },
-	              'Telefono'
+	              { htmlFor: '#areas' },
+	              '¿En que nos podrías ayudar?'
 	            ),
-	            _react2.default.createElement('input', {
-	              type: 'text',
-	              name: 'telefono',
-	              id: 'telefono',
-	              required: true })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row-field' },
-	          _react2.default.createElement(
-	            'label',
-	            { htmlFor: '#areas' },
-	            '¿En que nos podrías ayudar?'
+	            _react2.default.createElement(
+	              'select',
+	              {
+	                name: 'areas',
+	                id: 'areas',
+	                required: true },
+	              _react2.default.createElement(
+	                'option',
+	                { className: 'default' },
+	                'Elegí un area'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'Pre' },
+	                'Pre armado'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'Durante' },
+	                'Durante el evento'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'Limpieza' },
+	                'Limpieza'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'Difusion' },
+	                'Difusión'
+	              )
+	            )
 	          ),
 	          _react2.default.createElement(
-	            'select',
-	            {
-	              name: 'areas',
-	              id: 'areas',
-	              required: true },
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement('textarea', {
+	              name: 'comentario',
+	              placeholder: 'Dejá un comentario...' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
 	            _react2.default.createElement(
-	              'option',
-	              { className: 'default' },
-	              'Elegí un area'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              { value: 'Pre' },
-	              'Pre armado'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              { value: 'Durante' },
-	              'Durante el evento'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              { value: 'Limpieza' },
-	              'Limpieza'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              { value: 'Difusion' },
-	              'Difusión'
+	              'button',
+	              { type: 'submit' },
+	              'Enviar'
 	            )
 	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-row-field' },
-	          _react2.default.createElement('textarea', {
-	            name: 'comentario',
-	            placeholder: 'Dejá un comentario...' })
-	        ),
-	        '// Gracias por sumarte, y ser parte de este festival autogestivo. // ',
-	        _react2.default.createElement('br', null),
-	        'Te vamos a estar contactando via mail.',
-	        _react2.default.createElement(
-	          'button',
-	          { type: 'submit' },
-	          'Enviar'
 	        )
 	      );
 	    }
@@ -60911,115 +61452,21 @@
 	exports.default = Voluntariado;
 
 /***/ },
-/* 810 */
+/* 819 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 811 */,
-/* 812 */
+/* 820 */,
+/* 821 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(813);
-
-	__webpack_require__(758);
-
-	__webpack_require__(784);
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var FormAsync = function (_window$HTMLFormEleme) {
-	  _inherits(FormAsync, _window$HTMLFormEleme);
-
-	  function FormAsync() {
-	    _classCallCheck(this, FormAsync);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FormAsync).apply(this, arguments));
-	  }
-
-	  _createClass(FormAsync, [{
-	    key: 'connectedCallback',
-	    value: function connectedCallback() {
-	      this.responseCallBack = null;
-	      this.submitCallBack = null;
-	      this.handleSubmit = this.handleSubmit.bind(this);
-	      this.onResponse = this.onResponse.bind(this);
-	      this.onSubmit = this.onSubmit.bind(this);
-	      this.sendForm = this.sendForm.bind(this);
-	      this.addEventListener('submit', this.handleSubmit);
-	    }
-	  }, {
-	    key: 'disconnectedCallback',
-	    value: function disconnectedCallback() {
-	      this.removeEventListener('submit', this.handleSubmit);
-	    }
-	  }, {
-	    key: 'onSubmit',
-	    value: function onSubmit(cb) {
-	      this.submitCallBack = cb;
-	    }
-	  }, {
-	    key: 'onResponse',
-	    value: function onResponse(cb) {
-	      this.responseCallBack = cb;
-	    }
-	  }, {
-	    key: 'handleSubmit',
-	    value: function handleSubmit(e) {
-	      e.preventDefault();
-	      var data = new window.FormData(e.target);
-	      if (this.submitCallBack === 'function') this.submitCallBack(data);
-	      if (e.target.getAttribute('data-auto') !== 'false') {
-	        this.sendForm(data);
-	        return;
-	      }
-	      console.warn('Form not sended', e.target);
-	    }
-	  }, {
-	    key: 'sendForm',
-	    value: function sendForm(data) {
-	      if (!this.action) throw new Error('form-async needs action');
-	      var action = this.getAttribute('action');
-	      window.fetch(action, {
-	        credentials: 'same-origin',
-	        method: 'post',
-	        body: data
-	      }).catch(function (err) {
-	        console.warn('Request Internal Error action="' + action + '"', err);
-	      }).then(typeof this.responseCallBack === 'function' && this.responseCallBack);
-	    }
-	  }]);
-
-	  return FormAsync;
-	}(window.HTMLFormElement);
-
-	window.customElements.define('form-async', FormAsync, { extends: 'form' });
-
-/***/ },
-/* 813 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 814 */,
-/* 815 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	__webpack_require__(816);
+	__webpack_require__(822);
 
 	__webpack_require__(758);
 
@@ -61064,14 +61511,14 @@
 	window.customElements.define('alert-msg', AlertMsg, { extends: 'dialog' });
 
 /***/ },
-/* 816 */
+/* 822 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 817 */,
-/* 818 */
+/* 823 */,
+/* 824 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61082,7 +61529,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(819);
+	__webpack_require__(825);
 
 	__webpack_require__(778);
 
@@ -61243,157 +61690,7 @@
 	exports.default = Info;
 
 /***/ },
-/* 819 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 820 */,
-/* 821 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	__webpack_require__(822);
-
-	__webpack_require__(180);
-
-	__webpack_require__(778);
-
-	__webpack_require__(812);
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Form = function (_Component) {
-	  _inherits(Form, _Component);
-
-	  function Form() {
-	    _classCallCheck(this, Form);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Form).call(this));
-
-	    _this.state = {
-	      formAlertShow: false,
-	      formAlertText: ''
-	    };
-	    _this.formDidMount = _this.formDidMount.bind(_this);
-	    _this.closeAlert = _this.closeAlert.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(Form, [{
-	    key: 'formDidMount',
-	    value: function formDidMount(form) {
-	      var _this2 = this;
-
-	      if (!form) return;
-	      form.onResponse(function (res) {
-	        console.log('form response', res);
-	        res.json().then(function (data) {
-
-	          if (data.success) {
-	            if (typeof _this2.props.onSuccess === 'function') {
-	              _this2.props.onSuccess(data.result);
-	            }
-	            if (_this2.props.successAlert) {
-	              return _this2.setState({
-	                formAlertShow: true,
-	                formAlertText: data.text,
-	                formClass: 'success'
-	              });
-	            }
-	          } else {
-	            if (typeof _this2.props.onFail === 'function') {
-	              _this2.props.onFail(data.err);
-	            }
-	            if (_this2.props.failAlert) {
-	              return _this2.setState({
-	                formAlertShow: true,
-	                formAlertText: data.text,
-	                formClass: 'fail'
-	              });
-	            }
-	          }
-	        });
-	      });
-	    }
-	  }, {
-	    key: 'closeAlert',
-	    value: function closeAlert() {
-	      this.setState({ formAlertShow: false });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'dialog',
-	        {
-	          is: 'pop-up',
-	          onClick: this.props.closePopUp,
-	          active: this.props.active },
-	        _react2.default.createElement(
-	          'span',
-	          {
-	            onClick: this.props.closePopUp,
-	            className: 'pop-close' },
-	          '×'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          {
-	            className: 'loguineo' },
-	          _react2.default.createElement(
-	            'form',
-	            {
-	              is: 'form-async',
-	              action: this.props.action,
-	              ref: this.formDidMount },
-	            _react2.default.createElement(
-	              'dialog',
-	              {
-	                is: 'alert-msg',
-	                'class': 'alert-login',
-	                active: this.state.formAlertShow ? 'active' : '' },
-	              _react2.default.createElement(
-	                'span',
-	                {
-	                  onClick: this.closeAlert,
-	                  className: 'close' },
-	                '×'
-	              ),
-	              this.state.formAlertText
-	            ),
-	            this.props.children
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Form;
-	}(_react.Component);
-
-	exports.default = Form;
-
-/***/ },
-/* 822 */
+/* 825 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

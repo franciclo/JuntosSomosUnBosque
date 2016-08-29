@@ -8,10 +8,9 @@ module.exports = function (app) {
 
   app.get('/', function (req, res) {
     if (req.isAuthenticated()) {
-      console.log('isAuthenticated')
-      $tate('yo').value = {
+      $tate('user').value = {
         primerLogin: req.user.primerLogin,
-        name: req.user.getNombre(),
+        nombre: req.user.getNombre(),
         type: req.user.userType,
         location: req.user.location,
         arboles: req.user.arboles && req.user.arboles
