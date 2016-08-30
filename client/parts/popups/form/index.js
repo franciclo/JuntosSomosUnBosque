@@ -64,7 +64,7 @@ export default class Form extends Component {
           is='form-async'
           action={this.props.action}
           ref={this.formDidMount}
-          data-auto={this.props.auto || ''}>
+          data-auto={this.props.dataAuto || ''}>
           <dia-log
             class={this.state.formClass + ' alert-login alert-msg'}
             data-open={

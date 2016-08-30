@@ -1,0 +1,6 @@
+#perfil .loguineo{
+  min-width: 450px;
+}
+#perfil button[type="submit"] {
+  float: right;
+}

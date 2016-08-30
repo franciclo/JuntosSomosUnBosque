@@ -24,7 +24,7 @@ module.exports = function (req, res) {
         token + '">Recuperar contraseña de JuntosSomosUnBosque.red</a>'
 
       user.local.resetPasswordToken = token
-      user.local.resetPasswordExpires = Date.now() + 3600000 // 1 hour
+      user.local.resetPasswordExpires = Date.now() + 3600000 * 24 // 24 hours
 
       user.save(function (err) {
         if (err) res.json({success: false, text: 'Error al guardar usuario', result: err})

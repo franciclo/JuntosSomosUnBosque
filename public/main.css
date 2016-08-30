@@ -1382,6 +1382,11 @@ form .foot-buttons .back{
 .forgot {
   width: 360px;
   padding-top: 10px; 
+}#perfil .loguineo{
+  min-width: 450px;
+}
+#perfil button[type="submit"] {
+  float: right;
 }geo-select {
   height: 250px;
   width: 100%;

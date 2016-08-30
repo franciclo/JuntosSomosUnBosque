@@ -9,11 +9,22 @@ export default class Profile extends Component {
     super()
     this.state = {
       andaGeoLocal: 'geolocation' in navigator,
-      geoLocalResult: window.$tate('user.location').value
+      geoLocalResult: [-34.539, -58.446]
     }
     this.setUbicacionLocal = this.setUbicacionLocal.bind(this)
     this.updateLocation = this.updateLocation.bind(this)
   }
+
+  // componentWillReceiveProps (nextProps) {
+  //   if (nextProps.open === 'open') {
+  //     debugger
+  //     let userLoc = window.$tate('user.location').value
+  //     console.log(userLoc)
+  //     if (userLoc) {
+  //       this.setState({geoLocalResult: JSON.parse(userLoc)})
+  //     }
+  //   }
+  // }
 
   setUbicacionLocal (e) {
     if ('geolocation' in navigator) {
@@ -47,7 +58,7 @@ export default class Profile extends Component {
   }
 
   render () {
-    const userType =window.$tate('user.type').value
+    const userType = window.$tate('user.type').value
     return (
       <dia-log
         id='perfil'
@@ -55,13 +66,17 @@ export default class Profile extends Component {
         <Form
           action='/perfil'
           failAlert='true'
-          onSuccess={this.onSuccess}>
+          successAlert='true'>
           <label className='legend'>
             Perfil
           </label>
           <div className='form-row-field'>
-            <label htmlFor="nombre">Nombre</label>
-            <input name='nombre' id='nombre' type="text" value={window.$tate('user.nombre').value}/>
+            <label htmlFor='nombre'>Nombre</label>
+            <input
+              name='nombre'
+              id='nombre'
+              type='text'
+              defaultValue={window.$tate('user.nombre').value} />
           </div>
           <div className='form-row-field'>
             <label htmlFor='type'>Tipo de usuario</label>
@@ -97,7 +112,7 @@ export default class Profile extends Component {
             }
           </div>
           <div className='form-row-field'>
-            <button data-submit >Ingresar</button>
+            <button type='submit'>Guardar</button>
           </div>
         </Form>
       </dia-log>

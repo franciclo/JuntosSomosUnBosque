@@ -30,7 +30,6 @@ app.use(flash())
 
 require('./auth/routes')(app, passport)
 require('./forms')(app, passport)
-require('./api')(app)
 require('./entry')(app)
 
 app.listen(port)

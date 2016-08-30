@@ -25,6 +25,9 @@ class GeoSelect extends window.HTMLElement {
     })
   }
 
+  disconnectedCallback () {
+    this.map.remove()
+  }
   static get observedAttributes () {
     return ['lat', 'lng']
   }
@@ -34,7 +37,7 @@ class GeoSelect extends window.HTMLElement {
     switch (name) {
       case 'lat':
         if (+newValue) {
-          let coords = [newValue, this.getAttribute('lng')]
+          let coords = [+newValue, +this.getAttribute('lng')]
           this.marker.setLatLng(coords)
           this.map.setView(coords)
           this.querySelector('input').value = JSON.stringify(coords)
@@ -42,7 +45,7 @@ class GeoSelect extends window.HTMLElement {
         break
       case 'lng':
         if (+newValue) {
-          let coords = [this.getAttribute('lat'), newValue]
+          let coords = [+this.getAttribute('lat'), +newValue]
           this.marker.setLatLng(coords)
           this.map.setView(coords)
           this.querySelector('input').value = JSON.stringify(coords)

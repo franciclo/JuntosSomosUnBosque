@@ -2,7 +2,7 @@ module.exports = function (req, res) {
   var user = req.user
   user.primerLogin = false
   user.userType = req.body.userType
-  user.location = JSON.parse(req.body.location)
+  user.location = req.body.location
   user.save(function (err) {
     if (err) {
       res.json({

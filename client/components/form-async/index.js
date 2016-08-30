@@ -29,7 +29,7 @@ class FormAsync extends window.HTMLFormElement {
   handleSubmit (e) {
     e.preventDefault()
     const data = new window.FormData(e.target)
-    if (this.submitCallBack === 'function') this.submitCallBack(data)
+    if (typeof this.submitCallBack === 'function') this.submitCallBack(data)
     if (e.target.getAttribute('data-auto') !== 'false') {
       this.sendForm(data)
       return

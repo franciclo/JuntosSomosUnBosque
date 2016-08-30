@@ -59975,7 +59975,7 @@
 	            is: 'form-async',
 	            action: this.props.action,
 	            ref: this.formDidMount,
-	            'data-auto': this.props.auto || '' },
+	            'data-auto': this.props.dataAuto || '' },
 	          _react2.default.createElement(
 	            'dia-log',
 	            {
@@ -60071,7 +60071,7 @@
 	    value: function handleSubmit(e) {
 	      e.preventDefault();
 	      var data = new window.FormData(e.target);
-	      if (this.submitCallBack === 'function') this.submitCallBack(data);
+	      if (typeof this.submitCallBack === 'function') this.submitCallBack(data);
 	      if (e.target.getAttribute('data-auto') !== 'false') {
 	        this.sendForm(data);
 	        return;
@@ -60414,12 +60414,23 @@
 
 	    _this.state = {
 	      andaGeoLocal: 'geolocation' in navigator,
-	      geoLocalResult: window.$tate('user.location').value
+	      geoLocalResult: [-34.539, -58.446]
 	    };
 	    _this.setUbicacionLocal = _this.setUbicacionLocal.bind(_this);
 	    _this.updateLocation = _this.updateLocation.bind(_this);
 	    return _this;
 	  }
+
+	  // componentWillReceiveProps (nextProps) {
+	  //   if (nextProps.open === 'open') {
+	  //     debugger
+	  //     let userLoc = window.$tate('user.location').value
+	  //     console.log(userLoc)
+	  //     if (userLoc) {
+	  //       this.setState({geoLocalResult: JSON.parse(userLoc)})
+	  //     }
+	  //   }
+	  // }
 
 	  _createClass(Profile, [{
 	    key: 'setUbicacionLocal',
@@ -60459,7 +60470,7 @@
 	          {
 	            action: '/perfil',
 	            failAlert: 'true',
-	            onSuccess: this.onSuccess },
+	            successAlert: 'true' },
 	          _react2.default.createElement(
 	            'label',
 	            { className: 'legend' },
@@ -60473,7 +60484,11 @@
 	              { htmlFor: 'nombre' },
 	              'Nombre'
 	            ),
-	            _react2.default.createElement('input', { name: 'nombre', id: 'nombre', type: 'text', value: window.$tate('user.nombre').value })
+	            _react2.default.createElement('input', {
+	              name: 'nombre',
+	              id: 'nombre',
+	              type: 'text',
+	              defaultValue: window.$tate('user.nombre').value })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -60548,8 +60563,8 @@
 	            { className: 'form-row-field' },
 	            _react2.default.createElement(
 	              'button',
-	              { 'data-submit': true },
-	              'Ingresar'
+	              { type: 'submit' },
+	              'Guardar'
 	            )
 	          )
 	        )
@@ -60822,13 +60837,18 @@
 	      });
 	    }
 	  }, {
+	    key: 'disconnectedCallback',
+	    value: function disconnectedCallback() {
+	      this.map.remove();
+	    }
+	  }, {
 	    key: 'attributeChangedCallback',
 	    value: function attributeChangedCallback(name, oldValue, newValue) {
 	      if (!this.parentNode) return;
 	      switch (name) {
 	        case 'lat':
 	          if (+newValue) {
-	            var coords = [newValue, this.getAttribute('lng')];
+	            var coords = [+newValue, +this.getAttribute('lng')];
 	            this.marker.setLatLng(coords);
 	            this.map.setView(coords);
 	            this.querySelector('input').value = JSON.stringify(coords);
@@ -60836,7 +60856,7 @@
 	          break;
 	        case 'lng':
 	          if (+newValue) {
-	            var _coords = [this.getAttribute('lat'), newValue];
+	            var _coords = [+this.getAttribute('lat'), +newValue];
 	            this.marker.setLatLng(_coords);
 	            this.map.setView(_coords);
 	            this.querySelector('input').value = JSON.stringify(_coords);
