@@ -95,6 +95,7 @@ export default class Popups extends Component {
           this.props.user &&
             <Profile
               closePopUp={this.closePopUp}
+              user={this.props.user}
               open={this.state.open === 'perfil' ? 'open' : ''} />
         }
         {

@@ -2,6 +2,7 @@
 
 import 'document-register-element'
 import 'whatwg-fetch'
+import 'custom-event-polyfill'
 
 class FormAsync extends window.HTMLFormElement {
   connectedCallback () {
@@ -19,16 +20,19 @@ class FormAsync extends window.HTMLFormElement {
   }
 
   onSubmit (cb) {
+    console.log(cb)
     this.submitCallBack = cb
   }
 
   onResponse (cb) {
+    console.log(cb)
     this.responseCallBack = cb
   }
 
   handleSubmit (e) {
     e.preventDefault()
     const data = new window.FormData(e.target)
+    console.log('form-async onResponse', this.submitCallBack)
     if (typeof this.submitCallBack === 'function') this.submitCallBack(data)
     if (e.target.getAttribute('data-auto') !== 'false') {
       this.sendForm(data)
@@ -48,7 +52,12 @@ class FormAsync extends window.HTMLFormElement {
         body: data
       })
       .catch(err => { console.warn('Request Internal Error action="' + action + '"', err) })
-      .then(typeof this.responseCallBack === 'function' && this.responseCallBack)
+      .then(res => {
+        console.log('form-async onSubmit', this.responseCallBack)
+        if (typeof this.responseCallBack === 'function') {
+          this.responseCallBack(res)
+        }
+      })
   }
 }
 window.customElements.define('form-async', FormAsync, {extends: 'form'})

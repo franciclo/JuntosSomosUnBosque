@@ -47,13 +47,13 @@ export default class PrimerLogin extends Component {
   }
 
   onSuccess (res) {
+    window.$tate('popups.active').value = null
     let user = window.$tate('user').value
     window.$tate('user').value = undefined
     user.primerLogin = false
     user.userType = res.type
     user.location = res.location
     window.$tate('user').value = user
-    window.$tate('popups.active').value = null
   }
 
   render () {

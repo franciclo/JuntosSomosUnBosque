@@ -18,8 +18,10 @@ export default class Form extends Component {
   }
 
   formDidMount (form) {
+    console.log(form)
     if (!form) return
     form.onResponse(res => {
+      console.log('form react onResponse')
       res.json().then(data => {
         if (data.success) {
           if (typeof this.props.onSuccess === 'function') {
@@ -47,6 +49,7 @@ export default class Form extends Component {
       })
     })
     form.onSubmit(data => {
+      console.log('form react onSubmit')
       if (typeof this.props.onSubmit === 'function') {
         this.props.onSubmit(data, form.sendForm)
       }

@@ -15,16 +15,11 @@ export default class Profile extends Component {
     this.updateLocation = this.updateLocation.bind(this)
   }
 
-  // componentWillReceiveProps (nextProps) {
-  //   if (nextProps.open === 'open') {
-  //     debugger
-  //     let userLoc = window.$tate('user.location').value
-  //     console.log(userLoc)
-  //     if (userLoc) {
-  //       this.setState({geoLocalResult: JSON.parse(userLoc)})
-  //     }
-  //   }
-  // }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.open === 'open' && nextProps.user) {
+      this.setState({geoLocalResult: nextProps.user.location})
+    }
+  }
 
   setUbicacionLocal (e) {
     if ('geolocation' in navigator) {
@@ -57,16 +52,35 @@ export default class Profile extends Component {
     ]})
   }
 
+  onSuccess (res) {
+    // window.$tate('popups.active').value = null
+    window.$tate('user.type').value = res.userType
+    window.$tate('user.location').value = res.location
+    window.$tate('user.nombre').value = res.nombre
+  }
+
+  geoSelectDidMount (geo) {
+    if (!geo) return
+    // const bounds = [[-34.286722590335934,-58.963623046875],[-34.286722590335934,-58.963623046875]]
+    // let bounds = geo.map.getBounds()
+    // geo.map.fitBounds(bounds)
+    geo.map.invalidateSize()
+  }
+
   render () {
-    const userType = window.$tate('user.type').value
     return (
       <dia-log
         id='perfil'
         data-open-modal={this.props.open}>
+        <span
+          onClick={this.props.closePopUp}
+          className='pop-close'>
+        </span>
         <Form
           action='/perfil'
           failAlert='true'
-          successAlert='true'>
+          successAlert='true'
+          onSuccess={this.onSuccess}>
           <label className='legend'>
             Perfil
           </label>
@@ -76,16 +90,19 @@ export default class Profile extends Component {
               name='nombre'
               id='nombre'
               type='text'
-              defaultValue={window.$tate('user.nombre').value} />
+              defaultValue={this.props.user.nombre} />
           </div>
           <div className='form-row-field'>
             <label htmlFor='type'>Tipo de usuario</label>
-            <select id='type' name='userType'>
-              <option value='per' checked={userType === 'per'}>Persona</option>
-              <option value='viv' checked={userType === 'viv'}>Vivero</option>
-              <option value='org' checked={userType === 'org'}>Organización civil</option>
-              <option value='esc' checked={userType === 'esc'}>Escuela</option>
-              <option value='cul' checked={userType === 'cul'}>Centro cultural</option>
+            <select
+              id='type'
+              name='userType'
+              defaultValue={this.props.user.type}>
+              <option value='per'>Persona</option>
+              <option value='viv'>Vivero</option>
+              <option value='org'>Organización civil</option>
+              <option value='esc'>Escuela</option>
+              <option value='cul'>Centro cultural</option>
             </select>
           </div>
           <div className='form-row-field'>
@@ -96,7 +113,8 @@ export default class Profile extends Component {
             <geo-select
               onClick={this.updateLocation}
               lat={this.state.geoLocalResult[0]}
-              lng={this.state.geoLocalResult[1]}>
+              lng={this.state.geoLocalResult[1]}
+              ref={this.geoSelectDidMount}>
               <input type='hidden' name='location' />
             </geo-select>
             {

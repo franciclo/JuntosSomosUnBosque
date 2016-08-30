@@ -16,6 +16,10 @@ export default class Main extends Component {
     }
     this.redData = window.$tate('red').on('N')
     this.userData = window.$tate('user').on(['N', 'D'])
+
+    this.userNombreChange = window.$tate('user.nombre').on('E')
+    this.userLocationChange = window.$tate('user.location').on('E')
+    this.userTypeChange = window.$tate('user.type').on('E')
   }
 
   componentWillMount () {
@@ -56,12 +60,44 @@ export default class Main extends Component {
     })
 
     this.userData = this.userData.subscribe(user => {
+      let loc
+      try {
+        loc = JSON.parse(user.location)
+      } catch (err) {
+        return this.setState({user})
+      }
+      user.location = loc
+      this.setState({user})
+    })
+
+    this.userNombreChange.subscribe(n => {
+      let user = this.state.user
+      user.nombre = n
+      this.setState({user})
+    })
+    this.userLocationChange.subscribe(n => {
+      let user = this.state.user
+      let loc
+      try {
+        loc = JSON.parse(n)
+      } catch (err) {
+        loc = n
+      }
+      user.location = loc
+      this.setState({user})
+    })
+    this.userTypeChange.subscribe(n => {
+      let user = this.state.user
+      user.type = n
       this.setState({user})
     })
   }
   componentWillUnmount () {
     this.redData.unsubscribe()
     this.userData.unsubscribe()
+    this.userNombreChange.unsubscribe()
+    this.userLocationChange.unsubscribe()
+    this.userTypeChange.unsubscribe()
   }
 
   componentDidMount () {

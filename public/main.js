@@ -21468,6 +21468,10 @@
 	    };
 	    _this.redData = window.$tate('red').on('N');
 	    _this.userData = window.$tate('user').on(['N', 'D']);
+
+	    _this.userNombreChange = window.$tate('user.nombre').on('E');
+	    _this.userLocationChange = window.$tate('user.location').on('E');
+	    _this.userTypeChange = window.$tate('user.type').on('E');
 	    return _this;
 	  }
 
@@ -21512,6 +21516,35 @@
 	      });
 
 	      this.userData = this.userData.subscribe(function (user) {
+	        var loc = void 0;
+	        try {
+	          loc = JSON.parse(user.location);
+	        } catch (err) {
+	          return _this2.setState({ user: user });
+	        }
+	        user.location = loc;
+	        _this2.setState({ user: user });
+	      });
+
+	      this.userNombreChange.subscribe(function (n) {
+	        var user = _this2.state.user;
+	        user.nombre = n;
+	        _this2.setState({ user: user });
+	      });
+	      this.userLocationChange.subscribe(function (n) {
+	        var user = _this2.state.user;
+	        var loc = void 0;
+	        try {
+	          loc = JSON.parse(n);
+	        } catch (err) {
+	          loc = n;
+	        }
+	        user.location = loc;
+	        _this2.setState({ user: user });
+	      });
+	      this.userTypeChange.subscribe(function (n) {
+	        var user = _this2.state.user;
+	        user.type = n;
 	        _this2.setState({ user: user });
 	      });
 	    }
@@ -21520,6 +21553,9 @@
 	    value: function componentWillUnmount() {
 	      this.redData.unsubscribe();
 	      this.userData.unsubscribe();
+	      this.userNombreChange.unsubscribe();
+	      this.userLocationChange.unsubscribe();
+	      this.userTypeChange.unsubscribe();
 	    }
 	  }, {
 	    key: 'componentDidMount',
@@ -59516,7 +59552,7 @@
 
 	var _profile2 = _interopRequireDefault(_profile);
 
-	var _primerLogin = __webpack_require__(800);
+	var _primerLogin = __webpack_require__(803);
 
 	var _primerLogin2 = _interopRequireDefault(_primerLogin);
 
@@ -59634,6 +59670,7 @@
 	          open: this.state.open === 'forgot' ? 'open' : '' }),
 	        this.props.user && _react2.default.createElement(_profile2.default, {
 	          closePopUp: this.closePopUp,
+	          user: this.props.user,
 	          open: this.state.open === 'perfil' ? 'open' : '' }),
 	        this.props.user && this.props.user.primerLogin && _react2.default.createElement(_primerLogin2.default, {
 	          open: this.state.open === 'primerLogin' ? 'open' : '' }),
@@ -59924,8 +59961,10 @@
 	    value: function formDidMount(form) {
 	      var _this2 = this;
 
+	      console.log(form);
 	      if (!form) return;
 	      form.onResponse(function (res) {
+	        console.log('form react onResponse');
 	        res.json().then(function (data) {
 	          if (data.success) {
 	            if (typeof _this2.props.onSuccess === 'function') {
@@ -59953,6 +59992,7 @@
 	        });
 	      });
 	      form.onSubmit(function (data) {
+	        console.log('form react onSubmit');
 	        if (typeof _this2.props.onSubmit === 'function') {
 	          _this2.props.onSubmit(data, form.sendForm);
 	        }
@@ -60025,6 +60065,8 @@
 
 	__webpack_require__(753);
 
+	__webpack_require__(827);
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -60059,11 +60101,13 @@
 	  }, {
 	    key: 'onSubmit',
 	    value: function onSubmit(cb) {
+	      console.log(cb);
 	      this.submitCallBack = cb;
 	    }
 	  }, {
 	    key: 'onResponse',
 	    value: function onResponse(cb) {
+	      console.log(cb);
 	      this.responseCallBack = cb;
 	    }
 	  }, {
@@ -60071,6 +60115,7 @@
 	    value: function handleSubmit(e) {
 	      e.preventDefault();
 	      var data = new window.FormData(e.target);
+	      console.log('form-async onResponse', this.submitCallBack);
 	      if (typeof this.submitCallBack === 'function') this.submitCallBack(data);
 	      if (e.target.getAttribute('data-auto') !== 'false') {
 	        this.sendForm(data);
@@ -60081,6 +60126,8 @@
 	  }, {
 	    key: 'sendForm',
 	    value: function sendForm(data) {
+	      var _this2 = this;
+
 	      if (!this.action) throw new Error('form-async needs action');
 	      var action = this.getAttribute('action');
 	      window.fetch(action, {
@@ -60089,7 +60136,12 @@
 	        body: data
 	      }).catch(function (err) {
 	        console.warn('Request Internal Error action="' + action + '"', err);
-	      }).then(typeof this.responseCallBack === 'function' && this.responseCallBack);
+	      }).then(function (res) {
+	        console.log('form-async onSubmit', _this2.responseCallBack);
+	        if (typeof _this2.responseCallBack === 'function') {
+	          _this2.responseCallBack(res);
+	        }
+	      });
 	    }
 	  }]);
 
@@ -60386,7 +60438,7 @@
 
 	__webpack_require__(782);
 
-	__webpack_require__(803);
+	__webpack_require__(800);
 
 	var _react = __webpack_require__(1);
 
@@ -60421,18 +60473,14 @@
 	    return _this;
 	  }
 
-	  // componentWillReceiveProps (nextProps) {
-	  //   if (nextProps.open === 'open') {
-	  //     debugger
-	  //     let userLoc = window.$tate('user.location').value
-	  //     console.log(userLoc)
-	  //     if (userLoc) {
-	  //       this.setState({geoLocalResult: JSON.parse(userLoc)})
-	  //     }
-	  //   }
-	  // }
-
 	  _createClass(Profile, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.open === 'open' && nextProps.user) {
+	        this.setState({ geoLocalResult: nextProps.user.location });
+	      }
+	    }
+	  }, {
 	    key: 'setUbicacionLocal',
 	    value: function setUbicacionLocal(e) {
 	      var _this2 = this;
@@ -60457,20 +60505,40 @@
 	      this.setState({ geoLocalResult: [e.currentTarget.getAttribute('lat'), e.currentTarget.getAttribute('lng')] });
 	    }
 	  }, {
+	    key: 'onSuccess',
+	    value: function onSuccess(res) {
+	      // window.$tate('popups.active').value = null
+	      window.$tate('user.type').value = res.userType;
+	      window.$tate('user.location').value = res.location;
+	      window.$tate('user.nombre').value = res.nombre;
+	    }
+	  }, {
+	    key: 'geoSelectDidMount',
+	    value: function geoSelectDidMount(geo) {
+	      if (!geo) return;
+	      // const bounds = [[-34.286722590335934,-58.963623046875],[-34.286722590335934,-58.963623046875]]
+	      // let bounds = geo.map.getBounds()
+	      // geo.map.fitBounds(bounds)
+	      geo.map.invalidateSize();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var userType = window.$tate('user.type').value;
 	      return _react2.default.createElement(
 	        'dia-log',
 	        {
 	          id: 'perfil',
 	          'data-open-modal': this.props.open },
+	        _react2.default.createElement('span', {
+	          onClick: this.props.closePopUp,
+	          className: 'pop-close' }),
 	        _react2.default.createElement(
 	          _form2.default,
 	          {
 	            action: '/perfil',
 	            failAlert: 'true',
-	            successAlert: 'true' },
+	            successAlert: 'true',
+	            onSuccess: this.onSuccess },
 	          _react2.default.createElement(
 	            'label',
 	            { className: 'legend' },
@@ -60488,7 +60556,7 @@
 	              name: 'nombre',
 	              id: 'nombre',
 	              type: 'text',
-	              defaultValue: window.$tate('user.nombre').value })
+	              defaultValue: this.props.user.nombre })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -60500,30 +60568,33 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'type', name: 'userType' },
+	              {
+	                id: 'type',
+	                name: 'userType',
+	                defaultValue: this.props.user.type },
 	              _react2.default.createElement(
 	                'option',
-	                { value: 'per', checked: userType === 'per' },
+	                { value: 'per' },
 	                'Persona'
 	              ),
 	              _react2.default.createElement(
 	                'option',
-	                { value: 'viv', checked: userType === 'viv' },
+	                { value: 'viv' },
 	                'Vivero'
 	              ),
 	              _react2.default.createElement(
 	                'option',
-	                { value: 'org', checked: userType === 'org' },
+	                { value: 'org' },
 	                'Organización civil'
 	              ),
 	              _react2.default.createElement(
 	                'option',
-	                { value: 'esc', checked: userType === 'esc' },
+	                { value: 'esc' },
 	                'Escuela'
 	              ),
 	              _react2.default.createElement(
 	                'option',
-	                { value: 'cul', checked: userType === 'cul' },
+	                { value: 'cul' },
 	                'Centro cultural'
 	              )
 	            )
@@ -60546,7 +60617,8 @@
 	              {
 	                onClick: this.updateLocation,
 	                lat: this.state.geoLocalResult[0],
-	                lng: this.state.geoLocalResult[1] },
+	                lng: this.state.geoLocalResult[1],
+	                ref: this.geoSelectDidMount },
 	              _react2.default.createElement('input', { type: 'hidden', name: 'location' })
 	            ),
 	            this.state.andaGeoLocal && _react2.default.createElement(
@@ -60590,17 +60662,116 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(801);
+
+	__webpack_require__(752);
+
+	var _leaflet = __webpack_require__(533);
+
+	var _leaflet2 = _interopRequireDefault(_leaflet);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var GeoSelect = function (_window$HTMLElement) {
+	  _inherits(GeoSelect, _window$HTMLElement);
+
+	  function GeoSelect() {
+	    _classCallCheck(this, GeoSelect);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GeoSelect).apply(this, arguments));
+	  }
+
+	  _createClass(GeoSelect, [{
+	    key: 'connectedCallback',
+	    value: function connectedCallback() {
+	      var _this2 = this;
+
+	      var coords = [+this.getAttribute('lat'), +this.getAttribute('lng')];
+	      this.map = _leaflet2.default.map(this).setView(coords, 9);
+	      this.querySelector('input').value = JSON.stringify(coords);
+	      window.L.tileLayer('https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ', {
+	        attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	        tileSize: 512,
+	        zoomOffset: -1
+	      }).addTo(this.map);
+	      this.marker = _leaflet2.default.marker(coords).addTo(this.map);
+	      this.map.on('click', function (e) {
+	        _this2.setAttribute('lat', e.latlng.lat);
+	        _this2.setAttribute('lng', e.latlng.lng);
+	      });
+	    }
+	  }, {
+	    key: 'disconnectedCallback',
+	    value: function disconnectedCallback() {
+	      this.map.remove();
+	    }
+	  }, {
+	    key: 'attributeChangedCallback',
+	    value: function attributeChangedCallback(name, oldValue, newValue) {
+	      if (!this.parentNode) return;
+	      switch (name) {
+	        case 'lat':
+	          if (+newValue) {
+	            var coords = [+newValue, +this.getAttribute('lng')];
+	            this.marker.setLatLng(coords);
+	            this.map.setView(coords);
+	            this.querySelector('input').value = JSON.stringify(coords);
+	          }
+	          break;
+	        case 'lng':
+	          if (+newValue) {
+	            var _coords = [+this.getAttribute('lat'), +newValue];
+	            this.marker.setLatLng(_coords);
+	            this.map.setView(_coords);
+	            this.querySelector('input').value = JSON.stringify(_coords);
+	          }
+	          break;
+	      }
+	    }
+	  }], [{
+	    key: 'observedAttributes',
+	    get: function get() {
+	      return ['lat', 'lng'];
+	    }
+	  }]);
+
+	  return GeoSelect;
+	}(window.HTMLElement);
+
+	window.customElements.define('geo-select', GeoSelect);
+
+/***/ },
+/* 801 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 802 */,
+/* 803 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(801);
+	__webpack_require__(804);
 
 	__webpack_require__(782);
 
-	__webpack_require__(803);
+	__webpack_require__(800);
 
 	var _react = __webpack_require__(1);
 
@@ -60662,13 +60833,13 @@
 	  }, {
 	    key: 'onSuccess',
 	    value: function onSuccess(res) {
+	      window.$tate('popups.active').value = null;
 	      var user = window.$tate('user').value;
 	      window.$tate('user').value = undefined;
 	      user.primerLogin = false;
 	      user.userType = res.type;
 	      user.location = res.location;
 	      window.$tate('user').value = user;
-	      window.$tate('popups.active').value = null;
 	    }
 	  }, {
 	    key: 'render',
@@ -60776,105 +60947,6 @@
 	}(_react.Component);
 
 	exports.default = PrimerLogin;
-
-/***/ },
-/* 801 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 802 */,
-/* 803 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	__webpack_require__(804);
-
-	__webpack_require__(752);
-
-	var _leaflet = __webpack_require__(533);
-
-	var _leaflet2 = _interopRequireDefault(_leaflet);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var GeoSelect = function (_window$HTMLElement) {
-	  _inherits(GeoSelect, _window$HTMLElement);
-
-	  function GeoSelect() {
-	    _classCallCheck(this, GeoSelect);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GeoSelect).apply(this, arguments));
-	  }
-
-	  _createClass(GeoSelect, [{
-	    key: 'connectedCallback',
-	    value: function connectedCallback() {
-	      var _this2 = this;
-
-	      var coords = [+this.getAttribute('lat'), +this.getAttribute('lng')];
-	      this.map = _leaflet2.default.map(this).setView(coords, 9);
-	      this.querySelector('input').value = JSON.stringify(coords);
-	      window.L.tileLayer('https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ', {
-	        attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	        tileSize: 512,
-	        zoomOffset: -1
-	      }).addTo(this.map);
-	      this.marker = _leaflet2.default.marker(coords).addTo(this.map);
-	      this.map.on('click', function (e) {
-	        _this2.setAttribute('lat', e.latlng.lat);
-	        _this2.setAttribute('lng', e.latlng.lng);
-	      });
-	    }
-	  }, {
-	    key: 'disconnectedCallback',
-	    value: function disconnectedCallback() {
-	      this.map.remove();
-	    }
-	  }, {
-	    key: 'attributeChangedCallback',
-	    value: function attributeChangedCallback(name, oldValue, newValue) {
-	      if (!this.parentNode) return;
-	      switch (name) {
-	        case 'lat':
-	          if (+newValue) {
-	            var coords = [+newValue, +this.getAttribute('lng')];
-	            this.marker.setLatLng(coords);
-	            this.map.setView(coords);
-	            this.querySelector('input').value = JSON.stringify(coords);
-	          }
-	          break;
-	        case 'lng':
-	          if (+newValue) {
-	            var _coords = [+this.getAttribute('lat'), +newValue];
-	            this.marker.setLatLng(_coords);
-	            this.map.setView(_coords);
-	            this.querySelector('input').value = JSON.stringify(_coords);
-	          }
-	          break;
-	      }
-	    }
-	  }], [{
-	    key: 'observedAttributes',
-	    get: function get() {
-	      return ['lat', 'lng'];
-	    }
-	  }]);
-
-	  return GeoSelect;
-	}(window.HTMLElement);
-
-	window.customElements.define('geo-select', GeoSelect);
 
 /***/ },
 /* 804 */
@@ -61798,6 +61870,38 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 826 */,
+/* 827 */
+/***/ function(module, exports) {
+
+	// Polyfill for creating CustomEvents on IE9/10/11
+
+	// code pulled from:
+	// https://github.com/d4tocchini/customevent-polyfill
+	// https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
+
+	try {
+	  new window.CustomEvent("test");
+	} catch(e) {
+	 var CustomEvent = function(event, params) {
+	      var evt;
+	      params = params || {
+	          bubbles: false,
+	          cancelable: false,
+	          detail: undefined
+	      };
+
+	      evt = document.createEvent("CustomEvent");
+	      evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+	      return evt;
+	  };
+
+	  CustomEvent.prototype = window.Event.prototype;
+	  window.CustomEvent = CustomEvent; // expose definition to window
+	}
+
 
 /***/ }
 /******/ ]);
