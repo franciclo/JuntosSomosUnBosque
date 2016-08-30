@@ -21459,7 +21459,7 @@
 	  function Main() {
 	    _classCallCheck(this, Main);
 
-	    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this));
 
 	    _this.state = {
 	      user: null,
@@ -40369,7 +40369,7 @@
 	  function Mapa() {
 	    _classCallCheck(this, Mapa);
 
-	    var _this = _possibleConstructorReturn(this, (Mapa.__proto__ || Object.getPrototypeOf(Mapa)).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Mapa).call(this));
 
 	    _this.state = {
 	      lat: -34.53753049571174,
@@ -57882,7 +57882,7 @@
 	  function FestiMarker() {
 	    _classCallCheck(this, FestiMarker);
 
-	    return _possibleConstructorReturn(this, (FestiMarker.__proto__ || Object.getPrototypeOf(FestiMarker)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FestiMarker).apply(this, arguments));
 	  }
 
 	  _createClass(FestiMarker, [{
@@ -58072,7 +58072,7 @@
 	  function UserMarker() {
 	    _classCallCheck(this, UserMarker);
 
-	    return _possibleConstructorReturn(this, (UserMarker.__proto__ || Object.getPrototypeOf(UserMarker)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserMarker).apply(this, arguments));
 	  }
 
 	  _createClass(UserMarker, [{
@@ -58175,7 +58175,7 @@
 	  function Sidebar() {
 	    _classCallCheck(this, Sidebar);
 
-	    return _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Sidebar).apply(this, arguments));
 	  }
 
 	  _createClass(Sidebar, [{
@@ -58253,7 +58253,7 @@
 	  function Header() {
 	    _classCallCheck(this, Header);
 
-	    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Header).apply(this, arguments));
 	  }
 
 	  _createClass(Header, [{
@@ -58362,7 +58362,7 @@
 	  function DropDown() {
 	    _classCallCheck(this, DropDown);
 
-	    return _possibleConstructorReturn(this, (DropDown.__proto__ || Object.getPrototypeOf(DropDown)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DropDown).apply(this, arguments));
 	  }
 
 	  _createClass(DropDown, [{
@@ -58401,1391 +58401,8 @@
 /* 752 */
 /***/ function(module, exports) {
 
-	/*!
-
-	Copyright (C) 2014-2016 by Andrea Giammarchi - @WebReflection
-
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-
-	The above copyright notice and this permission notice shall be included in
-	all copies or substantial portions of the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	THE SOFTWARE.
-
-	*/
-	(function(window, document, Object, REGISTER_ELEMENT){'use strict';
-	var htmlClass = (function (info) {
-	  // (C) Andrea Giammarchi - @WebReflection - MIT Style
-	  var
-	    catchClass = /^[A-Z]+[a-z]/,
-	    filterBy = function (re) {
-	      var arr = [], tag;
-	      for (tag in register) {
-	        if (re.test(tag)) arr.push(tag);
-	      }
-	      return arr;
-	    },
-	    add = function (Class, tag) {
-	      tag = tag.toLowerCase();
-	      if (!(tag in register)) {
-	        register[Class] = (register[Class] || []).concat(tag);
-	        register[tag] = (register[tag.toUpperCase()] = Class);
-	      }
-	    },
-	    register = (Object.create || Object)(null),
-	    htmlClass = {},
-	    i, section, tags, Class
-	  ;
-	  for (section in info) {
-	    for (Class in info[section]) {
-	      tags = info[section][Class];
-	      register[Class] = tags;
-	      for (i = 0; i < tags.length; i++) {
-	        register[tags[i].toLowerCase()] =
-	        register[tags[i].toUpperCase()] = Class;
-	      }
-	    }
-	  }
-	  htmlClass.get = function get(tagOrClass) {
-	    return typeof tagOrClass === 'string' ?
-	      (register[tagOrClass] || (catchClass.test(tagOrClass) ? [] : '')) :
-	      filterBy(tagOrClass);
-	  };
-	  htmlClass.set = function set(tag, Class) {
-	    return (catchClass.test(tag) ?
-	      add(tag, Class) :
-	      add(Class, tag)
-	    ), htmlClass;
-	  };
-	  return htmlClass;
-	}({
-	  "collections": {
-	    "HTMLAllCollection": [
-	      "all"
-	    ],
-	    "HTMLCollection": [
-	      "forms"
-	    ],
-	    "HTMLFormControlsCollection": [
-	      "elements"
-	    ],
-	    "HTMLOptionsCollection": [
-	      "options"
-	    ]
-	  },
-	  "elements": {
-	    "Element": [
-	      "element"
-	    ],
-	    "HTMLAnchorElement": [
-	      "a"
-	    ],
-	    "HTMLAppletElement": [
-	      "applet"
-	    ],
-	    "HTMLAreaElement": [
-	      "area"
-	    ],
-	    "HTMLAttachmentElement": [
-	      "attachment"
-	    ],
-	    "HTMLAudioElement": [
-	      "audio"
-	    ],
-	    "HTMLBRElement": [
-	      "br"
-	    ],
-	    "HTMLBaseElement": [
-	      "base"
-	    ],
-	    "HTMLBodyElement": [
-	      "body"
-	    ],
-	    "HTMLButtonElement": [
-	      "button"
-	    ],
-	    "HTMLCanvasElement": [
-	      "canvas"
-	    ],
-	    "HTMLContentElement": [
-	      "content"
-	    ],
-	    "HTMLDListElement": [
-	      "dl"
-	    ],
-	    "HTMLDataElement": [
-	      "data"
-	    ],
-	    "HTMLDataListElement": [
-	      "datalist"
-	    ],
-	    "HTMLDetailsElement": [
-	      "details"
-	    ],
-	    "HTMLDialogElement": [
-	      "dialog"
-	    ],
-	    "HTMLDirectoryElement": [
-	      "dir"
-	    ],
-	    "HTMLDivElement": [
-	      "div"
-	    ],
-	    "HTMLDocument": [
-	      "document"
-	    ],
-	    "HTMLElement": [
-	      "element",
-	      "abbr",
-	      "address",
-	      "article",
-	      "aside",
-	      "b",
-	      "bdi",
-	      "bdo",
-	      "cite",
-	      "code",
-	      "command",
-	      "dd",
-	      "dfn",
-	      "dt",
-	      "em",
-	      "figcaption",
-	      "figure",
-	      "footer",
-	      "header",
-	      "i",
-	      "kbd",
-	      "mark",
-	      "nav",
-	      "noscript",
-	      "rp",
-	      "rt",
-	      "ruby",
-	      "s",
-	      "samp",
-	      "section",
-	      "small",
-	      "strong",
-	      "sub",
-	      "summary",
-	      "sup",
-	      "u",
-	      "var",
-	      "wbr"
-	    ],
-	    "HTMLEmbedElement": [
-	      "embed"
-	    ],
-	    "HTMLFieldSetElement": [
-	      "fieldset"
-	    ],
-	    "HTMLFontElement": [
-	      "font"
-	    ],
-	    "HTMLFormElement": [
-	      "form"
-	    ],
-	    "HTMLFrameElement": [
-	      "frame"
-	    ],
-	    "HTMLFrameSetElement": [
-	      "frameset"
-	    ],
-	    "HTMLHRElement": [
-	      "hr"
-	    ],
-	    "HTMLHeadElement": [
-	      "head"
-	    ],
-	    "HTMLHeadingElement": [
-	      "h1",
-	      "h2",
-	      "h3",
-	      "h4",
-	      "h5",
-	      "h6"
-	    ],
-	    "HTMLHtmlElement": [
-	      "html"
-	    ],
-	    "HTMLIFrameElement": [
-	      "iframe"
-	    ],
-	    "HTMLImageElement": [
-	      "img"
-	    ],
-	    "HTMLInputElement": [
-	      "input"
-	    ],
-	    "HTMLKeygenElement": [
-	      "keygen"
-	    ],
-	    "HTMLLIElement": [
-	      "li"
-	    ],
-	    "HTMLLabelElement": [
-	      "label"
-	    ],
-	    "HTMLLegendElement": [
-	      "legend"
-	    ],
-	    "HTMLLinkElement": [
-	      "link"
-	    ],
-	    "HTMLMapElement": [
-	      "map"
-	    ],
-	    "HTMLMarqueeElement": [
-	      "marquee"
-	    ],
-	    "HTMLMediaElement": [
-	      "media"
-	    ],
-	    "HTMLMenuElement": [
-	      "menu"
-	    ],
-	    "HTMLMenuItemElement": [
-	      "menuitem"
-	    ],
-	    "HTMLMetaElement": [
-	      "meta"
-	    ],
-	    "HTMLMeterElement": [
-	      "meter"
-	    ],
-	    "HTMLModElement": [
-	      "del",
-	      "ins"
-	    ],
-	    "HTMLOListElement": [
-	      "ol"
-	    ],
-	    "HTMLObjectElement": [
-	      "object"
-	    ],
-	    "HTMLOptGroupElement": [
-	      "optgroup"
-	    ],
-	    "HTMLOptionElement": [
-	      "option"
-	    ],
-	    "HTMLOutputElement": [
-	      "output"
-	    ],
-	    "HTMLParagraphElement": [
-	      "p"
-	    ],
-	    "HTMLParamElement": [
-	      "param"
-	    ],
-	    "HTMLPictureElement": [
-	      "picture"
-	    ],
-	    "HTMLPreElement": [
-	      "pre"
-	    ],
-	    "HTMLProgressElement": [
-	      "progress"
-	    ],
-	    "HTMLQuoteElement": [
-	      "blockquote",
-	      "q",
-	      "quote"
-	    ],
-	    "HTMLScriptElement": [
-	      "script"
-	    ],
-	    "HTMLSelectElement": [
-	      "select"
-	    ],
-	    "HTMLShadowElement": [
-	      "shadow"
-	    ],
-	    "HTMLSlotElement": [
-	      "slot"
-	    ],
-	    "HTMLSourceElement": [
-	      "source"
-	    ],
-	    "HTMLSpanElement": [
-	      "span"
-	    ],
-	    "HTMLStyleElement": [
-	      "style"
-	    ],
-	    "HTMLTableCaptionElement": [
-	      "caption"
-	    ],
-	    "HTMLTableCellElement": [
-	      "td",
-	      "th"
-	    ],
-	    "HTMLTableColElement": [
-	      "col",
-	      "colgroup"
-	    ],
-	    "HTMLTableElement": [
-	      "table"
-	    ],
-	    "HTMLTableRowElement": [
-	      "tr"
-	    ],
-	    "HTMLTableSectionElement": [
-	      "thead",
-	      "tbody",
-	      "tfoot"
-	    ],
-	    "HTMLTemplateElement": [
-	      "template"
-	    ],
-	    "HTMLTextAreaElement": [
-	      "textarea"
-	    ],
-	    "HTMLTimeElement": [
-	      "time"
-	    ],
-	    "HTMLTitleElement": [
-	      "title"
-	    ],
-	    "HTMLTrackElement": [
-	      "track"
-	    ],
-	    "HTMLUListElement": [
-	      "ul"
-	    ],
-	    "HTMLUnknownElement": [
-	      "unknown",
-	      "vhgroupv",
-	      "vkeygen"
-	    ],
-	    "HTMLVideoElement": [
-	      "video"
-	    ]
-	  },
-	  "nodes": {
-	    "Attr": [
-	      "node"
-	    ],
-	    "Audio": [
-	      "audio"
-	    ],
-	    "CDATASection": [
-	      "node"
-	    ],
-	    "CharacterData": [
-	      "node"
-	    ],
-	    "Comment": [
-	      "#comment"
-	    ],
-	    "Document": [
-	      "#document"
-	    ],
-	    "DocumentFragment": [
-	      "#document-fragment"
-	    ],
-	    "DocumentType": [
-	      "node"
-	    ],
-	    "HTMLDocument": [
-	      "#document"
-	    ],
-	    "Image": [
-	      "img"
-	    ],
-	    "Option": [
-	      "option"
-	    ],
-	    "ProcessingInstruction": [
-	      "node"
-	    ],
-	    "ShadowRoot": [
-	      "#shadow-root"
-	    ],
-	    "Text": [
-	      "#text"
-	    ],
-	    "XMLDocument": [
-	      "xml"
-	    ]
-	  }
-	}));
-
-
-
-	// DO NOT USE THIS FILE DIRECTLY, IT WON'T WORK
-	// THIS IS A PROJECT BASED ON A BUILD SYSTEM
-	// THIS FILE IS JUST WRAPPED UP RESULTING IN
-	// build/document-register-element.js
-	// and its .max.js counter part
-
-	var
-	  // IE < 11 only + old WebKit for attributes + feature detection
-	  EXPANDO_UID = '__' + REGISTER_ELEMENT + (Math.random() * 10e4 >> 0),
-
-	  // shortcuts and costants
-	  ADD_EVENT_LISTENER = 'addEventListener',
-	  ATTACHED = 'attached',
-	  CALLBACK = 'Callback',
-	  DETACHED = 'detached',
-	  EXTENDS = 'extends',
-
-	  ATTRIBUTE_CHANGED_CALLBACK = 'attributeChanged' + CALLBACK,
-	  ATTACHED_CALLBACK = ATTACHED + CALLBACK,
-	  CONNECTED_CALLBACK = 'connected' + CALLBACK,
-	  DISCONNECTED_CALLBACK = 'disconnected' + CALLBACK,
-	  CREATED_CALLBACK = 'created' + CALLBACK,
-	  DETACHED_CALLBACK = DETACHED + CALLBACK,
-
-	  ADDITION = 'ADDITION',
-	  MODIFICATION = 'MODIFICATION',
-	  REMOVAL = 'REMOVAL',
-
-	  DOM_ATTR_MODIFIED = 'DOMAttrModified',
-	  DOM_CONTENT_LOADED = 'DOMContentLoaded',
-	  DOM_SUBTREE_MODIFIED = 'DOMSubtreeModified',
-
-	  PREFIX_TAG = '<',
-	  PREFIX_IS = '=',
-
-	  // valid and invalid node names
-	  validName = /^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/,
-	  invalidNames = [
-	    'ANNOTATION-XML',
-	    'COLOR-PROFILE',
-	    'FONT-FACE',
-	    'FONT-FACE-SRC',
-	    'FONT-FACE-URI',
-	    'FONT-FACE-FORMAT',
-	    'FONT-FACE-NAME',
-	    'MISSING-GLYPH'
-	  ],
-
-	  // registered types and their prototypes
-	  types = [],
-	  protos = [],
-
-	  // to query subnodes
-	  query = '',
-
-	  // html shortcut used to feature detect
-	  documentElement = document.documentElement,
-
-	  // ES5 inline helpers || basic patches
-	  indexOf = types.indexOf || function (v) {
-	    for(var i = this.length; i-- && this[i] !== v;){}
-	    return i;
-	  },
-
-	  // other helpers / shortcuts
-	  OP = Object.prototype,
-	  hOP = OP.hasOwnProperty,
-	  iPO = OP.isPrototypeOf,
-
-	  defineProperty = Object.defineProperty,
-	  empty = [],
-	  gOPD = Object.getOwnPropertyDescriptor,
-	  gOPN = Object.getOwnPropertyNames,
-	  gPO = Object.getPrototypeOf,
-	  sPO = Object.setPrototypeOf,
-
-	  // jshint proto: true
-	  hasProto = !!Object.__proto__,
-
-	  // V1 helpers
-	  fixGetClass = false,
-	  DRECEV1 = '__dreCEv1',
-	  customElements = window.customElements,
-	  usableCustomElements = !!(
-	    customElements &&
-	    customElements.define &&
-	    customElements.get &&
-	    customElements.whenDefined
-	  ),
-	  Dict = Object.create || Object,
-	  Map = window.Map || function Map() {
-	    var K = [], V = [], i;
-	    return {
-	      get: function (k) {
-	        return V[indexOf.call(K, k)];
-	      },
-	      set: function (k, v) {
-	        i = indexOf.call(K, k);
-	        if (i < 0) V[K.push(k) - 1] = v;
-	        else V[i] = v;
-	      }
-	    };
-	  },
-	  Promise = window.Promise || function (fn) {
-	    var
-	      notify = [],
-	      done = false,
-	      p = {
-	        'catch': function () {
-	          return p;
-	        },
-	        'then': function (cb) {
-	          notify.push(cb);
-	          if (done) setTimeout(resolve, 1);
-	          return p;
-	        }
-	      }
-	    ;
-	    function resolve(value) {
-	      done = true;
-	      while (notify.length) notify.shift()(value);
-	    }
-	    fn(resolve);
-	    return p;
-	  },
-	  justCreated = false,
-	  constructors = Dict(null),
-	  waitingList = Dict(null),
-	  nodeNames = new Map(),
-	  secondArgument = String,
-
-	  // used to create unique instances
-	  create = Object.create || function Bridge(proto) {
-	    // silly broken polyfill probably ever used but short enough to work
-	    return proto ? ((Bridge.prototype = proto), new Bridge()) : this;
-	  },
-
-	  // will set the prototype if possible
-	  // or copy over all properties
-	  setPrototype = sPO || (
-	    hasProto ?
-	      function (o, p) {
-	        o.__proto__ = p;
-	        return o;
-	      } : (
-	    (gOPN && gOPD) ?
-	      (function(){
-	        function setProperties(o, p) {
-	          for (var
-	            key,
-	            names = gOPN(p),
-	            i = 0, length = names.length;
-	            i < length; i++
-	          ) {
-	            key = names[i];
-	            if (!hOP.call(o, key)) {
-	              defineProperty(o, key, gOPD(p, key));
-	            }
-	          }
-	        }
-	        return function (o, p) {
-	          do {
-	            setProperties(o, p);
-	          } while ((p = gPO(p)) && !iPO.call(p, o));
-	          return o;
-	        };
-	      }()) :
-	      function (o, p) {
-	        for (var key in p) {
-	          o[key] = p[key];
-	        }
-	        return o;
-	      }
-	  )),
-
-	  // DOM shortcuts and helpers, if any
-
-	  MutationObserver = window.MutationObserver ||
-	                     window.WebKitMutationObserver,
-
-	  HTMLElementPrototype = (
-	    window.HTMLElement ||
-	    window.Element ||
-	    window.Node
-	  ).prototype,
-
-	  IE8 = !iPO.call(HTMLElementPrototype, documentElement),
-
-	  safeProperty = IE8 ? function (o, k, d) {
-	    o[k] = d.value;
-	    return o;
-	  } : defineProperty,
-
-	  isValidNode = IE8 ?
-	    function (node) {
-	      return node.nodeType === 1;
-	    } :
-	    function (node) {
-	      return iPO.call(HTMLElementPrototype, node);
-	    },
-
-	  targets = IE8 && [],
-
-	  cloneNode = HTMLElementPrototype.cloneNode,
-	  dispatchEvent = HTMLElementPrototype.dispatchEvent,
-	  getAttribute = HTMLElementPrototype.getAttribute,
-	  hasAttribute = HTMLElementPrototype.hasAttribute,
-	  removeAttribute = HTMLElementPrototype.removeAttribute,
-	  setAttribute = HTMLElementPrototype.setAttribute,
-
-	  // replaced later on
-	  createElement = document.createElement,
-	  patchedCreateElement = createElement,
-
-	  // shared observer for all attributes
-	  attributesObserver = MutationObserver && {
-	    attributes: true,
-	    characterData: true,
-	    attributeOldValue: true
-	  },
-
-	  // useful to detect only if there's no MutationObserver
-	  DOMAttrModified = MutationObserver || function(e) {
-	    doesNotSupportDOMAttrModified = false;
-	    documentElement.removeEventListener(
-	      DOM_ATTR_MODIFIED,
-	      DOMAttrModified
-	    );
-	  },
-
-	  // will both be used to make DOMNodeInserted asynchronous
-	  asapQueue,
-	  asapTimer = 0,
-
-	  // internal flags
-	  setListener = false,
-	  doesNotSupportDOMAttrModified = true,
-	  dropDomContentLoaded = true,
-
-	  // needed for the innerHTML helper
-	  notFromInnerHTMLHelper = true,
-
-	  // optionally defined later on
-	  onSubtreeModified,
-	  callDOMAttrModified,
-	  getAttributesMirror,
-	  observer,
-
-	  // based on setting prototype capability
-	  // will check proto or the expando attribute
-	  // in order to setup the node once
-	  patchIfNotAlready,
-	  patch
-	;
-
-	// only if needed
-	if (!(REGISTER_ELEMENT in document)) {
-
-	  if (sPO || hasProto) {
-	      patchIfNotAlready = function (node, proto) {
-	        if (!iPO.call(proto, node)) {
-	          setupNode(node, proto);
-	        }
-	      };
-	      patch = setupNode;
-	  } else {
-	      patchIfNotAlready = function (node, proto) {
-	        if (!node[EXPANDO_UID]) {
-	          node[EXPANDO_UID] = Object(true);
-	          setupNode(node, proto);
-	        }
-	      };
-	      patch = patchIfNotAlready;
-	  }
-
-	  if (IE8) {
-	    doesNotSupportDOMAttrModified = false;
-	    (function (){
-	      var
-	        descriptor = gOPD(HTMLElementPrototype, ADD_EVENT_LISTENER),
-	        addEventListener = descriptor.value,
-	        patchedRemoveAttribute = function (name) {
-	          var e = new CustomEvent(DOM_ATTR_MODIFIED, {bubbles: true});
-	          e.attrName = name;
-	          e.prevValue = getAttribute.call(this, name);
-	          e.newValue = null;
-	          e[REMOVAL] = e.attrChange = 2;
-	          removeAttribute.call(this, name);
-	          dispatchEvent.call(this, e);
-	        },
-	        patchedSetAttribute = function (name, value) {
-	          var
-	            had = hasAttribute.call(this, name),
-	            old = had && getAttribute.call(this, name),
-	            e = new CustomEvent(DOM_ATTR_MODIFIED, {bubbles: true})
-	          ;
-	          setAttribute.call(this, name, value);
-	          e.attrName = name;
-	          e.prevValue = had ? old : null;
-	          e.newValue = value;
-	          if (had) {
-	            e[MODIFICATION] = e.attrChange = 1;
-	          } else {
-	            e[ADDITION] = e.attrChange = 0;
-	          }
-	          dispatchEvent.call(this, e);
-	        },
-	        onPropertyChange = function (e) {
-	          // jshint eqnull:true
-	          var
-	            node = e.currentTarget,
-	            superSecret = node[EXPANDO_UID],
-	            propertyName = e.propertyName,
-	            event
-	          ;
-	          if (superSecret.hasOwnProperty(propertyName)) {
-	            superSecret = superSecret[propertyName];
-	            event = new CustomEvent(DOM_ATTR_MODIFIED, {bubbles: true});
-	            event.attrName = superSecret.name;
-	            event.prevValue = superSecret.value || null;
-	            event.newValue = (superSecret.value = node[propertyName] || null);
-	            if (event.prevValue == null) {
-	              event[ADDITION] = event.attrChange = 0;
-	            } else {
-	              event[MODIFICATION] = event.attrChange = 1;
-	            }
-	            dispatchEvent.call(node, event);
-	          }
-	        }
-	      ;
-	      descriptor.value = function (type, handler, capture) {
-	        if (
-	          type === DOM_ATTR_MODIFIED &&
-	          this[ATTRIBUTE_CHANGED_CALLBACK] &&
-	          this.setAttribute !== patchedSetAttribute
-	        ) {
-	          this[EXPANDO_UID] = {
-	            className: {
-	              name: 'class',
-	              value: this.className
-	            }
-	          };
-	          this.setAttribute = patchedSetAttribute;
-	          this.removeAttribute = patchedRemoveAttribute;
-	          addEventListener.call(this, 'propertychange', onPropertyChange);
-	        }
-	        addEventListener.call(this, type, handler, capture);
-	      };
-	      defineProperty(HTMLElementPrototype, ADD_EVENT_LISTENER, descriptor);
-	    }());
-	  } else if (!MutationObserver) {
-	    documentElement[ADD_EVENT_LISTENER](DOM_ATTR_MODIFIED, DOMAttrModified);
-	    documentElement.setAttribute(EXPANDO_UID, 1);
-	    documentElement.removeAttribute(EXPANDO_UID);
-	    if (doesNotSupportDOMAttrModified) {
-	      onSubtreeModified = function (e) {
-	        var
-	          node = this,
-	          oldAttributes,
-	          newAttributes,
-	          key
-	        ;
-	        if (node === e.target) {
-	          oldAttributes = node[EXPANDO_UID];
-	          node[EXPANDO_UID] = (newAttributes = getAttributesMirror(node));
-	          for (key in newAttributes) {
-	            if (!(key in oldAttributes)) {
-	              // attribute was added
-	              return callDOMAttrModified(
-	                0,
-	                node,
-	                key,
-	                oldAttributes[key],
-	                newAttributes[key],
-	                ADDITION
-	              );
-	            } else if (newAttributes[key] !== oldAttributes[key]) {
-	              // attribute was changed
-	              return callDOMAttrModified(
-	                1,
-	                node,
-	                key,
-	                oldAttributes[key],
-	                newAttributes[key],
-	                MODIFICATION
-	              );
-	            }
-	          }
-	          // checking if it has been removed
-	          for (key in oldAttributes) {
-	            if (!(key in newAttributes)) {
-	              // attribute removed
-	              return callDOMAttrModified(
-	                2,
-	                node,
-	                key,
-	                oldAttributes[key],
-	                newAttributes[key],
-	                REMOVAL
-	              );
-	            }
-	          }
-	        }
-	      };
-	      callDOMAttrModified = function (
-	        attrChange,
-	        currentTarget,
-	        attrName,
-	        prevValue,
-	        newValue,
-	        action
-	      ) {
-	        var e = {
-	          attrChange: attrChange,
-	          currentTarget: currentTarget,
-	          attrName: attrName,
-	          prevValue: prevValue,
-	          newValue: newValue
-	        };
-	        e[action] = attrChange;
-	        onDOMAttrModified(e);
-	      };
-	      getAttributesMirror = function (node) {
-	        for (var
-	          attr, name,
-	          result = {},
-	          attributes = node.attributes,
-	          i = 0, length = attributes.length;
-	          i < length; i++
-	        ) {
-	          attr = attributes[i];
-	          name = attr.name;
-	          if (name !== 'setAttribute') {
-	            result[name] = attr.value;
-	          }
-	        }
-	        return result;
-	      };
-	    }
-	  }
-
-	  // set as enumerable, writable and configurable
-	  document[REGISTER_ELEMENT] = function registerElement(type, options) {
-	    upperType = type.toUpperCase();
-	    if (!setListener) {
-	      // only first time document.registerElement is used
-	      // we need to set this listener
-	      // setting it by default might slow down for no reason
-	      setListener = true;
-	      if (MutationObserver) {
-	        observer = (function(attached, detached){
-	          function checkEmAll(list, callback) {
-	            for (var i = 0, length = list.length; i < length; callback(list[i++])){}
-	          }
-	          return new MutationObserver(function (records) {
-	            for (var
-	              current, node, newValue,
-	              i = 0, length = records.length; i < length; i++
-	            ) {
-	              current = records[i];
-	              if (current.type === 'childList') {
-	                checkEmAll(current.addedNodes, attached);
-	                checkEmAll(current.removedNodes, detached);
-	              } else {
-	                node = current.target;
-	                if (notFromInnerHTMLHelper &&
-	                    node[ATTRIBUTE_CHANGED_CALLBACK] &&
-	                    current.attributeName !== 'style') {
-	                  newValue = getAttribute.call(node, current.attributeName);
-	                  if (newValue !== current.oldValue) {
-	                    node[ATTRIBUTE_CHANGED_CALLBACK](
-	                      current.attributeName,
-	                      current.oldValue,
-	                      newValue
-	                    );
-	                  }
-	                }
-	              }
-	            }
-	          });
-	        }(executeAction(ATTACHED), executeAction(DETACHED)));
-	        observer.observe(
-	          document,
-	          {
-	            childList: true,
-	            subtree: true
-	          }
-	        );
-	      } else {
-	        asapQueue = [];
-	        document[ADD_EVENT_LISTENER]('DOMNodeInserted', onDOMNode(ATTACHED));
-	        document[ADD_EVENT_LISTENER]('DOMNodeRemoved', onDOMNode(DETACHED));
-	      }
-
-	      document[ADD_EVENT_LISTENER](DOM_CONTENT_LOADED, onReadyStateChange);
-	      document[ADD_EVENT_LISTENER]('readystatechange', onReadyStateChange);
-
-	      HTMLElementPrototype.cloneNode = function (deep) {
-	        var
-	          node = cloneNode.call(this, !!deep),
-	          i = getTypeIndex(node)
-	        ;
-	        if (-1 < i) patch(node, protos[i]);
-	        if (deep) loopAndSetup(node.querySelectorAll(query));
-	        return node;
-	      };
-	    }
-
-	    if (-2 < (
-	      indexOf.call(types, PREFIX_IS + upperType) +
-	      indexOf.call(types, PREFIX_TAG + upperType)
-	    )) {
-	      throwTypeError(type);
-	    }
-
-	    if (!validName.test(upperType) || -1 < indexOf.call(invalidNames, upperType)) {
-	      throw new Error('The type ' + type + ' is invalid');
-	    }
-
-	    var
-	      constructor = function () {
-	        return extending ?
-	          document.createElement(nodeName, upperType) :
-	          document.createElement(nodeName);
-	      },
-	      opt = options || OP,
-	      extending = hOP.call(opt, EXTENDS),
-	      nodeName = extending ? options[EXTENDS].toUpperCase() : upperType,
-	      upperType,
-	      i
-	    ;
-
-	    if (extending && -1 < (
-	      indexOf.call(types, PREFIX_TAG + nodeName)
-	    )) {
-	      throwTypeError(nodeName);
-	    }
-
-	    i = types.push((extending ? PREFIX_IS : PREFIX_TAG) + upperType) - 1;
-
-	    query = query.concat(
-	      query.length ? ',' : '',
-	      extending ? nodeName + '[is="' + type.toLowerCase() + '"]' : nodeName
-	    );
-
-	    constructor.prototype = (
-	      protos[i] = hOP.call(opt, 'prototype') ?
-	        opt.prototype :
-	        create(HTMLElementPrototype)
-	    );
-
-	    loopAndVerify(
-	      document.querySelectorAll(query),
-	      ATTACHED
-	    );
-
-	    return constructor;
-	  };
-
-	  document.createElement = (patchedCreateElement = function (localName, typeExtension) {
-	    var
-	      is = getIs(typeExtension),
-	      node = is ?
-	        createElement.call(document, localName, secondArgument(is)) :
-	        createElement.call(document, localName),
-	      name = '' + localName,
-	      i = indexOf.call(
-	        types,
-	        (is ? PREFIX_IS : PREFIX_TAG) +
-	        (is || name).toUpperCase()
-	      ),
-	      setup = -1 < i
-	    ;
-	    if (is) {
-	      node.setAttribute('is', is = is.toLowerCase());
-	      if (setup) {
-	        setup = isInQSA(name.toUpperCase(), is);
-	      }
-	    }
-	    notFromInnerHTMLHelper = !document.createElement.innerHTMLHelper;
-	    if (setup) patch(node, protos[i]);
-	    return node;
-	  });
-
-	}
-
-	function ASAP() {
-	  var queue = asapQueue.splice(0, asapQueue.length);
-	  asapTimer = 0;
-	  while (queue.length) {
-	    queue.shift().call(
-	      null, queue.shift()
-	    );
-	  }
-	}
-
-	function loopAndVerify(list, action) {
-	  for (var i = 0, length = list.length; i < length; i++) {
-	    verifyAndSetupAndAction(list[i], action);
-	  }
-	}
-
-	function loopAndSetup(list) {
-	  for (var i = 0, length = list.length, node; i < length; i++) {
-	    node = list[i];
-	    patch(node, protos[getTypeIndex(node)]);
-	  }
-	}
-
-	function executeAction(action) {
-	  return function (node) {
-	    if (isValidNode(node)) {
-	      verifyAndSetupAndAction(node, action);
-	      loopAndVerify(
-	        node.querySelectorAll(query),
-	        action
-	      );
-	    }
-	  };
-	}
-
-	function getTypeIndex(target) {
-	  var
-	    is = getAttribute.call(target, 'is'),
-	    nodeName = target.nodeName.toUpperCase(),
-	    i = indexOf.call(
-	      types,
-	      is ?
-	          PREFIX_IS + is.toUpperCase() :
-	          PREFIX_TAG + nodeName
-	    )
-	  ;
-	  return is && -1 < i && !isInQSA(nodeName, is) ? -1 : i;
-	}
-
-	function isInQSA(name, type) {
-	  return -1 < query.indexOf(name + '[is="' + type + '"]');
-	}
-
-	function onDOMAttrModified(e) {
-	  var
-	    node = e.currentTarget,
-	    attrChange = e.attrChange,
-	    attrName = e.attrName,
-	    target = e.target
-	  ;
-	  if (notFromInnerHTMLHelper &&
-	      (!target || target === node) &&
-	      node[ATTRIBUTE_CHANGED_CALLBACK] &&
-	      attrName !== 'style' &&
-	      e.prevValue !== e.newValue) {
-	    node[ATTRIBUTE_CHANGED_CALLBACK](
-	      attrName,
-	      attrChange === e[ADDITION] ? null : e.prevValue,
-	      attrChange === e[REMOVAL] ? null : e.newValue
-	    );
-	  }
-	}
-
-	function onDOMNode(action) {
-	  var executor = executeAction(action);
-	  return function (e) {
-	    asapQueue.push(executor, e.target);
-	    if (asapTimer) clearTimeout(asapTimer);
-	    asapTimer = setTimeout(ASAP, 1);
-	  };
-	}
-
-	function onReadyStateChange(e) {
-	  if (dropDomContentLoaded) {
-	    dropDomContentLoaded = false;
-	    e.currentTarget.removeEventListener(DOM_CONTENT_LOADED, onReadyStateChange);
-	  }
-	  loopAndVerify(
-	    (e.target || document).querySelectorAll(query),
-	    e.detail === DETACHED ? DETACHED : ATTACHED
-	  );
-	  if (IE8) purge();
-	}
-
-	function patchedSetAttribute(name, value) {
-	  // jshint validthis:true
-	  var self = this;
-	  setAttribute.call(self, name, value);
-	  onSubtreeModified.call(self, {target: self});
-	}
-
-	function setupNode(node, proto) {
-	  setPrototype(node, proto);
-	  if (observer) {
-	    observer.observe(node, attributesObserver);
-	  } else {
-	    if (doesNotSupportDOMAttrModified) {
-	      node.setAttribute = patchedSetAttribute;
-	      node[EXPANDO_UID] = getAttributesMirror(node);
-	      node[ADD_EVENT_LISTENER](DOM_SUBTREE_MODIFIED, onSubtreeModified);
-	    }
-	    node[ADD_EVENT_LISTENER](DOM_ATTR_MODIFIED, onDOMAttrModified);
-	  }
-	  if (node[CREATED_CALLBACK] && notFromInnerHTMLHelper) {
-	    node.created = true;
-	    node[CREATED_CALLBACK]();
-	    node.created = false;
-	  }
-	}
-
-	function purge() {
-	  for (var
-	    node,
-	    i = 0,
-	    length = targets.length;
-	    i < length; i++
-	  ) {
-	    node = targets[i];
-	    if (!documentElement.contains(node)) {
-	      length--;
-	      targets.splice(i--, 1);
-	      verifyAndSetupAndAction(node, DETACHED);
-	    }
-	  }
-	}
-
-	function throwTypeError(type) {
-	  throw new Error('A ' + type + ' type is already registered');
-	}
-
-	function verifyAndSetupAndAction(node, action) {
-	  var
-	    fn,
-	    i = getTypeIndex(node)
-	  ;
-	  if (-1 < i) {
-	    patchIfNotAlready(node, protos[i]);
-	    i = 0;
-	    if (action === ATTACHED && !node[ATTACHED]) {
-	      node[DETACHED] = false;
-	      node[ATTACHED] = true;
-	      i = 1;
-	      if (IE8 && indexOf.call(targets, node) < 0) {
-	        targets.push(node);
-	      }
-	    } else if (action === DETACHED && !node[DETACHED]) {
-	      node[ATTACHED] = false;
-	      node[DETACHED] = true;
-	      i = 1;
-	    }
-	    if (i && (fn = node[action + CALLBACK])) fn.call(node);
-	  }
-	}
-
-
-
-	// V1 in da House!
-	function CustomElementRegistry() {}
-
-	CustomElementRegistry.prototype = {
-	  constructor: CustomElementRegistry,
-	  // a workaround for the stubborn WebKit
-	  define: usableCustomElements ?
-	    function (name, Class, options) {
-	      if (options) {
-	        CERDefine(name, Class, options);
-	      } else {
-	        customElements.define(name, Class);
-	        name = name.toUpperCase();
-	        constructors[name] = {
-	          constructor: Class,
-	          create: [name]
-	        };
-	        nodeNames.set(Class, name);
-	      }
-	    } :
-	    CERDefine,
-	  get: usableCustomElements ?
-	    function (name) {
-	      return customElements.get(name) || get(name);
-	    } :
-	    get,
-	  whenDefined: usableCustomElements ?
-	    function (name) {
-	      return Promise.race([
-	        customElements.whenDefined(name),
-	        whenDefined(name)
-	      ]);
-	    } :
-	    whenDefined
-	};
-
-	function CERDefine(name, Class, options) {
-	  var
-	    is = options && options[EXTENDS] || '',
-	    CProto = Class.prototype,
-	    proto = create(CProto),
-	    attributes = Class.observedAttributes || empty,
-	    definition = {prototype: proto}
-	  ;
-	  // TODO: is this needed at all since it's inherited?
-	  // defineProperty(proto, 'constructor', {value: Class});
-	  safeProperty(proto, CREATED_CALLBACK, {
-	      value: function () {
-	        if (justCreated) justCreated = false;
-	        else if (!this[DRECEV1]) {
-	          this[DRECEV1] = true;
-	          new Class(this);
-	          if (CProto[CREATED_CALLBACK])
-	            CProto[CREATED_CALLBACK].call(this);
-	          var info = constructors[nodeNames.get(Class)];
-	          if (!usableCustomElements || info.create.length > 1) {
-	            notifyAttributes(this);
-	          }
-	        }
-	    }
-	  });
-	  safeProperty(proto, ATTRIBUTE_CHANGED_CALLBACK, {
-	    value: function (name) {
-	      if (-1 < indexOf.call(attributes, name))
-	        CProto[ATTRIBUTE_CHANGED_CALLBACK].apply(this, arguments);
-	    }
-	  });
-	  if (CProto[CONNECTED_CALLBACK]) {
-	    safeProperty(proto, ATTACHED_CALLBACK, {
-	      value: CProto[CONNECTED_CALLBACK]
-	    });
-	  }
-	  if (CProto[DISCONNECTED_CALLBACK]) {
-	    safeProperty(proto, DETACHED_CALLBACK, {
-	      value: CProto[DISCONNECTED_CALLBACK]
-	    });
-	  }
-	  if (is) definition[EXTENDS] = is;
-	  document[REGISTER_ELEMENT](name, definition);
-	  name = name.toUpperCase();
-	  constructors[name] = {
-	    constructor: Class,
-	    create: is ? [is, secondArgument(name)] : [name]
-	  };
-	  nodeNames.set(Class, name);
-	  whenDefined(name);
-	  waitingList[name].r();
-	}
-
-	function get(name) {
-	  var info = constructors[name.toUpperCase()];
-	  return info && info.constructor;
-	}
-
-	function getIs(options) {
-	  return typeof options === 'string' ?
-	      options : (options && options.is || '');
-	}
-
-	function notifyAttributes(self) {
-	  var
-	    callback = self[ATTRIBUTE_CHANGED_CALLBACK],
-	    attributes = callback ? self.attributes : empty,
-	    i = attributes.length,
-	    attribute
-	  ;
-	  while (i--) {
-	    attribute =  attributes[i]; // || attributes.item(i);
-	    callback.call(
-	      self,
-	      attribute.name || attribute.nodeName,
-	      null,
-	      attribute.value || attribute.nodeValue
-	    );
-	  }
-	}
-
-	function whenDefined(name) {
-	  name = name.toUpperCase();
-	  if (!(name in waitingList)) {
-	    waitingList[name] = {};
-	    waitingList[name].p = new Promise(function (resolve) {
-	      waitingList[name].r = resolve;
-	    });
-	  }
-	  return waitingList[name].p;
-	}
-
-	function polyfillV1() {
-	  if (customElements) delete window.customElements;
-	  defineProperty(window, 'customElements', {
-	    configurable: true,
-	    value: new CustomElementRegistry()
-	  });
-	  defineProperty(window, 'CustomElementRegistry', {
-	    configurable: true,
-	    value: CustomElementRegistry
-	  });
-	  for (var
-	    patchClass = function (name) {
-	      var Class = window[name];
-	      if (Class) {
-	        window[name] = function CustomElementsV1(self) {
-	          var info, isNative;
-	          if (!self) self = this;
-	          if (!self[DRECEV1]) {
-	            justCreated = true;
-	            info = constructors[nodeNames.get(self.constructor)];
-	            isNative = usableCustomElements && info.create.length === 1;
-	            self = isNative ?
-	              Reflect.construct(Class, empty, info.constructor) :
-	              document.createElement.apply(document, info.create);
-	            self[DRECEV1] = true;
-	            justCreated = false;
-	            if (!isNative) notifyAttributes(self);
-	          }
-	          return self;
-	        };
-	        window[name].prototype = Class.prototype;
-	        try {
-	          Class.prototype.constructor = window[name];
-	        } catch(WebKit) {
-	          fixGetClass = true;
-	          defineProperty(Class, DRECEV1, {value: window[name]});
-	        }
-	      }
-	    },
-	    Classes = htmlClass.get(/^HTML/),
-	    i = Classes.length;
-	    i--;
-	    patchClass(Classes[i])
-	  ) {}
-	  (document.createElement = function (name, options) {
-	    var is = getIs(options);
-	    return is ?
-	      patchedCreateElement.call(this, name, secondArgument(is)) :
-	      patchedCreateElement.call(this, name);
-	  });
-	}
-
-	if (!customElements) polyfillV1();
-	try {
-	  (function (DRE, options, name) {
-	    options[EXTENDS] = 'a';
-	    DRE.prototype = HTMLAnchorElement.prototype;
-	    customElements.define(name, DRE, options);
-	    if (document.createElement(name).getAttribute('is') !== name) {
-	      throw options;
-	    }
-	  }(
-	    function DRE() {
-	      return Reflect.construct(HTMLAnchorElement, [], DRE);
-	    },
-	    {},
-	    'document-register-element-a'
-	  ));
-	} catch(o_O) {
-	  polyfillV1();
-	}
-
-	try {
-	  createElement.call(document, 'a', 'a');
-	} catch(FireFox) {
-	  secondArgument = function (is) {
-	    return {is: is};
-	  };
-	}
-
-	}(window, document, Object, 'registerElement'));
+	/*! (C) WebReflection Mit Style License */
+	(function(e,t,n,r){"use strict";function bt(){var e=ut.splice(0,ut.length);at=0;while(e.length)e.shift().call(null,e.shift())}function wt(e,t){for(var n=0,r=e.length;n<r;n++)_t(e[n],t)}function Et(e){for(var t=0,n=e.length,r;t<n;t++)r=e[t],yt(r,w[xt(r)])}function St(e){return function(t){K(t)&&(_t(t,e),wt(t.querySelectorAll(E),e))}}function xt(e){var t=Z.call(e,"is"),n=e.nodeName.toUpperCase(),r=x.call(b,t?m+t.toUpperCase():v+n);return t&&-1<r&&!Tt(n,t)?-1:r}function Tt(e,t){return-1<E.indexOf(e+'[is="'+t+'"]')}function Nt(e){var t=e.currentTarget,n=e.attrChange,r=e.attrName,i=e.target;ht&&(!i||i===t)&&t.attributeChangedCallback&&r!=="style"&&e.prevValue!==e.newValue&&t.attributeChangedCallback(r,n===e[f]?null:e.prevValue,n===e[c]?null:e.newValue)}function Ct(e){var t=St(e);return function(e){ut.push(t,e.target),at&&clearTimeout(at),at=setTimeout(bt,1)}}function kt(e){ct&&(ct=!1,e.currentTarget.removeEventListener(p,kt)),wt((e.target||t).querySelectorAll(E),e.detail===u?u:o),$&&Ot()}function Lt(e,t){var n=this;nt.call(n,e,t),pt.call(n,{target:n})}function At(e,t){W(e,t),mt?mt.observe(e,st):(lt&&(e.setAttribute=Lt,e[s]=vt(e),e.addEventListener(d,pt)),e.addEventListener(h,Nt)),e.createdCallback&&ht&&(e.created=!0,e.createdCallback(),e.created=!1)}function Ot(){for(var e,t=0,n=Q.length;t<n;t++)e=Q[t],S.contains(e)||(n--,Q.splice(t--,1),_t(e,u))}function Mt(e){throw new Error("A "+e+" type is already registered")}function _t(e,t){var n,r=xt(e);-1<r&&(gt(e,w[r]),r=0,t===o&&!e[o]?(e[u]=!1,e[o]=!0,r=1,$&&x.call(Q,e)<0&&Q.push(e)):t===u&&!e[u]&&(e[o]=!1,e[u]=!0,r=1),r&&(n=e[t+"Callback"])&&n.call(e))}function Dt(){}function Pt(e,n,i){var s=i&&i[a]||"",o=n.prototype,u=z(o),f=n.observedAttributes||Array.prototype,l={prototype:u};J(u,"createdCallback",{value:function(){I?I=!1:this[D]||(this[D]=!0,new n(this))}}),J(u,"attributeChangedCallback",{value:function(e){-1<x.call(f,e)&&o.attributeChangedCallback.apply(this,arguments)}}),o.connectedCallback&&J(u,"attachedCallback",{value:o.connectedCallback}),o.disconnectedCallback&&J(u,"detachedCallback",{value:o.disconnectedCallback}),s&&(l[a]=s),t[r](e,l),e=e.toUpperCase(),q[e]={constructor:n,create:s?[s,e]:[e]},U.set(n,e),Bt(e),R[e].r()}function Ht(e){var t=q[e.toUpperCase()];return t&&t.constructor}function Bt(e){return e=e.toUpperCase(),e in R||(R[e]={},R[e].p=new F(function(t){R[e].r=t})),R[e].p}function jt(){P&&delete e.customElements,k(e,"customElements",{configurable:!0,value:new Dt}),k(e,"CustomElementsRegistry",{configurable:!0,value:Dt});for(var n=function(n){var r=e[n];r&&(e[n]=function(n){return n||(n=this),n[D]||(I=!0,n=t.createElement.apply(t,q[U.get(n.constructor)].create),I=!1,n[D]=!0),n},J(e[n].prototype=z(r.prototype),"constructor",{configurable:!0,writable:!0,value:e[n]}))},r=i.get(/^HTML/),s=r.length;s--;n(r[s]));t.createElement=function(e,t){var n=typeof t=="string"?t:t&&t.is||"";return n?it.call(this,e,n):it.call(this,e)}}var i=function(e){var t=/^[A-Z]+[a-z]/,r=function(e){var t=[],n;for(n in s)e.test(n)&&t.push(n);return t},i=function(e,t){t=t.toLowerCase(),t in s||(s[e]=(s[e]||[]).concat(t),s[t]=s[t.toUpperCase()]=e)},s=(n.create||n)(null),o={},u,a,f,l;for(a in e)for(l in e[a]){f=e[a][l],s[l]=f;for(u=0;u<f.length;u++)s[f[u].toLowerCase()]=s[f[u].toUpperCase()]=l}return o.get=function(n){return typeof n=="string"?s[n]||(t.test(n)?[]:""):r(n)},o.set=function(n,r){return t.test(n)?i(n,r):i(r,n),o},o}({collections:{HTMLAllCollection:["all"],HTMLCollection:["forms"],HTMLFormControlsCollection:["elements"],HTMLOptionsCollection:["options"]},elements:{Element:["element"],HTMLAnchorElement:["a"],HTMLAppletElement:["applet"],HTMLAreaElement:["area"],HTMLAttachmentElement:["attachment"],HTMLAudioElement:["audio"],HTMLBRElement:["br"],HTMLBaseElement:["base"],HTMLBodyElement:["body"],HTMLButtonElement:["button"],HTMLCanvasElement:["canvas"],HTMLContentElement:["content"],HTMLDListElement:["dl"],HTMLDataElement:["data"],HTMLDataListElement:["datalist"],HTMLDetailsElement:["details"],HTMLDialogElement:["dialog"],HTMLDirectoryElement:["dir"],HTMLDivElement:["div"],HTMLDocument:["document"],HTMLElement:["element","abbr","address","article","aside","b","bdi","bdo","cite","code","command","dd","dfn","dt","em","figcaption","figure","footer","header","i","kbd","mark","nav","noscript","rp","rt","ruby","s","samp","section","small","strong","sub","summary","sup","u","var","wbr"],HTMLEmbedElement:["embed"],HTMLFieldSetElement:["fieldset"],HTMLFontElement:["font"],HTMLFormElement:["form"],HTMLFrameElement:["frame"],HTMLFrameSetElement:["frameset"],HTMLHRElement:["hr"],HTMLHeadElement:["head"],HTMLHeadingElement:["h1","h2","h3","h4","h5","h6"],HTMLHtmlElement:["html"],HTMLIFrameElement:["iframe"],HTMLImageElement:["img"],HTMLInputElement:["input"],HTMLKeygenElement:["keygen"],HTMLLIElement:["li"],HTMLLabelElement:["label"],HTMLLegendElement:["legend"],HTMLLinkElement:["link"],HTMLMapElement:["map"],HTMLMarqueeElement:["marquee"],HTMLMediaElement:["media"],HTMLMenuElement:["menu"],HTMLMenuItemElement:["menuitem"],HTMLMetaElement:["meta"],HTMLMeterElement:["meter"],HTMLModElement:["del","ins"],HTMLOListElement:["ol"],HTMLObjectElement:["object"],HTMLOptGroupElement:["optgroup"],HTMLOptionElement:["option"],HTMLOutputElement:["output"],HTMLParagraphElement:["p"],HTMLParamElement:["param"],HTMLPictureElement:["picture"],HTMLPreElement:["pre"],HTMLProgressElement:["progress"],HTMLQuoteElement:["blockquote","q","quote"],HTMLScriptElement:["script"],HTMLSelectElement:["select"],HTMLShadowElement:["shadow"],HTMLSlotElement:["slot"],HTMLSourceElement:["source"],HTMLSpanElement:["span"],HTMLStyleElement:["style"],HTMLTableCaptionElement:["caption"],HTMLTableCellElement:["td","th"],HTMLTableColElement:["col","colgroup"],HTMLTableElement:["table"],HTMLTableRowElement:["tr"],HTMLTableSectionElement:["thead","tbody","tfoot"],HTMLTemplateElement:["template"],HTMLTextAreaElement:["textarea"],HTMLTimeElement:["time"],HTMLTitleElement:["title"],HTMLTrackElement:["track"],HTMLUListElement:["ul"],HTMLUnknownElement:["unknown","vhgroupv","vkeygen"],HTMLVideoElement:["video"]},nodes:{Attr:["node"],Audio:["audio"],CDATASection:["node"],CharacterData:["node"],Comment:["#comment"],Document:["#document"],DocumentFragment:["#document-fragment"],DocumentType:["node"],HTMLDocument:["#document"],Image:["img"],Option:["option"],ProcessingInstruction:["node"],ShadowRoot:["#shadow-root"],Text:["#text"],XMLDocument:["xml"]}}),s="__"+r+(Math.random()*1e5>>0),o="attached",u="detached",a="extends",f="ADDITION",l="MODIFICATION",c="REMOVAL",h="DOMAttrModified",p="DOMContentLoaded",d="DOMSubtreeModified",v="<",m="=",g=/^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/,y=["ANNOTATION-XML","COLOR-PROFILE","FONT-FACE","FONT-FACE-SRC","FONT-FACE-URI","FONT-FACE-FORMAT","FONT-FACE-NAME","MISSING-GLYPH"],b=[],w=[],E="",S=t.documentElement,x=b.indexOf||function(e){for(var t=this.length;t--&&this[t]!==e;);return t},T=n.prototype,N=T.hasOwnProperty,C=T.isPrototypeOf,k=n.defineProperty,L=n.getOwnPropertyDescriptor,A=n.getOwnPropertyNames,O=n.getPrototypeOf,M=n.setPrototypeOf,_=!!n.__proto__,D="__dreCEv1",P=e.customElements,H=!!(P&&P.define&&P.get&&P.whenDefined),B=n.create||n,j=e.Map||function(){var t=[],n=[],r;return{get:function(e){return n[x.call(t,e)]},set:function(e,i){r=x.call(t,e),r<0?n[t.push(e)-1]=i:n[r]=i}}},F=e.Promise||function(e){function i(e){n=!0;while(t.length)t.shift()(e)}var t=[],n=!1,r={"catch":function(){return r},then:function(e){return t.push(e),n&&setTimeout(i,1),r}};return e(i),r},I=!1,q=B(null),R=B(null),U=new j,z=n.create||function It(e){return e?(It.prototype=e,new It):this},W=M||(_?function(e,t){return e.__proto__=t,e}:A&&L?function(){function e(e,t){for(var n,r=A(t),i=0,s=r.length;i<s;i++)n=r[i],N.call(e,n)||k(e,n,L(t,n))}return function(t,n){do e(t,n);while((n=O(n))&&!C.call(n,t));return t}}():function(e,t){for(var n in t)e[n]=t[n];return e}),X=e.MutationObserver||e.WebKitMutationObserver,V=(e.HTMLElement||e.Element||e.Node).prototype,$=!C.call(V,S),J=$?function(e,t,n){return e[t]=n.value,e}:k,K=$?function(e){return e.nodeType===1}:function(e){return C.call(V,e)},Q=$&&[],G=V.cloneNode,Y=V.dispatchEvent,Z=V.getAttribute,et=V.hasAttribute,tt=V.removeAttribute,nt=V.setAttribute,rt=t.createElement,it=rt,st=X&&{attributes:!0,characterData:!0,attributeOldValue:!0},ot=X||function(e){lt=!1,S.removeEventListener(h,ot)},ut,at=0,ft=!1,lt=!0,ct=!0,ht=!0,pt,dt,vt,mt,gt,yt;r in t||(M||_?(gt=function(e,t){C.call(t,e)||At(e,t)},yt=At):(gt=function(e,t){e[s]||(e[s]=n(!0),At(e,t))},yt=gt),$?(lt=!1,function(){var e=L(V,"addEventListener"),t=e.value,n=function(e){var t=new CustomEvent(h,{bubbles:!0});t.attrName=e,t.prevValue=Z.call(this,e),t.newValue=null,t[c]=t.attrChange=2,tt.call(this,e),Y.call(this,t)},r=function(e,t){var n=et.call(this,e),r=n&&Z.call(this,e),i=new CustomEvent(h,{bubbles:!0});nt.call(this,e,t),i.attrName=e,i.prevValue=n?r:null,i.newValue=t,n?i[l]=i.attrChange=1:i[f]=i.attrChange=0,Y.call(this,i)},i=function(e){var t=e.currentTarget,n=t[s],r=e.propertyName,i;n.hasOwnProperty(r)&&(n=n[r],i=new CustomEvent(h,{bubbles:!0}),i.attrName=n.name,i.prevValue=n.value||null,i.newValue=n.value=t[r]||null,i.prevValue==null?i[f]=i.attrChange=0:i[l]=i.attrChange=1,Y.call(t,i))};e.value=function(e,o,u){e===h&&this.attributeChangedCallback&&this.setAttribute!==r&&(this[s]={className:{name:"class",value:this.className}},this.setAttribute=r,this.removeAttribute=n,t.call(this,"propertychange",i)),t.call(this,e,o,u)},k(V,"addEventListener",e)}()):X||(S.addEventListener(h,ot),S.setAttribute(s,1),S.removeAttribute(s),lt&&(pt=function(e){var t=this,n,r,i;if(t===e.target){n=t[s],t[s]=r=vt(t);for(i in r){if(!(i in n))return dt(0,t,i,n[i],r[i],f);if(r[i]!==n[i])return dt(1,t,i,n[i],r[i],l)}for(i in n)if(!(i in r))return dt(2,t,i,n[i],r[i],c)}},dt=function(e,t,n,r,i,s){var o={attrChange:e,currentTarget:t,attrName:n,prevValue:r,newValue:i};o[s]=e,Nt(o)},vt=function(e){for(var t,n,r={},i=e.attributes,s=0,o=i.length;s<o;s++)t=i[s],n=t.name,n!=="setAttribute"&&(r[n]=t.value);return r})),t[r]=function(n,r){c=n.toUpperCase(),ft||(ft=!0,X?(mt=function(e,t){function n(e,t){for(var n=0,r=e.length;n<r;t(e[n++]));}return new X(function(r){for(var i,s,o,u=0,a=r.length;u<a;u++)i=r[u],i.type==="childList"?(n(i.addedNodes,e),n(i.removedNodes,t)):(s=i.target,ht&&s.attributeChangedCallback&&i.attributeName!=="style"&&(o=Z.call(s,i.attributeName),o!==i.oldValue&&s.attributeChangedCallback(i.attributeName,i.oldValue,o)))})}(St(o),St(u)),mt.observe(t,{childList:!0,subtree:!0})):(ut=[],t.addEventListener("DOMNodeInserted",Ct(o)),t.addEventListener("DOMNodeRemoved",Ct(u))),t.addEventListener(p,kt),t.addEventListener("readystatechange",kt),V.cloneNode=function(e){var t=G.call(this,!!e),n=xt(t);return-1<n&&yt(t,w[n]),e&&Et(t.querySelectorAll(E)),t}),-2<x.call(b,m+c)+x.call(b,v+c)&&Mt(n);if(!g.test(c)||-1<x.call(y,c))throw new Error("The type "+n+" is invalid");var i=function(){return f?t.createElement(l,c):t.createElement(l)},s=r||T,f=N.call(s,a),l=f?r[a].toUpperCase():c,c,h;return f&&-1<x.call(b,v+l)&&Mt(l),h=b.push((f?m:v)+c)-1,E=E.concat(E.length?",":"",f?l+'[is="'+n.toLowerCase()+'"]':l),i.prototype=w[h]=N.call(s,"prototype")?s.prototype:z(V),wt(t.querySelectorAll(E),o),i},t.createElement=it=function(e,n){var r=typeof n=="string"?n:"",i=r?rt.call(t,e,r):rt.call(t,e),s=""+e,o=x.call(b,(r?m:v)+(r||s).toUpperCase()),u=-1<o;return r&&(i.setAttribute("is",r=r.toLowerCase()),u&&(u=Tt(s.toUpperCase(),r))),ht=!t.createElement.innerHTMLHelper,u&&yt(i,w[o]),i}),Dt.prototype={constructor:Dt,define:H?function(e,t,n){n?Pt(e,t,n):P.define(e,t)}:Pt,get:H?function(e){return P.get(e)||Ht(e)}:Ht,whenDefined:H?function(e){return F.race(P.whenDefined,Bt(e))}:Bt},P||jt();try{(function(e,t){t[a]="a",W(e.prototype,HTMLAnchorElement.prototype),P.define("document-register-element-a",e,t),S.insertBefore(e=new e,S.firstChild),S.removeChild(e)})(function(){},{})}catch(Ft){jt()}})(window,document,Object,"registerElement");
 
 /***/ },
 /* 753 */
@@ -60258,7 +58875,7 @@
 	  function Nav(props) {
 	    _classCallCheck(this, Nav);
 
-	    var _this = _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Nav).call(this, props));
 
 	    _this.state = {
 	      plantaciones: true,
@@ -60410,7 +59027,7 @@
 	  function Body() {
 	    _classCallCheck(this, Body);
 
-	    return _possibleConstructorReturn(this, (Body.__proto__ || Object.getPrototypeOf(Body)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Body).apply(this, arguments));
 	  }
 
 	  _createClass(Body, [{
@@ -60468,7 +59085,7 @@
 	  function SliderBox() {
 	    _classCallCheck(this, SliderBox);
 
-	    return _possibleConstructorReturn(this, (SliderBox.__proto__ || Object.getPrototypeOf(SliderBox)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SliderBox).apply(this, arguments));
 	  }
 
 	  _createClass(SliderBox, [{
@@ -60560,7 +59177,7 @@
 	  function Plantaciones() {
 	    _classCallCheck(this, Plantaciones);
 
-	    return _possibleConstructorReturn(this, (Plantaciones.__proto__ || Object.getPrototypeOf(Plantaciones)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Plantaciones).apply(this, arguments));
 	  }
 
 	  _createClass(Plantaciones, [{
@@ -60661,7 +59278,7 @@
 	  function Arboles() {
 	    _classCallCheck(this, Arboles);
 
-	    return _possibleConstructorReturn(this, (Arboles.__proto__ || Object.getPrototypeOf(Arboles)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Arboles).apply(this, arguments));
 	  }
 
 	  _createClass(Arboles, [{
@@ -60746,7 +59363,7 @@
 	  function Body() {
 	    _classCallCheck(this, Body);
 
-	    return _possibleConstructorReturn(this, (Body.__proto__ || Object.getPrototypeOf(Body)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Body).apply(this, arguments));
 	  }
 
 	  _createClass(Body, [{
@@ -60857,7 +59474,7 @@
 	  function Footer() {
 	    _classCallCheck(this, Footer);
 
-	    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Footer).apply(this, arguments));
 	  }
 
 	  _createClass(Footer, [{
@@ -60969,7 +59586,7 @@
 	  function Popups() {
 	    _classCallCheck(this, Popups);
 
-	    var _this = _possibleConstructorReturn(this, (Popups.__proto__ || Object.getPrototypeOf(Popups)).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Popups).call(this));
 
 	    _this.state = {
 	      user: null,
@@ -61116,7 +59733,7 @@
 	  function Signin() {
 	    _classCallCheck(this, Signin);
 
-	    return _possibleConstructorReturn(this, (Signin.__proto__ || Object.getPrototypeOf(Signin)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Signin).apply(this, arguments));
 	  }
 
 	  _createClass(Signin, [{
@@ -61274,7 +59891,7 @@
 	  function Dialog() {
 	    _classCallCheck(this, Dialog);
 
-	    return _possibleConstructorReturn(this, (Dialog.__proto__ || Object.getPrototypeOf(Dialog)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Dialog).apply(this, arguments));
 	  }
 
 	  return Dialog;
@@ -61325,7 +59942,7 @@
 	  function Form() {
 	    _classCallCheck(this, Form);
 
-	    var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Form).call(this));
 
 	    _this.state = {
 	      formAlertShow: false,
@@ -61334,7 +59951,6 @@
 	    _this.closeAlert = _this.closeAlert.bind(_this);
 	    _this.sendForm = _this.sendForm.bind(_this);
 	    _this.onSubmit = _this.onSubmit.bind(_this);
-
 	    return _this;
 	  }
 
@@ -61347,9 +59963,9 @@
 	    key: 'onSubmit',
 	    value: function onSubmit(e) {
 	      e.preventDefault();
-	      var data = new FormData(e.target);
+	      var data = new window.FormData(e.target);
 	      if (typeof this.props.onSubmit === 'function') {
-	        this.props.onSubmit(data, form.sendForm);
+	        this.props.onSubmit(data, this.sendForm);
 	      }
 	      if (this.props.prevent) return;
 	      this.sendForm(data);
@@ -61365,7 +59981,7 @@
 	        method: 'post',
 	        body: data
 	      }).catch(function (err) {
-	        console.warn('Request Internal Error action="' + action + '"', err);
+	        console.warn('Request Internal Error action="' + _this2.props.action + '"', err);
 	      }).then(function (res) {
 	        res.json().then(function (data) {
 	          if (data.success) {
@@ -61479,7 +60095,7 @@
 	  function Signup() {
 	    _classCallCheck(this, Signup);
 
-	    return _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Signup).apply(this, arguments));
 	  }
 
 	  _createClass(Signup, [{
@@ -61630,7 +60246,7 @@
 	  function Forgot() {
 	    _classCallCheck(this, Forgot);
 
-	    return _possibleConstructorReturn(this, (Forgot.__proto__ || Object.getPrototypeOf(Forgot)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Forgot).apply(this, arguments));
 	  }
 
 	  _createClass(Forgot, [{
@@ -61744,7 +60360,7 @@
 	  function Profile() {
 	    _classCallCheck(this, Profile);
 
-	    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Profile).call(this));
 
 	    _this.state = {
 	      andaGeoLocal: 'geolocation' in navigator,
@@ -61907,11 +60523,11 @@
 	            _react2.default.createElement(
 	              'geo-select',
 	              {
-	                path: 'perfil',
+	                'data-id': 'perfil',
 	                onClick: this.updateLocation,
 	                lat: this.state.geoLocalResult[0],
 	                lng: this.state.geoLocalResult[1],
-	                ref: this.geoSelectDidMount },
+	                visible: this.props.open ? 'true' : 'false' },
 	              _react2.default.createElement('input', { type: 'hidden', name: 'location' })
 	            ),
 	            this.state.andaGeoLocal && _react2.default.createElement(
@@ -61973,71 +60589,82 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var mapas = {};
+
 	var GeoSelect = function (_window$HTMLElement) {
 	  _inherits(GeoSelect, _window$HTMLElement);
 
 	  function GeoSelect() {
 	    _classCallCheck(this, GeoSelect);
 
-	    var _this = _possibleConstructorReturn(this, (GeoSelect.__proto__ || Object.getPrototypeOf(GeoSelect)).call(this));
-
-	    _this.cnx = false;
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GeoSelect).apply(this, arguments));
 	  }
 
 	  _createClass(GeoSelect, [{
+	    key: 'disconnectedCallback',
+	    value: function disconnectedCallback() {
+	      mapas[this.getAttribute('data-id')].map.remove();
+	    }
+	  }, {
 	    key: 'connectedCallback',
 	    value: function connectedCallback() {
 	      var _this2 = this;
 
-	      console.log('this.sarasa', this.sarasa);
-	      var coords = [+this.getAttribute('lat'), +this.getAttribute('lng')];
-	      this.map = _leaflet2.default.map(this).setView(coords, 9);
+	      var coords = [+this.getAttribute('lat') || 0, +this.getAttribute('lng') || 0];
 	      this.querySelector('input').value = JSON.stringify(coords);
-	      window.L.tileLayer('https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ', {
-	        attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	        tileSize: 512,
-	        zoomOffset: -1
-	      }).addTo(this.map);
-	      this.marker = _leaflet2.default.marker(coords).addTo(this.map);
-	      this.map.on('click', function (e) {
+	      var id = this.getAttribute('data-id');
+	      if (!mapas[id]) {
+	        mapas[id] = {};
+	        mapas[id].map = _leaflet2.default.map(this).setView(coords, 9);
+	        window.L.tileLayer('https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ', {
+	          attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	          tileSize: 512,
+	          zoomOffset: -1
+	        }).addTo(mapas[id].map);
+	        mapas[id].marker = _leaflet2.default.marker(coords).addTo(mapas[id].map);
+	      }
+	      mapas[id].map.on('click', function (e) {
 	        _this2.setAttribute('lat', e.latlng.lat);
 	        _this2.setAttribute('lng', e.latlng.lng);
 	      });
-	    }
-	  }, {
-	    key: 'disconnectedCallback',
-	    value: function disconnectedCallback() {
-	      this.map.remove();
+	      this.map = mapas[id].map;
 	    }
 	  }, {
 	    key: 'attributeChangedCallback',
 	    value: function attributeChangedCallback(name, oldValue, newValue) {
-	      debugger;
 	      if (!this.parentNode) return;
-	      switch (name) {
-	        case 'lat':
-	          if (+newValue) {
-	            var coords = [+newValue, +this.getAttribute('lng')];
-	            this.marker.setLatLng(coords);
-	            this.map.setView(coords);
-	            this.querySelector('input').value = JSON.stringify(coords);
-	          }
-	          break;
-	        case 'lng':
-	          if (+newValue) {
-	            var _coords = [+this.getAttribute('lat'), +newValue];
-	            this.marker.setLatLng(_coords);
-	            this.map.setView(_coords);
-	            this.querySelector('input').value = JSON.stringify(_coords);
-	          }
-	          break;
+	      var id = this.getAttribute('data-id');
+	      var coords = [+this.getAttribute('lat') || 0, +this.getAttribute('lng') || 0];
+	      if (name === 'lat') {
+	        coords[0] = +newValue;
+	      } else if (name === 'lng') {
+	        coords[1] = +newValue;
+	      } else if (name === 'visible') {
+	        mapas[id].map.setView(coords);
+	        if (newValue) {
+	          console.log('invalidateSize');
+	          return mapas[id].map.invalidateSize();
+	        }
+	        return;
 	      }
+	      if (!mapas[id]) {
+	        mapas[id] = {};
+	        mapas[id].map = _leaflet2.default.map(this).setView(coords, 9);
+	        window.L.tileLayer('https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ', {
+	          attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	          tileSize: 512,
+	          zoomOffset: -1
+	        }).addTo(mapas[id].map);
+	        mapas[id].marker = _leaflet2.default.marker(coords).addTo(mapas[id].map);
+	      }
+	      mapas[id].marker.setLatLng(coords);
+	      mapas[id].map.setView(coords);
+	      this.querySelector('input').value = JSON.stringify(coords);
 	    }
 	  }], [{
 	    key: 'observedAttributes',
 	    get: function get() {
-	      return ['lat', 'lng'];
+	      return ['lat', 'lng', 'visible'];
 	    }
 	  }]);
 
@@ -62093,7 +60720,7 @@
 	  function PrimerLogin() {
 	    _classCallCheck(this, PrimerLogin);
 
-	    var _this = _possibleConstructorReturn(this, (PrimerLogin.__proto__ || Object.getPrototypeOf(PrimerLogin)).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PrimerLogin).call(this));
 
 	    _this.state = {
 	      andaGeoLocal: 'geolocation' in navigator,
@@ -62213,7 +60840,7 @@
 	            _react2.default.createElement(
 	              'geo-select',
 	              {
-	                path: 'primer',
+	                'data-id': 'primer',
 	                onClick: this.updateLocation,
 	                lat: this.state.geoLocalResult[0],
 	                lng: this.state.geoLocalResult[1] },
@@ -62288,7 +60915,7 @@
 	  function Reset() {
 	    _classCallCheck(this, Reset);
 
-	    return _possibleConstructorReturn(this, (Reset.__proto__ || Object.getPrototypeOf(Reset)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Reset).apply(this, arguments));
 	  }
 
 	  _createClass(Reset, [{
@@ -62354,7 +60981,7 @@
 	  function Flyer() {
 	    _classCallCheck(this, Flyer);
 
-	    return _possibleConstructorReturn(this, (Flyer.__proto__ || Object.getPrototypeOf(Flyer)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Flyer).apply(this, arguments));
 	  }
 
 	  _createClass(Flyer, [{
@@ -62434,7 +61061,7 @@
 	  function Festi() {
 	    _classCallCheck(this, Festi);
 
-	    var _this = _possibleConstructorReturn(this, (Festi.__proto__ || Object.getPrototypeOf(Festi)).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Festi).call(this));
 
 	    _this.state = {
 	      active: 'info'
@@ -62595,7 +61222,7 @@
 	  function Info() {
 	    _classCallCheck(this, Info);
 
-	    return _possibleConstructorReturn(this, (Info.__proto__ || Object.getPrototypeOf(Info)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Info).apply(this, arguments));
 	  }
 
 	  _createClass(Info, [{
@@ -62670,7 +61297,7 @@
 	  function Crono() {
 	    _classCallCheck(this, Crono);
 
-	    return _possibleConstructorReturn(this, (Crono.__proto__ || Object.getPrototypeOf(Crono)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Crono).apply(this, arguments));
 	  }
 
 	  _createClass(Crono, [{
@@ -62835,7 +61462,7 @@
 	  function Voluntariado() {
 	    _classCallCheck(this, Voluntariado);
 
-	    return _possibleConstructorReturn(this, (Voluntariado.__proto__ || Object.getPrototypeOf(Voluntariado)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Voluntariado).apply(this, arguments));
 	  }
 
 	  _createClass(Voluntariado, [{
@@ -63029,7 +61656,7 @@
 	  function Info() {
 	    _classCallCheck(this, Info);
 
-	    var _this = _possibleConstructorReturn(this, (Info.__proto__ || Object.getPrototypeOf(Info)).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Info).call(this));
 
 	    _this.state = {
 	      active: 'intro'

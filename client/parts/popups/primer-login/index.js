@@ -85,7 +85,7 @@ export default class PrimerLogin extends Component {
               <span className='ubicacion-info'>Hace click para elegir tu ubicación</span>
             </label>
             <geo-select
-              path='primer'
+              data-id='primer'
               onClick={this.updateLocation}
               lat={this.state.geoLocalResult[0]}
               lng={this.state.geoLocalResult[1]}>

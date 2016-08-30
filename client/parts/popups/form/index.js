@@ -14,8 +14,6 @@ export default class Form extends Component {
     this.closeAlert = this.closeAlert.bind(this)
     this.sendForm = this.sendForm.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
-    
-    
   }
 
   closeAlert () {
@@ -24,9 +22,9 @@ export default class Form extends Component {
 
   onSubmit (e) {
     e.preventDefault()
-    let data = new FormData(e.target)
+    let data = new window.FormData(e.target)
     if (typeof this.props.onSubmit === 'function') {
-      this.props.onSubmit(data, form.sendForm)
+      this.props.onSubmit(data, this.sendForm)
     }
     if (this.props.prevent) return
     this.sendForm(data)
@@ -41,7 +39,7 @@ export default class Form extends Component {
         method: 'post',
         body: data
       })
-      .catch(err => { console.warn('Request Internal Error action="' + action + '"', err) })
+      .catch(err => { console.warn('Request Internal Error action="' + this.props.action + '"', err) })
       .then(res => {
         res.json()
           .then(data => {

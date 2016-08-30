@@ -120,11 +120,11 @@ export default class Profile extends Component {
               <span className='ubicacion-info'>Hace click para elegir tu ubicación</span>
             </label>
             <geo-select
-              path='perfil'
+              data-id='perfil'
               onClick={this.updateLocation}
               lat={this.state.geoLocalResult[0]}
               lng={this.state.geoLocalResult[1]}
-              ref={this.geoSelectDidMount}>
+              visible={this.props.open ? 'true' : 'false'}>
               <input type='hidden' name='location' />
             </geo-select>
             {
