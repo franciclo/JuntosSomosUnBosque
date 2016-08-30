@@ -59634,7 +59634,7 @@
 	          open: this.state.open === 'forgot' ? 'open' : '' }),
 	        this.props.user && _react2.default.createElement(_profile2.default, {
 	          closePopUp: this.closePopUp,
-	          open: this.state.open === 'profile' ? 'open' : '' }),
+	          open: this.state.open === 'perfil' ? 'open' : '' }),
 	        this.props.user && this.props.user.primerLogin && _react2.default.createElement(_primerLogin2.default, {
 	          open: this.state.open === 'primerLogin' ? 'open' : '' }),
 	        this.props.user && this.props.user.reset && _react2.default.createElement(_reset2.default, {
@@ -60386,9 +60386,15 @@
 
 	__webpack_require__(782);
 
+	__webpack_require__(803);
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _form = __webpack_require__(785);
+
+	var _form2 = _interopRequireDefault(_form);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60404,21 +60410,148 @@
 	  function Profile() {
 	    _classCallCheck(this, Profile);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Profile).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Profile).call(this));
+
+	    _this.state = {
+	      andaGeoLocal: 'geolocation' in navigator,
+	      geoLocalResult: window.$tate('user.location').value
+	    };
+	    _this.setUbicacionLocal = _this.setUbicacionLocal.bind(_this);
+	    _this.updateLocation = _this.updateLocation.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(Profile, [{
+	    key: 'setUbicacionLocal',
+	    value: function setUbicacionLocal(e) {
+	      var _this2 = this;
+
+	      if ('geolocation' in navigator) {
+	        navigator.geolocation.getCurrentPosition(function (pos) {
+	          _this2.setState({
+	            andaGeoLocal: true,
+	            geoLocalResult: [pos.coords.latitude, pos.coords.longitude]
+	          });
+	        }, function (err) {
+	          console.warn(err);
+	          _this2.setState({ andaGeoLocal: false });
+	        });
+	      } else {
+	        this.setState({ andaGeoLocal: false });
+	      }
+	    }
+	  }, {
+	    key: 'updateLocation',
+	    value: function updateLocation(e) {
+	      this.setState({ geoLocalResult: [e.currentTarget.getAttribute('lat'), e.currentTarget.getAttribute('lng')] });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var userType = window.$tate('user.type').value;
 	      return _react2.default.createElement(
-	        'dialog',
+	        'dia-log',
 	        {
-	          'data-is': 'pop-up',
+	          id: 'perfil',
 	          'data-open-modal': this.props.open },
 	        _react2.default.createElement(
-	          'div',
-	          null,
-	          'hola profile'
+	          _form2.default,
+	          {
+	            action: '/perfil',
+	            failAlert: 'true',
+	            onSuccess: this.onSuccess },
+	          _react2.default.createElement(
+	            'label',
+	            { className: 'legend' },
+	            'Perfil'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'nombre' },
+	              'Nombre'
+	            ),
+	            _react2.default.createElement('input', { name: 'nombre', id: 'nombre', type: 'text', value: window.$tate('user.nombre').value })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'type' },
+	              'Tipo de usuario'
+	            ),
+	            _react2.default.createElement(
+	              'select',
+	              { id: 'type', name: 'userType' },
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'per', checked: userType === 'per' },
+	                'Persona'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'viv', checked: userType === 'viv' },
+	                'Vivero'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'org', checked: userType === 'org' },
+	                'Organización civil'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'esc', checked: userType === 'esc' },
+	                'Escuela'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'cul', checked: userType === 'cul' },
+	                'Centro cultural'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              'Ubicación',
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'ubicacion-info' },
+	                'Hace click para elegir tu ubicación'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'geo-select',
+	              {
+	                onClick: this.updateLocation,
+	                lat: this.state.geoLocalResult[0],
+	                lng: this.state.geoLocalResult[1] },
+	              _react2.default.createElement('input', { type: 'hidden', name: 'location' })
+	            ),
+	            this.state.andaGeoLocal && _react2.default.createElement(
+	              'button',
+	              {
+	                type: 'button',
+	                onClick: this.setUbicacionLocal,
+	                className: 'usar-auto-geo' },
+	              'Usar ubicación actual'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'button',
+	              { 'data-submit': true },
+	              'Ingresar'
+	            )
+	          )
 	        )
 	      );
 	    }

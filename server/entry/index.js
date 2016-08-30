@@ -1,5 +1,4 @@
 var path = require('path')
-var $tate = require('state-stream')
 var User = require('../models/user')
 
 module.exports = function (app) {
@@ -7,9 +6,9 @@ module.exports = function (app) {
   app.set('views', path.resolve(__dirname))
 
   app.get('/', function (req, res) {
+    var state = {}
     if (req.isAuthenticated()) {
-      console.log(req.user)
-      $tate('user').value = {
+      state.user = {
         primerLogin: req.user.primerLogin,
         nombre: req.user.getNombre(),
         type: req.user.userType,
@@ -32,7 +31,7 @@ module.exports = function (app) {
           text: 'Error al buscar arboles'
         })
       }
-      $tate('red').value = users
+      state.red = users
         .filter(function (user) {
           return user.arboles.length > 0
         })
@@ -46,7 +45,7 @@ module.exports = function (app) {
         })
 
       res.render('layout', {
-        state: $tate().value
+        state: state
       })
     })
   })

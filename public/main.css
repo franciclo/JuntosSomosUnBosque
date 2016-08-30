@@ -1382,6 +1382,11 @@ form .foot-buttons .back{
 .forgot {
   width: 360px;
   padding-top: 10px; 
+}geo-select {
+  height: 250px;
+  width: 100%;
+  display: block;
+  cursor: crosshair!important;
 }#primerLogin {
   max-width: 400px;
   width: 90%;
@@ -1404,11 +1409,6 @@ form .foot-buttons .back{
   float: right;
   font-size: 13px;
   color: #555;
-}geo-select {
-  height: 250px;
-  width: 100%;
-  display: block;
-  cursor: crosshair!important;
 }#festi_flyer img[src="flyer.svg"]{
   height: 90vh
 }#popup_festi > .pop-close {

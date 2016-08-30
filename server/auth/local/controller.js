@@ -17,18 +17,15 @@ module.exports = function (passport) {
       User.findOne({ 'local.email': email },
         function (err, user) {
           if (err) {
-            req.formNoti = 'error'
             return done(err)
           }
 
           if (!user) {
-            req.formNoti = 'no user'
-            return done('no user', false)
+            return done(null, false)
           }
 
           if (!user.validPassword(password)) {
-            req.formNoti = 'no pass'
-            return done('no pass', false)
+            return done(null, false)
           } else {
             return done(null, user)
           }

@@ -19,7 +19,7 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(express.static('./public'))
+app.use(express.static('./public', {maxAge: 86400000}))
 
 app.set('superSecret', config.secret)
 app.use(session({ secret: 'klj234 lkj23ñlkfoewut2if jfnf' }))

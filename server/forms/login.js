@@ -6,21 +6,20 @@ module.exports = function (passport) {
           return res.json({
             success: false,
             err: err,
-            text: 'Datos incorrectos - err'
+            text: 'Hubo un error intente mas tarde'
           })
         }
         if (!user) {
           return res.json({
             success: false,
-            text: 'Datos incorrectos - no user'
+            text: 'Datos incorrectos'
           })
         }
         req.logIn(user, function (err) {
           if (err) {
-            console.log(err)
             return res.json({
               success: false,
-              text: 'Datos incorrectos - in err',
+              text: 'Datos incorrectos',
               err: err
             })
           }

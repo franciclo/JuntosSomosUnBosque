@@ -1,15 +1,15 @@
 module.exports = function (app, passport) {
   app.post('/logout', function (req, res) {
     req.logout()
-    if (req.user) {
-      return res.json({
-        success: false,
-        text: 'sigue logueado'
-      })
-    }
+    req.session.destroy()
     res.json({
       success: true
     })
+  })
+  app.get('/logout', function (req, res) {
+    req.logout()
+    req.session.destroy()
+    res.redirect('/')
   })
   require('./facebook/routes')(app, passport)
   require('./google/routes')(app, passport)
