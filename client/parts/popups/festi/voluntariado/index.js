@@ -1,6 +1,5 @@
 import './styles.css'
 
-import 'components/form-async'
 import React, {Component} from 'react'
 import Form from '../../form'
 

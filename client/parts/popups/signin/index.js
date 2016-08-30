@@ -24,7 +24,8 @@ export default class Signin extends Component {
         <Form
           action='login'
           onSuccess={this.onSuccess}
-          failAlert='true'>
+          failAlert='true'
+          auto>
           <div className='form-row-field sociales'>
             <label className='legend'>
               Ingresar con red social

@@ -9,15 +9,23 @@ export default class Profile extends Component {
     super()
     this.state = {
       andaGeoLocal: 'geolocation' in navigator,
-      geoLocalResult: [-34.539, -58.446]
+      geoLocalResult: [-34.539, -58.446],
+      nombre: '',
+      userType: ''
     }
     this.setUbicacionLocal = this.setUbicacionLocal.bind(this)
     this.updateLocation = this.updateLocation.bind(this)
+    this.updateUserType = this.updateUserType.bind(this)
+    this.updateNombre = this.updateNombre.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.open === 'open' && nextProps.user) {
-      this.setState({geoLocalResult: nextProps.user.location})
+      this.setState({
+        userType: nextProps.user.userType,
+        geoLocalResult: nextProps.user.location,
+        nombre: nextProps.user.nombre
+      })
     }
   }
 
@@ -53,18 +61,17 @@ export default class Profile extends Component {
   }
 
   onSuccess (res) {
-    // window.$tate('popups.active').value = null
     window.$tate('user.type').value = res.userType
     window.$tate('user.location').value = res.location
     window.$tate('user.nombre').value = res.nombre
   }
 
-  geoSelectDidMount (geo) {
-    if (!geo) return
-    // const bounds = [[-34.286722590335934,-58.963623046875],[-34.286722590335934,-58.963623046875]]
-    // let bounds = geo.map.getBounds()
-    // geo.map.fitBounds(bounds)
-    geo.map.invalidateSize()
+  updateNombre (e) {
+    this.setState({nombre: e.target.value})
+  }
+
+  updateUserType (e) {
+    this.setState({userType: e.target.value})
   }
 
   render () {
@@ -90,14 +97,16 @@ export default class Profile extends Component {
               name='nombre'
               id='nombre'
               type='text'
-              defaultValue={this.props.user.nombre} />
+              onChange={this.updateNombre}
+              value={this.state.nombre} />
           </div>
           <div className='form-row-field'>
             <label htmlFor='type'>Tipo de usuario</label>
             <select
               id='type'
               name='userType'
-              defaultValue={this.props.user.type}>
+              onChange={this.updateUserType}
+              value={this.state.userType}>
               <option value='per'>Persona</option>
               <option value='viv'>Vivero</option>
               <option value='org'>Organización civil</option>
@@ -111,6 +120,7 @@ export default class Profile extends Component {
               <span className='ubicacion-info'>Hace click para elegir tu ubicación</span>
             </label>
             <geo-select
+              path='perfil'
               onClick={this.updateLocation}
               lat={this.state.geoLocalResult[0]}
               lng={this.state.geoLocalResult[1]}

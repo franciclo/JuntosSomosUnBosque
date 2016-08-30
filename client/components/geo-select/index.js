@@ -4,7 +4,12 @@ import 'document-register-element'
 import L from 'leaflet'
 
 class GeoSelect extends window.HTMLElement {
+  constructor () {
+    super()
+    this.cnx = false
+  }
   connectedCallback () {
+    console.log('this.sarasa', this.sarasa)
     const coords = [
       +this.getAttribute('lat'),
       +this.getAttribute('lng')
@@ -33,6 +38,7 @@ class GeoSelect extends window.HTMLElement {
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
+    debugger
     if (!this.parentNode) return
     switch (name) {
       case 'lat':
