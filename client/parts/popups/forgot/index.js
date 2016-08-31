@@ -22,12 +22,16 @@ export default class Forgot extends Component {
             <label className='legend'>Recuperar contraseña</label>
             <div className='form-row-field'>
               <label htmlFor='emailForgotForm'>Mail</label>
-              <input id='emailForgotForm' data-label='email' data-rules='required isEmail ajaxMailExist' type='text'></input>
+              <input
+                id='emailForgotForm'
+                name='email'
+                type='text'
+                required />
             </div>
-            <div className='form-row-field regis-buttons'>
+            <div className='form-row-field foot-buttons'>
               <button
                 type='button'
-                className='volver-regis'
+                className='back'
                 onClick={this.props.loginShow}>
                 &#8249;&nbsp;volver
               </button>

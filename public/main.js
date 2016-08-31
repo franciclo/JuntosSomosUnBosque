@@ -21516,6 +21516,7 @@
 	      });
 
 	      this.userData = this.userData.subscribe(function (user) {
+	        if (!user) return _this2.setState({ user: null });
 	        var loc = void 0;
 	        try {
 	          loc = JSON.parse(user.location);
@@ -59589,7 +59590,6 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Popups).call(this));
 
 	    _this.state = {
-	      user: null,
 	      open: null
 	    };
 	    window.$tate('popups.active').value = null;
@@ -59614,6 +59614,9 @@
 	      if (nextProps.user && nextProps.user.primerLogin) {
 	        this.setState({ open: 'primerLogin' });
 	      }
+	      if (nextProps.user && nextProps.user.reset) {
+	        this.setState({ open: 'reset' });
+	      }
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -59632,7 +59635,7 @@
 	  }, {
 	    key: 'closePopUp',
 	    value: function closePopUp(e) {
-	      if (this.state.open !== 'primerLogin' && e.target.id === 'popups_layout' || ~e.target.className.indexOf('pop-close')) {
+	      if (this.state.open !== 'primerLogin' && this.state.open !== 'reset' && e.target.id === 'popups_layout' || ~e.target.className.indexOf('pop-close')) {
 	        window.$tate('popups.active').value = null;
 	        this.setState({ open: null });
 	      }
@@ -59675,7 +59678,7 @@
 	        this.props.user && this.props.user.primerLogin && _react2.default.createElement(_primerLogin2.default, {
 	          open: this.state.open === 'primerLogin' ? 'open' : '' }),
 	        this.props.user && this.props.user.reset && _react2.default.createElement(_reset2.default, {
-	          closePopUp: this.closePopUp,
+	          user: this.props.user,
 	          open: this.state.open === 'reset' ? 'open' : '' })
 	      );
 	    }
@@ -59741,7 +59744,7 @@
 	    value: function onSuccess(res) {
 	      window.$tate('user').value = undefined;
 	      window.$tate('user').value = res;
-	      window.$tate('popups.active').value = res.primerLogin ? 'primerLogin' : null;
+	      window.$tate('popups.active').value = res.primerLogin ? 'primerLogin' : '';
 	    }
 	  }, {
 	    key: 'render',
@@ -60282,16 +60285,20 @@
 	                { htmlFor: 'emailForgotForm' },
 	                'Mail'
 	              ),
-	              _react2.default.createElement('input', { id: 'emailForgotForm', 'data-label': 'email', 'data-rules': 'required isEmail ajaxMailExist', type: 'text' })
+	              _react2.default.createElement('input', {
+	                id: 'emailForgotForm',
+	                name: 'email',
+	                type: 'text',
+	                required: true })
 	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'form-row-field regis-buttons' },
+	              { className: 'form-row-field foot-buttons' },
 	              _react2.default.createElement(
 	                'button',
 	                {
 	                  type: 'button',
-	                  className: 'volver-regis',
+	                  className: 'back',
 	                  onClick: this.props.loginShow },
 	                '‹ volver'
 	              ),
@@ -60642,7 +60649,6 @@
 	      } else if (name === 'visible') {
 	        mapas[id].map.setView(coords);
 	        if (newValue) {
-	          console.log('invalidateSize');
 	          return mapas[id].map.invalidateSize();
 	        }
 	        return;
@@ -60758,7 +60764,7 @@
 	  }, {
 	    key: 'onSuccess',
 	    value: function onSuccess(res) {
-	      window.$tate('popups.active').value = null;
+	      window.$tate('popups.active').value = '';
 	      var user = window.$tate('user').value;
 	      window.$tate('user').value = undefined;
 	      user.primerLogin = false;
@@ -60901,6 +60907,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _form = __webpack_require__(785);
+
+	var _form2 = _interopRequireDefault(_form);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60919,17 +60929,70 @@
 	  }
 
 	  _createClass(Reset, [{
+	    key: 'onSuccess',
+	    value: function onSuccess(res) {
+	      window.$tate('user').value = undefined;
+	      window.$tate('user').value = res;
+	      window.$tate('popups.active').value = '';
+	      window.history.pushState(null, null, window.location.origin);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'dialog',
+	        'dia-log',
 	        {
-	          'data-is': 'pop-up',
 	          'data-open-modal': this.props.open },
 	        _react2.default.createElement(
 	          'div',
-	          null,
-	          'hola reset'
+	          { className: 'logineo reset' },
+	          _react2.default.createElement(
+	            _form2.default,
+	            {
+	              action: '/reset',
+	              failAlert: 'true',
+	              onSuccess: this.onSuccess },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-row-field' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: 'pass1' },
+	                'Nueva contraseña'
+	              ),
+	              _react2.default.createElement('input', {
+	                id: 'pass1',
+	                name: 'pass',
+	                required: true,
+	                type: 'password' })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-row-field' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: 'pass2' },
+	                'Confirmar contraseña'
+	              ),
+	              _react2.default.createElement('input', {
+	                id: 'pass2',
+	                name: 'passconfirm',
+	                type: 'password' })
+	            ),
+	            _react2.default.createElement('input', {
+	              type: 'hidden',
+	              name: 'email',
+	              defaultValue: this.props.user.email }),
+	            _react2.default.createElement('input', {
+	              type: 'hidden',
+	              name: 'codigo',
+	              defaultValue: window.location.search.split('=')[1] }),
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'submit' },
+	              'Enviar'
+	            )
+	          )
 	        )
 	      );
 	    }

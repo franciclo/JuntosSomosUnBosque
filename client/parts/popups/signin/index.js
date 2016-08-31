@@ -9,7 +9,7 @@ export default class Signin extends Component {
   onSuccess (res) {
     window.$tate('user').value = undefined
     window.$tate('user').value = res
-    window.$tate('popups.active').value = res.primerLogin ? 'primerLogin' : null
+    window.$tate('popups.active').value = res.primerLogin ? 'primerLogin' : ''
   }
 
   render () {

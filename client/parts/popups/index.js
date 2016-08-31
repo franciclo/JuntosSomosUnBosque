@@ -15,7 +15,6 @@ export default class Popups extends Component {
   constructor () {
     super()
     this.state = {
-      user: null,
       open: null
     }
     window.$tate('popups.active').value = null
@@ -33,6 +32,9 @@ export default class Popups extends Component {
     if (nextProps.user && nextProps.user.primerLogin) {
       this.setState({open: 'primerLogin'})
     }
+    if (nextProps.user && nextProps.user.reset) {
+      this.setState({open: 'reset'})
+    }
   }
 
   componentWillUnmount () {
@@ -46,6 +48,7 @@ export default class Popups extends Component {
   closePopUp (e) {
     if (
       this.state.open !== 'primerLogin' &&
+      this.state.open !== 'reset' &&
       e.target.id === 'popups_layout' ||
       ~e.target.className.indexOf('pop-close')
     ) {
@@ -60,6 +63,9 @@ export default class Popups extends Component {
         id='popups_layout'
         className={this.state.open ? 'open' : ''}
         onClick={this.closePopUp}>
+
+        {/*        Content         */}
+
         <Flyer
           closePopUp={this.closePopUp}
           open={this.state.open === 'flyer' ? 'open' : ''} />
@@ -69,6 +75,9 @@ export default class Popups extends Component {
         <Info
           closePopUp={this.closePopUp}
           open={this.state.open === 'info' ? 'open' : ''} />
+
+        {/*    User not logged actions    */}
+
         {
           !this.props.user &&
             <Signin
@@ -91,6 +100,9 @@ export default class Popups extends Component {
               loginShow={this.activatePopUp('signin')}
               open={this.state.open === 'forgot' ? 'open' : ''} />
         }
+
+        {/*    User logged actions    */}
+
         {
           this.props.user &&
             <Profile
@@ -106,7 +118,7 @@ export default class Popups extends Component {
         {
           this.props.user && this.props.user.reset &&
             <Reset
-              closePopUp={this.closePopUp}
+              user={this.props.user}
               open={this.state.open === 'reset' ? 'open' : ''} />
         }
       </div>

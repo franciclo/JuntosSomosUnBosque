@@ -15,6 +15,8 @@ module.exports = function (app, passport) {
   app.post('/perfil', isLoggedIn, require('./perfil'))
 
   app.post('/forgot', require('./forgot'))
+
+  app.post('/reset', require('./reset'))
 }
 
   // app.get('/arboles', isLoggedIn, function (req, res) {

@@ -60,6 +60,7 @@ export default class Main extends Component {
     })
 
     this.userData = this.userData.subscribe(user => {
+      if (!user) return this.setState({user: null})
       let loc
       try {
         loc = JSON.parse(user.location)

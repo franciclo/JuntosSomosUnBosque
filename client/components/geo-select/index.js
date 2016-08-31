@@ -52,7 +52,6 @@ class GeoSelect extends window.HTMLElement {
     } else if (name === 'visible') {
       mapas[id].map.setView(coords)
       if (newValue) {
-        console.log('invalidateSize')
         return mapas[id].map.invalidateSize()
       }
       return
