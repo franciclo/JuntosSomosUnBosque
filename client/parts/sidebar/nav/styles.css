@@ -1,19 +1,10 @@
 #sidebar_nav {
   display: flex;
+  height: 140px;
+  transition: height .1s linear;
 }
-#sidebar_nav>button{
-  cursor: pointer;
-  flex: 1;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0;
-  color: white;
-  min-height: 140px;
-  font-size: 16px;
-  margin: 0;
+#sidebar_nav.admin-mode {
+  height: 50px;
 }
 #sidebar_nav_plantaciones {
   background: #ff687b;
@@ -25,15 +16,15 @@
   position: relative;
   background: #009aff;
 }
+
+
 #sidebar_nav button.active .underline{
   width: 77%;
   border-top: 2px solid white;
   margin: 5px auto 0;
 }
-#sidebar_nav button img {
-  width: auto;
-  height: 50px;
-  margin: 0 auto 20px;
+#sidebar_nav.admin-mode button.active .underline{
+  margin: 1px auto 0px;
 }
 #sidebar_nav_red .counter {
   position: absolute;
@@ -50,63 +41,80 @@
   font-weight: bold;
 }
 
-#sidebar_nav>button.active {
-  font-size: 17px!important;
-  animation: none!important;
-}
-#sidebar_nav>button.active img{
-  animation: none!important;
-  height: 55px!important;
-  margin-bottom: 10px;
+
+#sidebar_nav>button{
+  cursor: pointer;
+  flex: 1;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  color: white;
+  height: 100%;
+  margin: 0;
+  outline: none;
 }
 
-#sidebar_nav>button:hover {
-  animation: growTxt 0.1s linear;
+
+#sidebar_nav>button>.label {
+  transition: all .2s linear;
+  opacity: 1;
+  font-size: 16px;
+}
+#sidebar_nav>button.active>.label {
+  font-size: 17px;
+  transition: none;
+}
+#sidebar_nav>button:hover>.label {
   font-size: 17px;
 }
+#sidebar_nav.admin-mode>button>.label {
+  transition: all .3s linear;
+  opacity: 0;
+  font-size: 0;
+}
+
+
+#sidebar_nav button img {
+  width: auto;
+  height: 50px;
+  margin: 0 auto 20px;
+  transition: height .1s ease-out;
+}
+#sidebar_nav>button.active>img{
+  transition: none;
+  height: 55px;
+  margin-bottom: 10px;
+}
 #sidebar_nav>button:hover>img{
-  animation: growImg 0.1s ease-out;
   height: 55px;
 }
-@keyframes growTxt {
-  0% {
-    font-size: 16px;
-  }
-  100% {
-    font-size: 17px;
-  }
+#sidebar_nav.admin-mode>button>img {
+  height: 30px;
+  margin-bottom: 4px;
 }
-@keyframes growImg {
-  0% {
-    height: 50px;
-  }
-  100% {
-    height: 55px;
-  }
+#sidebar_nav.admin-mode>button:hover>img{
+  height: 35px;
+}
+#sidebar_nav.admin-mode>button.active>img{
+  height: 35px;
 }
 
-@keyframes growImgSm {
-  0% {
-    height: 30px;
-  }
-  100% {
-    height: 35px;
-  }
-}
 
 @media (max-height: 630px) {
-  #sidebar_nav>button{
-    min-height: 117px;
+  #sidebar_nav{
+    height: 117px;
   }
   #sidebar_nav>button>img{
     height: 30px;
   }
 
   #sidebar_nav>button:hover>img{
-    animation: growImgSm 0.1s ease-out;
     height: 35px;
   }
-  #sidebar_nav>button.active img{
+  #sidebar_nav>button.active>img{
     height: 35px!important;
     margin-bottom: 10px;
   }

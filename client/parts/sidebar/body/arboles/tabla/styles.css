@@ -1,0 +1,16 @@
+#lista-arboles{
+  flex: 1;
+  width: 100%;
+  padding-bottom: 10px;
+}
+#lista-arboles .loguineo {
+  padding: 0;
+}
+#lista-arboles .sin-arboles {
+  background: #eaeaea;
+  color: #7b7b7b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

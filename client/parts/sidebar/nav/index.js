@@ -8,9 +8,18 @@ export default class Nav extends Component {
     this.state = {
       plantaciones: true,
       arbol: false,
-      red: false
+      red: false,
+      adminArboles: false
     }
+    window.$tate('adminArboles').value = false
+    this.openAdminArboles = window.$tate('adminArboles').on('E')
     this.activateNav = this.activateNav.bind(this)
+  }
+
+  componentWillMount () {
+    this.openAdminArboles.subscribe(bool => {
+      this.setState({adminArboles: bool})
+    })
   }
 
   renderCantidadTotal (dom, arboles) {
@@ -49,13 +58,15 @@ export default class Nav extends Component {
 
   render () {
     return (
-      <div id='sidebar_nav'>
+      <div
+        id='sidebar_nav'
+        className={this.state.adminArboles ? 'admin-mode' : ''}>
         <button
           id='sidebar_nav_plantaciones'
           className={this.state.plantaciones ? 'active' : ''}
           onClick={this.activateNav('action_content_lugar')}>
           <img src='plantaciones.svg' alt='Plantaciones' />
-          Plantaciones
+          <span className='label'>Plantaciones</span>
           <span className='underline'></span>
         </button>
         <button
@@ -63,7 +74,7 @@ export default class Nav extends Component {
           className={this.state.arbol ? 'active' : ''}
           onClick={this.activateNav('action_content_suma')}>
           <img src='arbol.svg' alt='Tus arboles' />
-          Tus arboles
+          <span className='label'>Tus arboles</span>
           <span className='underline'></span>
         </button>
         <button
@@ -72,7 +83,7 @@ export default class Nav extends Component {
           onClick={this.activateNav('action_content_red')}>
           <span className='counter'>{this.props.total}</span>
           <img src='red.svg' alt='Arboles de la red' />
-          La red
+          <span className='label'>La red</span>
           <span className='underline'></span>
         </button>
       </div>

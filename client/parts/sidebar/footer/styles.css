@@ -9,7 +9,9 @@
 #social_links img {
   height: 20px;
 }
-
+#sidebar_footer>img.chico {
+  height: 44px;
+}
 @media (max-height: 630px) {
   #sidebar_footer>img {
     height: 44px;

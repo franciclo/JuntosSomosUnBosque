@@ -1,3 +1,7 @@
+#tus-arboles.active {
+  display: flex;
+  flex-direction: column;
+}
 #cartel_suma {
   background: white;
   border-radius: 3px;

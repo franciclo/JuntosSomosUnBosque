@@ -10,7 +10,8 @@ export default class Sidebar extends Component {
   render () {
     return (
       <div id='sidebar'>
-        <Header user={this.props.user} />
+        <Header
+          user={this.props.user} />
         <h1>JUNTOS SOMOS UN <span>BOSQUE</span></h1>
         <Nav
           total={
@@ -19,7 +20,9 @@ export default class Sidebar extends Component {
                 return arbol.cantidad + acc
               }, 0)
           } />
-        <Body arboles={this.props.arboles} />
+        <Body
+          arboles={this.props.arboles}
+          user={this.props.user} />
         <Footer />
       </div>
     )

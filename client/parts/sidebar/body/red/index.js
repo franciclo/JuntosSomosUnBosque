@@ -17,7 +17,7 @@ export default class Body extends Component {
   }
   render () {
     return (
-      <article data-id='action_content_red' data-enter='de-arr-s'>
+      <article data-id='action_content_red'>
         <div id='la_red'>
           <h1>Nuestros arboles</h1>
           <div id='lista_arboles_red'>
