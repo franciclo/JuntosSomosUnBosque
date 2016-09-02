@@ -2,7 +2,28 @@ import './styles.css'
 import 'components/slider-box'
 import React, {Component} from 'react'
 
-export default class Body extends Component {
+export default class Red extends Component {
+  constructor () {
+    super()
+    this.state = {
+      arboles: []
+    }
+  }
+
+  componentWillMount () {
+    window.fetch('/arboles')
+      .then(res => {
+        return res.json()
+      })
+      .then(res => {
+        if (res.success) {
+          this.setState({arboles: res.result})
+        } else {
+          console.log('error al pedir los arboles', res)
+        }
+      })
+  }
+
   rainbow (k) {
     let colors = [
       '#2bd873',
@@ -15,6 +36,7 @@ export default class Body extends Component {
     ]
     return colors[(colors.length - 1) < k ? 0 : k]
   }
+
   render () {
     return (
       <article data-id='action_content_red'>
@@ -26,14 +48,14 @@ export default class Body extends Component {
               <span>Cantidad</span>
             </div>
             {
-              this.props.arboles
+              this.state.arboles
                 .map((arbol, i) => {
                   return (
                     <div
                       key={i}
                       style={{background: this.rainbow(i)}}
                       className='fila-arbol'>
-                      <span>{arbol.label}</span>
+                      <span>{this.props.especieById(arbol.especie)}</span>
                       <span>{arbol.cantidad}</span>
                     </div>
                   )

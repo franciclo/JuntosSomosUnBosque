@@ -9,10 +9,13 @@ export default class Nav extends Component {
       plantaciones: true,
       arbol: false,
       red: false,
-      adminArboles: false
+      adminArboles: false,
+      total: 0
     }
+    window.$tate('total').value = 0
     window.$tate('adminArboles').value = false
     this.openAdminArboles = window.$tate('adminArboles').on('E')
+    this.totalCount = window.$tate('total').on('E')
     this.activateNav = this.activateNav.bind(this)
   }
 
@@ -20,16 +23,9 @@ export default class Nav extends Component {
     this.openAdminArboles.subscribe(bool => {
       this.setState({adminArboles: bool})
     })
-  }
-
-  renderCantidadTotal (dom, arboles) {
-    var arbolesCantidad = []
-    for (var arbol in arboles) {
-      arbolesCantidad.push(arboles[arbol].cantidad)
-    }
-    var cantidadTotal = arbolesCantidad
-      .reduce((a, b) => a + b, 0)
-    dom.querySelector('#home_sidebar .logo svg-icon .count').textContent = cantidadTotal
+    this.totalCount.subscribe(total => {
+      this.setState({total})
+    })
   }
 
   activateNav (active) {
@@ -81,7 +77,7 @@ export default class Nav extends Component {
           id='sidebar_nav_red'
           className={this.state.red ? 'active' : ''}
           onClick={this.activateNav('action_content_red')}>
-          <span className='counter'>{this.props.total}</span>
+          <span className='counter'>{this.state.total}</span>
           <img src='red.svg' alt='Arboles de la red' />
           <span className='label'>La red</span>
           <span className='underline'></span>

@@ -54,13 +54,13 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _parts = __webpack_require__(172);
+	var _main = __webpack_require__(172);
 
-	var _parts2 = _interopRequireDefault(_parts);
+	var _main2 = _interopRequireDefault(_main);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_reactDom2.default.render(_react2.default.createElement(_parts2.default, null), document.getElementById('root'));
+	_reactDom2.default.render(_react2.default.createElement(_main2.default, null), document.getElementById('root'));
 
 /***/ },
 /* 1 */
@@ -21463,15 +21463,9 @@
 
 	    _this.state = {
 	      user: null,
-	      arboles: [],
-	      red: []
+	      especies: []
 	    };
-	    _this.redData = window.$tate('red').on('N');
-	    _this.userData = window.$tate('user').on(['N', 'D']);
-
-	    _this.userNombreChange = window.$tate('user.nombre').on('E');
-	    _this.userLocationChange = window.$tate('user.location').on('E');
-	    _this.userTypeChange = window.$tate('user.type').on('E');
+	    _this.especieById = _this.especieById.bind(_this);
 	    return _this;
 	  }
 
@@ -21480,83 +21474,39 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
-	      this.redData = this.redData.subscribe(function (data) {
-	        var arboles = data.map(function (usu) {
-	          return usu.arboles || [];
-	        }).reduce(function (acc, arboles) {
-	          arboles.forEach(function (arbol) {
-	            var label = arbol.especie + ' ' + arbol.tamagno;
-	            var ind = acc.map(function (a) {
-	              return a.label;
-	            }).indexOf(label);
-	            if (~ind) {
-	              acc[ind].cantidad += arbol.cantidad;
-	            } else {
-	              acc.push({
-	                cantidad: arbol.cantidad,
-	                label: label
-	              });
-	            }
-	          });
-	          return acc;
-	        }, []).sort(function (a, b) {
-	          return b.cantidad - a.cantidad;
-	        });
-
-	        var red = data.map(function (user) {
-	          user.arboles = user.arboles.reduce(function (acc, arbol) {
-	            return arbol.cantidad + acc;
-	          }, 0);
-	          return user;
-	        });
-	        _this2.setState({
-	          arboles: arboles,
-	          red: red
-	        });
-	      });
-
-	      this.userData = this.userData.subscribe(function (user) {
+	      window.$tate('user').on(['N', 'D']).subscribe(function (user) {
 	        if (!user) return _this2.setState({ user: null });
-	        var loc = void 0;
-	        try {
-	          loc = JSON.parse(user.location);
-	        } catch (err) {
-	          return _this2.setState({ user: user });
-	        }
-	        user.location = loc;
+	        user.location = JSON.parse(user.location);
 	        _this2.setState({ user: user });
 	      });
 
-	      this.userNombreChange.subscribe(function (n) {
+	      window.$tate('user.nombre').on('E').subscribe(function (n) {
 	        var user = _this2.state.user;
 	        user.nombre = n;
 	        _this2.setState({ user: user });
 	      });
-	      this.userLocationChange.subscribe(function (n) {
+
+	      window.$tate('user.location').on('E').subscribe(function (n) {
 	        var user = _this2.state.user;
-	        var loc = void 0;
-	        try {
-	          loc = JSON.parse(n);
-	        } catch (err) {
-	          loc = n;
-	        }
-	        user.location = loc;
+	        user.location = JSON.parse(n);
 	        _this2.setState({ user: user });
 	      });
-	      this.userTypeChange.subscribe(function (n) {
+
+	      window.$tate('user.type').on('E').subscribe(function (n) {
 	        var user = _this2.state.user;
 	        user.type = n;
 	        _this2.setState({ user: user });
 	      });
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      this.redData.unsubscribe();
-	      this.userData.unsubscribe();
-	      this.userNombreChange.unsubscribe();
-	      this.userLocationChange.unsubscribe();
-	      this.userTypeChange.unsubscribe();
+
+	      window.fetch('/especies').then(function (res) {
+	        return res.json();
+	      }).then(function (res) {
+	        if (res.success) {
+	          _this2.setState({ especies: res.result });
+	        } else {
+	          console.log('error al pedir las especies', res);
+	        }
+	      });
 	    }
 	  }, {
 	    key: 'componentDidMount',
@@ -21579,16 +21529,28 @@
 	      return vistoNum === 1 || vistoNum === 2 ? true : Math.random() >= 0.7;
 	    }
 	  }, {
+	    key: 'especieById',
+	    value: function especieById(id) {
+	      var especieI = this.state.especies.map(function (e) {
+	        return e.id;
+	      }).indexOf(id);
+	      if (!~especieI) return 'Especie desconocida';
+	      return this.state.especies[especieI].label;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(_sidebar2.default, {
-	          arboles: this.state.arboles,
+	          especies: this.state.especies,
+	          especieById: this.especieById,
 	          user: this.state.user }),
-	        _react2.default.createElement(_mapa2.default, { red: this.state.red }),
-	        _react2.default.createElement(_popups2.default, { user: this.state.user })
+	        _react2.default.createElement(_mapa2.default, {
+	          especieById: this.especieById }),
+	        _react2.default.createElement(_popups2.default, {
+	          user: this.state.user })
 	      );
 	    }
 	  }]);
@@ -21667,6 +21629,38 @@
 	  }
 	}
 
+	if (typeof window !== 'undefined') {
+	  window.$tateViz = function (clear) {
+	    if (!clear) return console.log('need to pass window.clear function as param')
+	    state$Diffs
+	      .map(function (d) {
+	        return {
+	          changetype: (function (kind) {
+	            switch (kind) {
+	              case 'N':
+	                return 'New'
+	              case 'E':
+	                return 'Edited'
+	              case 'D':
+	                return 'Deleted'
+	              case 'A':
+	                return 'New in array'
+	            }
+	          }(d.kind)),
+	          path: d.path.join('.'),
+	          value: JSON.stringify(((d.kind === 'A') ? d.item.rhs : d.rhs))
+	        }
+	      })
+	      .scan(function (acc, v) {
+	        acc.push(v)
+	        return acc
+	      }, [])
+	      .subscribe(function (ds) {
+	        clear()
+	        console.table(ds)
+	      })
+	  }
+	}
 	if (typeof window !== 'undefined') window.$tate = query
 	module.exports = query
 
@@ -40375,12 +40369,28 @@
 	    _this.state = {
 	      lat: -34.53753049571174,
 	      lng: -58.44419449567794,
-	      zoom: 11
+	      zoom: 11,
+	      red: []
 	    };
 	    return _this;
 	  }
 
 	  _createClass(Mapa, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      window.fetch('/red').then(function (res) {
+	        return res.json();
+	      }).then(function (res) {
+	        if (res.success) {
+	          _this2.setState({ red: res.result });
+	        } else {
+	          console.log('error al pedir la red', res);
+	        }
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var position = [this.state.lat, this.state.lng];
@@ -40394,12 +40404,11 @@
 	          tileSize: 512,
 	          zoomOffset: -1,
 	          attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-	          url: 'https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ'
-	        }),
+	          url: 'https://api.mapbox.com/styles/v1/franciclo/cio8ufhm00023afmf9592ilip/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJhbmNpY2xvIiwiYSI6ImNpaXRlam5nZjAzaHl2cW01ZW55NjMwc28ifQ.6on5-qEDrK8yqMyUdATmlQ' }),
 	        _react2.default.createElement(_festiMarker2.default, {
 	          position: position,
 	          className: 'festi-marker' }),
-	        this.props.red.map(function (user, i) {
+	        this.state.red.map(function (user, i) {
 	          return _react2.default.createElement(_userMarker2.default, {
 	            position: user.location,
 	            user: user,
@@ -58185,8 +58194,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'sidebar' },
-	        _react2.default.createElement(_header2.default, {
-	          user: this.props.user }),
+	        _react2.default.createElement(_header2.default, { user: this.props.user }),
 	        _react2.default.createElement(
 	          'h1',
 	          null,
@@ -58197,13 +58205,8 @@
 	            'BOSQUE'
 	          )
 	        ),
-	        _react2.default.createElement(_nav2.default, {
-	          total: this.props.arboles.reduce(function (acc, arbol) {
-	            return arbol.cantidad + acc;
-	          }, 0) }),
-	        _react2.default.createElement(_body2.default, {
-	          arboles: this.props.arboles,
-	          user: this.props.user }),
+	        _react2.default.createElement(_nav2.default, null),
+	        _react2.default.createElement(_body2.default, this.props),
 	        _react2.default.createElement(_footer2.default, null)
 	      );
 	    }
@@ -58885,10 +58888,13 @@
 	      plantaciones: true,
 	      arbol: false,
 	      red: false,
-	      adminArboles: false
+	      adminArboles: false,
+	      total: 0
 	    };
+	    window.$tate('total').value = 0;
 	    window.$tate('adminArboles').value = false;
 	    _this.openAdminArboles = window.$tate('adminArboles').on('E');
+	    _this.totalCount = window.$tate('total').on('E');
 	    _this.activateNav = _this.activateNav.bind(_this);
 	    return _this;
 	  }
@@ -58901,18 +58907,9 @@
 	      this.openAdminArboles.subscribe(function (bool) {
 	        _this2.setState({ adminArboles: bool });
 	      });
-	    }
-	  }, {
-	    key: 'renderCantidadTotal',
-	    value: function renderCantidadTotal(dom, arboles) {
-	      var arbolesCantidad = [];
-	      for (var arbol in arboles) {
-	        arbolesCantidad.push(arboles[arbol].cantidad);
-	      }
-	      var cantidadTotal = arbolesCantidad.reduce(function (a, b) {
-	        return a + b;
-	      }, 0);
-	      dom.querySelector('#home_sidebar .logo svg-icon .count').textContent = cantidadTotal;
+	      this.totalCount.subscribe(function (total) {
+	        _this2.setState({ total: total });
+	      });
 	    }
 	  }, {
 	    key: 'activateNav',
@@ -58985,7 +58982,7 @@
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'counter' },
-	            this.props.total
+	            this.state.total
 	          ),
 	          _react2.default.createElement('img', { src: 'red.svg', alt: 'Arboles de la red' }),
 	          _react2.default.createElement(
@@ -59069,8 +59066,8 @@
 	          'data-path': 'sidebar.body',
 	          id: 'sidebar_body' },
 	        _react2.default.createElement(_plantaciones2.default, null),
-	        _react2.default.createElement(_arboles2.default, { user: this.props.user }),
-	        _react2.default.createElement(_red2.default, { arboles: this.props.arboles })
+	        _react2.default.createElement(_arboles2.default, this.props),
+	        _react2.default.createElement(_red2.default, { especieById: this.props.especieById })
 	      );
 	    }
 	  }]);
@@ -59215,7 +59212,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'article',
-	        { 'data-id': 'action_content_lugar', 'data-enter': 'de-arr-s', className: 'de-arr-s active' },
+	        { 'data-id': 'action_content_lugar', className: 'active' },
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'cartel_evento' },
@@ -59380,8 +59377,10 @@
 	            'Cargá tus primeros arbolitos'
 	          )
 	        ),
-	        this.props.user && this.state.adminArboles && _react2.default.createElement(_form2.default, { user: this.props.user }),
-	        this.props.user && (this.state.adminArboles || this.props.user.arboles.length > 0) && _react2.default.createElement(_tabla2.default, { user: this.props.user })
+	        this.props.user && this.state.adminArboles && _react2.default.createElement(_form2.default, { especies: this.props.especies }),
+	        this.props.user && (this.state.adminArboles || this.props.user.arboles.length > 0) && _react2.default.createElement(_tabla2.default, {
+	          especieById: this.props.especieById,
+	          showAdmin: !this.state.adminArboles })
 	      );
 	    }
 	  }]);
@@ -59479,6 +59478,25 @@
 	      window.$tate('adminArboles').value = false;
 	    }
 	  }, {
+	    key: 'agregarArbol',
+	    value: function agregarArbol(data) {
+	      var misArboles = window.$tate('user.arboles').value;
+	      var miArbolI = misArboles.map(function (a) {
+	        return a.especie + a.tamagno;
+	      }).indexOf(data.get('especie') + data.get('tamagno'));
+	      if (~miArbolI) {
+	        misArboles[miArbolI].cantidad += +data.get('cantidad');
+	      } else {
+	        misArboles.push({
+	          tamagno: data.get('tamagno'),
+	          cantidad: +data.get('cantidad'),
+	          especie: data.get('especie')
+	        });
+	      }
+	      window.$tate('user.arboles').value = undefined;
+	      window.$tate('user.arboles').value = misArboles;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -59490,6 +59508,7 @@
 	        _react2.default.createElement(
 	          _form2.default,
 	          {
+	            onSubmit: this.agregarArbol,
 	            prevent: 'prevent' },
 	          _react2.default.createElement(
 	            'div',
@@ -59507,259 +59526,20 @@
 	                required: true },
 	              _react2.default.createElement(
 	                'option',
-	                { className: 'default' },
+	                {
+	                  className: 'default',
+	                  value: '' },
 	                'Elegí una especie'
 	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Agu' },
-	                'Aguaribay'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Alg' },
-	                'Algarrobo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Cha' },
-	                'Chañar'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Cor' },
-	                'Coronillo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Esp' },
-	                'Espinillo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sen' },
-	                'Sen de Campo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Som' },
-	                'Sombra de Toro'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Tal' },
-	                'Tala'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Alg' },
-	                'Algodonillo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Ana' },
-	                'Anacahuita'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Azo' },
-	                'Azota Caballo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Bla' },
-	                'Blanquillo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Bug' },
-	                'Bugre'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Can' },
-	                'Canelón'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Car' },
-	                'Carpinchera'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Cei' },
-	                'Ceibo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Cha' },
-	                'Chal Chal'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Cur' },
-	                'Curupí'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Dur' },
-	                'Durasznillo Blanco'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Flo' },
-	                'Flor de Seda'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Fum' },
-	                'Fumo Bravo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Hig' },
-	                'Higuerón'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Ing' },
-	                'Ingá'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Lau' },
-	                'Laurel Criollo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Mat' },
-	                'Mata Ojo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Mur' },
-	                'Murta'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Omb' },
-	                'Ombú'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Pal' },
-	                'Palo Amarillo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Pin' },
-	                'Pindó'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Ram' },
-	                'Rama Negra'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Ros' },
-	                'Rosa de Río'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sal' },
-	                'Salvia Azul'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sar' },
-	                'Sarandí Blanco'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sar' },
-	                'Sarandí Colorado'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sau' },
-	                'Sauce Criollo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sau' },
-	                'Sauco'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Tar' },
-	                'Tarumá'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Tas' },
-	                'Tasi'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Tem' },
-	                'Tembetarí'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Tim' },
-	                'Timbó'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Bar' },
-	                'Barba de Chivo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Car' },
-	                'Carquejilla'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Cei' },
-	                'Ceibillo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Hed' },
-	                'Hediondillo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Lan' },
-	                'Lantana'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Mal' },
-	                'Malva Blanca'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Mal' },
-	                'Malva de Monte'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Mal' },
-	                'Malvavisco'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Mol' },
-	                'Molle'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Pav' },
-	                'Pavonia'
-	              )
+	              this.props.especies.map(function (especie, key) {
+	                return _react2.default.createElement(
+	                  'option',
+	                  {
+	                    key: key,
+	                    value: especie.id },
+	                  especie.label
+	                );
+	              })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -59791,7 +59571,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'form-field' },
+	              { className: 'form-field cantidad' },
 	              _react2.default.createElement(
 	                'label',
 	                { htmlFor: '#cantidad' },
@@ -59803,15 +59583,17 @@
 	                id: 'cantidad',
 	                min: '1',
 	                required: true })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-row-field' },
+	            ),
 	            _react2.default.createElement(
-	              'button',
-	              null,
-	              'Agregar'
+	              'div',
+	              { className: 'form-field submit-btn' },
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  type: 'submit',
+	                  title: 'Agregar' },
+	                '+'
+	              )
 	            )
 	          )
 	        )
@@ -60056,58 +59838,101 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TablaArboles).call(this, props));
 
 	    _this.state = {
-	      total: 0,
-	      showSubmit: false
+	      showSubmit: false,
+	      arboles: []
 	    };
 	    return _this;
 	  }
 
 	  _createClass(TablaArboles, [{
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      var arbolesCantidad = [];
-	      for (var arbol in nextProps.arboles) {
-	        arbolesCantidad.push(nextProps.arboles[arbol].cantidad);
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      window.$tate('user.arboles').on('N').subscribe(function (arboles) {
+	        console.log(arboles);
+	        _this2.setState({ arboles: arboles, showSubmit: true });
+	        _this2.forceUpdate();
+	      });
+	    }
+	  }, {
+	    key: 'tamagnoByNum',
+	    value: function tamagnoByNum(n) {
+	      var label = '';
+	      switch (n) {
+	        case '1':
+	          label = 'Brote';
+	          break;
+	        case '2':
+	          label = 'Chico';
+	          break;
+	        case '3':
+	          label = 'Mediano';
+	          break;
+	        case '4':
+	          label = 'Maduro';
+	          break;
+	        case '5':
+	          label = 'Grande';
+	          break;
 	      }
-	      var total = arbolesCantidad.reduce(function (a, b) {
-	        return a + b;
-	      }, 0);
-	      this.setState({ total: total });
+	      return label;
+	    }
+	  }, {
+	    key: 'rainbow',
+	    value: function rainbow(k) {
+	      var colors = ['#2bd873', '#5fedd5', '#009aff', '#153add', '#ff3642', '#ff687b', '#ec9c55'];
+	      return colors[colors.length - 1 < k ? 0 : k];
+	      // style={{
+	      //   background: this.rainbow(key)
+	      // }}
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this3 = this;
+
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'lista-arboles' },
-	        _react2.default.createElement(
+	        {
+	          id: 'lista-arboles',
+	          className: this.state.arboles.length === 0 ? 'sin-arboles' : '' },
+	        this.props.showAdmin && _react2.default.createElement(
+	          'div',
+	          { className: 'tabla-header' },
+	          _react2.default.createElement(
+	            'button',
+	            {
+	              onClick: function onClick(e) {
+	                window.$tate('adminArboles').value = true;
+	              } },
+	            'Cargar arboles'
+	          )
+	        ),
+	        this.state.arboles.length > 0 && _react2.default.createElement(
 	          _form2.default,
 	          {
 	            prevent: 'prevent' },
-	          this.props.arboles && _react2.default.createElement(
-	            'div',
-	            { className: 'tabla-header' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'total' },
-	              'Total: ',
-	              this.state.total
-	            ),
-	            _react2.default.createElement('button', {
-	              type: 'submit',
-	              className: !this.state.showSubmit ? 'hide' : '' })
-	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'tabla-arboles' },
-	            this.props.arboles && this.props.arboles.map(function (arbol) {
+	            this.state.arboles.map(function (arbol, key) {
 	              return _react2.default.createElement(
 	                'div',
-	                { className: 'item-arbol' },
+	                {
+	                  key: key,
+	                  className: 'item-arbol' },
 	                _react2.default.createElement(
 	                  'span',
-	                  { className: 'arbol-especie' },
-	                  arbol.especie
+	                  { className: 'especie' },
+	                  _this3.props.especieById(arbol.especie)
+	                ),
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'tamagno' },
+	                  '(',
+	                  _this3.tamagnoByNum(arbol.tamagno),
+	                  ')'
 	                ),
 	                _react2.default.createElement('input', {
 	                  type: 'hidden',
@@ -60119,14 +59944,36 @@
 	                  defaultValue: arbol.especie }),
 	                _react2.default.createElement('input', {
 	                  type: 'number',
+	                  onChange: function onChange(e) {
+	                    _this3.setState({ showSubmit: true });
+	                  },
 	                  defaultValue: arbol.cantidad })
 	              );
 	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'tabla-footer' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'total' },
+	              'Total: ',
+	              this.state.arboles.reduce(function (acc, arbol) {
+	                return acc + arbol.cantidad;
+	              }, 0)
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                type: 'submit',
+	                className: !this.state.showSubmit ? 'hide' : '' },
+	              'Guardar cambios'
+	            )
 	          )
 	        ),
-	        !this.props.arboles && _react2.default.createElement(
-	          'div',
-	          { className: 'sin-arboles' },
+	        this.state.arboles.length === 0 && _react2.default.createElement(
+	          'span',
+	          { className: 'sin-arboles-label' },
 	          'No tenés árboles registrados'
 	        )
 	      );
@@ -60173,16 +60020,36 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Body = function (_Component) {
-	  _inherits(Body, _Component);
+	var Red = function (_Component) {
+	  _inherits(Red, _Component);
 
-	  function Body() {
-	    _classCallCheck(this, Body);
+	  function Red() {
+	    _classCallCheck(this, Red);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Body).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Red).call(this));
+
+	    _this.state = {
+	      arboles: []
+	    };
+	    return _this;
 	  }
 
-	  _createClass(Body, [{
+	  _createClass(Red, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      window.fetch('/arboles').then(function (res) {
+	        return res.json();
+	      }).then(function (res) {
+	        if (res.success) {
+	          _this2.setState({ arboles: res.result });
+	        } else {
+	          console.log('error al pedir los arboles', res);
+	        }
+	      });
+	    }
+	  }, {
 	    key: 'rainbow',
 	    value: function rainbow(k) {
 	      var colors = ['#2bd873', '#5fedd5', '#009aff', '#153add', '#ff3642', '#ff687b', '#ec9c55'];
@@ -60191,7 +60058,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      return _react2.default.createElement(
 	        'article',
@@ -60221,17 +60088,17 @@
 	                'Cantidad'
 	              )
 	            ),
-	            this.props.arboles.map(function (arbol, i) {
+	            this.state.arboles.map(function (arbol, i) {
 	              return _react2.default.createElement(
 	                'div',
 	                {
 	                  key: i,
-	                  style: { background: _this2.rainbow(i) },
+	                  style: { background: _this3.rainbow(i) },
 	                  className: 'fila-arbol' },
 	                _react2.default.createElement(
 	                  'span',
 	                  null,
-	                  arbol.label
+	                  _this3.props.especieById(arbol.especie)
 	                ),
 	                _react2.default.createElement(
 	                  'span',
@@ -60246,10 +60113,10 @@
 	    }
 	  }]);
 
-	  return Body;
+	  return Red;
 	}(_react.Component);
 
-	exports.default = Body;
+	exports.default = Red;
 
 /***/ },
 /* 783 */

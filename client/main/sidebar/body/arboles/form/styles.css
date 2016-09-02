@@ -7,8 +7,21 @@
 #admin-arboles .loguineo {
   padding:0;
 }
+#admin-arboles .form-field{
+  padding: 10px 0;
+}
+#admin-arboles .form-field.submit-btn{
+  display: flex;
+  justify-content: flex-end;
+  flex: 0;
+}
+#admin-arboles button{
+  font-size: 28px;
+  padding: 0px 9px;
+  margin: 0 0 8px 30px;
+}
 #admin-arboles .form-field.tamagno{
-  flex:3;
+  flex:2;
   margin-right: 30px;
 }
 #admin-arboles .form-field.tamagno label{
@@ -23,15 +36,11 @@
   color: white;
   background: #2bd873;
 }
-#admin-arboles button{
-  width: 100%;
-  font-size: 16px;
-}
 
 #admin-arboles .close{
   position: absolute;
-  top: 20px;
-  right: 10px;
+  top: 15px;
+  right: 0;
   cursor: pointer;
   font-size: 30px;
   line-height: 20px;

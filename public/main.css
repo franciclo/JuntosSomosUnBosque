@@ -931,7 +931,6 @@ drop-down dia-log{
   }
 }#sidebar_body {
   flex:1;
-  overflow: auto;
 }
 slider-box {
   height: 100%;
@@ -1185,8 +1184,21 @@ slider-box > article.active {
 #admin-arboles .loguineo {
   padding:0;
 }
+#admin-arboles .form-field{
+  padding: 10px 0;
+}
+#admin-arboles .form-field.submit-btn{
+  display: flex;
+  justify-content: flex-end;
+  flex: 0;
+}
+#admin-arboles button{
+  font-size: 28px;
+  padding: 0px 9px;
+  margin: 0 0 8px 30px;
+}
 #admin-arboles .form-field.tamagno{
-  flex:3;
+  flex:2;
   margin-right: 30px;
 }
 #admin-arboles .form-field.tamagno label{
@@ -1201,15 +1213,11 @@ slider-box > article.active {
   color: white;
   background: #2bd873;
 }
-#admin-arboles button{
-  width: 100%;
-  font-size: 16px;
-}
 
 #admin-arboles .close{
   position: absolute;
-  top: 20px;
-  right: 10px;
+  top: 15px;
+  right: 0;
   cursor: pointer;
   font-size: 30px;
   line-height: 20px;
@@ -1306,18 +1314,106 @@ dia-log[data-open="open"] {
 }#lista-arboles{
   flex: 1;
   width: 100%;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
 #lista-arboles .loguineo {
   padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
-#lista-arboles .sin-arboles {
-  background: #eaeaea;
-  color: #7b7b7b;
+#lista-arboles .loguineo form {
+  margin: 0;
+  overflow: hidden;
+  height: auto;
+  flex:1;
+}
+#lista-arboles.sin-arboles{
+  background: #f5f5f5;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+}
+#lista-arboles .sin-arboles-label {
+  color: #7b7b7b;
+}
+.tabla-arboles {
+  flex:1;
+  overflow: auto;
+}
+.tabla-arboles .item-arbol {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 15px;
+  background: #f5f5f5;
+}
+.tabla-arboles .item-arbol:nth-child(even){
+  background: #eaeaea;
+}
+.tabla-footer {
+  display: flex;
+  justify-content: space-between;
+  min-height: 34px;
+  align-items: flex-end;
+  flex: 0!important;
+}
+.tabla-footer button{
+  font-size: 15px;
+  padding: 5px 10px 4px;
+  align-self: inherit;
+}
+.tabla-footer .total {
+  background: #ccc;
+  border-radius: 17px;
+  display: flex;
+  align-items: center;
+  padding: 2px 15px 0;
+  color: #444;
+  height: 24px;
+  font-size: 14px;
+}
+.tabla-arboles .item-arbol input[type="number"]{
+  width: 60px;
+  color: #666;
+  background: transparent;
+  border: none;
+  font-size: 17px;
+  height: 25px;
+}
+.tabla-arboles .item-arbol .tamagno{
+  flex: 1;
+  padding-left: 5px;
+  color: #656565;
+  font-size: 13px;
+}
+.tabla-arboles .item-arbol .especie{
+  color: #666;
+  font-size: 15px;
+  font-weight: 500;
+}
+.tabla-header {
+  height: 65px;
+  display: flex;
+  align-items: flex-end;
+}
+.tabla-header button{
+  margin: 5px 0 10px;
+  float: right;
+  width: 100%;
+  background: #2bd873;
+  color: #fff;
+  border: none;
+  padding: 6px 0;
+  font-weight: 500;
+  font-size: 16px;
+  height: 30px;
+  cursor: pointer;
+}
+.tabla-header button:hover{
+  background: #25bb64;
 }#la_red {
   padding-top: 20px;
 }

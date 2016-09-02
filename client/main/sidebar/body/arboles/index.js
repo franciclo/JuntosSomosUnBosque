@@ -58,14 +58,16 @@ export default class Arboles extends Component {
           this.props.user &&
           this.state.adminArboles &&
           (
-            <FormArboles user={this.props.user} />
+            <FormArboles especies={this.props.especies} />
           )
         }
         {
           this.props.user &&
           (this.state.adminArboles || this.props.user.arboles.length > 0) &&
           (
-            <TablaArboles user={this.props.user} />
+            <TablaArboles
+              especieById={this.props.especieById}
+              showAdmin={!this.state.adminArboles} />
           )
         }
       </article>

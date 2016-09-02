@@ -11,8 +11,8 @@ export default class Body extends Component {
         data-path='sidebar.body'
         id='sidebar_body'>
         <Plantaciones />
-        <Arboles user={this.props.user} />
-        <Red arboles={this.props.arboles} />
+        <Arboles {...this.props} />
+        <Red especieById={this.props.especieById} />
       </slider-box>
     )
   }

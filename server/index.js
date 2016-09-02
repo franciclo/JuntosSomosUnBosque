@@ -31,6 +31,7 @@ app.use(flash())
 require('./auth/routes')(app, passport)
 require('./forms')(app, passport)
 require('./entry')(app)
+require('./api')(app)
 
 app.listen(port)
 console.log('Bosque en puerto ' + port)
