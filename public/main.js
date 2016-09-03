@@ -59374,7 +59374,7 @@
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(props) {
-	      if (props.user && props.arboles && props.arboles.length > 0) {
+	      if (props.arboles.length > 0) {
 	        this.setState({
 	          arboles: props.arboles,
 	          cantidades: props.arboles.map(function (a) {
@@ -59433,7 +59433,7 @@
 	        {
 	          id: 'tus-arboles',
 	          'data-id': 'action_content_suma' },
-	        !this.props.isLogged || !this.state.adminArboles && this.state.arboles && this.state.arboles.length === 0 && _react2.default.createElement(
+	        !this.state.adminArboles && (!this.props.isLogged || this.props.arboles.length === 0) && _react2.default.createElement(
 	          'div',
 	          { id: 'cartel_suma' },
 	          _react2.default.createElement(
@@ -59465,7 +59465,7 @@
 	        ),
 	        this.props.isLogged && this.state.adminArboles && _react2.default.createElement(_form2.default, {
 	          sumarArbol: this.sumarArbol }),
-	        this.props.isLogged && this.state.adminArboles || this.state.arboles && this.state.arboles.length > 0 && _react2.default.createElement(_tabla2.default, {
+	        this.props.isLogged && (this.state.adminArboles || this.props.arboles.length > 0) && _react2.default.createElement(_tabla2.default, {
 	          changeCantidad: this.changeCantidad,
 	          arbolesSaved: this.arbolesSaved,
 	          arboles: this.state.arboles,
