@@ -7,9 +7,10 @@ import Form from '../form'
 
 export default class Signup extends Component {
   onSuccess (res) {
-    window.$tate('user').value = undefined
-    window.$tate('user').value = res
-    window.$tate('popups.active').value = res.primerLogin ? 'primerLogin' : null
+    window.$tate('user').value = {
+      nombre: res,
+      primerLogin: true
+    }
   }
 
   render () {

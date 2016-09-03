@@ -1,24 +1,9 @@
 import './styles.css'
 import React, {Component} from 'react'
+import {byId as especieById} from 'utils/get-especies'
 import Form from '../../../../popups/form'
 
 export default class TablaArboles extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      showSubmit: false,
-      arboles: []
-    }
-  }
-  componentWillMount () {
-    window.$tate('user.arboles')
-      .on('N')
-      .subscribe(arboles => {
-        console.log(arboles)
-        this.setState({arboles, showSubmit: true})
-        this.forceUpdate()
-      })
-  }
   tamagnoByNum (n) {
     let label = ''
     switch (n) {
@@ -40,26 +25,11 @@ export default class TablaArboles extends Component {
     }
     return label
   }
-  rainbow (k) {
-    let colors = [
-      '#2bd873',
-      '#5fedd5',
-      '#009aff',
-      '#153add',
-      '#ff3642',
-      '#ff687b',
-      '#ec9c55'
-    ]
-    return colors[(colors.length - 1) < k ? 0 : k]
-    // style={{
-    //   background: this.rainbow(key)
-    // }}
-  }
   render () {
     return (
       <div
         id='lista-arboles'
-        className={this.state.arboles.length === 0 ? 'sin-arboles' : ''}>
+        className={this.props.arboles.length === 0 ? 'sin-arboles' : ''}>
         {
           this.props.showAdmin &&
           (
@@ -76,35 +46,43 @@ export default class TablaArboles extends Component {
           )
         }
         {
-          this.state.arboles.length > 0 &&
+          this.props.arboles.length > 0 &&
           (
             <Form
-              prevent='prevent'>
+              action='/save-arboles'
+              failAlert='true'
+              successAlert='true'
+              onSuccess={this.props.arbolesSaved}>
               <div className='tabla-arboles'>
                 {
-                  this.state.arboles.map((arbol, key) => {
+                  this.props.arboles.map((arbol, key) => {
                     return (
                       <div
                         key={key}
                         className='item-arbol'>
                         <span className='especie'>
-                          {this.props.especieById(arbol.especie)}
+                          {especieById(arbol.especie)}
                         </span>
                         <span className='tamagno'>
                           ({this.tamagnoByNum(arbol.tamagno)})
                         </span>
                         <input
                           type='hidden'
-                          name='tamagno'
-                          defaultValue={arbol.tamagno} />
-                        <input
-                          type='hidden'
-                          name='especie'
-                          defaultValue={arbol.especie} />
+                          name='arboles[]'
+                          defaultValue={
+                            JSON.stringify({
+                              especie: arbol.especie,
+                              tamagno: arbol.tamagno,
+                              cantidad: this.props.cantidades[key]
+                            })
+                          } />
                         <input
                           type='number'
-                          onChange={e => { this.setState({showSubmit: true}) }}
-                          defaultValue={arbol.cantidad} />
+                          data-key={key}
+                          max='10000'
+                          min='1'
+                          onChange={this.props.changeCantidad}
+                          value={this.props.cantidades[key]} />
                       </div>
                     )
                   })
@@ -113,15 +91,15 @@ export default class TablaArboles extends Component {
               <div className='tabla-footer'>
                 <div className='total'>
                   Total: {
-                    this.state.arboles
-                      .reduce((acc, arbol) => {
-                        return acc + arbol.cantidad
+                    this.props.cantidades
+                      .reduce((acc, cant) => {
+                        return acc + +cant
                       }, 0)
                   }
                 </div>
                 <button
                   type='submit'
-                  className={!this.state.showSubmit ? 'hide' : ''}>
+                  className={!this.props.showSubmit ? 'hide' : ''}>
                   Guardar cambios
                 </button>
               </div>
@@ -129,7 +107,7 @@ export default class TablaArboles extends Component {
           )
         }
         {
-          this.state.arboles.length === 0 &&
+          this.props.arboles.length === 0 &&
           (
             <span className='sin-arboles-label'>
               No tenés árboles registrados

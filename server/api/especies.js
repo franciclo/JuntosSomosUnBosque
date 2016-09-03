@@ -13,12 +13,7 @@ module.exports = function (req, res) {
       return res.json(
         {
           success: true,
-          result: especies.map(function (especie) {
-            return {
-              label: especie.singular,
-              id: especie.id
-            }
-          })
+          result: especies
         })
     } else {
       return res.json(

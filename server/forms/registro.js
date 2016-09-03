@@ -25,16 +25,7 @@ module.exports = function (passport) {
           }
           return res.json({
             success: true,
-            result: {
-              tipo: user.userType,
-              primerLogin: user.primerLogin,
-              location: {
-                lat: 0,
-                lng: 0
-              },
-              nombre: user.getNombre(),
-              arboles: user.arboles
-            }
+            result: user.getNombre()
           })
         })
       })(req, res, next)

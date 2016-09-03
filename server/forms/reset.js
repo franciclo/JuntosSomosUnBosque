@@ -32,13 +32,7 @@ module.exports = function (req, res) {
         }
         res.json({
           success: true,
-          result: {
-            tipo: user.userType,
-            primerLogin: user.primerLogin,
-            location: user.location,
-            nombre: user.getNombre(),
-            arboles: user.arboles
-          }
+          result: null
         })
       })
     })

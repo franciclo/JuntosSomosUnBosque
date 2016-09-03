@@ -1,7 +1,7 @@
 import './styles.css'
 import 'components/slider-box'
 import React, {Component} from 'react'
-
+import {byId as especieById} from 'utils/get-especies'
 export default class Red extends Component {
   constructor () {
     super()
@@ -24,19 +24,6 @@ export default class Red extends Component {
       })
   }
 
-  rainbow (k) {
-    let colors = [
-      '#2bd873',
-      '#5fedd5',
-      '#009aff',
-      '#153add',
-      '#ff3642',
-      '#ff687b',
-      '#ec9c55'
-    ]
-    return colors[(colors.length - 1) < k ? 0 : k]
-  }
-
   render () {
     return (
       <article data-id='action_content_red'>
@@ -53,9 +40,8 @@ export default class Red extends Component {
                   return (
                     <div
                       key={i}
-                      style={{background: this.rainbow(i)}}
                       className='fila-arbol'>
-                      <span>{this.props.especieById(arbol.especie)}</span>
+                      <span>{especieById(arbol.especie)}</span>
                       <span>{arbol.cantidad}</span>
                     </div>
                   )

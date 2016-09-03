@@ -17,7 +17,12 @@ class GeoSelect extends window.HTMLElement {
       +this.getAttribute('lat') || 0,
       +this.getAttribute('lng') || 0
     ]
-    this.querySelector('input').value = JSON.stringify(coords)
+    this.querySelector('input').value = JSON.stringify(
+      {
+        lat: coords[0],
+        lng: coords[1]
+      }
+    )
     const id = this.getAttribute('data-id')
     if (!mapas[id]) {
       mapas[id] = {}
@@ -70,7 +75,12 @@ class GeoSelect extends window.HTMLElement {
     }
     mapas[id].marker.setLatLng(coords)
     mapas[id].map.setView(coords)
-    this.querySelector('input').value = JSON.stringify(coords)
+    this.querySelector('input').value = JSON.stringify(
+      {
+        lat: coords[0],
+        lng: coords[1]
+      }
+    )
   }
 
 }

@@ -7,10 +7,16 @@ export default class Arboles extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      adminArboles: false
+      adminArboles: false,
+      arboles: [],
+      cantidades: [],
+      showSubmit: false
     }
     window.$tate('adminArboles').value = false
     this.openAdminArboles = window.$tate('adminArboles').on('E')
+    this.changeCantidad = this.changeCantidad.bind(this)
+    this.arbolesSaved = this.arbolesSaved.bind(this)
+    this.sumarArbol = this.sumarArbol.bind(this)
   }
 
   componentWillMount () {
@@ -23,14 +29,68 @@ export default class Arboles extends Component {
     this.openAdminArboles.unsubscribe()
   }
 
+  componentWillReceiveProps (props) {
+    if (
+      props.user &&
+      props.arboles &&
+      props.arboles.length > 0
+    ) {
+      this.setState({
+        arboles: props.arboles,
+        cantidades: props.arboles.map(a => a.cantidad)
+      })
+    }
+  }
+
+  sumarArbol (data) {
+    const tamagno = data.get('tamagno')
+    const cantidad = +data.get('cantidad')
+    const especie = data.get('especie')
+    const arboles = this.state.arboles
+    const cantidades = this.state.cantidades
+    const arbolI = arboles
+      .map(a => [a.especie, a.tamagno].join(''))
+      .indexOf([especie, tamagno].join(''))
+    if (~arbolI) {
+      console.log('arbol edit')
+      cantidades[arbolI] = +cantidades[arbolI] + +cantidad
+    } else {
+      console.log('arbol new')
+      arboles.push({
+        especie: especie,
+        tamagno: tamagno
+      })
+      cantidades.push(cantidad)
+    }
+    this.setState({arboles, cantidades, showSubmit: true})
+  }
+
+  changeCantidad (e) {
+    let key = +e.target.getAttribute('data-key')
+    let cantidades = this.state.cantidades
+    cantidades[key] = e.target.value
+    this.setState({cantidades, showSubmit: true})
+  }
+
+  arbolesSaved (res) {
+    console.log(res)
+    this.setState({showSubmit: false})
+    window.$tate('user.arboles').value = undefined
+    window.$tate('user.arboles').value = res
+  }
+
   render () {
     return (
       <article
         id='tus-arboles'
         data-id='action_content_suma'>
         {
-          !this.state.adminArboles &&
-          (!this.props.user || this.props.user.arboles.length === 0) &&
+          !this.props.isLogged ||
+          (
+            !this.state.adminArboles &&
+            this.state.arboles &&
+            this.state.arboles.length === 0
+          ) &&
           (
             <div id='cartel_suma'>
               <h1>Sumá tus árboles</h1>
@@ -39,7 +99,7 @@ export default class Arboles extends Component {
               </p>
               <button
                 onClick={(e) => {
-                  if (this.props.user) {
+                  if (this.props.isLogged) {
                     window.$tate('adminArboles').value = true
                   } else {
                     window.$tate('popups.active').value = 'signin'
@@ -55,18 +115,27 @@ export default class Arboles extends Component {
           )
         }
         {
-          this.props.user &&
+          this.props.isLogged &&
           this.state.adminArboles &&
           (
-            <FormArboles especies={this.props.especies} />
+            <FormArboles
+              sumarArbol={this.sumarArbol} />
           )
         }
         {
-          this.props.user &&
-          (this.state.adminArboles || this.props.user.arboles.length > 0) &&
+          this.props.isLogged &&
+          this.state.adminArboles ||
+          (
+            this.state.arboles &&
+            this.state.arboles.length > 0
+          ) &&
           (
             <TablaArboles
-              especieById={this.props.especieById}
+              changeCantidad={this.changeCantidad}
+              arbolesSaved={this.arbolesSaved}
+              arboles={this.state.arboles}
+              cantidades={this.state.cantidades}
+              showSubmit={this.state.showSubmit}
               showAdmin={!this.state.adminArboles} />
           )
         }

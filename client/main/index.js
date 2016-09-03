@@ -2,6 +2,7 @@ import './styles.css'
 
 import 'state-stream'
 import React, {Component} from 'react'
+import {makeRequest as makeRequestEspecies} from 'utils/get-especies'
 import Mapa from './mapa'
 import Sidebar from './sidebar'
 import Popups from './popups'
@@ -10,55 +11,82 @@ export default class Main extends Component {
   constructor () {
     super()
     this.state = {
-      user: null,
-      especies: []
+      isLogged: null,
+      nombre: null,
+      primerLogin: null,
+      reset: null,
+      userType: null,
+      location: null,
+      arboles: null
     }
-    this.especieById = this.especieById.bind(this)
   }
 
   componentWillMount () {
+    makeRequestEspecies()
     window.$tate('user')
       .on(['N', 'D'])
       .subscribe(user => {
-        if (!user) return this.setState({user: null})
-        user.location = JSON.parse(user.location)
-        this.setState({user})
+        if (!user) {
+          return this.setState({
+            isLogged: false,
+            nombre: null,
+            userType: null,
+            location: null,
+            arboles: null
+          })
+        }
+        if (user.primerLogin) {
+          return this.setState({
+            isLogged: true,
+            nombre: user.nombre,
+            primerLogin: true
+          })
+        }
+        if (user.reset) {
+          return this.setState(
+            {
+              isLogged: true,
+              reset: true
+            })
+        }
+        this.setState({
+          isLogged: true,
+          nombre: user.nombre,
+          userType: user.userType,
+          location: user.location && JSON.parse(user.location),
+          arboles: user.arboles
+        })
       })
 
     window.$tate('user.nombre')
       .on('E')
-      .subscribe(n => {
-        let user = this.state.user
-        user.nombre = n
-        this.setState({user})
+      .subscribe(nombre => {
+        this.setState({nombre})
+      })
+
+    window.$tate('user.primerLogin')
+      .on('E')
+      .subscribe(primerLogin => {
+        this.setState({primerLogin})
+      })
+
+    window.$tate('user.userType')
+      .on(['E', 'N'])
+      .subscribe(userType => {
+        this.setState({userType})
       })
 
     window.$tate('user.location')
-      .on('E')
-      .subscribe(n => {
-        let user = this.state.user
-        user.location = JSON.parse(n)
-        this.setState({user})
+      .on(['E', 'N'])
+      .subscribe(location => {
+        location = JSON.parse(location)
+        this.setState({location})
       })
 
-    window.$tate('user.type')
-      .on('E')
-      .subscribe(n => {
-        let user = this.state.user
-        user.type = n
-        this.setState({user})
-      })
-
-    window.fetch('/especies')
-      .then(res => {
-        return res.json()
-      })
-      .then(res => {
-        if (res.success) {
-          this.setState({especies: res.result})
-        } else {
-          console.log('error al pedir las especies', res)
-        }
+    window.$tate('user.arboles')
+      .on('N')
+      .subscribe(arboles => {
+        this.setState({arboles})
       })
   }
 
@@ -82,25 +110,21 @@ export default class Main extends Component {
       : Math.random() >= 0.7
   }
 
-  especieById (id) {
-    let especieI = this.state.especies
-      .map(e => e.id)
-      .indexOf(id)
-    if (!~especieI) return 'Especie desconocida'
-    return this.state.especies[especieI].label
-  }
-
   render () {
     return (
       <div>
         <Sidebar
-          especies={this.state.especies}
-          especieById={this.especieById}
-          user={this.state.user} />
-        <Mapa
-          especieById={this.especieById} />
+          isLogged={this.state.isLogged}
+          arboles={this.state.arboles}
+          nombre={this.state.nombre} />
+        <Mapa />
         <Popups
-          user={this.state.user} />
+          isLogged={this.state.isLogged}
+          userType={this.state.userType}
+          location={this.state.location}
+          nombre={this.state.nombre}
+          primerLogin={this.state.primerLogin}
+          reset={this.state.reset} />
       </div>
     )
   }

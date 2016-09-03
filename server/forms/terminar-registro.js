@@ -14,7 +14,7 @@ module.exports = function (req, res) {
       success: true,
       text: 'Datos guardados',
       result: {
-        type: user.userType,
+        userType: user.userType,
         location: user.location
       }
     })

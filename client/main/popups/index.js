@@ -29,11 +29,11 @@ export default class Popups extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.user && nextProps.user.primerLogin) {
-      this.setState({open: 'primerLogin'})
+    if (nextProps.isLogged && nextProps.primerLogin) {
+      return this.setState({open: 'primerLogin'})
     }
-    if (nextProps.user && nextProps.user.reset) {
-      this.setState({open: 'reset'})
+    if (nextProps.isLogged && nextProps.reset) {
+      return this.setState({open: 'reset'})
     }
   }
 
@@ -79,7 +79,7 @@ export default class Popups extends Component {
         {/*    User not logged actions    */}
 
         {
-          !this.props.user &&
+          !this.props.isLogged &&
             <Signin
               closePopUp={this.closePopUp}
               crearCuentaShow={this.activatePopUp('signup')}
@@ -87,14 +87,14 @@ export default class Popups extends Component {
               open={this.state.open === 'signin' ? 'open' : ''} />
         }
         {
-          !this.props.user &&
+          !this.props.isLogged &&
             <Signup
               closePopUp={this.closePopUp}
               loginShow={this.activatePopUp('signin')}
               open={this.state.open === 'signup' ? 'open' : ''} />
         }
         {
-          !this.props.user &&
+          !this.props.isLogged &&
             <Forgot
               closePopUp={this.closePopUp}
               loginShow={this.activatePopUp('signin')}
@@ -104,21 +104,22 @@ export default class Popups extends Component {
         {/*    User logged actions    */}
 
         {
-          this.props.user &&
+          this.props.isLogged &&
             <Profile
               closePopUp={this.closePopUp}
-              user={this.props.user}
+              userType={this.props.userType}
+              location={this.props.location}
+              nombre={this.props.nombre}
               open={this.state.open === 'perfil' ? 'open' : ''} />
         }
         {
-          this.props.user && this.props.user.primerLogin &&
+          this.props.isLogged && this.props.primerLogin &&
             <PrimerLogin
               open={this.state.open === 'primerLogin' ? 'open' : ''} />
         }
         {
-          this.props.user && this.props.user.reset &&
+          this.props.isLogged && this.props.reset &&
             <Reset
-              user={this.props.user}
               open={this.state.open === 'reset' ? 'open' : ''} />
         }
       </div>

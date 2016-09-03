@@ -7,12 +7,9 @@ var userSchema = mongoose.Schema({
   name: String,
   arboles: [
     {
-      tamagno: Number,
+      tamagno: String,
       cantidad: Number,
-      especie: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Especie'
-      }
+      especie: String
     }
   ],
   primerLogin: {

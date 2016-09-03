@@ -18,7 +18,7 @@ export default class Header extends Component {
           </button>
           |
           {
-            !this.props.user &&
+            !this.props.nombre &&
               <button
                 onClick={
                   (e) => { window.$tate('popups.active').value = 'signin' }
@@ -27,9 +27,9 @@ export default class Header extends Component {
               </button>
           }
           {
-            this.props.user &&
+            this.props.nombre &&
               <drop-down>
-                {this.props.user.nombre}
+                {this.props.nombre}
                 <dia-log>
                   <button
                     onClick={e => {

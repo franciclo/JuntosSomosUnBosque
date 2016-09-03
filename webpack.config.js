@@ -12,14 +12,15 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'components': path.resolve('./client/components')
+      'components': path.resolve('./client/components'),
+      'utils': path.resolve('./client/utils')
     },
     extensions: ['', '.js']
   },
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         exclude: /(node_modules)/,
         loader: 'babel',
         query: {

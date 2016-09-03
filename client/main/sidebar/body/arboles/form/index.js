@@ -1,12 +1,14 @@
 import './styles.css'
 import React, {Component} from 'react'
+import {all as allEspecies} from 'utils/get-especies'
 import Form from '../../../../popups/form'
 
 export default class FormArboles extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      rangeLabel: 'Brote'
+      rangeLabel: 'Brote',
+      especies: []
     }
     this.changeRange = this.changeRange.bind(this)
   }
@@ -45,24 +47,6 @@ export default class FormArboles extends Component {
     window.$tate('adminArboles').value = false
   }
 
-  agregarArbol (data) {
-    let misArboles = window.$tate('user.arboles').value
-    let miArbolI = misArboles
-      .map(a => a.especie + a.tamagno)
-      .indexOf(data.get('especie') + data.get('tamagno'))
-    if (~miArbolI) {
-      misArboles[miArbolI].cantidad += +data.get('cantidad')
-    } else {
-      misArboles.push({
-        tamagno: data.get('tamagno'),
-        cantidad: +data.get('cantidad'),
-        especie: data.get('especie')
-      })
-    }
-    window.$tate('user.arboles').value = undefined
-    window.$tate('user.arboles').value = misArboles
-  }
-
   render () {
     return (
       <div id='admin-arboles'>
@@ -71,7 +55,7 @@ export default class FormArboles extends Component {
           onClick={this.closeAdmin}>
         </span>
         <Form
-          onSubmit={this.agregarArbol}
+          onSubmit={this.props.sumarArbol}
           prevent='prevent'>
           <div className='form-row-field'>
             <label htmlFor='#especie'>Especie</label>
@@ -85,13 +69,14 @@ export default class FormArboles extends Component {
                 Elegí una especie
               </option>
               {
-                this.props.especies.map((especie, key) => {
-                  return <option
-                    key={key}
-                    value={especie.id}>
-                    {especie.label}
-                  </option>
-                })
+                allEspecies()
+                  .map((especie, key) => {
+                    return <option
+                      key={key}
+                      value={especie.id}>
+                      {especie.label}
+                    </option>
+                  })
               }
             </select>
           </div>
@@ -121,6 +106,7 @@ export default class FormArboles extends Component {
                 name='cantidad'
                 id='cantidad'
                 min='1'
+                max='10000'
                 required />
             </div>
             <div className='form-field submit-btn'>

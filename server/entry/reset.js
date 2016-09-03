@@ -8,14 +8,11 @@ module.exports = function (req, res) {
     if (err || !user) {
       return res.redirect('/')
     }
-    var state = {}
-    state.user = {
-      nombre: user.getNombre(),
-      email: user.local.email,
-      reset: true
-    }
     res.render('layout', {
-      state: state
+      state: {
+        nombre: user.getNombre(),
+        reset: true
+      }
     })
   })
 }

@@ -21433,6 +21433,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _getEspecies = __webpack_require__(773);
+
 	var _mapa = __webpack_require__(525);
 
 	var _mapa2 = _interopRequireDefault(_mapa);
@@ -21441,7 +21443,7 @@
 
 	var _sidebar2 = _interopRequireDefault(_sidebar);
 
-	var _popups = __webpack_require__(788);
+	var _popups = __webpack_require__(789);
 
 	var _popups2 = _interopRequireDefault(_popups);
 
@@ -21462,10 +21464,14 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this));
 
 	    _this.state = {
-	      user: null,
-	      especies: []
+	      isLogged: null,
+	      nombre: null,
+	      primerLogin: null,
+	      reset: null,
+	      userType: null,
+	      location: null,
+	      arboles: null
 	    };
-	    _this.especieById = _this.especieById.bind(_this);
 	    return _this;
 	  }
 
@@ -21474,38 +21480,58 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
+	      (0, _getEspecies.makeRequest)();
 	      window.$tate('user').on(['N', 'D']).subscribe(function (user) {
-	        if (!user) return _this2.setState({ user: null });
-	        user.location = JSON.parse(user.location);
-	        _this2.setState({ user: user });
-	      });
-
-	      window.$tate('user.nombre').on('E').subscribe(function (n) {
-	        var user = _this2.state.user;
-	        user.nombre = n;
-	        _this2.setState({ user: user });
-	      });
-
-	      window.$tate('user.location').on('E').subscribe(function (n) {
-	        var user = _this2.state.user;
-	        user.location = JSON.parse(n);
-	        _this2.setState({ user: user });
-	      });
-
-	      window.$tate('user.type').on('E').subscribe(function (n) {
-	        var user = _this2.state.user;
-	        user.type = n;
-	        _this2.setState({ user: user });
-	      });
-
-	      window.fetch('/especies').then(function (res) {
-	        return res.json();
-	      }).then(function (res) {
-	        if (res.success) {
-	          _this2.setState({ especies: res.result });
-	        } else {
-	          console.log('error al pedir las especies', res);
+	        if (!user) {
+	          return _this2.setState({
+	            isLogged: false,
+	            nombre: null,
+	            userType: null,
+	            location: null,
+	            arboles: null
+	          });
 	        }
+	        if (user.primerLogin) {
+	          return _this2.setState({
+	            isLogged: true,
+	            nombre: user.nombre,
+	            primerLogin: true
+	          });
+	        }
+	        if (user.reset) {
+	          return _this2.setState({
+	            isLogged: true,
+	            reset: true
+	          });
+	        }
+	        _this2.setState({
+	          isLogged: true,
+	          nombre: user.nombre,
+	          userType: user.userType,
+	          location: user.location && JSON.parse(user.location),
+	          arboles: user.arboles
+	        });
+	      });
+
+	      window.$tate('user.nombre').on('E').subscribe(function (nombre) {
+	        _this2.setState({ nombre: nombre });
+	      });
+
+	      window.$tate('user.primerLogin').on('E').subscribe(function (primerLogin) {
+	        _this2.setState({ primerLogin: primerLogin });
+	      });
+
+	      window.$tate('user.userType').on(['E', 'N']).subscribe(function (userType) {
+	        _this2.setState({ userType: userType });
+	      });
+
+	      window.$tate('user.location').on(['E', 'N']).subscribe(function (location) {
+	        location = JSON.parse(location);
+	        _this2.setState({ location: location });
+	      });
+
+	      window.$tate('user.arboles').on('N').subscribe(function (arboles) {
+	        _this2.setState({ arboles: arboles });
 	      });
 	    }
 	  }, {
@@ -21529,28 +21555,23 @@
 	      return vistoNum === 1 || vistoNum === 2 ? true : Math.random() >= 0.7;
 	    }
 	  }, {
-	    key: 'especieById',
-	    value: function especieById(id) {
-	      var especieI = this.state.especies.map(function (e) {
-	        return e.id;
-	      }).indexOf(id);
-	      if (!~especieI) return 'Especie desconocida';
-	      return this.state.especies[especieI].label;
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(_sidebar2.default, {
-	          especies: this.state.especies,
-	          especieById: this.especieById,
-	          user: this.state.user }),
-	        _react2.default.createElement(_mapa2.default, {
-	          especieById: this.especieById }),
+	          isLogged: this.state.isLogged,
+	          arboles: this.state.arboles,
+	          nombre: this.state.nombre }),
+	        _react2.default.createElement(_mapa2.default, null),
 	        _react2.default.createElement(_popups2.default, {
-	          user: this.state.user })
+	          isLogged: this.state.isLogged,
+	          userType: this.state.userType,
+	          location: this.state.location,
+	          nombre: this.state.nombre,
+	          primerLogin: this.state.primerLogin,
+	          reset: this.state.reset })
 	      );
 	    }
 	  }]);
@@ -40378,17 +40399,20 @@
 	  _createClass(Mapa, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      var _this2 = this;
-
-	      window.fetch('/red').then(function (res) {
-	        return res.json();
-	      }).then(function (res) {
-	        if (res.success) {
-	          _this2.setState({ red: res.result });
-	        } else {
-	          console.log('error al pedir la red', res);
-	        }
-	      });
+	      // window.fetch('/red')
+	      //   .then(res => {
+	      //     return res.json()
+	      //   })
+	      //   .then(res => {
+	      //     console.log('/red ', res)
+	      //     if (res.success) {
+	      //       this.setState({
+	      //         red: res.result
+	      //       })
+	      //     } else {
+	      //       console.log('error al pedir la red', res)
+	      //     }
+	      //   })
 	    }
 	  }, {
 	    key: 'render',
@@ -58167,7 +58191,7 @@
 
 	var _body2 = _interopRequireDefault(_body);
 
-	var _footer = __webpack_require__(785);
+	var _footer = __webpack_require__(786);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
@@ -58194,7 +58218,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'sidebar' },
-	        _react2.default.createElement(_header2.default, { user: this.props.user }),
+	        _react2.default.createElement(_header2.default, { nombre: this.props.nombre }),
 	        _react2.default.createElement(
 	          'h1',
 	          null,
@@ -58206,7 +58230,9 @@
 	          )
 	        ),
 	        _react2.default.createElement(_nav2.default, null),
-	        _react2.default.createElement(_body2.default, this.props),
+	        _react2.default.createElement(_body2.default, {
+	          isLogged: this.props.isLogged,
+	          arboles: this.props.arboles }),
 	        _react2.default.createElement(_footer2.default, null)
 	      );
 	    }
@@ -58282,7 +58308,7 @@
 	            '+ info'
 	          ),
 	          '|',
-	          !this.props.user && _react2.default.createElement(
+	          !this.props.nombre && _react2.default.createElement(
 	            'button',
 	            {
 	              onClick: function onClick(e) {
@@ -58290,10 +58316,10 @@
 	              } },
 	            'ingresar'
 	          ),
-	          this.props.user && _react2.default.createElement(
+	          this.props.nombre && _react2.default.createElement(
 	            'drop-down',
 	            null,
-	            this.props.user.nombre,
+	            this.props.nombre,
 	            _react2.default.createElement(
 	              'dia-log',
 	              null,
@@ -59036,7 +59062,7 @@
 
 	var _arboles2 = _interopRequireDefault(_arboles);
 
-	var _red = __webpack_require__(782);
+	var _red = __webpack_require__(783);
 
 	var _red2 = _interopRequireDefault(_red);
 
@@ -59066,8 +59092,10 @@
 	          'data-path': 'sidebar.body',
 	          id: 'sidebar_body' },
 	        _react2.default.createElement(_plantaciones2.default, null),
-	        _react2.default.createElement(_arboles2.default, this.props),
-	        _react2.default.createElement(_red2.default, { especieById: this.props.especieById })
+	        _react2.default.createElement(_arboles2.default, {
+	          arboles: this.props.arboles,
+	          isLogged: this.props.isLogged }),
+	        _react2.default.createElement(_red2.default, null)
 	      );
 	    }
 	  }]);
@@ -59295,7 +59323,7 @@
 
 	var _form2 = _interopRequireDefault(_form);
 
-	var _tabla = __webpack_require__(779);
+	var _tabla = __webpack_require__(780);
 
 	var _tabla2 = _interopRequireDefault(_tabla);
 
@@ -59316,10 +59344,16 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Arboles).call(this, props));
 
 	    _this.state = {
-	      adminArboles: false
+	      adminArboles: false,
+	      arboles: [],
+	      cantidades: [],
+	      showSubmit: false
 	    };
 	    window.$tate('adminArboles').value = false;
 	    _this.openAdminArboles = window.$tate('adminArboles').on('E');
+	    _this.changeCantidad = _this.changeCantidad.bind(_this);
+	    _this.arbolesSaved = _this.arbolesSaved.bind(_this);
+	    _this.sumarArbol = _this.sumarArbol.bind(_this);
 	    return _this;
 	  }
 
@@ -59338,6 +59372,58 @@
 	      this.openAdminArboles.unsubscribe();
 	    }
 	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(props) {
+	      if (props.user && props.arboles && props.arboles.length > 0) {
+	        this.setState({
+	          arboles: props.arboles,
+	          cantidades: props.arboles.map(function (a) {
+	            return a.cantidad;
+	          })
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'sumarArbol',
+	    value: function sumarArbol(data) {
+	      var tamagno = data.get('tamagno');
+	      var cantidad = +data.get('cantidad');
+	      var especie = data.get('especie');
+	      var arboles = this.state.arboles;
+	      var cantidades = this.state.cantidades;
+	      var arbolI = arboles.map(function (a) {
+	        return [a.especie, a.tamagno].join('');
+	      }).indexOf([especie, tamagno].join(''));
+	      if (~arbolI) {
+	        console.log('arbol edit');
+	        cantidades[arbolI] = +cantidades[arbolI] + +cantidad;
+	      } else {
+	        console.log('arbol new');
+	        arboles.push({
+	          especie: especie,
+	          tamagno: tamagno
+	        });
+	        cantidades.push(cantidad);
+	      }
+	      this.setState({ arboles: arboles, cantidades: cantidades, showSubmit: true });
+	    }
+	  }, {
+	    key: 'changeCantidad',
+	    value: function changeCantidad(e) {
+	      var key = +e.target.getAttribute('data-key');
+	      var cantidades = this.state.cantidades;
+	      cantidades[key] = e.target.value;
+	      this.setState({ cantidades: cantidades, showSubmit: true });
+	    }
+	  }, {
+	    key: 'arbolesSaved',
+	    value: function arbolesSaved(res) {
+	      console.log(res);
+	      this.setState({ showSubmit: false });
+	      window.$tate('user.arboles').value = undefined;
+	      window.$tate('user.arboles').value = res;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this3 = this;
@@ -59347,7 +59433,7 @@
 	        {
 	          id: 'tus-arboles',
 	          'data-id': 'action_content_suma' },
-	        !this.state.adminArboles && (!this.props.user || this.props.user.arboles.length === 0) && _react2.default.createElement(
+	        !this.props.isLogged || !this.state.adminArboles && this.state.arboles && this.state.arboles.length === 0 && _react2.default.createElement(
 	          'div',
 	          { id: 'cartel_suma' },
 	          _react2.default.createElement(
@@ -59364,7 +59450,7 @@
 	            'button',
 	            {
 	              onClick: function onClick(e) {
-	                if (_this3.props.user) {
+	                if (_this3.props.isLogged) {
 	                  window.$tate('adminArboles').value = true;
 	                } else {
 	                  window.$tate('popups.active').value = 'signin';
@@ -59377,9 +59463,14 @@
 	            'Cargá tus primeros arbolitos'
 	          )
 	        ),
-	        this.props.user && this.state.adminArboles && _react2.default.createElement(_form2.default, { especies: this.props.especies }),
-	        this.props.user && (this.state.adminArboles || this.props.user.arboles.length > 0) && _react2.default.createElement(_tabla2.default, {
-	          especieById: this.props.especieById,
+	        this.props.isLogged && this.state.adminArboles && _react2.default.createElement(_form2.default, {
+	          sumarArbol: this.sumarArbol }),
+	        this.props.isLogged && this.state.adminArboles || this.state.arboles && this.state.arboles.length > 0 && _react2.default.createElement(_tabla2.default, {
+	          changeCantidad: this.changeCantidad,
+	          arbolesSaved: this.arbolesSaved,
+	          arboles: this.state.arboles,
+	          cantidades: this.state.cantidades,
+	          showSubmit: this.state.showSubmit,
 	          showAdmin: !this.state.adminArboles })
 	      );
 	    }
@@ -59415,7 +59506,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form = __webpack_require__(773);
+	var _getEspecies = __webpack_require__(773);
+
+	var _form = __webpack_require__(774);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -59436,7 +59529,8 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FormArboles).call(this, props));
 
 	    _this.state = {
-	      rangeLabel: 'Brote'
+	      rangeLabel: 'Brote',
+	      especies: []
 	    };
 	    _this.changeRange = _this.changeRange.bind(_this);
 	    return _this;
@@ -59478,25 +59572,6 @@
 	      window.$tate('adminArboles').value = false;
 	    }
 	  }, {
-	    key: 'agregarArbol',
-	    value: function agregarArbol(data) {
-	      var misArboles = window.$tate('user.arboles').value;
-	      var miArbolI = misArboles.map(function (a) {
-	        return a.especie + a.tamagno;
-	      }).indexOf(data.get('especie') + data.get('tamagno'));
-	      if (~miArbolI) {
-	        misArboles[miArbolI].cantidad += +data.get('cantidad');
-	      } else {
-	        misArboles.push({
-	          tamagno: data.get('tamagno'),
-	          cantidad: +data.get('cantidad'),
-	          especie: data.get('especie')
-	        });
-	      }
-	      window.$tate('user.arboles').value = undefined;
-	      window.$tate('user.arboles').value = misArboles;
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -59508,7 +59583,7 @@
 	        _react2.default.createElement(
 	          _form2.default,
 	          {
-	            onSubmit: this.agregarArbol,
+	            onSubmit: this.props.sumarArbol,
 	            prevent: 'prevent' },
 	          _react2.default.createElement(
 	            'div',
@@ -59531,7 +59606,7 @@
 	                  value: '' },
 	                'Elegí una especie'
 	              ),
-	              this.props.especies.map(function (especie, key) {
+	              (0, _getEspecies.all)().map(function (especie, key) {
 	                return _react2.default.createElement(
 	                  'option',
 	                  {
@@ -59582,6 +59657,7 @@
 	                name: 'cantidad',
 	                id: 'cantidad',
 	                min: '1',
+	                max: '10000',
 	                required: true })
 	            ),
 	            _react2.default.createElement(
@@ -59615,6 +59691,54 @@
 /***/ },
 /* 772 */,
 /* 773 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var especies = [];
+	function makeRequest() {
+	  window.fetch('/especies').then(function (res) {
+	    return res.json();
+	  }).then(function (res) {
+	    if (res.success) {
+	      especies = res.result;
+	    } else {
+	      console.warn('Error al pedir las especies', res);
+	    }
+	  });
+	}
+	function all(label) {
+	  if (especies.length === 0) return 'No hay especies cargadas';
+	  if (!especies[0].hasOwnProperty(label)) {
+	    label = 'singular';
+	  }
+	  return especies.map(function (e) {
+	    return {
+	      id: e._id,
+	      label: e[label]
+	    };
+	  });
+	}
+	function byId(id, label) {
+	  if (especies.length === 0) return 'No hay especies cargadas';
+	  var i = especies.map(function (e) {
+	    return e._id;
+	  }).indexOf(id);
+	  if (!~i) return 'Especie desconocida';
+	  if (!especies[i].hasOwnProperty(label)) {
+	    label = 'singular';
+	  }
+	  return especies[i][label];
+	}
+	exports.all = all;
+	exports.byId = byId;
+	exports.makeRequest = makeRequest;
+
+/***/ },
+/* 774 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59625,11 +59749,11 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(774);
+	__webpack_require__(775);
 
 	__webpack_require__(180);
 
-	__webpack_require__(776);
+	__webpack_require__(777);
 
 	var _react = __webpack_require__(1);
 
@@ -59756,19 +59880,19 @@
 	exports.default = Form;
 
 /***/ },
-/* 774 */
+/* 775 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 775 */,
-/* 776 */
+/* 776 */,
+/* 777 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	__webpack_require__(777);
+	__webpack_require__(778);
 
 	__webpack_require__(752);
 
@@ -59793,14 +59917,14 @@
 	window.customElements.define('dia-log', Dialog);
 
 /***/ },
-/* 777 */
+/* 778 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 778 */,
-/* 779 */
+/* 779 */,
+/* 780 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59811,13 +59935,15 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(780);
+	__webpack_require__(781);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form = __webpack_require__(773);
+	var _getEspecies = __webpack_require__(773);
+
+	var _form = __webpack_require__(774);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -59832,30 +59958,13 @@
 	var TablaArboles = function (_Component) {
 	  _inherits(TablaArboles, _Component);
 
-	  function TablaArboles(props) {
+	  function TablaArboles() {
 	    _classCallCheck(this, TablaArboles);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TablaArboles).call(this, props));
-
-	    _this.state = {
-	      showSubmit: false,
-	      arboles: []
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TablaArboles).apply(this, arguments));
 	  }
 
 	  _createClass(TablaArboles, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this2 = this;
-
-	      window.$tate('user.arboles').on('N').subscribe(function (arboles) {
-	        console.log(arboles);
-	        _this2.setState({ arboles: arboles, showSubmit: true });
-	        _this2.forceUpdate();
-	      });
-	    }
-	  }, {
 	    key: 'tamagnoByNum',
 	    value: function tamagnoByNum(n) {
 	      var label = '';
@@ -59879,24 +59988,15 @@
 	      return label;
 	    }
 	  }, {
-	    key: 'rainbow',
-	    value: function rainbow(k) {
-	      var colors = ['#2bd873', '#5fedd5', '#009aff', '#153add', '#ff3642', '#ff687b', '#ec9c55'];
-	      return colors[colors.length - 1 < k ? 0 : k];
-	      // style={{
-	      //   background: this.rainbow(key)
-	      // }}
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this2 = this;
 
 	      return _react2.default.createElement(
 	        'div',
 	        {
 	          id: 'lista-arboles',
-	          className: this.state.arboles.length === 0 ? 'sin-arboles' : '' },
+	          className: this.props.arboles.length === 0 ? 'sin-arboles' : '' },
 	        this.props.showAdmin && _react2.default.createElement(
 	          'div',
 	          { className: 'tabla-header' },
@@ -59909,14 +60009,17 @@
 	            'Cargar arboles'
 	          )
 	        ),
-	        this.state.arboles.length > 0 && _react2.default.createElement(
+	        this.props.arboles.length > 0 && _react2.default.createElement(
 	          _form2.default,
 	          {
-	            prevent: 'prevent' },
+	            action: '/save-arboles',
+	            failAlert: 'true',
+	            successAlert: 'true',
+	            onSuccess: this.props.arbolesSaved },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'tabla-arboles' },
-	            this.state.arboles.map(function (arbol, key) {
+	            this.props.arboles.map(function (arbol, key) {
 	              return _react2.default.createElement(
 	                'div',
 	                {
@@ -59925,29 +60028,30 @@
 	                _react2.default.createElement(
 	                  'span',
 	                  { className: 'especie' },
-	                  _this3.props.especieById(arbol.especie)
+	                  (0, _getEspecies.byId)(arbol.especie)
 	                ),
 	                _react2.default.createElement(
 	                  'span',
 	                  { className: 'tamagno' },
 	                  '(',
-	                  _this3.tamagnoByNum(arbol.tamagno),
+	                  _this2.tamagnoByNum(arbol.tamagno),
 	                  ')'
 	                ),
 	                _react2.default.createElement('input', {
 	                  type: 'hidden',
-	                  name: 'tamagno',
-	                  defaultValue: arbol.tamagno }),
-	                _react2.default.createElement('input', {
-	                  type: 'hidden',
-	                  name: 'especie',
-	                  defaultValue: arbol.especie }),
+	                  name: 'arboles[]',
+	                  defaultValue: JSON.stringify({
+	                    especie: arbol.especie,
+	                    tamagno: arbol.tamagno,
+	                    cantidad: _this2.props.cantidades[key]
+	                  }) }),
 	                _react2.default.createElement('input', {
 	                  type: 'number',
-	                  onChange: function onChange(e) {
-	                    _this3.setState({ showSubmit: true });
-	                  },
-	                  defaultValue: arbol.cantidad })
+	                  'data-key': key,
+	                  max: '10000',
+	                  min: '1',
+	                  onChange: _this2.props.changeCantidad,
+	                  value: _this2.props.cantidades[key] })
 	              );
 	            })
 	          ),
@@ -59958,20 +60062,20 @@
 	              'div',
 	              { className: 'total' },
 	              'Total: ',
-	              this.state.arboles.reduce(function (acc, arbol) {
-	                return acc + arbol.cantidad;
+	              this.props.cantidades.reduce(function (acc, cant) {
+	                return acc + +cant;
 	              }, 0)
 	            ),
 	            _react2.default.createElement(
 	              'button',
 	              {
 	                type: 'submit',
-	                className: !this.state.showSubmit ? 'hide' : '' },
+	                className: !this.props.showSubmit ? 'hide' : '' },
 	              'Guardar cambios'
 	            )
 	          )
 	        ),
-	        this.state.arboles.length === 0 && _react2.default.createElement(
+	        this.props.arboles.length === 0 && _react2.default.createElement(
 	          'span',
 	          { className: 'sin-arboles-label' },
 	          'No tenés árboles registrados'
@@ -59986,14 +60090,14 @@
 	exports.default = TablaArboles;
 
 /***/ },
-/* 780 */
+/* 781 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 781 */,
-/* 782 */
+/* 782 */,
+/* 783 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60004,13 +60108,15 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(783);
+	__webpack_require__(784);
 
 	__webpack_require__(760);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _getEspecies = __webpack_require__(773);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60050,16 +60156,8 @@
 	      });
 	    }
 	  }, {
-	    key: 'rainbow',
-	    value: function rainbow(k) {
-	      var colors = ['#2bd873', '#5fedd5', '#009aff', '#153add', '#ff3642', '#ff687b', '#ec9c55'];
-	      return colors[colors.length - 1 < k ? 0 : k];
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
-
 	      return _react2.default.createElement(
 	        'article',
 	        { 'data-id': 'action_content_red' },
@@ -60093,12 +60191,11 @@
 	                'div',
 	                {
 	                  key: i,
-	                  style: { background: _this3.rainbow(i) },
 	                  className: 'fila-arbol' },
 	                _react2.default.createElement(
 	                  'span',
 	                  null,
-	                  _this3.props.especieById(arbol.especie)
+	                  (0, _getEspecies.byId)(arbol.especie)
 	                ),
 	                _react2.default.createElement(
 	                  'span',
@@ -60119,14 +60216,14 @@
 	exports.default = Red;
 
 /***/ },
-/* 783 */
+/* 784 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 784 */,
-/* 785 */
+/* 785 */,
+/* 786 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60137,7 +60234,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(786);
+	__webpack_require__(787);
 
 	var _react = __webpack_require__(1);
 
@@ -60213,14 +60310,14 @@
 	exports.default = Footer;
 
 /***/ },
-/* 786 */
+/* 787 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 787 */,
-/* 788 */
+/* 788 */,
+/* 789 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60231,45 +60328,45 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(789);
+	__webpack_require__(790);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _signin = __webpack_require__(791);
+	var _signin = __webpack_require__(792);
 
 	var _signin2 = _interopRequireDefault(_signin);
 
-	var _signup = __webpack_require__(794);
+	var _signup = __webpack_require__(795);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
-	var _forgot = __webpack_require__(797);
+	var _forgot = __webpack_require__(798);
 
 	var _forgot2 = _interopRequireDefault(_forgot);
 
-	var _profile = __webpack_require__(800);
+	var _profile = __webpack_require__(801);
 
 	var _profile2 = _interopRequireDefault(_profile);
 
-	var _primerLogin = __webpack_require__(806);
+	var _primerLogin = __webpack_require__(807);
 
 	var _primerLogin2 = _interopRequireDefault(_primerLogin);
 
-	var _reset = __webpack_require__(809);
+	var _reset = __webpack_require__(810);
 
 	var _reset2 = _interopRequireDefault(_reset);
 
-	var _flyer = __webpack_require__(812);
+	var _flyer = __webpack_require__(813);
 
 	var _flyer2 = _interopRequireDefault(_flyer);
 
-	var _festi = __webpack_require__(815);
+	var _festi = __webpack_require__(816);
 
 	var _festi2 = _interopRequireDefault(_festi);
 
-	var _info = __webpack_require__(827);
+	var _info = __webpack_require__(828);
 
 	var _info2 = _interopRequireDefault(_info);
 
@@ -60311,11 +60408,11 @@
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.user && nextProps.user.primerLogin) {
-	        this.setState({ open: 'primerLogin' });
+	      if (nextProps.isLogged && nextProps.primerLogin) {
+	        return this.setState({ open: 'primerLogin' });
 	      }
-	      if (nextProps.user && nextProps.user.reset) {
-	        this.setState({ open: 'reset' });
+	      if (nextProps.isLogged && nextProps.reset) {
+	        return this.setState({ open: 'reset' });
 	      }
 	    }
 	  }, {
@@ -60358,27 +60455,28 @@
 	        _react2.default.createElement(_info2.default, {
 	          closePopUp: this.closePopUp,
 	          open: this.state.open === 'info' ? 'open' : '' }),
-	        !this.props.user && _react2.default.createElement(_signin2.default, {
+	        !this.props.isLogged && _react2.default.createElement(_signin2.default, {
 	          closePopUp: this.closePopUp,
 	          crearCuentaShow: this.activatePopUp('signup'),
 	          forgotShow: this.activatePopUp('forgot'),
 	          open: this.state.open === 'signin' ? 'open' : '' }),
-	        !this.props.user && _react2.default.createElement(_signup2.default, {
+	        !this.props.isLogged && _react2.default.createElement(_signup2.default, {
 	          closePopUp: this.closePopUp,
 	          loginShow: this.activatePopUp('signin'),
 	          open: this.state.open === 'signup' ? 'open' : '' }),
-	        !this.props.user && _react2.default.createElement(_forgot2.default, {
+	        !this.props.isLogged && _react2.default.createElement(_forgot2.default, {
 	          closePopUp: this.closePopUp,
 	          loginShow: this.activatePopUp('signin'),
 	          open: this.state.open === 'forgot' ? 'open' : '' }),
-	        this.props.user && _react2.default.createElement(_profile2.default, {
+	        this.props.isLogged && _react2.default.createElement(_profile2.default, {
 	          closePopUp: this.closePopUp,
-	          user: this.props.user,
+	          userType: this.props.userType,
+	          location: this.props.location,
+	          nombre: this.props.nombre,
 	          open: this.state.open === 'perfil' ? 'open' : '' }),
-	        this.props.user && this.props.user.primerLogin && _react2.default.createElement(_primerLogin2.default, {
+	        this.props.isLogged && this.props.primerLogin && _react2.default.createElement(_primerLogin2.default, {
 	          open: this.state.open === 'primerLogin' ? 'open' : '' }),
-	        this.props.user && this.props.user.reset && _react2.default.createElement(_reset2.default, {
-	          user: this.props.user,
+	        this.props.isLogged && this.props.reset && _react2.default.createElement(_reset2.default, {
 	          open: this.state.open === 'reset' ? 'open' : '' })
 	      );
 	    }
@@ -60390,14 +60488,14 @@
 	exports.default = Popups;
 
 /***/ },
-/* 789 */
+/* 790 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 790 */,
-/* 791 */
+/* 791 */,
+/* 792 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60408,17 +60506,17 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(792);
+	__webpack_require__(793);
 
 	__webpack_require__(180);
 
-	__webpack_require__(776);
+	__webpack_require__(777);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form = __webpack_require__(773);
+	var _form = __webpack_require__(774);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -60566,14 +60664,14 @@
 	exports.default = Signin;
 
 /***/ },
-/* 792 */
+/* 793 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 793 */,
-/* 794 */
+/* 794 */,
+/* 795 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60584,17 +60682,17 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(795);
+	__webpack_require__(796);
 
 	__webpack_require__(753);
 
-	__webpack_require__(776);
+	__webpack_require__(777);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form = __webpack_require__(773);
+	var _form = __webpack_require__(774);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -60618,9 +60716,10 @@
 	  _createClass(Signup, [{
 	    key: 'onSuccess',
 	    value: function onSuccess(res) {
-	      window.$tate('user').value = undefined;
-	      window.$tate('user').value = res;
-	      window.$tate('popups.active').value = res.primerLogin ? 'primerLogin' : null;
+	      window.$tate('user').value = {
+	        nombre: res,
+	        primerLogin: true
+	      };
 	    }
 	  }, {
 	    key: 'render',
@@ -60719,14 +60818,14 @@
 	exports.default = Signup;
 
 /***/ },
-/* 795 */
+/* 796 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 796 */,
-/* 797 */
+/* 797 */,
+/* 798 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60737,15 +60836,15 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(798);
+	__webpack_require__(799);
 
-	__webpack_require__(776);
+	__webpack_require__(777);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form = __webpack_require__(773);
+	var _form = __webpack_require__(774);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -60835,14 +60934,14 @@
 	exports.default = Forgot;
 
 /***/ },
-/* 798 */
+/* 799 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 799 */,
-/* 800 */
+/* 800 */,
+/* 801 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60853,17 +60952,17 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(801);
+	__webpack_require__(802);
 
-	__webpack_require__(776);
+	__webpack_require__(777);
 
-	__webpack_require__(803);
+	__webpack_require__(804);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form = __webpack_require__(773);
+	var _form = __webpack_require__(774);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -60899,11 +60998,11 @@
 	  _createClass(Profile, [{
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.open === 'open' && nextProps.user) {
+	      if (nextProps.open === 'open') {
 	        this.setState({
-	          userType: nextProps.user.userType,
-	          geoLocalResult: nextProps.user.location,
-	          nombre: nextProps.user.nombre
+	          userType: nextProps.userType,
+	          geoLocalResult: [nextProps.location.lat, nextProps.location.lng],
+	          nombre: nextProps.nombre
 	        });
 	      }
 	    }
@@ -60934,7 +61033,7 @@
 	  }, {
 	    key: 'onSuccess',
 	    value: function onSuccess(res) {
-	      window.$tate('user.type').value = res.userType;
+	      window.$tate('user.userType').value = res.userType;
 	      window.$tate('user.location').value = res.location;
 	      window.$tate('user.nombre').value = res.nombre;
 	    }
@@ -61080,21 +61179,21 @@
 	exports.default = Profile;
 
 /***/ },
-/* 801 */
+/* 802 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 802 */,
-/* 803 */
+/* 803 */,
+/* 804 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(804);
+	__webpack_require__(805);
 
 	__webpack_require__(752);
 
@@ -61132,7 +61231,10 @@
 	      var _this2 = this;
 
 	      var coords = [+this.getAttribute('lat') || 0, +this.getAttribute('lng') || 0];
-	      this.querySelector('input').value = JSON.stringify(coords);
+	      this.querySelector('input').value = JSON.stringify({
+	        lat: coords[0],
+	        lng: coords[1]
+	      });
 	      var id = this.getAttribute('data-id');
 	      if (!mapas[id]) {
 	        mapas[id] = {};
@@ -61179,7 +61281,10 @@
 	      }
 	      mapas[id].marker.setLatLng(coords);
 	      mapas[id].map.setView(coords);
-	      this.querySelector('input').value = JSON.stringify(coords);
+	      this.querySelector('input').value = JSON.stringify({
+	        lat: coords[0],
+	        lng: coords[1]
+	      });
 	    }
 	  }], [{
 	    key: 'observedAttributes',
@@ -61194,14 +61299,14 @@
 	window.customElements.define('geo-select', GeoSelect);
 
 /***/ },
-/* 804 */
+/* 805 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 805 */,
-/* 806 */
+/* 806 */,
+/* 807 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61212,17 +61317,17 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(807);
+	__webpack_require__(808);
 
-	__webpack_require__(776);
+	__webpack_require__(777);
 
-	__webpack_require__(803);
+	__webpack_require__(804);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form = __webpack_require__(773);
+	var _form = __webpack_require__(774);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -61278,13 +61383,10 @@
 	  }, {
 	    key: 'onSuccess',
 	    value: function onSuccess(res) {
+	      window.$tate('user.userType').value = res.userType;
+	      window.$tate('user.location').value = res.location;
+	      window.$tate('user.primerLogin').value = false;
 	      window.$tate('popups.active').value = '';
-	      var user = window.$tate('user').value;
-	      window.$tate('user').value = undefined;
-	      user.primerLogin = false;
-	      user.userType = res.type;
-	      user.location = res.location;
-	      window.$tate('user').value = user;
 	    }
 	  }, {
 	    key: 'render',
@@ -61395,14 +61497,14 @@
 	exports.default = PrimerLogin;
 
 /***/ },
-/* 807 */
+/* 808 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 808 */,
-/* 809 */
+/* 809 */,
+/* 810 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61413,15 +61515,15 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(810);
+	__webpack_require__(811);
 
-	__webpack_require__(776);
+	__webpack_require__(777);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form = __webpack_require__(773);
+	var _form = __webpack_require__(774);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -61445,10 +61547,7 @@
 	  _createClass(Reset, [{
 	    key: 'onSuccess',
 	    value: function onSuccess(res) {
-	      window.$tate('user').value = undefined;
-	      window.$tate('user').value = res;
-	      window.$tate('popups.active').value = '';
-	      window.history.pushState(null, null, window.location.origin);
+	      window.location = window.location.origin;
 	    }
 	  }, {
 	    key: 'render',
@@ -61495,10 +61594,6 @@
 	            ),
 	            _react2.default.createElement('input', {
 	              type: 'hidden',
-	              name: 'email',
-	              defaultValue: this.props.user.email }),
-	            _react2.default.createElement('input', {
-	              type: 'hidden',
 	              name: 'codigo',
 	              defaultValue: window.location.search.split('=')[1] }),
 	            _react2.default.createElement(
@@ -61518,14 +61613,14 @@
 	exports.default = Reset;
 
 /***/ },
-/* 810 */
+/* 811 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 811 */,
-/* 812 */
+/* 812 */,
+/* 813 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61536,9 +61631,9 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(813);
+	__webpack_require__(814);
 
-	__webpack_require__(776);
+	__webpack_require__(777);
 
 	var _react = __webpack_require__(1);
 
@@ -61584,14 +61679,14 @@
 	exports.default = Flyer;
 
 /***/ },
-/* 813 */
+/* 814 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 814 */,
-/* 815 */
+/* 815 */,
+/* 816 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61602,9 +61697,9 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(816);
+	__webpack_require__(817);
 
-	__webpack_require__(776);
+	__webpack_require__(777);
 
 	__webpack_require__(760);
 
@@ -61612,15 +61707,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _info = __webpack_require__(818);
+	var _info = __webpack_require__(819);
 
 	var _info2 = _interopRequireDefault(_info);
 
-	var _crono = __webpack_require__(821);
+	var _crono = __webpack_require__(822);
 
 	var _crono2 = _interopRequireDefault(_crono);
 
-	var _voluntariado = __webpack_require__(824);
+	var _voluntariado = __webpack_require__(825);
 
 	var _voluntariado2 = _interopRequireDefault(_voluntariado);
 
@@ -61761,14 +61856,14 @@
 	exports.default = Festi;
 
 /***/ },
-/* 816 */
+/* 817 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 817 */,
-/* 818 */
+/* 818 */,
+/* 819 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61779,7 +61874,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(819);
+	__webpack_require__(820);
 
 	var _react = __webpack_require__(1);
 
@@ -61836,14 +61931,14 @@
 	exports.default = Info;
 
 /***/ },
-/* 819 */
+/* 820 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 820 */,
-/* 821 */
+/* 821 */,
+/* 822 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61854,7 +61949,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(822);
+	__webpack_require__(823);
 
 	var _react = __webpack_require__(1);
 
@@ -61997,14 +62092,14 @@
 	exports.default = Crono;
 
 /***/ },
-/* 822 */
+/* 823 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 823 */,
-/* 824 */
+/* 824 */,
+/* 825 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62015,13 +62110,13 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(825);
+	__webpack_require__(826);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _form = __webpack_require__(773);
+	var _form = __webpack_require__(774);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -62193,14 +62288,14 @@
 	exports.default = Voluntariado;
 
 /***/ },
-/* 825 */
+/* 826 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 826 */,
-/* 827 */
+/* 827 */,
+/* 828 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62211,9 +62306,9 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	__webpack_require__(828);
+	__webpack_require__(829);
 
-	__webpack_require__(776);
+	__webpack_require__(777);
 
 	var _react = __webpack_require__(1);
 
@@ -62367,7 +62462,7 @@
 	exports.default = Info;
 
 /***/ },
-/* 828 */
+/* 829 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

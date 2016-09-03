@@ -20,11 +20,14 @@ export default class Profile extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.open === 'open' && nextProps.user) {
+    if (nextProps.open === 'open') {
       this.setState({
-        userType: nextProps.user.userType,
-        geoLocalResult: nextProps.user.location,
-        nombre: nextProps.user.nombre
+        userType: nextProps.userType,
+        geoLocalResult: [
+          nextProps.location.lat,
+          nextProps.location.lng
+        ],
+        nombre: nextProps.nombre
       })
     }
   }
@@ -61,7 +64,7 @@ export default class Profile extends Component {
   }
 
   onSuccess (res) {
-    window.$tate('user.type').value = res.userType
+    window.$tate('user.userType').value = res.userType
     window.$tate('user.location').value = res.location
     window.$tate('user.nombre').value = res.nombre
   }

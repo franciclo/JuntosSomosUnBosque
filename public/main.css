@@ -1330,6 +1330,9 @@ dia-log[data-open="open"] {
   height: auto;
   flex:1;
 }
+#lista-arboles dia-log.alert-msg {
+  bottom: 0;
+}
 #lista-arboles.sin-arboles{
   background: #f5f5f5;
   display: flex;

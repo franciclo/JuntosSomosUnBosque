@@ -6,10 +6,7 @@ import Form from '../form'
 
 export default class Reset extends Component {
   onSuccess (res) {
-    window.$tate('user').value = undefined
-    window.$tate('user').value = res
-    window.$tate('popups.active').value = ''
-    window.history.pushState(null, null, window.location.origin)
+    window.location = window.location.origin
   }
   render () {
     return (
@@ -35,12 +32,6 @@ export default class Reset extends Component {
                 name='passconfirm'
                 type='password' />
             </div>
-            <input
-              type='hidden'
-              name='email'
-              defaultValue={
-                this.props.user.email
-              } />
             <input
               type='hidden'
               name='codigo'

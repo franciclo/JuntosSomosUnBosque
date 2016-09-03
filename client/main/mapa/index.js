@@ -18,17 +18,20 @@ export default class Mapa extends Component {
   }
 
   componentWillMount () {
-    window.fetch('/red')
-      .then(res => {
-        return res.json()
-      })
-      .then(res => {
-        if (res.success) {
-          this.setState({red: res.result})
-        } else {
-          console.log('error al pedir la red', res)
-        }
-      })
+    // window.fetch('/red')
+    //   .then(res => {
+    //     return res.json()
+    //   })
+    //   .then(res => {
+    //     console.log('/red ', res)
+    //     if (res.success) {
+    //       this.setState({
+    //         red: res.result
+    //       })
+    //     } else {
+    //       console.log('error al pedir la red', res)
+    //     }
+    //   })
   }
 
   render () {
