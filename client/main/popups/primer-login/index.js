@@ -3,7 +3,8 @@ import './styles.css'
 import 'components/dia-log'
 import 'components/geo-select'
 import React, {Component} from 'react'
-import Form from '../form'
+import Form from 'utils/form'
+
 export default class PrimerLogin extends Component {
   constructor () {
     super()

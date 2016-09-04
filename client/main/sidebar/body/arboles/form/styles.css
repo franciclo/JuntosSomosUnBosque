@@ -24,6 +24,9 @@
   flex:2;
   margin-right: 30px;
 }
+#admin-arboles .form-field.tamagno input {
+  border: none;
+}
 #admin-arboles .form-field.tamagno label{
   position: relative;
 }

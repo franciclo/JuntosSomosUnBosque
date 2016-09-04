@@ -56,7 +56,9 @@
   margin: 0;
   outline: none;
 }
-
+#sidebar_nav.admin-mode>button {
+  padding:0;
+}
 
 #sidebar_nav>button>.label {
   transition: all .2s linear;

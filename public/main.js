@@ -59430,7 +59430,8 @@
 	      } else {
 	        arboles.push({
 	          especie: arbol.especie,
-	          tamagno: arbol.tamagno
+	          tamagno: arbol.tamagno,
+	          cantidad: arbol.cantidad
 	        });
 	        cantidades.push(arbol.cantidad);
 	      }
@@ -59579,7 +59580,7 @@
 
 	    _this.state = {
 	      especie: null,
-	      tamagno: null,
+	      tamagno: '1',
 	      cantidad: null,
 	      rangeLabel: 'Brote'
 	    };
@@ -60126,6 +60127,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'total' },
+	              console.log(this.props.cantidades),
 	              'Total: ',
 	              this.props.cantidades.reduce(function (acc, cant) {
 	                return acc + +cant;

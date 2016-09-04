@@ -50,7 +50,8 @@ export default class Arboles extends Component {
     } else {
       arboles.push({
         especie: arbol.especie,
-        tamagno: arbol.tamagno
+        tamagno: arbol.tamagno,
+        cantidad: arbol.cantidad
       })
       cantidades.push(arbol.cantidad)
     }

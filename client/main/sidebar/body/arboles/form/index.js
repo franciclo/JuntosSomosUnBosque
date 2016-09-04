@@ -1,14 +1,14 @@
 import './styles.css'
 import React, {Component} from 'react'
 import {all as allEspecies} from 'utils/get-especies'
-import Form from '../../../../popups/form'
+import Form from 'utils/form'
 
 export default class FormArboles extends Component {
   constructor (props) {
     super(props)
     this.state = {
       especie: null,
-      tamagno: null,
+      tamagno: '1',
       cantidad: null,
       rangeLabel: 'Brote'
     }

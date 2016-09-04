@@ -853,7 +853,9 @@ drop-down dia-log{
   margin: 0;
   outline: none;
 }
-
+#sidebar_nav.admin-mode>button {
+  padding:0;
+}
 
 #sidebar_nav>button>.label {
   transition: all .2s linear;
@@ -1200,6 +1202,9 @@ slider-box > article.active {
 #admin-arboles .form-field.tamagno{
   flex:2;
   margin-right: 30px;
+}
+#admin-arboles .form-field.tamagno input {
+  border: none;
 }
 #admin-arboles .form-field.tamagno label{
   position: relative;

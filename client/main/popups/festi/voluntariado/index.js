@@ -1,7 +1,7 @@
 import './styles.css'
 
 import React, {Component} from 'react'
-import Form from '../../form'
+import Form from 'utils/form'
 
 export default class Voluntariado extends Component {
   render () {

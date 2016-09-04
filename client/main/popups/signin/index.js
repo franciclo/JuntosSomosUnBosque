@@ -3,7 +3,7 @@ import './styles.css'
 import 'state-stream'
 import 'components/dia-log'
 import React, {Component} from 'react'
-import Form from '../form'
+import Form from 'utils/form'
 
 export default class Signin extends Component {
   onSuccess (res) {

@@ -1,7 +1,7 @@
 import './styles.css'
 import React, {Component} from 'react'
 import {byId as especieById} from 'utils/get-especies'
-import Form from '../../../../popups/form'
+import Form from 'utils/form'
 
 export default class TablaArboles extends Component {
   componentWillMount () {
@@ -115,6 +115,7 @@ export default class TablaArboles extends Component {
               </div>
               <div className='tabla-footer'>
                 <div className='total'>
+                  {console.log(this.props.cantidades)}
                   Total: {
                     this.props.cantidades
                       .reduce((acc, cant) => {

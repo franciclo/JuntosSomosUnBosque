@@ -3,7 +3,7 @@ import './styles.css'
 import 'whatwg-fetch'
 import 'components/dia-log'
 import React, {Component} from 'react'
-import Form from '../form'
+import Form from 'utils/form'
 
 export default class Signup extends Component {
   onSuccess (res) {
