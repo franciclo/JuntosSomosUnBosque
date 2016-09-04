@@ -4,6 +4,11 @@ import {byId as especieById} from 'utils/get-especies'
 import Form from '../../../../popups/form'
 
 export default class TablaArboles extends Component {
+  componentWillMount () {
+    window.$tate('especiesLoad')
+      .on('E')
+      .subscribe(() => { this.forceUpdate() })
+  }
   tamagnoByNum (n) {
     let label = ''
     switch (n) {
@@ -34,13 +39,14 @@ export default class TablaArboles extends Component {
           this.props.showAdmin &&
           (
             <div className='tabla-header'>
+              <h1>Mis árboles</h1>
               <button
                 onClick={
                   e => {
                     window.$tate('adminArboles').value = true
                   }
                 }>
-                Cargar arboles
+                Sumar arboles
               </button>
             </div>
           )

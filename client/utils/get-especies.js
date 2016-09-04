@@ -1,6 +1,6 @@
 var especies = []
 function makeRequest () {
-  window.fetch('/especies')
+  return window.fetch('/especies')
     .then(function (res) {
       return res.json()
     })

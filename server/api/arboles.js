@@ -23,19 +23,21 @@ module.exports = function (req, res) {
             })
       })
       .forEach(function (userArboles) {
-        var arbolesI = arboles
-            .map(function (arbol) {
-              return arbol.especie
+        userArboles.forEach(function (userArbol) {
+          var arbolI = arboles
+              .map(function (arbol) {
+                return arbol.especie
+              })
+              .indexOf(userArbol.especie)
+          if (~arbolI) {
+            arboles[arbolI].cantidad += userArbol.cantidad
+          } else {
+            arboles.push({
+              especie: userArbol.especie,
+              cantidad: userArbol.cantidad
             })
-            .indexOf(userArboles.especie)
-        if (~arbolesI) {
-          arboles[arbolesI].cantidad += userArboles.cantidad
-        } else {
-          arboles.push({
-            especie: userArboles.especie,
-            cantidad: userArboles.cantidad
-          })
-        }
+          }
+        })
       })
     res.json({
       success: true,

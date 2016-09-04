@@ -30,7 +30,7 @@ export default class Arboles extends Component {
   }
 
   componentWillReceiveProps (props) {
-    if (props.arboles.length > 0) {
+    if (props.arboles && props.arboles.length > 0) {
       this.setState({
         arboles: props.arboles,
         cantidades: props.arboles.map(a => a.cantidad)
@@ -48,10 +48,8 @@ export default class Arboles extends Component {
       .map(a => [a.especie, a.tamagno].join(''))
       .indexOf([especie, tamagno].join(''))
     if (~arbolI) {
-      console.log('arbol edit')
       cantidades[arbolI] = +cantidades[arbolI] + +cantidad
     } else {
-      console.log('arbol new')
       arboles.push({
         especie: especie,
         tamagno: tamagno
@@ -76,13 +74,22 @@ export default class Arboles extends Component {
   }
 
   render () {
+    console.log('this.props.isLogged', this.props.isLogged)
+    console.log('this.state.adminArboles', this.state.adminArboles)
+    console.log('this.props.arboles', this.props.arboles)
+    console.log('-------------------------------------')
     return (
       <article
         id='tus-arboles'
         data-id='action_content_suma'>
         {
           !this.state.adminArboles &&
-          (!this.props.isLogged || this.props.arboles.length === 0) &&
+          (
+            !this.props.isLogged ||
+            (
+              !this.props.arboles ||
+              this.props.arboles.length === 0)
+            ) &&
           (
             <div id='cartel_suma'>
               <h1>Sumá tus árboles</h1>
@@ -116,7 +123,7 @@ export default class Arboles extends Component {
         }
         {
           this.props.isLogged &&
-          (this.state.adminArboles || this.props.arboles.length > 0) &&
+          (this.state.adminArboles || (this.props.arboles && this.props.arboles.length > 0)) &&
           (
             <TablaArboles
               changeCantidad={this.changeCantidad}

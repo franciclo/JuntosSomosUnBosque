@@ -19,10 +19,14 @@ export default class Main extends Component {
       location: null,
       arboles: null
     }
+    window.$tate('especiesLoad').value = false
   }
 
   componentWillMount () {
     makeRequestEspecies()
+      .then(() => {
+        window.$tate('especiesLoad').value = true
+      })
     window.$tate('user')
       .on(['N', 'D'])
       .subscribe(user => {

@@ -1,32 +1,82 @@
-#la_red {
-  padding-top: 20px;
+#lista-red.active {
+  display: flex;
+  flex-direction: column;
 }
-#la_red h1 {
-  display: inline-block;
+#lista-red .tabla-arboles-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+#lista-red .tabla-arboles {
+  display: flex;
+  flex-direction: column;
+  flex:1;
+  overflow: auto;
+}
+#lista-red .tabla-footer {
+  display: flex;
+  min-height: 34px;
+  align-items: flex-end;
+  flex: 0!important;
+}
+#lista-red .tabla-footer button{
+  font-size: 15px;
+  padding: 5px 10px 4px;
+  align-self: inherit;
+}
+#lista-red .tabla-footer .total {
+  background: #ccc;
+  border-radius: 17px;
+  display: flex;
+  align-items: center;
+  padding: 2px 15px 0;
+  color: #444;
+  height: 24px;
+  font-size: 14px;
+}
+#lista-red .tabla-arboles .item-arbol {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 15px;
+  background: #f5f5f5;
+  color: #666;
+  min-height: 25px;
+}
+#lista-red .tabla-arboles .item-arbol:nth-child(even){
+  background: #eaeaea;
+}
+#lista-red .tabla-arboles .item-arbol input[type="number"]{
+}
+#lista-red .tabla-arboles .item-arbol .tamagno{
+  flex: 1;
+  padding-left: 5px;
+  font-size: 13px;
+}
+#lista-red .tabla-arboles .item-arbol .especie{
+  font-size: 15px;
+  font-weight: 500;
+}
+#lista-red .tabla-arboles .item-arbol .cantidad{
+  width: 30px;
+  color: #666;
+  background: transparent;
+  border: none;
+  font-size: 17px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+}
+#lista-red .tabla-header {
+  height: 65px;
+  display: flex;
+  align-items: flex-end;
+}
+#lista-red .tabla-header h1 {
   color: #555;
   padding: 10px 0;
-  text-align: left;
   font-weight: 100;
   font-size: 22px;
   margin: 0;
-  padding: 0 0 10px 0;
-}
-#lista_nuestros_arboles_cabecera {
-  display: flex;
-  justify-content: space-between;
-  padding: 9px 0;
-  color: #555;
-  border-top: 1px solid #e8e8e8;
-}
-#lista_arboles_red{
-  overflow: auto;
-}
-#lista_arboles_red>.fila-arbol{
-  position: relative;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 9px;
-  display: flex;
-  color: white;
 }

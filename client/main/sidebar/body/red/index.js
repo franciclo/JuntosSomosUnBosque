@@ -6,7 +6,8 @@ export default class Red extends Component {
   constructor () {
     super()
     this.state = {
-      arboles: []
+      arboles: [],
+      total: 0
     }
   }
 
@@ -17,38 +18,55 @@ export default class Red extends Component {
       })
       .then(res => {
         if (res.success) {
-          this.setState({arboles: res.result})
+          let total = res.result
+            .reduce((acc, a) => {
+              return acc + a.cantidad
+            }, 0)
+          window.$tate('total').value = total
+          this.setState({arboles: res.result, total})
         } else {
-          console.log('error al pedir los arboles', res)
+          console.warn('error al pedir los arboles', res)
         }
       })
   }
-
   render () {
     return (
-      <article data-id='action_content_red'>
-        <div id='la_red'>
-          <h1>Nuestros arboles</h1>
-          <div id='lista_arboles_red'>
-            <div id='lista_nuestros_arboles_cabecera'>
-              <span>Especie/Tamaño</span>
-              <span>Cantidad</span>
-            </div>
-            {
-              this.state.arboles
-                .map((arbol, i) => {
-                  return (
-                    <div
-                      key={i}
-                      className='fila-arbol'>
-                      <span>{especieById(arbol.especie)}</span>
-                      <span>{arbol.cantidad}</span>
-                    </div>
-                  )
-                })
-            }
-          </div>
+      <article
+        data-id='action_content_red'
+        id='lista-red'>
+        <div className='tabla-header'>
+          <h1>Árboles de la red</h1>
         </div>
+        {
+          this.state.arboles.length > 0 &&
+          (
+            <div className='tabla-arboles-wrapper'>
+              <div className='tabla-arboles'>
+                {
+                  this.state.arboles.map((arbol, key) => {
+                    return (
+                      <div
+                        key={key}
+                        className='item-arbol'>
+                        <span className='especie'>
+                          {especieById(arbol.especie)}
+                        </span>
+                        <span className='cantidad'>
+                          {arbol.cantidad}
+                        </span>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+              <div className='tabla-footer'>
+                <div className='total'>
+                  Total: {this.state.total}
+                </div>
+              </div>
+            </div>
+          )
+        }
       </article>
     )
   }

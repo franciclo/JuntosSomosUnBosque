@@ -69,8 +69,8 @@ export default class Nav extends Component {
           id='sidebar_nav_arbol'
           className={this.state.arbol ? 'active' : ''}
           onClick={this.activateNav('action_content_suma')}>
-          <img src='arbol.svg' alt='Tus arboles' />
-          <span className='label'>Tus arboles</span>
+          <img src='arbol.svg' alt='Mis árboles' />
+          <span className='label'>Mis árboles</span>
           <span className='underline'></span>
         </button>
         <button

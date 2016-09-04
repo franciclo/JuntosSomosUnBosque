@@ -21,7 +21,7 @@ module.exports = function (req, res) {
     }
     res.json({
       success: true,
-      text: 'Arbols guardados',
+      text: 'Arboles guardados',
       result: arboles
     })
   })
