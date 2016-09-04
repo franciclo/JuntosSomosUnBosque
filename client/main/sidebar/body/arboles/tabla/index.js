@@ -45,7 +45,7 @@ export default class TablaArboles extends Component {
                     window.$tate('adminArboles').value = true
                   }
                 }>
-                Sumar arboles
+                Sumar árboles
               </button>
             </div>
           )
@@ -115,7 +115,6 @@ export default class TablaArboles extends Component {
               </div>
               <div className='tabla-footer'>
                 <div className='total'>
-                  {console.log(this.props.cantidades)}
                   Total: {
                     this.props.cantidades
                       .reduce((acc, cant) => {

@@ -58347,7 +58347,7 @@
 	              onClick: function onClick(e) {
 	                window.$tate('popups.active').value = 'signin';
 	              } },
-	            'ingresar'
+	            'Ingresar'
 	          ),
 	          this.props.nombre && _react2.default.createElement(
 	            'drop-down',
@@ -59305,7 +59305,7 @@
 	          _react2.default.createElement(
 	            'p',
 	            { className: 'bolder' },
-	            'Traé tus arboles al festival y plantemos un bosque!'
+	            '¡Traé tus arboles al festival y plantemos un bosque!'
 	          ),
 	          _react2.default.createElement(
 	            'button',
@@ -60052,7 +60052,7 @@
 	              onClick: function onClick(e) {
 	                window.$tate('adminArboles').value = true;
 	              } },
-	            'Sumar arboles'
+	            'Sumar árboles'
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -60127,7 +60127,6 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'total' },
-	              console.log(this.props.cantidades),
 	              'Total: ',
 	              this.props.cantidades.reduce(function (acc, cant) {
 	                return acc + +cant;
@@ -62483,7 +62482,7 @@
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'text' },
-	                'JUNTOS SOMOS UN BOSQUE es una red de personas que cultivan árboles nativos y comestibles, con la intención de plantarlos todos juntos en festivales de plantación, creando bosques comunitarios en el espacio público. La red comparte conocimientos, inicia a nuevos cultivadores y autogestiona los festivales de plantación. "Esta semilla que crees ínfima, contiene un árbol, que contiene un bosque" Jodoroski'
+	                'JUNTOS SOMOS UN BOSQUE es una red de personas que cultivan árboles nativos y comestibles, con la intención de plantarlos todos juntos en festivales de plantación, creando bosques comunitarios en el espacio público. La red comparte conocimientos, inicia a nuevos cultivadores y autogestiona los festivales de plantación. "Esta semilla que crees ínfima, contiene un árbol, que contiene un bosque" Jodorowski'
 	              )
 	            ),
 	            _react2.default.createElement(

@@ -69,7 +69,7 @@ export default class Info extends Component {
                 JUNTOS SOMOS UN BOSQUE es una red de personas que cultivan árboles nativos y comestibles, con la intención de plantarlos todos juntos en festivales de plantación, creando bosques comunitarios en el espacio público.
                 La red comparte conocimientos, inicia a nuevos cultivadores y autogestiona los festivales de plantación.
 
-                "Esta semilla que crees ínfima, contiene un árbol, que contiene un bosque" Jodoroski
+                "Esta semilla que crees ínfima, contiene un árbol, que contiene un bosque" Jodorowski
               </div>
             </article>
             <article

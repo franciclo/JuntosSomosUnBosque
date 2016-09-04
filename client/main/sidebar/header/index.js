@@ -23,7 +23,7 @@ export default class Header extends Component {
                 onClick={
                   (e) => { window.$tate('popups.active').value = 'signin' }
                 }>
-                ingresar
+                Ingresar
               </button>
           }
           {

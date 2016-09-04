@@ -20,7 +20,7 @@ export default class Plantaciones extends Component {
             Estamos creando un Bosque comunitario junto a la Reserva Ecológica Costanera norte, en Ciudad Universitaria, lugar en emergencia ambiental y abandono estatal, donde vamos a realizar su inauguración civil.
           </p>
           <p className='bolder'>
-            Traé tus arboles al festival y plantemos un bosque!
+            ¡Traé tus arboles al festival y plantemos un bosque!
           </p>
           <button
             onClick={
