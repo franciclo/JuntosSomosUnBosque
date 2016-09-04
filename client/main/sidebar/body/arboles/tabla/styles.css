@@ -20,12 +20,7 @@
 #lista-arboles dia-log.alert-msg {
   bottom: 0;
 }
-#lista-arboles.sin-arboles{
-  background: #f5f5f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 #lista-arboles .sin-arboles-label {
   color: #7b7b7b;
 }
@@ -125,4 +120,13 @@
 }
 #lista-arboles .tabla-arboles .item-arbol .borrar:hover {
   color: #e0273e;
+}
+
+.tabla-placeholder{
+  height: 100%;
+  width: 100%;
+  background: #efefef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -33,8 +33,7 @@ export default class TablaArboles extends Component {
   render () {
     return (
       <div
-        id='lista-arboles'
-        className={this.props.arboles.length === 0 ? 'sin-arboles' : ''}>
+        id='lista-arboles'>
         {
           this.props.showAdmin &&
           (
@@ -52,7 +51,6 @@ export default class TablaArboles extends Component {
           )
         }
         {
-          this.props.arboles.length > 0 &&
           (
             <Form
               action='/save-arboles'
@@ -101,6 +99,19 @@ export default class TablaArboles extends Component {
                     )
                   })
                 }
+                {
+                  this.props.arboles.length === 0 &&
+                  (
+                    <div className='tabla-placeholder'>
+                      <span className='sin-arboles-label'>
+                        No tenés árboles registrados
+                      </span>
+                      <input
+                        type='hidden'
+                        name='arboles[]' />
+                    </div>
+                  )
+                }
               </div>
               <div className='tabla-footer'>
                 <div className='total'>
@@ -118,14 +129,6 @@ export default class TablaArboles extends Component {
                 </button>
               </div>
             </Form>
-          )
-        }
-        {
-          this.props.arboles.length === 0 &&
-          (
-            <span className='sin-arboles-label'>
-              No tenés árboles registrados
-            </span>
           )
         }
       </div>

@@ -59481,7 +59481,7 @@
 	        {
 	          id: 'tus-arboles',
 	          'data-id': 'action_content_suma' },
-	        !this.state.adminArboles && (!this.props.isLogged || !this.props.arboles || this.props.arboles.length === 0) && _react2.default.createElement(
+	        !this.state.adminArboles && (!this.props.isLogged || !this.state.showSubmit && (!this.props.arboles || this.props.arboles.length === 0)) && _react2.default.createElement(
 	          'div',
 	          { id: 'cartel_suma' },
 	          _react2.default.createElement(
@@ -59513,7 +59513,7 @@
 	        ),
 	        this.props.isLogged && this.state.adminArboles && _react2.default.createElement(_form2.default, {
 	          sumarArbol: this.sumarArbol }),
-	        this.props.isLogged && (this.state.adminArboles || this.props.arboles && this.props.arboles.length > 0) && _react2.default.createElement(_tabla2.default, {
+	        this.props.isLogged && (this.state.adminArboles || this.state.showSubmit || this.props.arboles && this.props.arboles.length > 0) && _react2.default.createElement(_tabla2.default, {
 	          changeCantidad: this.changeCantidad,
 	          eliminarArbol: this.eliminarArbol,
 	          arbolesSaved: this.arbolesSaved,
@@ -59586,6 +59586,7 @@
 	    _this.changeTamagno = _this.changeTamagno.bind(_this);
 	    _this.changeEspecie = _this.changeEspecie.bind(_this);
 	    _this.changeCantidad = _this.changeCantidad.bind(_this);
+	    _this.sumarArbol = _this.sumarArbol.bind(_this);
 	    return _this;
 	  }
 
@@ -59617,7 +59618,17 @@
 	          label = 'Grande';
 	          break;
 	      }
-	      this.setState({ rangeLabel: label });
+	      this.setState({ rangeLabel: label, tamagno: e.target.value });
+	    }
+	  }, {
+	    key: 'changeEspecie',
+	    value: function changeEspecie(e) {
+	      this.setState({ especie: e.target.value });
+	    }
+	  }, {
+	    key: 'changeCantidad',
+	    value: function changeCantidad(e) {
+	      this.setState({ cantidad: e.target.value });
 	    }
 	  }, {
 	    key: 'closeAdmin',
@@ -59646,7 +59657,8 @@
 	        _react2.default.createElement(
 	          _form2.default,
 	          {
-	            prevent: 'prevent' },
+	            prevent: 'prevent',
+	            onSubmit: this.sumarArbol },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'form-row-field' },
@@ -59731,8 +59743,7 @@
 	                'button',
 	                {
 	                  type: 'submit',
-	                  title: 'Agregar',
-	                  onClick: this.sumarArbol },
+	                  title: 'Agregar' },
 	                '+'
 	              )
 	            )
@@ -60025,8 +60036,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        {
-	          id: 'lista-arboles',
-	          className: this.props.arboles.length === 0 ? 'sin-arboles' : '' },
+	          id: 'lista-arboles' },
 	        this.props.showAdmin && _react2.default.createElement(
 	          'div',
 	          { className: 'tabla-header' },
@@ -60044,7 +60054,7 @@
 	            'Sumar arboles'
 	          )
 	        ),
-	        this.props.arboles.length > 0 && _react2.default.createElement(
+	        _react2.default.createElement(
 	          _form2.default,
 	          {
 	            action: '/save-arboles',
@@ -60096,7 +60106,19 @@
 	                  onChange: _this3.props.changeCantidad,
 	                  value: _this3.props.cantidades[key] })
 	              );
-	            })
+	            }),
+	            this.props.arboles.length === 0 && _react2.default.createElement(
+	              'div',
+	              { className: 'tabla-placeholder' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'sin-arboles-label' },
+	                'No tenés árboles registrados'
+	              ),
+	              _react2.default.createElement('input', {
+	                type: 'hidden',
+	                name: 'arboles[]' })
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -60117,11 +60139,6 @@
 	              'Guardar cambios'
 	            )
 	          )
-	        ),
-	        this.props.arboles.length === 0 && _react2.default.createElement(
-	          'span',
-	          { className: 'sin-arboles-label' },
-	          'No tenés árboles registrados'
 	        )
 	      );
 	    }

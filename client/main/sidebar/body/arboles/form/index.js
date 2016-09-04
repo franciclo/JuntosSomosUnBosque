@@ -15,6 +15,7 @@ export default class FormArboles extends Component {
     this.changeTamagno = this.changeTamagno.bind(this)
     this.changeEspecie = this.changeEspecie.bind(this)
     this.changeCantidad = this.changeCantidad.bind(this)
+    this.sumarArbol = this.sumarArbol.bind(this)
   }
 
   componentWillMount () {
@@ -44,7 +45,15 @@ export default class FormArboles extends Component {
         label = 'Grande'
         break
     }
-    this.setState({rangeLabel: label})
+    this.setState({rangeLabel: label, tamagno: e.target.value})
+  }
+
+  changeEspecie (e) {
+    this.setState({especie: e.target.value})
+  }
+
+  changeCantidad (e) {
+    this.setState({cantidad: e.target.value})
   }
 
   closeAdmin () {
@@ -68,7 +77,8 @@ export default class FormArboles extends Component {
           onClick={this.closeAdmin}>
         </span>
         <Form
-          prevent='prevent'>
+          prevent='prevent'
+          onSubmit={this.sumarArbol}>
           <div className='form-row-field'>
             <label htmlFor='#especie'>Especie</label>
             <select
@@ -126,8 +136,7 @@ export default class FormArboles extends Component {
             <div className='form-field submit-btn'>
               <button
                 type='submit'
-                title='Agregar'
-                onClick={this.sumarArbol}>
+                title='Agregar'>
                 +
               </button>
             </div>

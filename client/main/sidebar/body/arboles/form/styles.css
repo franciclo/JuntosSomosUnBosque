@@ -27,6 +27,10 @@
 #admin-arboles .form-field.tamagno label{
   position: relative;
 }
+#admin-arboles select{
+  font-weight: 500;
+  color: #444;
+}
 .tamagno-label {
   position: absolute;
   top: 0;

@@ -95,8 +95,11 @@ export default class Arboles extends Component {
           (
             !this.props.isLogged ||
             (
-              !this.props.arboles ||
-              this.props.arboles.length === 0)
+              !this.state.showSubmit &&
+              (
+                !this.props.arboles ||
+                this.props.arboles.length === 0)
+              )
             ) &&
           (
             <div id='cartel_suma'>
@@ -131,7 +134,14 @@ export default class Arboles extends Component {
         }
         {
           this.props.isLogged &&
-          (this.state.adminArboles || (this.props.arboles && this.props.arboles.length > 0)) &&
+          (
+            this.state.adminArboles ||
+            this.state.showSubmit ||
+            (
+              this.props.arboles &&
+              this.props.arboles.length > 0
+            )
+          ) &&
           (
             <TablaArboles
               changeCantidad={this.changeCantidad}

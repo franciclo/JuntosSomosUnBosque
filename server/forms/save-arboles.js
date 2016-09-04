@@ -1,9 +1,11 @@
 module.exports = function (req, res) {
   try {
+    console.log(req.body.arboles)
     var arboles = req.body.arboles
       .map(function (arbolStr) {
-        return JSON.parse(arbolStr)
+        return arbolStr && JSON.parse(arbolStr)
       })
+      .filter(function (a) { return a })
   } catch (err) {
     res.json({
       success: false,
