@@ -60207,6 +60207,9 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
+	      window.$tate('especiesLoad').on('E').subscribe(function () {
+	        _this2.forceUpdate();
+	      });
 	      window.fetch('/arboles').then(function (res) {
 	        return res.json();
 	      }).then(function (res) {

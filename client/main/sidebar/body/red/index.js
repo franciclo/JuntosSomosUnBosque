@@ -12,6 +12,9 @@ export default class Red extends Component {
   }
 
   componentWillMount () {
+    window.$tate('especiesLoad')
+      .on('E')
+      .subscribe(() => { this.forceUpdate() })
     window.fetch('/arboles')
       .then(res => {
         return res.json()
