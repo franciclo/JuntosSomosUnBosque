@@ -103,7 +103,7 @@
 }
 
 
-@media (max-height: 630px) {
+@media (max-height: 640px) {
   #sidebar_nav{
     height: 117px;
   }
@@ -125,6 +125,6 @@
     right: 4px;
   }  
   #sidebar_nav {
-    margin:0 -5px;
+    margin: 0 -25px;
   }
 }

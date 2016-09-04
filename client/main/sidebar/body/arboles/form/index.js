@@ -7,10 +7,14 @@ export default class FormArboles extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      rangeLabel: 'Brote',
-      especies: []
+      especie: null,
+      tamagno: null,
+      cantidad: null,
+      rangeLabel: 'Brote'
     }
-    this.changeRange = this.changeRange.bind(this)
+    this.changeTamagno = this.changeTamagno.bind(this)
+    this.changeEspecie = this.changeEspecie.bind(this)
+    this.changeCantidad = this.changeCantidad.bind(this)
   }
 
   componentWillMount () {
@@ -21,7 +25,7 @@ export default class FormArboles extends Component {
       })
   }
 
-  changeRange (e) {
+  changeTamagno (e) {
     let label = ''
     switch (e.target.value) {
       case '1':
@@ -47,6 +51,15 @@ export default class FormArboles extends Component {
     window.$tate('adminArboles').value = false
   }
 
+  sumarArbol () {
+    let arbol = {
+      especie: this.state.especie,
+      tamagno: this.state.tamagno,
+      cantidad: this.state.cantidad
+    }
+    this.props.sumarArbol(arbol)
+  }
+
   render () {
     return (
       <div id='admin-arboles'>
@@ -55,13 +68,13 @@ export default class FormArboles extends Component {
           onClick={this.closeAdmin}>
         </span>
         <Form
-          onSubmit={this.props.sumarArbol}
           prevent='prevent'>
           <div className='form-row-field'>
             <label htmlFor='#especie'>Especie</label>
             <select
               name='especie'
               id='especie'
+              onChange={this.changeEspecie}
               required>
               <option
                 className='default'
@@ -96,7 +109,7 @@ export default class FormArboles extends Component {
                 max='5'
                 step='1'
                 defaultValue='1'
-                onChange={this.changeRange}
+                onChange={this.changeTamagno}
                 required />
             </div>
             <div className='form-field cantidad'>
@@ -107,12 +120,14 @@ export default class FormArboles extends Component {
                 id='cantidad'
                 min='1'
                 max='10000'
+                onChange={this.changeCantidad}
                 required />
             </div>
             <div className='form-field submit-btn'>
               <button
                 type='submit'
-                title='Agregar'>
+                title='Agregar'
+                onClick={this.sumarArbol}>
                 +
               </button>
             </div>

@@ -16,9 +16,3 @@
 #sidebar>h1>span {
   color: #2bd873;
 }
-
-@media (max-width: 900px) {
-  #sidebar {
-    margin: 20px 5px 5px; 
-  }
-}

@@ -13,7 +13,7 @@
 #admin-arboles .form-field.submit-btn{
   display: flex;
   justify-content: flex-end;
-  flex: 0;
+  flex: 1;
 }
 #admin-arboles button{
   font-size: 28px;

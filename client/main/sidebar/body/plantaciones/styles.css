@@ -1,3 +1,7 @@
+#evento-wrapper.active {
+  display: flex;
+  flex-direction: column;
+}
 .action-content p.info {
   text-align: left;
   padding: 5px 0 15px;
@@ -9,6 +13,7 @@
 }
 
 #cartel_evento {
+  overflow: auto;
   background: white;
   border-radius: 3px;
 }

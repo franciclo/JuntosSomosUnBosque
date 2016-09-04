@@ -16,6 +16,7 @@ export default class Arboles extends Component {
     this.openAdminArboles = window.$tate('adminArboles').on('E')
     this.changeCantidad = this.changeCantidad.bind(this)
     this.arbolesSaved = this.arbolesSaved.bind(this)
+    this.eliminarArbol = this.eliminarArbol.bind(this)
     this.sumarArbol = this.sumarArbol.bind(this)
   }
 
@@ -38,23 +39,20 @@ export default class Arboles extends Component {
     }
   }
 
-  sumarArbol (data) {
-    const tamagno = data.get('tamagno')
-    const cantidad = +data.get('cantidad')
-    const especie = data.get('especie')
+  sumarArbol (arbol) {
     const arboles = this.state.arboles
     const cantidades = this.state.cantidades
     const arbolI = arboles
       .map(a => [a.especie, a.tamagno].join(''))
-      .indexOf([especie, tamagno].join(''))
+      .indexOf([arbol.especie, arbol.tamagno].join(''))
     if (~arbolI) {
-      cantidades[arbolI] = +cantidades[arbolI] + +cantidad
+      cantidades[arbolI] = +cantidades[arbolI] + +arbol.cantidad
     } else {
       arboles.push({
-        especie: especie,
-        tamagno: tamagno
+        especie: arbol.especie,
+        tamagno: arbol.tamagno
       })
-      cantidades.push(cantidad)
+      cantidades.push(arbol.cantidad)
     }
     this.setState({arboles, cantidades, showSubmit: true})
   }
@@ -66,18 +64,28 @@ export default class Arboles extends Component {
     this.setState({cantidades, showSubmit: true})
   }
 
+  eliminarArbol (especie, tamagno) {
+    return () => {
+      let arboles = this.state.arboles
+      const arbolI = arboles
+        .map(a => [a.especie, a.tamagno].join(''))
+        .indexOf([especie, tamagno].join(''))
+      arboles.splice(arbolI, 1)
+      this.setState({
+        arboles,
+        cantidades: arboles.map(a => a.cantidad),
+        showSubmit: true
+      })
+    }
+  }
+
   arbolesSaved (res) {
-    console.log(res)
     this.setState({showSubmit: false})
     window.$tate('user.arboles').value = undefined
     window.$tate('user.arboles').value = res
   }
 
   render () {
-    console.log('this.props.isLogged', this.props.isLogged)
-    console.log('this.state.adminArboles', this.state.adminArboles)
-    console.log('this.props.arboles', this.props.arboles)
-    console.log('-------------------------------------')
     return (
       <article
         id='tus-arboles'
@@ -127,6 +135,7 @@ export default class Arboles extends Component {
           (
             <TablaArboles
               changeCantidad={this.changeCantidad}
+              eliminarArbol={this.eliminarArbol}
               arbolesSaved={this.arbolesSaved}
               arboles={this.state.arboles}
               cantidades={this.state.cantidades}

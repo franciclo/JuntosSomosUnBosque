@@ -66,6 +66,14 @@ export default class TablaArboles extends Component {
                       <div
                         key={key}
                         className='item-arbol'>
+                        <span
+                          title='Eliminar'
+                          className='borrar'
+                          onClick={
+                            this.props.eliminarArbol(arbol.especie, arbol.tamagno)
+                          }>
+                          &otimes;
+                        </span>
                         <span className='especie'>
                           {especieById(arbol.especie)}
                         </span>

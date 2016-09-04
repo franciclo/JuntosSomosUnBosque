@@ -9,7 +9,8 @@ export default class Form extends Component {
     super()
     this.state = {
       formAlertShow: false,
-      formAlertText: ''
+      formAlertText: '',
+      loading: false
     }
     this.closeAlert = this.closeAlert.bind(this)
     this.sendForm = this.sendForm.bind(this)
@@ -22,6 +23,7 @@ export default class Form extends Component {
 
   onSubmit (e) {
     e.preventDefault()
+    if (this.state.loading) return
     let data = new window.FormData(e.target)
     if (typeof this.props.onSubmit === 'function') {
       this.props.onSubmit(data, this.sendForm)
@@ -32,6 +34,7 @@ export default class Form extends Component {
 
   sendForm (data) {
     if (!this.props.action) throw new Error('form-async needs action')
+    this.setState({loading: true})
     window.fetch(
       this.props.action,
       {
@@ -43,6 +46,7 @@ export default class Form extends Component {
       .then(res => {
         res.json()
           .then(data => {
+            this.setState({loading: false})
             if (data.success) {
               if (typeof this.props.onSuccess === 'function') {
                 this.props.onSuccess(data.result)

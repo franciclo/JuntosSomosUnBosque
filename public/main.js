@@ -59273,7 +59273,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'article',
-	        { 'data-id': 'action_content_lugar', className: 'active' },
+	        { 'data-id': 'action_content_lugar', id: 'evento-wrapper', className: 'active' },
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'cartel_evento' },
@@ -59386,6 +59386,7 @@
 	    _this.openAdminArboles = window.$tate('adminArboles').on('E');
 	    _this.changeCantidad = _this.changeCantidad.bind(_this);
 	    _this.arbolesSaved = _this.arbolesSaved.bind(_this);
+	    _this.eliminarArbol = _this.eliminarArbol.bind(_this);
 	    _this.sumarArbol = _this.sumarArbol.bind(_this);
 	    return _this;
 	  }
@@ -59418,23 +59419,20 @@
 	    }
 	  }, {
 	    key: 'sumarArbol',
-	    value: function sumarArbol(data) {
-	      var tamagno = data.get('tamagno');
-	      var cantidad = +data.get('cantidad');
-	      var especie = data.get('especie');
+	    value: function sumarArbol(arbol) {
 	      var arboles = this.state.arboles;
 	      var cantidades = this.state.cantidades;
 	      var arbolI = arboles.map(function (a) {
 	        return [a.especie, a.tamagno].join('');
-	      }).indexOf([especie, tamagno].join(''));
+	      }).indexOf([arbol.especie, arbol.tamagno].join(''));
 	      if (~arbolI) {
-	        cantidades[arbolI] = +cantidades[arbolI] + +cantidad;
+	        cantidades[arbolI] = +cantidades[arbolI] + +arbol.cantidad;
 	      } else {
 	        arboles.push({
-	          especie: especie,
-	          tamagno: tamagno
+	          especie: arbol.especie,
+	          tamagno: arbol.tamagno
 	        });
-	        cantidades.push(cantidad);
+	        cantidades.push(arbol.cantidad);
 	      }
 	      this.setState({ arboles: arboles, cantidades: cantidades, showSubmit: true });
 	    }
@@ -59447,9 +59445,28 @@
 	      this.setState({ cantidades: cantidades, showSubmit: true });
 	    }
 	  }, {
+	    key: 'eliminarArbol',
+	    value: function eliminarArbol(especie, tamagno) {
+	      var _this3 = this;
+
+	      return function () {
+	        var arboles = _this3.state.arboles;
+	        var arbolI = arboles.map(function (a) {
+	          return [a.especie, a.tamagno].join('');
+	        }).indexOf([especie, tamagno].join(''));
+	        arboles.splice(arbolI, 1);
+	        _this3.setState({
+	          arboles: arboles,
+	          cantidades: arboles.map(function (a) {
+	            return a.cantidad;
+	          }),
+	          showSubmit: true
+	        });
+	      };
+	    }
+	  }, {
 	    key: 'arbolesSaved',
 	    value: function arbolesSaved(res) {
-	      console.log(res);
 	      this.setState({ showSubmit: false });
 	      window.$tate('user.arboles').value = undefined;
 	      window.$tate('user.arboles').value = res;
@@ -59457,12 +59474,8 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this4 = this;
 
-	      console.log('this.props.isLogged', this.props.isLogged);
-	      console.log('this.state.adminArboles', this.state.adminArboles);
-	      console.log('this.props.arboles', this.props.arboles);
-	      console.log('-------------------------------------');
 	      return _react2.default.createElement(
 	        'article',
 	        {
@@ -59485,7 +59498,7 @@
 	            'button',
 	            {
 	              onClick: function onClick(e) {
-	                if (_this3.props.isLogged) {
+	                if (_this4.props.isLogged) {
 	                  window.$tate('adminArboles').value = true;
 	                } else {
 	                  window.$tate('popups.active').value = 'signin';
@@ -59502,6 +59515,7 @@
 	          sumarArbol: this.sumarArbol }),
 	        this.props.isLogged && (this.state.adminArboles || this.props.arboles && this.props.arboles.length > 0) && _react2.default.createElement(_tabla2.default, {
 	          changeCantidad: this.changeCantidad,
+	          eliminarArbol: this.eliminarArbol,
 	          arbolesSaved: this.arbolesSaved,
 	          arboles: this.state.arboles,
 	          cantidades: this.state.cantidades,
@@ -59564,10 +59578,14 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FormArboles).call(this, props));
 
 	    _this.state = {
-	      rangeLabel: 'Brote',
-	      especies: []
+	      especie: null,
+	      tamagno: null,
+	      cantidad: null,
+	      rangeLabel: 'Brote'
 	    };
-	    _this.changeRange = _this.changeRange.bind(_this);
+	    _this.changeTamagno = _this.changeTamagno.bind(_this);
+	    _this.changeEspecie = _this.changeEspecie.bind(_this);
+	    _this.changeCantidad = _this.changeCantidad.bind(_this);
 	    return _this;
 	  }
 
@@ -59579,8 +59597,8 @@
 	      });
 	    }
 	  }, {
-	    key: 'changeRange',
-	    value: function changeRange(e) {
+	    key: 'changeTamagno',
+	    value: function changeTamagno(e) {
 	      var label = '';
 	      switch (e.target.value) {
 	        case '1':
@@ -59607,6 +59625,16 @@
 	      window.$tate('adminArboles').value = false;
 	    }
 	  }, {
+	    key: 'sumarArbol',
+	    value: function sumarArbol() {
+	      var arbol = {
+	        especie: this.state.especie,
+	        tamagno: this.state.tamagno,
+	        cantidad: this.state.cantidad
+	      };
+	      this.props.sumarArbol(arbol);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -59618,7 +59646,6 @@
 	        _react2.default.createElement(
 	          _form2.default,
 	          {
-	            onSubmit: this.props.sumarArbol,
 	            prevent: 'prevent' },
 	          _react2.default.createElement(
 	            'div',
@@ -59633,6 +59660,7 @@
 	              {
 	                name: 'especie',
 	                id: 'especie',
+	                onChange: this.changeEspecie,
 	                required: true },
 	              _react2.default.createElement(
 	                'option',
@@ -59676,7 +59704,7 @@
 	                max: '5',
 	                step: '1',
 	                defaultValue: '1',
-	                onChange: this.changeRange,
+	                onChange: this.changeTamagno,
 	                required: true })
 	            ),
 	            _react2.default.createElement(
@@ -59693,6 +59721,7 @@
 	                id: 'cantidad',
 	                min: '1',
 	                max: '10000',
+	                onChange: this.changeCantidad,
 	                required: true })
 	            ),
 	            _react2.default.createElement(
@@ -59702,7 +59731,8 @@
 	                'button',
 	                {
 	                  type: 'submit',
-	                  title: 'Agregar' },
+	                  title: 'Agregar',
+	                  onClick: this.sumarArbol },
 	                '+'
 	              )
 	            )
@@ -59764,7 +59794,8 @@
 
 	    _this.state = {
 	      formAlertShow: false,
-	      formAlertText: ''
+	      formAlertText: '',
+	      loading: false
 	    };
 	    _this.closeAlert = _this.closeAlert.bind(_this);
 	    _this.sendForm = _this.sendForm.bind(_this);
@@ -59781,6 +59812,7 @@
 	    key: 'onSubmit',
 	    value: function onSubmit(e) {
 	      e.preventDefault();
+	      if (this.state.loading) return;
 	      var data = new window.FormData(e.target);
 	      if (typeof this.props.onSubmit === 'function') {
 	        this.props.onSubmit(data, this.sendForm);
@@ -59794,6 +59826,7 @@
 	      var _this2 = this;
 
 	      if (!this.props.action) throw new Error('form-async needs action');
+	      this.setState({ loading: true });
 	      window.fetch(this.props.action, {
 	        credentials: 'same-origin',
 	        method: 'post',
@@ -59802,6 +59835,7 @@
 	        console.warn('Request Internal Error action="' + _this2.props.action + '"', err);
 	      }).then(function (res) {
 	        res.json().then(function (data) {
+	          _this2.setState({ loading: false });
 	          if (data.success) {
 	            if (typeof _this2.props.onSuccess === 'function') {
 	              _this2.props.onSuccess(data.result);
@@ -60026,6 +60060,14 @@
 	                {
 	                  key: key,
 	                  className: 'item-arbol' },
+	                _react2.default.createElement(
+	                  'span',
+	                  {
+	                    title: 'Eliminar',
+	                    className: 'borrar',
+	                    onClick: _this3.props.eliminarArbol(arbol.especie, arbol.tamagno) },
+	                  '⊗'
+	                ),
 	                _react2.default.createElement(
 	                  'span',
 	                  { className: 'especie' },

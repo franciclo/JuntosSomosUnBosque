@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 15px;
+  padding: 8px 15px 5px;
   background: #f5f5f5;
   min-height: 25px;
 }
@@ -111,4 +111,18 @@
   font-weight: 100;
   font-size: 22px;
   margin: 0;
+}
+#lista-arboles .tabla-arboles .item-arbol .borrar {
+  font-size: 25px;
+  line-height: 20px;
+  margin-right: 10px;
+  color: #ff687b;
+  visibility: hidden;
+  cursor: pointer;
+}
+#lista-arboles .tabla-arboles .item-arbol:hover .borrar {
+  visibility: visible;
+}
+#lista-arboles .tabla-arboles .item-arbol .borrar:hover {
+  color: #e0273e;
 }
