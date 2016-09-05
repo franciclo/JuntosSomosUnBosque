@@ -15,9 +15,17 @@ export default class Mapa extends Component {
       zoom: 11,
       red: []
     }
+    this.fetchRed = this.fetchRed.bind(this)
   }
 
   componentWillMount () {
+    window.$tate('user.arboles')
+      .on('N')
+      .subscribe(() => { this.fetchRed() })
+    this.fetchRed()
+  }
+
+  fetchRed () {
     window.fetch('/red')
       .then(res => {
         return res.json()

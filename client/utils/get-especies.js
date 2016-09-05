@@ -12,28 +12,17 @@ function makeRequest () {
       }
     })
 }
-function all (label) {
-  if (especies.length === 0) return 'No hay especies cargadas'
-  if (!especies[0].hasOwnProperty(label)) {
-    label = 'singular'
-  }
-  return especies
-    .map(function (e) {
-      return {
-        id: e._id,
-        label: e[label]
-      }
-    })
+function all () {
+  return especies.sort((a, b) => (a.label < b.label) ? -1 : (a.label > b.label) ? 1 : 0)
 }
-function byId (id, label) {
+function byId (id) {
+  console.log(id)
+  console.log(especies)
   if (especies.length === 0) return 'No hay especies cargadas'
   var i = especies
-    .map(function (e) { return e._id })
+    .map(function (e) { return e.id })
     .indexOf(id)
   if (!~i) return 'Especie desconocida'
-  if (!especies[i].hasOwnProperty(label)) {
-    label = 'singular'
-  }
-  return especies[i][label]
+  return especies[i].label
 }
 export {all, byId, makeRequest}

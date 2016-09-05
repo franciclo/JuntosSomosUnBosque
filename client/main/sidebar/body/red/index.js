@@ -9,12 +9,20 @@ export default class Red extends Component {
       arboles: [],
       total: 0
     }
+    this.fetchArboles = this.fetchArboles.bind(this)
   }
 
   componentWillMount () {
     window.$tate('especiesLoad')
       .on('E')
       .subscribe(() => { this.forceUpdate() })
+    window.$tate('user.arboles')
+      .on('N')
+      .subscribe(() => { this.fetchArboles() })
+    this.fetchArboles()
+  }
+
+  fetchArboles () {
     window.fetch('/arboles')
       .then(res => {
         return res.json()
@@ -32,6 +40,7 @@ export default class Red extends Component {
         }
       })
   }
+
   render () {
     return (
       <article

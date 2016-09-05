@@ -40365,28 +40365,20 @@
 	    }
 	  });
 	}
-	function all(label) {
-	  if (especies.length === 0) return 'No hay especies cargadas';
-	  if (!especies[0].hasOwnProperty(label)) {
-	    label = 'singular';
-	  }
-	  return especies.map(function (e) {
-	    return {
-	      id: e._id,
-	      label: e[label]
-	    };
+	function all() {
+	  return especies.sort(function (a, b) {
+	    return a.label < b.label ? -1 : a.label > b.label ? 1 : 0;
 	  });
 	}
-	function byId(id, label) {
+	function byId(id) {
+	  console.log(id);
+	  console.log(especies);
 	  if (especies.length === 0) return 'No hay especies cargadas';
 	  var i = especies.map(function (e) {
-	    return e._id;
+	    return e.id;
 	  }).indexOf(id);
 	  if (!~i) return 'Especie desconocida';
-	  if (!especies[i].hasOwnProperty(label)) {
-	    label = 'singular';
-	  }
-	  return especies[i][label];
+	  return especies[i].label;
 	}
 	exports.all = all;
 	exports.byId = byId;
@@ -40444,6 +40436,7 @@
 	      zoom: 11,
 	      red: []
 	    };
+	    _this.fetchRed = _this.fetchRed.bind(_this);
 	    return _this;
 	  }
 
@@ -40452,11 +40445,21 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
+	      window.$tate('user.arboles').on('N').subscribe(function () {
+	        _this2.fetchRed();
+	      });
+	      this.fetchRed();
+	    }
+	  }, {
+	    key: 'fetchRed',
+	    value: function fetchRed() {
+	      var _this3 = this;
+
 	      window.fetch('/red').then(function (res) {
 	        return res.json();
 	      }).then(function (res) {
 	        if (res.success) {
-	          _this2.setState({
+	          _this3.setState({
 	            red: res.result
 	          });
 	        } else {
@@ -59682,15 +59685,39 @@
 	                  value: '' },
 	                'Elegí una especie'
 	              ),
-	              (0, _getEspecies.all)().map(function (especie, key) {
-	                return _react2.default.createElement(
-	                  'option',
-	                  {
-	                    key: key,
-	                    value: especie.id },
-	                  especie.label
-	                );
-	              })
+	              _react2.default.createElement(
+	                'optgroup',
+	                { label: 'Nativos' },
+	                (0, _getEspecies.all)().filter(function (e) {
+	                  return e.tipo === 'nativo';
+	                }).map(function (especie, key) {
+	                  return _react2.default.createElement(
+	                    'option',
+	                    {
+	                      key: key,
+	                      value: especie.id },
+	                    especie.label,
+	                    '  (',
+	                    especie.latin,
+	                    ')'
+	                  );
+	                })
+	              ),
+	              _react2.default.createElement(
+	                'optgroup',
+	                { label: 'Comestibles' },
+	                (0, _getEspecies.all)().filter(function (e) {
+	                  return e.tipo === 'comestible';
+	                }).map(function (especie, key) {
+	                  return _react2.default.createElement(
+	                    'option',
+	                    {
+	                      key: key,
+	                      value: especie.id },
+	                    especie.label
+	                  );
+	                })
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -60199,6 +60226,7 @@
 	      arboles: [],
 	      total: 0
 	    };
+	    _this.fetchArboles = _this.fetchArboles.bind(_this);
 	    return _this;
 	  }
 
@@ -60210,6 +60238,16 @@
 	      window.$tate('especiesLoad').on('E').subscribe(function () {
 	        _this2.forceUpdate();
 	      });
+	      window.$tate('user.arboles').on('N').subscribe(function () {
+	        _this2.fetchArboles();
+	      });
+	      this.fetchArboles();
+	    }
+	  }, {
+	    key: 'fetchArboles',
+	    value: function fetchArboles() {
+	      var _this3 = this;
+
 	      window.fetch('/arboles').then(function (res) {
 	        return res.json();
 	      }).then(function (res) {
@@ -60218,7 +60256,7 @@
 	            return acc + a.cantidad;
 	          }, 0);
 	          window.$tate('total').value = total;
-	          _this2.setState({ arboles: res.result, total: total });
+	          _this3.setState({ arboles: res.result, total: total });
 	        } else {
 	          console.warn('error al pedir los arboles', res);
 	        }

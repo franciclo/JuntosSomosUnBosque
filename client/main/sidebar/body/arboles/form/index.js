@@ -91,16 +91,32 @@ export default class FormArboles extends Component {
                 value=''>
                 Elegí una especie
               </option>
-              {
-                allEspecies()
-                  .map((especie, key) => {
-                    return <option
-                      key={key}
-                      value={especie.id}>
-                      {especie.label}
-                    </option>
-                  })
-              }
+              <optgroup label='Nativos'>
+                {
+                  allEspecies()
+                    .filter(e => e.tipo === 'nativo')
+                    .map((especie, key) => {
+                      return <option
+                        key={key}
+                        value={especie.id}>
+                        {especie.label}&nbsp;&nbsp;({especie.latin})
+                      </option>
+                    })
+                }
+              </optgroup>
+              <optgroup label='Comestibles'>
+                {
+                  allEspecies()
+                    .filter(e => e.tipo === 'comestible')
+                    .map((especie, key) => {
+                      return <option
+                        key={key}
+                        value={especie.id}>
+                        {especie.label}
+                      </option>
+                    })
+                }
+              </optgroup>
             </select>
           </div>
           <div className='form-row'>
