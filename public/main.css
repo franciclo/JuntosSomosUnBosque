@@ -1681,8 +1681,9 @@ label.legend {
 #popup_festi > div {
   background: white;
   height: 90vh;
-  width: 45vw;
-  min-width: 620px;
+  width: 90vw;
+  max-width: 700px;
+  max-height: 600px;
   display: flex;
   flex-direction: column;
 }
@@ -1777,12 +1778,13 @@ label.legend {
   height: 13px;
 }
 #popup_festi_content_info {
-  padding: 30px 70px;
+  padding: 15px 30px 0;
   height: 100%;
   box-sizing: border-box;
+  overflow: auto;
 }
 #popup_festi_content_info p {
-  font-size: 18px;
+  font-size: 16px;
   color: #444;
   margin: 10px 0 0;
 }    

@@ -40371,8 +40371,6 @@
 	  });
 	}
 	function byId(id) {
-	  console.log(id);
-	  console.log(especies);
 	  if (especies.length === 0) return 'No hay especies cargadas';
 	  var i = especies.map(function (e) {
 	    return e.id;
@@ -61895,13 +61893,13 @@
 	                  'p',
 	                  { className: 'info' },
 	                  _react2.default.createElement('img', { src: 'lugar.svg' }),
-	                  'Eco aldea Velatropa, Ciudad Universitaria.'
+	                  'Reserva Ecológica Costanera Norte, acceso Puente FADU, Ciudad Universitaria.'
 	                ),
 	                _react2.default.createElement(
 	                  'p',
 	                  { className: 'info' },
 	                  _react2.default.createElement('img', { src: 'reloj-fff.svg' }),
-	                  'Sábado 24 de septiembre, 12:00 am'
+	                  'Sábado 24  y Domingo 25 de Septiembre. De 10am  hasta que caiga el sol.'
 	                )
 	              )
 	            ),
@@ -62017,18 +62015,17 @@
 	          className: 'active' },
 	        _react2.default.createElement(
 	          'p',
-	          { className: 'info' },
-	          'Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.'
-	        ),
-	        _react2.default.createElement(
-	          'p',
 	          null,
-	          'A partir de los rituales de siembra que ofrecimos en recitales, encuentros y talleres se fue creando una gran red de cultivadores de árboles nativos y comestibles.'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando plantaciones colectivas, cuando los arbolitos hayan crecido y estén listos para ir a tierra.'
+	          'Vení a participar de la plantación colectiva de un Bosque, en el marco de un festival, donde habrá música, charlas, talleres y encuentro de redes.',
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('br', null),
+	          'Te invitamos a apadrinar un árbol, trayendo tu propio arbolito nativo para plantar (más de un metro de altura). Si no contás con tu arbolito, también podés venir y nosotros te facilitamos uno para que plantes y apadrines.',
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('br', null),
+	          'Donde plantaremos el Bosque? En el Parque Natural de la Reserva Ecológica Costanera Norte, detrás de Ciudad Universitaria. Este lugar fue nombrado Reserva en el 2012, y desde entonces que está totalmente abandonada. La desidia institucional a dejado en emergencia ambiental este espacio que hoy no cuenta con administración ni mantenimiento alguno. Hay incendios, basura y vandalismo. Plantando un bosque colectivamente nos manifestamos activamente para que este hermoso lugar sea conocido y disfrutado por todos.',
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('br', null),
+	          'Entrada libre y gratuita.'
 	        )
 	      );
 	    }

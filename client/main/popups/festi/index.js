@@ -41,11 +41,11 @@ export default class Festi extends Component {
                 <h1>Festival de plantación</h1>
                 <p className='info'>
                   <img src='lugar.svg' />
-                  Eco aldea Velatropa, Ciudad Universitaria.
+                  Reserva Ecológica Costanera Norte, acceso Puente FADU, Ciudad Universitaria.
                 </p>
                 <p className='info'>
                   <img src='reloj-fff.svg' />
-                  Sábado 24 de septiembre, 12:00 am
+                  Sábado 24  y Domingo 25 de Septiembre. De 10am  hasta que caiga el sol.
                 </p>
               </div>
             </header>

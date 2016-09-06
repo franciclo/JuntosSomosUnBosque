@@ -9,9 +9,16 @@ export default class Info extends Component {
         data-id='info'
         id='popup_festi_content_info'
         className='active'>
-        <p className='info'>Queremos motivar a las personas a ser actores de cambio para vivir en un mundo más saludable.</p>
-        <p>A partir de los rituales de siembra que ofrecimos en recitales, encuentros y talleres se fue creando una gran red de cultivadores de árboles nativos y comestibles.</p>
-        <p>Queremos que esos arbolitos se conviertan en un bosque. Por eso estamos organizando plantaciones colectivas, cuando los arbolitos hayan crecido y estén listos para ir a tierra.</p>
+        <p>
+          Vení a participar de la plantación colectiva de un Bosque, en el marco de un festival, donde habrá música, charlas, talleres y encuentro de redes.
+          <br /><br />
+          Te invitamos a apadrinar un árbol, trayendo tu propio arbolito nativo para plantar (más de un metro de altura). Si no contás con tu arbolito, también podés venir y nosotros te facilitamos uno para que plantes y apadrines.
+          <br /><br />
+          Donde plantaremos el Bosque?
+          En el Parque Natural de la Reserva Ecológica Costanera Norte, detrás de Ciudad Universitaria. Este lugar fue nombrado Reserva en el 2012, y desde entonces que está totalmente abandonada. La desidia institucional a dejado en emergencia ambiental este espacio que hoy no cuenta con administración ni mantenimiento alguno. Hay incendios, basura y vandalismo. Plantando un bosque colectivamente nos manifestamos activamente para que este hermoso lugar sea conocido y disfrutado por todos.
+          <br /><br />
+          Entrada libre y gratuita.
+        </p>
       </article>
     )
   }
