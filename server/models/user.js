@@ -16,6 +16,22 @@ var userSchema = mongoose.Schema({
     type: Boolean,
     default: true
   },
+  email: String,
+  emailVerificationToken: String,
+  emailVerificationExpires: Date,
+  emailVerificationSent: {
+    type: Boolean,
+    default: false
+  },
+  emailVerified: {
+    type: Boolean,
+    default: false
+  },
+  localRegistry: {
+    type: Boolean,
+    default: false
+  },
+  unofficialPassword: String,
   local: {
     email: String,
     password: String,

@@ -3,7 +3,7 @@ var crypto = require('crypto')
 var sendMail = require('../../mail')
 
 module.exports = function (req, res, next) {
-  User.findOne({'local.email': req.body.email},
+  User.findOne({'email': req.body.email, 'emailVerified': true},
     function (err, user) {
       if (err) {
         return res.json({
@@ -18,11 +18,8 @@ module.exports = function (req, res, next) {
           text: 'Ese mail ya está registrado'
         })
       }
-      var newUser = new User()
-      newUser.name = req.body.name
-      newUser.unofficialPassword = newUser.generateHash(req.body.password)
-      newUser.email = req.body.email
-      newUser.localRegistry = true
+
+      req.user.email = req.body.email
 
       crypto.randomBytes(20, function (err, buf) {
         if (err) {
@@ -37,16 +34,16 @@ module.exports = function (req, res, next) {
         var mailText = '<a href="http://www.juntossomosunbosque.red/validar-mail?codigo=' +
           token + '">Validar cuenta de JuntosSomosUnBosque.red</a>'
 
-        newUser.emailVerificationToken = token
-        newUser.emailVerificationExpires = Date.now() + 3600000 * 24 // 24 hours
+        req.user.emailVerificationToken = token
+        req.user.emailVerificationExpires = Date.now() + 3600000 * 24 // 24 hours
 
         sendMail({
           to: [req.body.email],
           subject: 'Validar cuenta de Juntos Somos Un Bosque',
           html: mailText
         }).then(function (info) {
-          newUser.emailVerificationSent = true
-          newUser.save(function (err) {
+          req.user.emailVerificationSent = true
+          req.user.save(function (err) {
             if (err) {
               res.json({
                 success: false,

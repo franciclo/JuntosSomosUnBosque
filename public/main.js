@@ -21468,6 +21468,9 @@
 	      nombre: null,
 	      primerLogin: null,
 	      reset: null,
+	      userMail: null,
+	      emailVerificationSent: null,
+	      emailToVerify: null,
 	      userType: null,
 	      location: null,
 	      arboles: null
@@ -21504,7 +21507,17 @@
 	        if (user.reset) {
 	          return _this2.setState({
 	            isLogged: true,
+	            nombre: user.nombre,
 	            reset: true
+	          });
+	        }
+	        if (user.emailVerified === false) {
+	          return _this2.setState({
+	            isLogged: true,
+	            nombre: user.nombre,
+	            userMail: true,
+	            emailVerificationSent: user.emailVerificationSent,
+	            emailToVerify: user.emailToVerify || ''
 	          });
 	        }
 	        _this2.setState({
@@ -21574,7 +21587,10 @@
 	          location: this.state.location,
 	          nombre: this.state.nombre,
 	          primerLogin: this.state.primerLogin,
-	          reset: this.state.reset })
+	          reset: this.state.reset,
+	          userMail: this.state.userMail,
+	          emailVerificationSent: this.state.emailVerificationSent,
+	          emailToVerify: this.state.emailToVerify })
 	      );
 	    }
 	  }]);
@@ -59770,7 +59786,7 @@
 	                {
 	                  type: 'submit',
 	                  title: 'Agregar' },
-	                '+'
+	                'Agregar'
 	              )
 	            )
 	          )
@@ -59849,6 +59865,21 @@
 	    key: 'onSubmit',
 	    value: function onSubmit(e) {
 	      e.preventDefault();
+	      if (e.target.querySelector('input[data-same-as]')) {
+	        var same = e.target.querySelector('input[data-same-as]');
+	        var sameTo = e.target.querySelector(same.getAttribute('data-same-as'));
+	        if (same && sameTo) {
+	          if (same.value !== sameTo.value) {
+	            console.log(same.value, sameTo.value);
+	            same.setCustomValidity('Las contraseñas deben ser iguales.');
+	            return;
+	          } else {
+	            same.setCustomValidity('');
+	          }
+	        } else {
+	          console.warn('FormAsync validate input same to.', same, sameTo);
+	        }
+	      }
 	      if (this.state.loading) return;
 	      var data = new window.FormData(e.target);
 	      if (typeof this.props.onSubmit === 'function') {
@@ -60477,6 +60508,10 @@
 
 	var _info2 = _interopRequireDefault(_info);
 
+	var _userMail = __webpack_require__(831);
+
+	var _userMail2 = _interopRequireDefault(_userMail);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60521,6 +60556,9 @@
 	      if (nextProps.isLogged && nextProps.reset) {
 	        return this.setState({ open: 'reset' });
 	      }
+	      if (nextProps.isLogged && nextProps.userMail) {
+	        return this.setState({ open: 'userMail' });
+	      }
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -60539,7 +60577,7 @@
 	  }, {
 	    key: 'closePopUp',
 	    value: function closePopUp(e) {
-	      if (this.state.open !== 'primerLogin' && this.state.open !== 'reset' && e.target.id === 'popups_layout' || ~e.target.className.indexOf('pop-close')) {
+	      if (this.state.open !== 'primerLogin' && this.state.open !== 'reset' && this.state.open !== 'userMail' && e.target.id === 'popups_layout' || ~e.target.className.indexOf('pop-close')) {
 	        window.$tate('popups.active').value = null;
 	        this.setState({ open: null });
 	      }
@@ -60584,7 +60622,11 @@
 	        this.props.isLogged && this.props.primerLogin && _react2.default.createElement(_primerLogin2.default, {
 	          open: this.state.open === 'primerLogin' ? 'open' : '' }),
 	        this.props.isLogged && this.props.reset && _react2.default.createElement(_reset2.default, {
-	          open: this.state.open === 'reset' ? 'open' : '' })
+	          open: this.state.open === 'reset' ? 'open' : '' }),
+	        this.props.isLogged && this.props.userMail && _react2.default.createElement(_userMail2.default, {
+	          open: this.state.open === 'userMail' ? 'open' : '',
+	          emailVerificationSent: this.props.emailVerificationSent,
+	          emailToVerify: this.props.emailToVerify })
 	      );
 	    }
 	  }]);
@@ -60844,8 +60886,8 @@
 	          _form2.default,
 	          {
 	            action: '/registro',
-	            onSuccess: this.onSuccess,
-	            failAlert: 'true' },
+	            failAlert: 'true',
+	            successAlert: 'true' },
 	          _react2.default.createElement(
 	            'label',
 	            { className: 'legend' },
@@ -60894,6 +60936,21 @@
 	              id: 'password_registro',
 	              name: 'password',
 	              type: 'password',
+	              required: true })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              {
+	                htmlFor: 'password_repeat' },
+	              'Repetí la contraseña'
+	            ),
+	            _react2.default.createElement('input', {
+	              id: 'password_repeat',
+	              type: 'password',
+	              'data-same-as': '#password_registro',
 	              required: true })
 	          ),
 	          _react2.default.createElement(
@@ -62569,6 +62626,158 @@
 
 /***/ },
 /* 829 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 830 */,
+/* 831 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(832);
+
+	__webpack_require__(777);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _form = __webpack_require__(774);
+
+	var _form2 = _interopRequireDefault(_form);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var UserMail = function (_Component) {
+	  _inherits(UserMail, _Component);
+
+	  function UserMail(props) {
+	    _classCallCheck(this, UserMail);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserMail).call(this, props));
+
+	    _this.state = {
+	      emailVerificationSent: null,
+	      emailToVerify: null
+	    };
+	    _this.onSuccess = _this.onSuccess.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(UserMail, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.setState({
+	        emailVerificationSent: this.props.emailVerificationSent,
+	        emailToVerify: this.props.emailToVerify
+	      });
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(props) {
+	      this.setState({
+	        emailVerificationSent: props.emailVerificationSent,
+	        emailToVerify: props.emailToVerify
+	      });
+	    }
+	  }, {
+	    key: 'onSuccess',
+	    value: function onSuccess() {
+	      this.setState({ emailVerificationSent: true });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      return _react2.default.createElement(
+	        'dia-log',
+	        {
+	          'data-open-modal': this.props.open },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'logineo user-mail' },
+	          !this.state.emailVerificationSent && _react2.default.createElement(
+	            _form2.default,
+	            {
+	              action: '/mail-verification',
+	              failAlert: 'true',
+	              onSuccess: this.onSuccess },
+	            _react2.default.createElement(
+	              'label',
+	              { className: 'legend' },
+	              'Validá la cuenta con tu mail'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-row-field' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: 'emailForgotForm' },
+	                'Mail'
+	              ),
+	              _react2.default.createElement('input', {
+	                id: 'emailForgotForm',
+	                name: 'email',
+	                type: 'text',
+	                defaultValue: this.props.emailToVerify || '',
+	                required: true })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-row-field foot-buttons' },
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  type: 'submit' },
+	                'Enviar'
+	              )
+	            )
+	          ),
+	          this.state.emailVerificationSent && _react2.default.createElement(
+	            'div',
+	            { className: 'email-sent' },
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'El mail de verificación ya fue enviado, revisá tu bandeja de entrada.'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              {
+	                onClick: function onClick(e) {
+	                  _this2.setState({ emailVerificationSent: false });
+	                } },
+	              'Reenviar'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return UserMail;
+	}(_react.Component);
+
+	exports.default = UserMail;
+
+/***/ },
+/* 832 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

@@ -15,6 +15,9 @@ export default class Main extends Component {
       nombre: null,
       primerLogin: null,
       reset: null,
+      userMail: null,
+      emailVerificationSent: null,
+      emailToVerify: null,
       userType: null,
       location: null,
       arboles: null
@@ -47,11 +50,20 @@ export default class Main extends Component {
           })
         }
         if (user.reset) {
-          return this.setState(
-            {
-              isLogged: true,
-              reset: true
-            })
+          return this.setState({
+            isLogged: true,
+            nombre: user.nombre,
+            reset: true
+          })
+        }
+        if (user.emailVerified === false) {
+          return this.setState({
+            isLogged: true,
+            nombre: user.nombre,
+            userMail: true,
+            emailVerificationSent: user.emailVerificationSent,
+            emailToVerify: user.emailToVerify || ''
+          })
         }
         this.setState({
           isLogged: true,
@@ -128,7 +140,10 @@ export default class Main extends Component {
           location={this.state.location}
           nombre={this.state.nombre}
           primerLogin={this.state.primerLogin}
-          reset={this.state.reset} />
+          reset={this.state.reset}
+          userMail={this.state.userMail}
+          emailVerificationSent={this.state.emailVerificationSent}
+          emailToVerify={this.state.emailToVerify} />
       </div>
     )
   }

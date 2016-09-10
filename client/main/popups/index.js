@@ -10,6 +10,7 @@ import Reset from './reset'
 import Flyer from './flyer'
 import Festi from './festi'
 import Info from './info'
+import UserMail from './user-mail'
 
 export default class Popups extends Component {
   constructor () {
@@ -35,6 +36,9 @@ export default class Popups extends Component {
     if (nextProps.isLogged && nextProps.reset) {
       return this.setState({open: 'reset'})
     }
+    if (nextProps.isLogged && nextProps.userMail) {
+      return this.setState({open: 'userMail'})
+    }
   }
 
   componentWillUnmount () {
@@ -49,6 +53,7 @@ export default class Popups extends Component {
     if (
       this.state.open !== 'primerLogin' &&
       this.state.open !== 'reset' &&
+      this.state.open !== 'userMail' &&
       e.target.id === 'popups_layout' ||
       ~e.target.className.indexOf('pop-close')
     ) {
@@ -121,6 +126,13 @@ export default class Popups extends Component {
           this.props.isLogged && this.props.reset &&
             <Reset
               open={this.state.open === 'reset' ? 'open' : ''} />
+        }
+        {
+          this.props.isLogged && this.props.userMail &&
+            <UserMail
+              open={this.state.open === 'userMail' ? 'open' : ''}
+              emailVerificationSent={this.props.emailVerificationSent}
+              emailToVerify={this.props.emailToVerify} />
         }
       </div>
     )

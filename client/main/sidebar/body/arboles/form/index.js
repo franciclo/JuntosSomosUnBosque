@@ -153,7 +153,7 @@ export default class FormArboles extends Component {
               <button
                 type='submit'
                 title='Agregar'>
-                +
+                Agregar
               </button>
             </div>
           </div>

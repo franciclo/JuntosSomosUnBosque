@@ -1,7 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy
 var User = require('../../models/user')
-var sendMail = require('../../mail')
-var crypto = require('crypto')
 
 module.exports = function (passport) {
   passport.use('local-login', new LocalStrategy({
@@ -96,48 +94,48 @@ module.exports = function (passport) {
   }))
 }
 
-module.exports.recuperar = function (req, res) {
-  User.findOne({
-    'local.resetPasswordToken': req.query.codigo,
-    'local.resetPasswordExpires': { $gt: Date.now() }
-  }, function (err, user) {
-    if (err || !user) {
-      console.log('err reset', err, user)
-      return res.redirect('/')
-    }
-    res.render('layout', {
-      sectionHtml: '../../app/src/content/sections/reset/index.html',
-      entryFilename: 'reset',
-      userMail: user.local.email
-    })
-  })
-}
+// module.exports.recuperar = function (req, res) {
+//   User.findOne({
+//     'local.resetPasswordToken': req.query.codigo,
+//     'local.resetPasswordExpires': { $gt: Date.now() }
+//   }, function (err, user) {
+//     if (err || !user) {
+//       console.log('err reset', err, user)
+//       return res.redirect('/')
+//     }
+//     res.render('layout', {
+//       sectionHtml: '../../app/src/content/sections/reset/index.html',
+//       entryFilename: 'reset',
+//       userMail: user.local.email
+//     })
+//   })
+// }
 
-module.exports.reset = function (req, res) {
-  User.findOne({
-    'local.resetPasswordToken': req.query.codigo,
-    'local.resetPasswordExpires': { $gt: Date.now() }
-  }, function (err, user) {
-    if (err || !user) {
-      return res.json({success: false, text: 'Parece que el usuario ya no existe mas', result: err})
-    }
-    console.log(req.query.password)
-    user.password = req.query.password
-    user.resetPasswordToken = undefined
-    user.resetPasswordExpires = undefined
+// module.exports.reset = function (req, res) {
+//   User.findOne({
+//     'local.resetPasswordToken': req.query.codigo,
+//     'local.resetPasswordExpires': { $gt: Date.now() }
+//   }, function (err, user) {
+//     if (err || !user) {
+//       return res.json({success: false, text: 'Parece que el usuario ya no existe mas', result: err})
+//     }
+//     console.log(req.query.password)
+//     user.password = req.query.password
+//     user.resetPasswordToken = undefined
+//     user.resetPasswordExpires = undefined
 
-    user.save(function (err) {
-      if (err) {
-        res.json({success: false, text: 'Hubo un problema con tu usuario', result: err})
-        return
-      }
-      req.logIn(user, function (err) {
-        if (err) {
-          res.json({success: false, text: 'Hubo un problema con tu nueva contraseña', result: err})
-          return
-        }
-        res.json({success: true, text: 'Contraseña cambiada, redireccionando..'})
-      })
-    })
-  })
-}
+//     user.save(function (err) {
+//       if (err) {
+//         res.json({success: false, text: 'Hubo un problema con tu usuario', result: err})
+//         return
+//       }
+//       req.logIn(user, function (err) {
+//         if (err) {
+//           res.json({success: false, text: 'Hubo un problema con tu nueva contraseña', result: err})
+//           return
+//         }
+//         res.json({success: true, text: 'Contraseña cambiada, redireccionando..'})
+//       })
+//     })
+//   })
+// }

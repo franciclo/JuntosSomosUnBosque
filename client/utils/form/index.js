@@ -23,6 +23,21 @@ export default class Form extends Component {
 
   onSubmit (e) {
     e.preventDefault()
+    if (e.target.querySelector('input[data-same-as]')) {
+      let same = e.target.querySelector('input[data-same-as]')
+      let sameTo = e.target.querySelector(same.getAttribute('data-same-as'))
+      if (same && sameTo) {
+        if (same.value !== sameTo.value) {
+          console.log(same.value, sameTo.value)
+          same.setCustomValidity('Las contraseñas deben ser iguales.')
+          return
+        } else {
+          same.setCustomValidity('')
+        }
+      } else {
+        console.warn('FormAsync validate input same to.', same, sameTo)
+      }
+    }
     if (this.state.loading) return
     let data = new window.FormData(e.target)
     if (typeof this.props.onSubmit === 'function') {

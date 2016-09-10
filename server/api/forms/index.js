@@ -8,8 +8,9 @@ module.exports = function (app, passport) {
   app.post('/save-arboles', isLoggedIn, require('./save-arboles'))
   app.post('/perfil', isLoggedIn, require('./perfil'))
   app.post('/login', require('./login')(passport))
-  app.post('/registro', require('./registro')(passport))
+  app.post('/registro', require('./registro'))
   app.post('/terminar-registro', isLoggedIn, require('./terminar-registro'))
   app.post('/forgot', require('./forgot'))
   app.post('/reset', require('./reset'))
+  app.post('/mail-verification', require('./mail-verification'))
 }

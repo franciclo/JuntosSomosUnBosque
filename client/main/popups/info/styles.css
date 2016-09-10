@@ -56,6 +56,7 @@
   overflow: auto;
   box-sizing: border-box;
   color: white;
+  text-align: justify;
 }
 #popup_info > div > nav > button.active {
   font-size: 17px!important;

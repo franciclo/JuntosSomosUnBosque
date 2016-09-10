@@ -1,27 +1,32 @@
 module.exports = function (req, res) {
-  if (!req.isAuthenticated()) {
-    return res.render('layout', {
-      state: {}
-    })
-  }
+  var userClient = {}
 
-  var userClient = {
-    primerLogin: req.user.primerLogin,
-    nombre: req.user.getNombre(),
-    type: req.user.userType,
-    location: req.user.location,
-    arboles: req.user.arboles
-      .map(function (arbol) {
-        return {
-          especie: arbol.especie,
-          cantidad: arbol.cantidad,
-          tamagno: arbol.tamagno
-        }
-      })
+  if (req.isAuthenticated()) {
+    userClient.nombre = req.user.name
+    if (!req.user.emailVerified) {
+      userClient.emailVerified = false
+      if (req.user.emailVerificationSent) {
+        userClient.emailVerificationSent = true
+        userClient.emailToVerify = req.user.email
+      }
+    } else if (req.user.primerLogin) {
+      userClient.primerLogin = true
+    } else {
+      userClient.type = req.user.userType
+      userClient.location = req.user.location
+      userClient.arboles = req.user.arboles
+        .map(function (arbol) {
+          return {
+            especie: arbol.especie,
+            cantidad: arbol.cantidad,
+            tamagno: arbol.tamagno
+          }
+        })
+    }
   }
   return res.render('layout', {
-    state: {
-      user: userClient
-    }
+    state: userClient.nombre
+      ? { user: userClient }
+      : {}
   })
 }

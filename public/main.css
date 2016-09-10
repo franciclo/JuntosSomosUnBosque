@@ -1195,8 +1195,8 @@ slider-box > article.active {
   flex: 1;
 }
 #admin-arboles button{
-  font-size: 28px;
-  padding: 0px 9px;
+  font-size: 17px;
+  padding: 7px 7px;
   margin: 0 0 8px 30px;
 }
 #admin-arboles .form-field.tamagno{
@@ -1914,6 +1914,7 @@ span.linea-crono {
   overflow: auto;
   box-sizing: border-box;
   color: white;
+  text-align: justify;
 }
 #popup_info > div > nav > button.active {
   font-size: 17px!important;
@@ -1931,4 +1932,29 @@ span.linea-crono {
   100% {
     font-size: 17px;
   }
+}.user-mail {
+  width: 360px;
+  padding-top: 10px; 
+}
+.user-mail form .foot-buttons {
+  justify-content: flex-end;
+}
+.email-sent {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.email-sent p{
+  font-size: 22px;
+  color: #555;
+}
+.email-sent button {
+  cursor: pointer;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 0.1rem;
+  background: #2bd873;
+  color: white;
+  font-size: 1.2rem;
+  align-self: flex-end;
 }

@@ -25,8 +25,8 @@ export default class Signup extends Component {
         </span>
         <Form
           action='/registro'
-          onSuccess={this.onSuccess}
-          failAlert='true'>
+          failAlert='true'
+          successAlert='true'>
           <label className='legend'>Nueva cuenta</label>
           <div className='form-row-field'>
             <label
@@ -59,6 +59,17 @@ export default class Signup extends Component {
               id='password_registro'
               name='password'
               type='password'
+              required />
+          </div>
+          <div className='form-row-field'>
+            <label
+              htmlFor='password_repeat'>
+              Repetí la contraseña
+            </label>
+            <input
+              id='password_repeat'
+              type='password'
+              data-same-as='#password_registro'
               required />
           </div>
           <div className='form-row-field foot-buttons'>
