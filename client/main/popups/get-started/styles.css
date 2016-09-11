@@ -1,4 +1,19 @@
-.forgot {
-  width: 360px;
-  padding-top: 10px; 
+.get-started {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.get-started p{
+  font-size: 22px;
+  color: #555;
+}
+.get-started button {
+  cursor: pointer;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 0.1rem;
+  background: #2bd873;
+  color: white;
+  font-size: 1.2rem;
+  align-self: flex-end;
 }

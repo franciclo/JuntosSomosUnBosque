@@ -51,7 +51,7 @@ export default class PrimerLogin extends Component {
     window.$tate('user.userType').value = res.userType
     window.$tate('user.location').value = res.location
     window.$tate('user.primerLogin').value = false
-    window.$tate('popups.active').value = ''
+    window.$tate('popups.active').value = 'getStarted'
   }
 
   render () {

@@ -6,16 +6,16 @@ export default class Nav extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      plantaciones: true,
-      arbol: false,
-      red: false,
       adminArboles: false,
-      total: 0
+      total: 0,
+      active: 'plantaciones'
     }
     window.$tate('total').value = 0
     window.$tate('adminArboles').value = false
+    window.$tate('sidebar.nav.active').value = ''
     this.openAdminArboles = window.$tate('adminArboles').on('E')
     this.totalCount = window.$tate('total').on('E')
+    this.navActives = window.$tate('sidebar.nav.active').on(['E', 'N'])
     this.activateNav = this.activateNav.bind(this)
   }
 
@@ -26,29 +26,26 @@ export default class Nav extends Component {
     this.totalCount.subscribe(total => {
       this.setState({total})
     })
+    this.navActives.subscribe(active => { this.setState({active}) })
   }
 
   activateNav (active) {
-    let navs = {
-      plantaciones: false,
-      arbol: false,
-      red: false
-    }
+    let nav = ''
     switch (active) {
       case 'action_content_lugar':
-        navs.plantaciones = true
+        nav = 'plantaciones'
         break
       case 'action_content_suma':
-        navs.arbol = true
+        nav = 'arbol'
         break
       case 'action_content_red':
-        navs.red = true
+        nav = 'red'
         break
     }
     return () => {
       window.$tate('sidebar.body.active')
         .value = active
-      this.setState(navs)
+      this.setState({active: nav})
     }
   }
 
@@ -59,7 +56,7 @@ export default class Nav extends Component {
         className={this.state.adminArboles ? 'admin-mode' : ''}>
         <button
           id='sidebar_nav_plantaciones'
-          className={this.state.plantaciones ? 'active' : ''}
+          className={this.state.active === 'plantaciones' ? 'active' : ''}
           onClick={this.activateNav('action_content_lugar')}>
           <img src='plantaciones.svg' alt='Plantaciones' />
           <span className='label'>Plantaciones</span>
@@ -67,7 +64,7 @@ export default class Nav extends Component {
         </button>
         <button
           id='sidebar_nav_arbol'
-          className={this.state.arbol ? 'active' : ''}
+          className={this.state.active === 'arbol' ? 'active' : ''}
           onClick={this.activateNav('action_content_suma')}>
           <img src='arbol.svg' alt='Mis árboles' />
           <span className='label'>Mis árboles</span>
@@ -75,7 +72,7 @@ export default class Nav extends Component {
         </button>
         <button
           id='sidebar_nav_red'
-          className={this.state.red ? 'active' : ''}
+          className={this.state.active === 'red' ? 'active' : ''}
           onClick={this.activateNav('action_content_red')}>
           <span className='counter'>{this.state.total}</span>
           <img src='red.svg' alt='Arboles de la red' />

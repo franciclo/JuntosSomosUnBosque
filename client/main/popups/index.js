@@ -11,6 +11,7 @@ import Flyer from './flyer'
 import Festi from './festi'
 import Info from './info'
 import UserMail from './user-mail'
+import GetStarted from './get-started'
 
 export default class Popups extends Component {
   constructor () {
@@ -133,6 +134,11 @@ export default class Popups extends Component {
               open={this.state.open === 'userMail' ? 'open' : ''}
               emailVerificationSent={this.props.emailVerificationSent}
               emailToVerify={this.props.emailToVerify} />
+        }
+        {
+          this.props.isLogged &&
+            <GetStarted
+              open={this.state.open === 'getStarted' ? 'open' : ''} />
         }
       </div>
     )

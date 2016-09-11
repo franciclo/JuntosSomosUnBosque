@@ -2,9 +2,8 @@ import './styles.css'
 
 import 'components/dia-log'
 import React, {Component} from 'react'
-import Form from 'utils/form'
 
-export default class Forgot extends Component {
+export default class GetStarted extends Component {
   render () {
     return (
       <dia-log
@@ -14,33 +13,19 @@ export default class Forgot extends Component {
           onClick={this.props.closePopUp}
           className='pop-close'>
         </span>
-        <div className='logineo forgot'>
-          <Form
-            action='/forgot'
-            failAlert='true'
-            successAlert='true'>
-            <label className='legend'>Recuperar contraseña</label>
-            <div className='form-row-field'>
-              <label htmlFor='emailForgotForm'>Mail</label>
-              <input
-                id='emailForgotForm'
-                name='email'
-                type='text'
-                required />
-            </div>
-            <div className='form-row-field foot-buttons'>
-              <button
-                type='button'
-                className='back'
-                onClick={this.props.loginShow}>
-                &#8249;&nbsp;volver
-              </button>
-              <button
-                type='submit'>
-                Enviar
-              </button>
-            </div>
-          </Form>
+        <div className='get-started'>
+          <p>Registro completado</p>
+          <button
+            onClick={e => {
+              window.$tate('sidebar.body.active')
+                      .value = 'action_content_suma'
+              window.$tate('sidebar.nav.active')
+                      .value = 'arbol'
+              window.$tate('adminArboles').value = true
+              window.$tate('popups.active').value = ''
+            }}>
+            Empeza a cargar tus arbolitos!
+          </button>
         </div>
       </dia-log>
     )
