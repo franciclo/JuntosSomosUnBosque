@@ -58251,7 +58251,13 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'tabla-arboles' },
-	              this.props.user.arboles.map(function (arbol, key) {
+	              this.props.user.arboles.map(function (arbol) {
+	                arbol.especieLabel = (0, _especies.byId)(arbol.especie);
+	                arbol.tamagnoLabel = (0, _tamagnos2.default)(arbol.tamagno);
+	                return arbol;
+	              }).sort(function (a, b) {
+	                return a.especieLabel < b.especieLabel ? -1 : a.especieLabel > b.especieLabel ? 1 : 0;
+	              }).map(function (arbol, key) {
 	                return _react2.default.createElement(
 	                  'div',
 	                  {
@@ -58260,13 +58266,13 @@
 	                  _react2.default.createElement(
 	                    'span',
 	                    { className: 'especie' },
-	                    (0, _especies.byId)(arbol.especie)
+	                    arbol.especieLabel
 	                  ),
 	                  _react2.default.createElement(
 	                    'span',
 	                    { className: 'tamagno' },
 	                    '(',
-	                    (0, _tamagnos2.default)(arbol.tamagno),
+	                    arbol.tamagnoLabel,
 	                    ')'
 	                  ),
 	                  _react2.default.createElement(
@@ -60227,7 +60233,13 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'tabla-arboles' },
-	            this.props.arboles.map(function (arbol, key) {
+	            this.props.arboles.map(function (arbol) {
+	              arbol.especieLabel = (0, _especies.byId)(arbol.especie);
+	              arbol.tamagnoLabel = (0, _tamagnos2.default)(arbol.tamagno);
+	              return arbol;
+	            }).sort(function (a, b) {
+	              return a.especieLabel < b.especieLabel ? -1 : a.especieLabel > b.especieLabel ? 1 : 0;
+	            }).map(function (arbol, key) {
 	              return _react2.default.createElement(
 	                'div',
 	                {
@@ -60244,13 +60256,13 @@
 	                _react2.default.createElement(
 	                  'span',
 	                  { className: 'especie' },
-	                  (0, _especies.byId)(arbol.especie)
+	                  arbol.especieLabel
 	                ),
 	                _react2.default.createElement(
 	                  'span',
 	                  { className: 'tamagno' },
 	                  '(',
-	                  (0, _tamagnos2.default)(arbol.tamagno),
+	                  arbol.tamagnoLabel,
 	                  ')'
 	                ),
 	                _react2.default.createElement('input', {
@@ -60424,7 +60436,13 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'tabla-arboles' },
-	            this.state.arboles.map(function (arbol, key) {
+	            this.state.arboles.map(function (arbol) {
+	              arbol.especieLabel = (0, _especies.byId)(arbol.especie);
+	              arbol.tamagnoLabel = (0, _tamagnos2.default)(arbol.tamagno);
+	              return arbol;
+	            }).sort(function (a, b) {
+	              return a.especieLabel < b.especieLabel ? -1 : a.especieLabel > b.especieLabel ? 1 : 0;
+	            }).map(function (arbol, key) {
 	              return _react2.default.createElement(
 	                'div',
 	                {
@@ -60433,13 +60451,13 @@
 	                _react2.default.createElement(
 	                  'span',
 	                  { className: 'especie' },
-	                  (0, _especies.byId)(arbol.especie)
+	                  arbol.especieLabel
 	                ),
 	                _react2.default.createElement(
 	                  'span',
 	                  { className: 'tamagno' },
 	                  '(',
-	                  (0, _tamagnos2.default)(arbol.tamagno),
+	                  arbol.tamagnoLabel,
 	                  ')'
 	                ),
 	                _react2.default.createElement(

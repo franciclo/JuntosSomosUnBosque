@@ -39,7 +39,18 @@ export default class TablaArboles extends Component {
             onSuccess={this.props.arbolesSaved}>
             <div className='tabla-arboles'>
               {
-                this.props.arboles.map((arbol, key) => {
+                this.props.arboles
+                .map(arbol => {
+                  arbol.especieLabel = especieById(arbol.especie)
+                  arbol.tamagnoLabel = tamagnoByNum(arbol.tamagno)
+                  return arbol
+                })
+                .sort((a, b) => (a.especieLabel < b.especieLabel)
+                  ? -1
+                  : (a.especieLabel > b.especieLabel)
+                    ? 1
+                    : 0)
+                .map((arbol, key) => {
                   return (
                     <div
                       key={key}
@@ -53,10 +64,10 @@ export default class TablaArboles extends Component {
                         &otimes;
                       </span>
                       <span className='especie'>
-                        {especieById(arbol.especie)}
+                        {arbol.especieLabel}
                       </span>
                       <span className='tamagno'>
-                        ({tamagnoByNum(arbol.tamagno)})
+                        ({arbol.tamagnoLabel})
                       </span>
                       <input
                         type='hidden'

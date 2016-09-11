@@ -430,5 +430,23 @@ module.exports = [
     "label" : "Almendro",
     "latin" : "",
     "tipo" : "comestible"
+  },
+  {
+    "id" : "73",
+    "label" : "Manzano",
+    "latin" : "",
+    "tipo" : "comestible"
+  },
+  {
+    "id" : "74",
+    "label" : "Algarrobo dulce",
+    "latin" : "Prosopis flexuosa",
+    "tipo" : "nativo"
+  },
+  {
+    "id" : "75",
+    "label" : "Algarrobo negro",
+    "latin" : "Prosopis nigra",
+    "tipo" : "nativo"
   }
 ]

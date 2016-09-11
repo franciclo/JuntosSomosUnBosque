@@ -57,16 +57,27 @@ export default class Red extends Component {
             <div className='tabla-arboles-wrapper'>
               <div className='tabla-arboles'>
                 {
-                  this.state.arboles.map((arbol, key) => {
+                  this.state.arboles
+                  .map(arbol => {
+                    arbol.especieLabel = especieById(arbol.especie)
+                    arbol.tamagnoLabel = tamagnoByNum(arbol.tamagno)
+                    return arbol
+                  })
+                  .sort((a, b) => (a.especieLabel < b.especieLabel)
+                    ? -1
+                    : (a.especieLabel > b.especieLabel)
+                      ? 1
+                      : 0)
+                  .map((arbol, key) => {
                     return (
                       <div
                         key={key}
                         className='item-arbol'>
                         <span className='especie'>
-                          {especieById(arbol.especie)}
+                          {arbol.especieLabel}
                         </span>
                         <span className='tamagno'>
-                          ({tamagnoByNum(arbol.tamagno)})
+                          ({arbol.tamagnoLabel})
                         </span>
                         <span className='cantidad'>
                           {arbol.cantidad}
