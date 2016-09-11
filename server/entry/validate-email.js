@@ -26,7 +26,7 @@ module.exports = function (req, res) {
           return res.redirect('/')
         }
         if (user.localRegistry) {
-          user.local.name = req.body.name
+          user.local.name = user.getNombre()
           user.local.email = user.email
           user.local.password = user.unofficialPassword
         }
