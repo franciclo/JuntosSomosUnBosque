@@ -2,7 +2,7 @@ import './styles.css'
 
 import 'state-stream'
 import React, {Component} from 'react'
-import {makeRequest as makeRequestEspecies} from 'utils/get-especies'
+import {fetchEspecies} from 'utils/especies'
 import Mapa from './mapa'
 import Sidebar from './sidebar'
 import Popups from './popups'
@@ -26,7 +26,7 @@ export default class Main extends Component {
   }
 
   componentWillMount () {
-    makeRequestEspecies()
+    fetchEspecies()
       .then(() => {
         window.$tate('especiesLoad').value = true
       })

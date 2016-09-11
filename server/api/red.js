@@ -18,6 +18,7 @@ module.exports = function (req, res) {
         })
         .map(function (user) {
           return {
+            id: user.id,
             userType: user.userType,
             location: JSON.parse(user.location),
             nombre: user.getNombre(),

@@ -1,7 +1,8 @@
 import './styles.css'
 import React, {Component} from 'react'
-import {all as allEspecies} from 'utils/get-especies'
+import {all as allEspecies} from 'utils/especies'
 import Form from 'utils/form'
+import tamagnoByNum from 'utils/tamagnos'
 
 export default class FormArboles extends Component {
   constructor (props) {
@@ -27,24 +28,7 @@ export default class FormArboles extends Component {
   }
 
   changeTamagno (e) {
-    let label = ''
-    switch (e.target.value) {
-      case '1':
-        label = 'Brote'
-        break
-      case '2':
-        label = 'Chico'
-        break
-      case '3':
-        label = 'Mediano'
-        break
-      case '4':
-        label = 'Maduro'
-        break
-      case '5':
-        label = 'Grande'
-        break
-    }
+    let label = tamagnoByNum(e.target.value)
     this.setState({rangeLabel: label, tamagno: e.target.value})
   }
 

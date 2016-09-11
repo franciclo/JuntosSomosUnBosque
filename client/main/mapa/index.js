@@ -19,6 +19,7 @@ export default class Mapa extends Component {
   }
 
   componentWillMount () {
+    window.$tate('map.popups.active').value = ''
     window.$tate('user.arboles')
       .on('N')
       .subscribe(() => { this.fetchRed() })
@@ -47,7 +48,10 @@ export default class Mapa extends Component {
       <Map
         id='mapa'
         center={position}
-        zoom={this.state.zoom}>
+        zoom={this.state.zoom}
+        onClick={e => {
+          window.$tate('map.popups.active').value = ''
+        }}>
         <TileLayer
           tileSize={512}
           zoomOffset={-1}

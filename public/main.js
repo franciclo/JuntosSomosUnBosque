@@ -21433,7 +21433,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _getEspecies = __webpack_require__(525);
+	var _especies = __webpack_require__(525);
 
 	var _mapa = __webpack_require__(526);
 
@@ -21484,7 +21484,7 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
-	      (0, _getEspecies.makeRequest)().then(function () {
+	      (0, _especies.fetchEspecies)().then(function () {
 	        window.$tate('especiesLoad').value = true;
 	      });
 	      window.$tate('user').on(['N', 'D']).subscribe(function (user) {
@@ -40370,7 +40370,7 @@
 	  value: true
 	});
 	var especies = [];
-	function makeRequest() {
+	function fetchEspecies() {
 	  return window.fetch('/especies').then(function (res) {
 	    return res.json();
 	  }).then(function (res) {
@@ -40396,7 +40396,7 @@
 	}
 	exports.all = all;
 	exports.byId = byId;
-	exports.makeRequest = makeRequest;
+	exports.fetchEspecies = fetchEspecies;
 
 /***/ },
 /* 526 */
@@ -40459,6 +40459,7 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
+	      window.$tate('map.popups.active').value = '';
 	      window.$tate('user.arboles').on('N').subscribe(function () {
 	        _this2.fetchRed();
 	      });
@@ -40490,7 +40491,10 @@
 	        {
 	          id: 'mapa',
 	          center: position,
-	          zoom: this.state.zoom },
+	          zoom: this.state.zoom,
+	          onClick: function onClick(e) {
+	            window.$tate('map.popups.active').value = '';
+	          } },
 	        _react2.default.createElement(_reactLeaflet.TileLayer, {
 	          tileSize: 512,
 	          zoomOffset: -1,
@@ -57999,7 +58003,7 @@
 	            onClick: function onClick(e) {
 	              window.$tate('popups.active').value = 'festi';
 	            } },
-	          _react2.default.createElement('img', { src: 'fecha.svg', alt: '24 de Septiembre' }),
+	          _react2.default.createElement('img', { src: 'fecha.svg', title: '24 y 25 de Septiembre' }),
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'title' },
@@ -58008,7 +58012,7 @@
 	              'span',
 	              { className: 'ver-mas' },
 	              'Ver más',
-	              _react2.default.createElement('img', { src: 'caret-right.svg', alt: 'Ver mas' })
+	              _react2.default.createElement('img', { src: 'caret-right.svg', title: 'Ver mas' })
 	            )
 	          ),
 	          _react2.default.createElement('span', { className: 'triangle' })
@@ -58159,6 +58163,16 @@
 
 	var _reactLeafletDivIcon2 = _interopRequireDefault(_reactLeafletDivIcon);
 
+	var _userTypes = __webpack_require__(835);
+
+	var _userTypes2 = _interopRequireDefault(_userTypes);
+
+	var _tamagnos = __webpack_require__(834);
+
+	var _tamagnos2 = _interopRequireDefault(_tamagnos);
+
+	var _especies = __webpack_require__(525);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58170,13 +58184,34 @@
 	var UserMarker = function (_Component) {
 	  _inherits(UserMarker, _Component);
 
-	  function UserMarker() {
+	  function UserMarker(props) {
 	    _classCallCheck(this, UserMarker);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserMarker).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserMarker).call(this, props));
+
+	    _this.state = {
+	      active: null
+	    };
+	    _this.pop = window.$tate('map.popups.active').on(['E', 'N']);
+	    _this.showPopup = _this.showPopup.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(UserMarker, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      this.pop.subscribe(function (id) {
+	        _this2.setState({ active: id === _this2.props.user.id });
+	      });
+	    }
+	  }, {
+	    key: 'showPopup',
+	    value: function showPopup() {
+	      window.$tate('map.popups.active').value = this.props.user.id;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -58184,15 +58219,64 @@
 	        this.props,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'user_marker' },
+	          {
+	            className: 'user_marker' },
 	          _react2.default.createElement('img', {
-	            src: this.props.user.userType + '.svg' }),
+	            onClick: this.showPopup,
+	            src: this.props.user.userType + '.svg',
+	            title: (0, _userTypes2.default)(this.props.user.userType) }),
 	          _react2.default.createElement(
 	            'span',
-	            { className: 'counter' },
+	            {
+	              className: 'counter',
+	              onClick: this.showPopup },
 	            this.props.user.arboles.reduce(function (acc, a) {
 	              return acc + a.cantidad;
 	            }, 0)
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'user_popup ' + (this.state.active ? 'active' : '') },
+	            _react2.default.createElement(
+	              'h1',
+	              null,
+	              this.props.user.nombre
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              (0, _userTypes2.default)(this.props.user.userType)
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'tabla-arboles' },
+	              this.props.user.arboles.map(function (arbol, key) {
+	                return _react2.default.createElement(
+	                  'div',
+	                  {
+	                    key: key,
+	                    className: 'item-arbol' },
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'especie' },
+	                    (0, _especies.byId)(arbol.especie)
+	                  ),
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'tamagno' },
+	                    '(',
+	                    (0, _tamagnos2.default)(arbol.tamagno),
+	                    ')'
+	                  ),
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'cantidad' },
+	                    arbol.cantidad
+	                  )
+	                );
+	              })
+	            ),
+	            _react2.default.createElement('span', { className: 'triangle' })
 	          )
 	        )
 	      );
@@ -59305,7 +59389,7 @@
 	                'p',
 	                { className: 'info' },
 	                _react2.default.createElement('img', { src: 'reloj.svg', alt: 'Hora' }),
-	                'Domingo, 12:00 am'
+	                'Sábado 24  y Domingo 25 de Septiembre.'
 	              ),
 	              _react2.default.createElement(
 	                'h1',
@@ -59573,11 +59657,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _getEspecies = __webpack_require__(525);
+	var _especies = __webpack_require__(525);
 
 	var _form = __webpack_require__(774);
 
 	var _form2 = _interopRequireDefault(_form);
+
+	var _tamagnos = __webpack_require__(834);
+
+	var _tamagnos2 = _interopRequireDefault(_tamagnos);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59618,24 +59706,7 @@
 	  }, {
 	    key: 'changeTamagno',
 	    value: function changeTamagno(e) {
-	      var label = '';
-	      switch (e.target.value) {
-	        case '1':
-	          label = 'Brote';
-	          break;
-	        case '2':
-	          label = 'Chico';
-	          break;
-	        case '3':
-	          label = 'Mediano';
-	          break;
-	        case '4':
-	          label = 'Maduro';
-	          break;
-	        case '5':
-	          label = 'Grande';
-	          break;
-	      }
+	      var label = (0, _tamagnos2.default)(e.target.value);
 	      this.setState({ rangeLabel: label, tamagno: e.target.value });
 	    }
 	  }, {
@@ -59702,7 +59773,7 @@
 	              _react2.default.createElement(
 	                'optgroup',
 	                { label: 'Nativos' },
-	                (0, _getEspecies.all)().filter(function (e) {
+	                (0, _especies.all)().filter(function (e) {
 	                  return e.tipo === 'nativo';
 	                }).map(function (especie, key) {
 	                  return _react2.default.createElement(
@@ -59720,7 +59791,7 @@
 	              _react2.default.createElement(
 	                'optgroup',
 	                { label: 'Comestibles' },
-	                (0, _getEspecies.all)().filter(function (e) {
+	                (0, _especies.all)().filter(function (e) {
 	                  return e.tipo === 'comestible';
 	                }).map(function (especie, key) {
 	                  return _react2.default.createElement(
@@ -60030,11 +60101,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _getEspecies = __webpack_require__(525);
+	var _especies = __webpack_require__(525);
 
 	var _form = __webpack_require__(774);
 
 	var _form2 = _interopRequireDefault(_form);
+
+	var _tamagnos = __webpack_require__(834);
+
+	var _tamagnos2 = _interopRequireDefault(_tamagnos);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60061,29 +60136,6 @@
 	      window.$tate('especiesLoad').on('E').subscribe(function () {
 	        _this2.forceUpdate();
 	      });
-	    }
-	  }, {
-	    key: 'tamagnoByNum',
-	    value: function tamagnoByNum(n) {
-	      var label = '';
-	      switch (n) {
-	        case '1':
-	          label = 'Brote';
-	          break;
-	        case '2':
-	          label = 'Chico';
-	          break;
-	        case '3':
-	          label = 'Mediano';
-	          break;
-	        case '4':
-	          label = 'Maduro';
-	          break;
-	        case '5':
-	          label = 'Grande';
-	          break;
-	      }
-	      return label;
 	    }
 	  }, {
 	    key: 'render',
@@ -60138,13 +60190,13 @@
 	                _react2.default.createElement(
 	                  'span',
 	                  { className: 'especie' },
-	                  (0, _getEspecies.byId)(arbol.especie)
+	                  (0, _especies.byId)(arbol.especie)
 	                ),
 	                _react2.default.createElement(
 	                  'span',
 	                  { className: 'tamagno' },
 	                  '(',
-	                  _this3.tamagnoByNum(arbol.tamagno),
+	                  (0, _tamagnos2.default)(arbol.tamagno),
 	                  ')'
 	                ),
 	                _react2.default.createElement('input', {
@@ -60233,7 +60285,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _getEspecies = __webpack_require__(525);
+	var _especies = __webpack_require__(525);
+
+	var _tamagnos = __webpack_require__(834);
+
+	var _tamagnos2 = _interopRequireDefault(_tamagnos);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60323,7 +60379,14 @@
 	                _react2.default.createElement(
 	                  'span',
 	                  { className: 'especie' },
-	                  (0, _getEspecies.byId)(arbol.especie)
+	                  (0, _especies.byId)(arbol.especie)
+	                ),
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'tamagno' },
+	                  '(',
+	                  (0, _tamagnos2.default)(arbol.tamagno),
+	                  ')'
 	                ),
 	                _react2.default.createElement(
 	                  'span',
@@ -62781,6 +62844,61 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 833 */,
+/* 834 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function (n) {
+	  switch (n) {
+	    case '1':
+	      return 'Brote';
+	    case '2':
+	      return 'Plantin';
+	    case '3':
+	      return 'Mediano';
+	    case '4':
+	      return 'Maduro';
+	    case '5':
+	      return 'Grande';
+	    default:
+	      return 'Tamaño desconocido';
+	  }
+	};
+
+/***/ },
+/* 835 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function (utype) {
+	  switch (utype) {
+	    case 'per':
+	      return 'Persona';
+	    case 'viv':
+	      return 'Vivero';
+	    case 'org':
+	      return 'Organización civil';
+	    case 'esc':
+	      return 'Escuela';
+	    case 'cul':
+	      return 'Centro cultural';
+	    default:
+	      return 'Tipo desconocido';
+	  }
+	};
 
 /***/ }
 /******/ ]);

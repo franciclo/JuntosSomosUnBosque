@@ -11,7 +11,7 @@ export default class Plantaciones extends Component {
             <div className='header-evento-text'>
               <p className='info'>
                 <img src='reloj.svg' alt='Hora' />
-                Domingo, 12:00 am
+                Sábado 24  y Domingo 25 de Septiembre.
               </p>
               <h1>Festival de plantación</h1>
             </div>

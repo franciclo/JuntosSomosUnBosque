@@ -1,5 +1,5 @@
 var especies = []
-function makeRequest () {
+function fetchEspecies () {
   return window.fetch('/especies')
     .then(function (res) {
       return res.json()
@@ -23,4 +23,4 @@ function byId (id) {
   if (!~i) return 'Especie desconocida'
   return especies[i].label
 }
-export {all, byId, makeRequest}
+export {all, byId, fetchEspecies}

@@ -1,34 +1,14 @@
 import './styles.css'
 import React, {Component} from 'react'
-import {byId as especieById} from 'utils/get-especies'
+import {byId as especieById} from 'utils/especies'
 import Form from 'utils/form'
+import tamagnoByNum from 'utils/tamagnos'
 
 export default class TablaArboles extends Component {
   componentWillMount () {
     window.$tate('especiesLoad')
       .on('E')
       .subscribe(() => { this.forceUpdate() })
-  }
-  tamagnoByNum (n) {
-    let label = ''
-    switch (n) {
-      case '1':
-        label = 'Brote'
-        break
-      case '2':
-        label = 'Chico'
-        break
-      case '3':
-        label = 'Mediano'
-        break
-      case '4':
-        label = 'Maduro'
-        break
-      case '5':
-        label = 'Grande'
-        break
-    }
-    return label
   }
   render () {
     return (
@@ -76,7 +56,7 @@ export default class TablaArboles extends Component {
                         {especieById(arbol.especie)}
                       </span>
                       <span className='tamagno'>
-                        ({this.tamagnoByNum(arbol.tamagno)})
+                        ({tamagnoByNum(arbol.tamagno)})
                       </span>
                       <input
                         type='hidden'

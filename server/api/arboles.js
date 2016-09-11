@@ -15,26 +15,21 @@ module.exports = function (req, res) {
       })
       .map(function (user) {
         return user.arboles
-            .map(function (arbol) {
-              return {
-                especie: arbol.especie,
-                cantidad: arbol.cantidad
-              }
-            })
       })
       .forEach(function (userArboles) {
-        userArboles.forEach(function (userArbol) {
+        userArboles.forEach(function (uArbol) {
           var arbolI = arboles
               .map(function (arbol) {
-                return arbol.especie
+                return [arbol.especie, arbol.tamagno].join('')
               })
-              .indexOf(userArbol.especie)
+              .indexOf([uArbol.especie, uArbol.tamagno].join(''))
           if (~arbolI) {
-            arboles[arbolI].cantidad += userArbol.cantidad
+            arboles[arbolI].cantidad += uArbol.cantidad
           } else {
             arboles.push({
-              especie: userArbol.especie,
-              cantidad: userArbol.cantidad
+              especie: uArbol.especie,
+              tamagno: uArbol.tamagno,
+              cantidad: uArbol.cantidad
             })
           }
         })

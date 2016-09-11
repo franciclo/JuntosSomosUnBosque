@@ -1,7 +1,9 @@
 import './styles.css'
 import 'components/slider-box'
 import React, {Component} from 'react'
-import {byId as especieById} from 'utils/get-especies'
+import {byId as especieById} from 'utils/especies'
+import tamagnoByNum from 'utils/tamagnos'
+
 export default class Red extends Component {
   constructor () {
     super()
@@ -62,6 +64,9 @@ export default class Red extends Component {
                         className='item-arbol'>
                         <span className='especie'>
                           {especieById(arbol.especie)}
+                        </span>
+                        <span className='tamagno'>
+                          ({tamagnoByNum(arbol.tamagno)})
                         </span>
                         <span className='cantidad'>
                           {arbol.cantidad}
