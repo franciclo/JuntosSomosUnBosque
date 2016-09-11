@@ -2,7 +2,6 @@ module.exports = function (req, res) {
   var userClient = {}
 
   if (req.isAuthenticated()) {
-    console.log('is authenticated')
     userClient.nombre = req.user.getNombre()
     if (!req.user.emailVerified) {
       userClient.emailVerified = false
