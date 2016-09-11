@@ -625,7 +625,7 @@ form .foot-buttons .back{
   background: none;
 }
 .festi-marker {
-  /*z-index: 999!important;*/
+  z-index: 999!important;
 }
 #festi_marker {
   display: flex;

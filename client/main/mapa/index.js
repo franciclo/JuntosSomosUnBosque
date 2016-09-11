@@ -16,14 +16,14 @@ export default class Mapa extends Component {
       red: []
     }
     this.fetchRed = this.fetchRed.bind(this)
+    this.userArboles = window.$tate('user.arboles').on('N')
   }
 
   componentWillMount () {
-    window.$tate('map.popups.active').value = ''
-    window.$tate('user.arboles')
-      .on('N')
-      .subscribe(() => { this.fetchRed() })
     this.fetchRed()
+    window.$tate('map.popups.active').value = ''
+    this.userArboles
+      .subscribe(() => { this.fetchRed() })
   }
 
   fetchRed () {

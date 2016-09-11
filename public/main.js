@@ -40451,6 +40451,7 @@
 	      red: []
 	    };
 	    _this.fetchRed = _this.fetchRed.bind(_this);
+	    _this.userArboles = window.$tate('user.arboles').on('N');
 	    return _this;
 	  }
 
@@ -40459,11 +40460,11 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
+	      this.fetchRed();
 	      window.$tate('map.popups.active').value = '';
-	      window.$tate('user.arboles').on('N').subscribe(function () {
+	      this.userArboles.subscribe(function () {
 	        _this2.fetchRed();
 	      });
-	      this.fetchRed();
 	    }
 	  }, {
 	    key: 'fetchRed',
