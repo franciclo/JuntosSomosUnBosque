@@ -59,7 +59,7 @@ export default class Festi extends Component {
               </button>
               <button
                 id='popup_festi_nav_crono'
-                className={(this.state.active === 'crono' ? 'active' : '') + ' nav'}
+                className={(this.state.active === 'crono' ? 'active' : '') + ' nav hide'}
                 onClick={this.activeSection('crono')}>
                 Cronograma
                 <span className='underline'></span>
