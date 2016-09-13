@@ -60237,8 +60237,6 @@
 	              arbol.especieLabel = (0, _especies.byId)(arbol.especie);
 	              arbol.tamagnoLabel = (0, _tamagnos2.default)(arbol.tamagno);
 	              return arbol;
-	            }).sort(function (a, b) {
-	              return a.especieLabel < b.especieLabel ? -1 : a.especieLabel > b.especieLabel ? 1 : 0;
 	            }).map(function (arbol, key) {
 	              return _react2.default.createElement(
 	                'div',
@@ -60344,6 +60342,8 @@
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	__webpack_require__(786);
+
+	__webpack_require__(756);
 
 	__webpack_require__(763);
 

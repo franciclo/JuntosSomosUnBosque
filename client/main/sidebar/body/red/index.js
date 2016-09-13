@@ -1,4 +1,5 @@
 import './styles.css'
+import 'whatwg-fetch'
 import 'components/slider-box'
 import React, {Component} from 'react'
 import {byId as especieById} from 'utils/especies'
@@ -58,33 +59,33 @@ export default class Red extends Component {
               <div className='tabla-arboles'>
                 {
                   this.state.arboles
-                  .map(arbol => {
-                    arbol.especieLabel = especieById(arbol.especie)
-                    arbol.tamagnoLabel = tamagnoByNum(arbol.tamagno)
-                    return arbol
-                  })
-                  .sort((a, b) => (a.especieLabel < b.especieLabel)
-                    ? -1
-                    : (a.especieLabel > b.especieLabel)
-                      ? 1
-                      : 0)
-                  .map((arbol, key) => {
-                    return (
-                      <div
-                        key={key}
-                        className='item-arbol'>
-                        <span className='especie'>
-                          {arbol.especieLabel}
-                        </span>
-                        <span className='tamagno'>
-                          ({arbol.tamagnoLabel})
-                        </span>
-                        <span className='cantidad'>
-                          {arbol.cantidad}
-                        </span>
-                      </div>
-                    )
-                  })
+                    .map(arbol => {
+                      arbol.especieLabel = especieById(arbol.especie)
+                      arbol.tamagnoLabel = tamagnoByNum(arbol.tamagno)
+                      return arbol
+                    })
+                    .sort((a, b) => (a.especieLabel < b.especieLabel)
+                      ? -1
+                      : (a.especieLabel > b.especieLabel)
+                        ? 1
+                        : 0)
+                    .map((arbol, key) => {
+                      return (
+                        <div
+                          key={key}
+                          className='item-arbol'>
+                          <span className='especie'>
+                            {arbol.especieLabel}
+                          </span>
+                          <span className='tamagno'>
+                            ({arbol.tamagnoLabel})
+                          </span>
+                          <span className='cantidad'>
+                            {arbol.cantidad}
+                          </span>
+                        </div>
+                      )
+                    })
                 }
               </div>
               <div className='tabla-footer'>

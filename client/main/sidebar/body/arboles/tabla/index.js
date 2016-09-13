@@ -40,55 +40,50 @@ export default class TablaArboles extends Component {
             <div className='tabla-arboles'>
               {
                 this.props.arboles
-                .map(arbol => {
-                  arbol.especieLabel = especieById(arbol.especie)
-                  arbol.tamagnoLabel = tamagnoByNum(arbol.tamagno)
-                  return arbol
-                })
-                .sort((a, b) => (a.especieLabel < b.especieLabel)
-                  ? -1
-                  : (a.especieLabel > b.especieLabel)
-                    ? 1
-                    : 0)
-                .map((arbol, key) => {
-                  return (
-                    <div
-                      key={key}
-                      className='item-arbol'>
-                      <span
-                        title='Eliminar'
-                        className='borrar'
-                        onClick={
-                          this.props.eliminarArbol(arbol.especie, arbol.tamagno)
-                        }>
-                        &otimes;
-                      </span>
-                      <span className='especie'>
-                        {arbol.especieLabel}
-                      </span>
-                      <span className='tamagno'>
-                        ({arbol.tamagnoLabel})
-                      </span>
-                      <input
-                        type='hidden'
-                        name='arboles[]'
-                        defaultValue={
-                          JSON.stringify({
-                            especie: arbol.especie,
-                            tamagno: arbol.tamagno,
-                            cantidad: this.props.cantidades[key]
-                          })
-                        } />
-                      <input
-                        type='number'
-                        data-key={key}
-                        max='10000'
-                        min='1'
-                        onChange={this.props.changeCantidad}
-                        value={this.props.cantidades[key]} />
-                    </div>
-                  )
-                })
+                  .map(arbol => {
+                    arbol.especieLabel = especieById(arbol.especie)
+                    arbol.tamagnoLabel = tamagnoByNum(arbol.tamagno)
+                    return arbol
+                  })
+                  .map((arbol, key) => {
+                    return (
+                      <div
+                        key={key}
+                        className='item-arbol'>
+                        <span
+                          title='Eliminar'
+                          className='borrar'
+                          onClick={
+                            this.props.eliminarArbol(arbol.especie, arbol.tamagno)
+                          }>
+                          &otimes;
+                        </span>
+                        <span className='especie'>
+                          {arbol.especieLabel}
+                        </span>
+                        <span className='tamagno'>
+                          ({arbol.tamagnoLabel})
+                        </span>
+                        <input
+                          type='hidden'
+                          name='arboles[]'
+                          defaultValue={
+                            JSON.stringify({
+                              especie: arbol.especie,
+                              tamagno: arbol.tamagno,
+                              cantidad: this.props.cantidades[key]
+                            })
+                          } />
+                        <input
+                          type='number'
+                          data-key={key}
+                          max='10000'
+                          min='1'
+                          onChange={this.props.changeCantidad}
+                          value={this.props.cantidades[key]} />
+                      </div>
+                    )
+                  })
               }
               {
                 this.props.arboles.length === 0 &&
