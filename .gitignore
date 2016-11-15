@@ -1,5 +1,4 @@
 node_modules
-ssl
 *.log
 *.json
 !defaults.json
