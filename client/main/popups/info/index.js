@@ -68,7 +68,7 @@ export default class Info extends Component {
               <div className='text'>
                 JUNTOS SOMOS UN BOSQUE es un proyecto de forestación colectiva. Es una red de personas que cultivan árboles nativos y comestibles, con la intención de plantarlos colectivamente creando bosques comunitarios en espacios  públicos. La red comparte conocimientos, inicia a nuevos cultivadores y autogestiona los festivales de plantación.
 
-                "Esta semilla que crees ínfima, contiene un árbol, que contiene un bosque” Alejandro Jodorowski.
+                "Esta semilla que crees ínfima, contiene un árbol, que contiene un bosque" Alejandro Jodorowski.
               </div>
             </article>
             <article

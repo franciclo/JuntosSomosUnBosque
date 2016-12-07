@@ -4,7 +4,7 @@ import React, {Component} from 'react'
 export default class Plantaciones extends Component {
   render () {
     return (
-      <article data-id='action_content_lugar' id='evento-wrapper' className='active'>
+      <article data-id='action_content_lugar' id='evento-wrapper'>
         <div id='cartel_evento'>
           <div className='header-evento'>
             <img src='fecha.svg' alt='24 de septiembre' />

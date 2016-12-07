@@ -72,9 +72,6 @@ export default class Popups extends Component {
 
         {/*        Content         */}
 
-        <Flyer
-          closePopUp={this.closePopUp}
-          open={this.state.open === 'flyer' ? 'open' : ''} />
         <Festi
           closePopUp={this.closePopUp}
           open={this.state.open === 'festi' ? 'open' : ''} />

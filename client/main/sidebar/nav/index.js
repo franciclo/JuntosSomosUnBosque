@@ -8,7 +8,7 @@ export default class Nav extends Component {
     this.state = {
       adminArboles: false,
       total: 0,
-      active: 'plantaciones'
+      active: 'red'
     }
     window.$tate('total').value = 0
     window.$tate('adminArboles').value = false

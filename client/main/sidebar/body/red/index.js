@@ -48,7 +48,8 @@ export default class Red extends Component {
     return (
       <article
         data-id='action_content_red'
-        id='lista-red'>
+        id='lista-red'
+        className='active'>
         <div className='tabla-header'>
           <h1>Árboles de la red</h1>
         </div>
