@@ -5,6 +5,11 @@ module.exports = (function () {
 
   function send (options) {
     if (!options) throw new Error('no options in send mail')
+    var opts = config.message
+    Object.keys(options)
+      .forEach(function (key) {
+        opts[key] = options[key]
+      })
     return new Promise(function (resolve, reject) {
       transporter.sendMail(opts, function (err, info) {
         if (err) {
