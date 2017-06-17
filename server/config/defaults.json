@@ -18,6 +18,9 @@
     "callbackURL"     : "http://localhost:3000/auth/facebook/callback"
 },
 "mailer": {
+  "message": {
+    "from":"info@juntossomosunbosque.red"
+  }
 }
 
 }
