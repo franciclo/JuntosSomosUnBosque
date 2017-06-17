@@ -19,11 +19,6 @@
 },
 "mailer": {
   "transport":{
-      "service": "gmail",
-      "auth": {
-        "user": "",
-        "pass": ""
-      }
   },
   "message": {
     "from":"JuntosSomosUnBosque@noreply.com",
