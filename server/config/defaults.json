@@ -18,12 +18,6 @@
     "callbackURL"     : "http://localhost:3000/auth/facebook/callback"
 },
 "mailer": {
-  "transport":{
-  },
-  "message": {
-    "from":"JuntosSomosUnBosque@noreply.com",
-    "subject":"Juntos Somos Un Bosque"
-  }
 }
 
 }
