@@ -10,13 +10,19 @@ export default class NuevoFesti extends Component {
     super()
     this.state = {
       geoLocalResult: [-34.539, -58.446],
-      titulo: null,
-      desc: null
+      titulo: '',
+      desc: '',
+      fecha: ''
     }
+    this.updateLocation = this.updateLocation.bind(this)
   }
 
   updateTitulo (e) {
     this.setState({titulo: e.target.value})
+  }
+
+  updateFecha (e) {
+    this.setState({fecha: e.target.value})
   }
 
   updateDesc (e) {
@@ -40,14 +46,14 @@ export default class NuevoFesti extends Component {
   render () {
     return (
       <dia-log
-        id='primerLogin'
+        id='nuevoFesti'
         data-is='pop-up'
         data-open-modal={this.props.open}>
         <span
           onClick={this.props.closePopUp}
           className='pop-close' />
         <Form
-          action='/terminar-registro'
+          action='/nuevo-festi'
           failAlert='true'
           onSuccess={this.onSuccess}>
           <label className='legend'>
@@ -73,7 +79,12 @@ export default class NuevoFesti extends Component {
           </div>
           <div className='form-row-field'>
             <label htmlFor='type'>Fecha</label>
-            <input type='date' />
+            <input
+              name='fecha'
+              id='fecha'
+              type='date'
+              onChange={this.updateFecha}
+              value={this.state.fecha} />
           </div>
           <div className='form-row-field'>
             <label>
@@ -81,10 +92,11 @@ export default class NuevoFesti extends Component {
               <span className='ubicacion-info'>Hace click para elegir la ubicación</span>
             </label>
             <geo-select
-              data-id='primer'
+              data-id='nuevoFesti'
               onClick={this.updateLocation}
               lat={this.state.geoLocalResult[0]}
-              lng={this.state.geoLocalResult[1]}>
+              lng={this.state.geoLocalResult[1]}
+              visible={this.props.open ? 'true' : 'false'}>
               <input type='hidden' name='location' />
             </geo-select>
           </div>

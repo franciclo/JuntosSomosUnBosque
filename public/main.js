@@ -67945,9 +67945,11 @@
 
 	    _this.state = {
 	      geoLocalResult: [-34.539, -58.446],
-	      titulo: null,
-	      desc: null
+	      titulo: '',
+	      desc: '',
+	      fecha: ''
 	    };
+	    _this.updateLocation = _this.updateLocation.bind(_this);
 	    return _this;
 	  }
 
@@ -67955,6 +67957,11 @@
 	    key: 'updateTitulo',
 	    value: function updateTitulo(e) {
 	      this.setState({ titulo: e.target.value });
+	    }
+	  }, {
+	    key: 'updateFecha',
+	    value: function updateFecha(e) {
+	      this.setState({ fecha: e.target.value });
 	    }
 	  }, {
 	    key: 'updateDesc',
@@ -67980,7 +67987,7 @@
 	      return _react2.default.createElement(
 	        'dia-log',
 	        {
-	          id: 'primerLogin',
+	          id: 'nuevoFesti',
 	          'data-is': 'pop-up',
 	          'data-open-modal': this.props.open },
 	        _react2.default.createElement('span', {
@@ -67989,7 +67996,7 @@
 	        _react2.default.createElement(
 	          _form2.default,
 	          {
-	            action: '/terminar-registro',
+	            action: '/nuevo-festi',
 	            failAlert: 'true',
 	            onSuccess: this.onSuccess },
 	          _react2.default.createElement(
@@ -68035,7 +68042,12 @@
 	              { htmlFor: 'type' },
 	              'Fecha'
 	            ),
-	            _react2.default.createElement('input', { type: 'date' })
+	            _react2.default.createElement('input', {
+	              name: 'fecha',
+	              id: 'fecha',
+	              type: 'date',
+	              onChange: this.updateFecha,
+	              value: this.state.fecha })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -68053,10 +68065,11 @@
 	            _react2.default.createElement(
 	              'geo-select',
 	              {
-	                'data-id': 'primer',
+	                'data-id': 'nuevoFesti',
 	                onClick: this.updateLocation,
 	                lat: this.state.geoLocalResult[0],
-	                lng: this.state.geoLocalResult[1] },
+	                lng: this.state.geoLocalResult[1],
+	                visible: this.props.open ? 'true' : 'false' },
 	              _react2.default.createElement('input', { type: 'hidden', name: 'location' })
 	            )
 	          ),

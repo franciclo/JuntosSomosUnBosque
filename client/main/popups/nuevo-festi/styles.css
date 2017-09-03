@@ -1,11 +1,14 @@
-#primerLogin {
-  max-width: 400px;
+#nuevoFesti {
+  max-width: 700px;
   width: 90%;
 }
-#primerLogin button{
+#nuevoFesti button{
   float: right;
 }
-.usar-auto-geo{
+#nuevoFesti textarea {
+  height: 6em;
+}
+#nuevoFesti .usar-auto-geo{
   margin: 5px 0 0;
   font-size: 16px;
   padding: 5px 10px;
@@ -13,10 +16,10 @@
   background: #2bd873;
   font-weight: 500;
 }
-.usar-auto-geo:hover{
+#nuevoFesti .usar-auto-geo:hover{
   background: #2ace6e;
 }
-.ubicacion-info {
+#nuevoFesti .ubicacion-info {
   float: right;
   font-size: 13px;
   color: #555;
