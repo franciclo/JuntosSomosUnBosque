@@ -31,7 +31,7 @@ export default class Main extends Component {
         window.$tate('especiesLoad').value = true
       })
     window.$tate('user')
-      .on(['N', 'D'])
+      .on(['N', 'D', 'E'])
       .subscribe(user => {
         if (!user) {
           return this.setState({

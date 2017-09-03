@@ -12,6 +12,7 @@ import Festi from './festi'
 import Info from './info'
 import UserMail from './user-mail'
 import GetStarted from './get-started'
+import NuevoFesti from './nuevo-festi'
 
 export default class Popups extends Component {
   constructor () {
@@ -136,6 +137,12 @@ export default class Popups extends Component {
           this.props.isLogged &&
             <GetStarted
               open={this.state.open === 'getStarted' ? 'open' : ''} />
+        }
+        {
+          this.props.isLogged &&
+            <NuevoFesti
+              closePopUp={this.closePopUp}
+              open={this.state.open === 'nuevoFesti' ? 'open' : ''} />
         }
       </div>
     )

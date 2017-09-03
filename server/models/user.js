@@ -84,4 +84,18 @@ userSchema.methods.getNombre = function () {
   return userName
 }
 
+userSchema.methods.getEmail = function () {
+  var userEmail = ''
+  if (this.email) {
+    userEmail = this.email
+  } else if (this.google.email) {
+    userEmail = this.google.email
+  } else if (this.facebook.name) {
+    userEmail = this.facebook.name
+  } else if (this.local.email) {
+    userEmail = this.local.email
+  }
+  return userEmail
+}
+
 module.exports = mongoose.model('User', userSchema)

@@ -1,3 +1,5 @@
+var config = require('../config')
+
 module.exports = function (req, res) {
   var userClient = {}
 
@@ -12,6 +14,10 @@ module.exports = function (req, res) {
     } else if (req.user.primerLogin) {
       userClient.primerLogin = true
     } else {
+      userClient.type = req.user.userType
+      if (config.admins.includes(req.user.getEmail())) {
+        userClient.isAdmin = true
+      }
       userClient.type = req.user.userType
       userClient.location = req.user.location
       userClient.arboles = req.user.arboles

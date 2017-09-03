@@ -39,7 +39,6 @@ module.exports = function (req, res, next) {
 
         newUser.emailVerificationToken = token
         newUser.emailVerificationExpires = Date.now() + 3600000 * 24 // 24 hours
-
         sendMail({
           to: [req.body.email],
           subject: 'Validar cuenta de Juntos Somos Un Bosque',
@@ -60,7 +59,8 @@ module.exports = function (req, res, next) {
               result: info
             })
           })
-        }, function (err) {
+        })
+        .catch(function (err) {
           res.json({
             success: false,
             text: 'Error al enviar el mail de verificación',

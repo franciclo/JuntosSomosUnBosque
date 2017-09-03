@@ -10,16 +10,7 @@ module.exports = (function () {
       .forEach(function (key) {
         opts[key] = options[key]
       })
-    return new Promise(function (resolve, reject) {
-      transporter.sendMail(opts, function (err, info) {
-        if (err) {
-          console.log('send mail error', err)
-          reject(err)
-        } else {
-          resolve(info)
-        }
-      })
-    })
+    return transporter.sendMail(opts)
   }
 
   return send

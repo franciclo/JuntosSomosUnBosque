@@ -3,8 +3,16 @@ import React, {Component} from 'react'
 
 export default class Plantaciones extends Component {
   render () {
+    const user = window.$tate('user').value
     return (
       <article data-id='action_content_lugar' id='evento-wrapper'>
+        {user && user.isAdmin && (<button
+          id='agregar-festi-btn'
+          onClick={
+            (e) => { window.$tate('popups.active').value = 'nuevoFesti' }
+          }>
+          Nuevo festi
+        </button>)}
         <div id='cartel_evento'>
           <div className='header-evento'>
             <img src='fecha.svg' alt='24 de septiembre' />

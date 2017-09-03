@@ -20,7 +20,8 @@
 "mailer": {
   "message": {
     "from":"info@juntossomosunbosque.red"
-  }
-}
-
+  },
+  "transport": {}
+},
+"admins": []
 }

@@ -1102,7 +1102,8 @@ slider-box > article.active {
 }
 
 #cartel_evento {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   background: white;
   border-radius: 3px;
 }
@@ -1195,6 +1196,18 @@ slider-box > article.active {
 }
 #cartel_evento.off button:hover {
   background: #c7c7c7!important;
+}
+
+#agregar-festi-btn {
+  background: #ff687b;
+  border: none;
+  width: 125px;
+  color: white;
+  font-size: 18px;
+  margin-top: 10px;
+  padding: 5px 0 2px;
+  align-self: flex-end;
+  cursor: pointer;
 }
 #tus-arboles.active {
   display: flex;
@@ -2041,4 +2054,26 @@ span.linea-crono {
   color: white;
   font-size: 1.2rem;
   align-self: flex-end;
+}#primerLogin {
+  max-width: 400px;
+  width: 90%;
+}
+#primerLogin button{
+  float: right;
+}
+.usar-auto-geo{
+  margin: 5px 0 0;
+  font-size: 16px;
+  padding: 5px 10px;
+  width: 100%;
+  background: #2bd873;
+  font-weight: 500;
+}
+.usar-auto-geo:hover{
+  background: #2ace6e;
+}
+.ubicacion-info {
+  float: right;
+  font-size: 13px;
+  color: #555;
 }

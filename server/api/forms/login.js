@@ -1,3 +1,4 @@
+var config = require('../../config')
 module.exports = function (passport) {
   return function (req, res, next) {
     passport.authenticate('local-login',
@@ -23,15 +24,22 @@ module.exports = function (passport) {
               err: err
             })
           }
+
+          var userClient = {
+            tipo: user.userType,
+            primerLogin: user.primerLogin,
+            location: user.location,
+            nombre: user.getNombre(),
+            arboles: user.arboles
+          }
+
+          if (config.admins.includes(req.user.getEmail())) {
+            userClient.isAdmin = true
+          }
+
           return res.json({
             success: true,
-            result: {
-              tipo: user.userType,
-              primerLogin: user.primerLogin,
-              location: user.location,
-              nombre: user.getNombre(),
-              arboles: user.arboles
-            }
+            result: userClient
           })
         })
       })(req, res, next)

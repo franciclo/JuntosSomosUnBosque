@@ -22269,7 +22269,7 @@
 	      (0, _especies.fetchEspecies)().then(function () {
 	        window.$tate('especiesLoad').value = true;
 	      });
-	      window.$tate('user').on(['N', 'D']).subscribe(function (user) {
+	      window.$tate('user').on(['N', 'D', 'E']).subscribe(function (user) {
 	        if (!user) {
 	          return _this2.setState({
 	            isLogged: false,
@@ -64311,9 +64311,19 @@
 	  _createClass(Plantaciones, [{
 	    key: 'render',
 	    value: function render() {
+	      var user = window.$tate('user').value;
 	      return _react2.default.createElement(
 	        'article',
 	        { 'data-id': 'action_content_lugar', id: 'evento-wrapper' },
+	        user && user.isAdmin && _react2.default.createElement(
+	          'button',
+	          {
+	            id: 'agregar-festi-btn',
+	            onClick: function onClick(e) {
+	              window.$tate('popups.active').value = 'nuevoFesti';
+	            } },
+	          'Nuevo festi'
+	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'cartel_evento' },
@@ -65531,6 +65541,10 @@
 
 	var _getStarted2 = _interopRequireDefault(_getStarted);
 
+	var _nuevoFesti = __webpack_require__(874);
+
+	var _nuevoFesti2 = _interopRequireDefault(_nuevoFesti);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -65644,7 +65658,10 @@
 	          emailVerificationSent: this.props.emailVerificationSent,
 	          emailToVerify: this.props.emailToVerify }),
 	        this.props.isLogged && _react2.default.createElement(_getStarted2.default, {
-	          open: this.state.open === 'getStarted' ? 'open' : '' })
+	          open: this.state.open === 'getStarted' ? 'open' : '' }),
+	        this.props.isLogged && _react2.default.createElement(_nuevoFesti2.default, {
+	          closePopUp: this.closePopUp,
+	          open: this.state.open === 'nuevoFesti' ? 'open' : '' })
 	      );
 	    }
 	  }]);
@@ -65707,7 +65724,6 @@
 	  _createClass(Signin, [{
 	    key: 'onSuccess',
 	    value: function onSuccess(res) {
-	      window.$tate('user').value = undefined;
 	      window.$tate('user').value = res;
 	      window.$tate('popups.active').value = res.primerLogin ? 'primerLogin' : '';
 	    }
@@ -67880,6 +67896,191 @@
 
 /***/ }),
 /* 872 */
+/***/ (function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 873 */,
+/* 874 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	__webpack_require__(875);
+
+	__webpack_require__(814);
+
+	__webpack_require__(841);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _form = __webpack_require__(811);
+
+	var _form2 = _interopRequireDefault(_form);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NuevoFesti = function (_Component) {
+	  _inherits(NuevoFesti, _Component);
+
+	  function NuevoFesti() {
+	    _classCallCheck(this, NuevoFesti);
+
+	    var _this = _possibleConstructorReturn(this, (NuevoFesti.__proto__ || Object.getPrototypeOf(NuevoFesti)).call(this));
+
+	    _this.state = {
+	      geoLocalResult: [-34.539, -58.446],
+	      titulo: null,
+	      desc: null
+	    };
+	    return _this;
+	  }
+
+	  _createClass(NuevoFesti, [{
+	    key: 'updateTitulo',
+	    value: function updateTitulo(e) {
+	      this.setState({ titulo: e.target.value });
+	    }
+	  }, {
+	    key: 'updateDesc',
+	    value: function updateDesc(e) {
+	      this.setState({ desc: e.target.value });
+	    }
+	  }, {
+	    key: 'updateLocation',
+	    value: function updateLocation(e) {
+	      this.setState({ geoLocalResult: [e.currentTarget.getAttribute('lat'), e.currentTarget.getAttribute('lng')] });
+	    }
+	  }, {
+	    key: 'onSuccess',
+	    value: function onSuccess(res) {
+	      window.$tate('user.userType').value = res.userType;
+	      window.$tate('user.location').value = res.location;
+	      window.$tate('user.primerLogin').value = false;
+	      window.$tate('popups.active').value = 'getStarted';
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'dia-log',
+	        {
+	          id: 'primerLogin',
+	          'data-is': 'pop-up',
+	          'data-open-modal': this.props.open },
+	        _react2.default.createElement('span', {
+	          onClick: this.props.closePopUp,
+	          className: 'pop-close' }),
+	        _react2.default.createElement(
+	          _form2.default,
+	          {
+	            action: '/terminar-registro',
+	            failAlert: 'true',
+	            onSuccess: this.onSuccess },
+	          _react2.default.createElement(
+	            'label',
+	            { className: 'legend' },
+	            'Nuevo Festival'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'titulo' },
+	              'Titulo'
+	            ),
+	            _react2.default.createElement('input', {
+	              name: 'titulo',
+	              id: 'titulo',
+	              type: 'text',
+	              onChange: this.updateTitulo,
+	              value: this.state.titulo })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'desc' },
+	              'Descripci\xF3n'
+	            ),
+	            _react2.default.createElement('textarea', {
+	              name: 'desc',
+	              id: 'desc',
+	              type: 'text',
+	              onChange: this.updateDesc,
+	              value: this.state.desc })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'type' },
+	              'Fecha'
+	            ),
+	            _react2.default.createElement('input', { type: 'date' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              null,
+	              'Ubicaci\xF3n',
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'ubicacion-info' },
+	                'Hace click para elegir la ubicaci\xF3n'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'geo-select',
+	              {
+	                'data-id': 'primer',
+	                onClick: this.updateLocation,
+	                lat: this.state.geoLocalResult[0],
+	                lng: this.state.geoLocalResult[1] },
+	              _react2.default.createElement('input', { type: 'hidden', name: 'location' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'button',
+	              { 'data-submit': true },
+	              'Guardar'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return NuevoFesti;
+	}(_react.Component);
+
+	exports.default = NuevoFesti;
+
+/***/ }),
+/* 875 */
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
