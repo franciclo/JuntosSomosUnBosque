@@ -5,7 +5,7 @@ import 'components/geo-select'
 import React, {Component} from 'react'
 import Form from 'utils/form'
 
-export default class NuevoFesti extends Component {
+export default class FormFesti extends Component {
   constructor () {
     super()
     this.state = {
@@ -15,6 +15,27 @@ export default class NuevoFesti extends Component {
       fecha: ''
     }
     this.updateLocation = this.updateLocation.bind(this)
+    this.updateTitulo = this.updateTitulo.bind(this)
+    this.updateDesc = this.updateDesc.bind(this)
+    this.updateFecha = this.updateFecha.bind(this)
+  }
+
+  componentWillReceiveProps () {
+    const festi = window.$tate('festival').value
+    let loc = {}
+    try {
+      loc = JSON.parse(festi.locacion)
+    } catch (err) {
+      console.log(err)
+      loc = {lat: null, lng: null}
+    }
+    console.log('recieveProps')
+    this.setState({
+      geoLocalResult: [loc.lat, loc.lng],
+      titulo: festi.titulo,
+      desc: festi.descripcion,
+      fecha: festi.fecha
+    })
   }
 
   updateTitulo (e) {
@@ -37,10 +58,8 @@ export default class NuevoFesti extends Component {
   }
 
   onSuccess (res) {
-    window.$tate('user.userType').value = res.userType
-    window.$tate('user.location').value = res.location
-    window.$tate('user.primerLogin').value = false
-    window.$tate('popups.active').value = 'getStarted'
+    console.log(res)
+    window.$tate('festival').value = res
   }
 
   render () {
@@ -53,11 +72,11 @@ export default class NuevoFesti extends Component {
           onClick={this.props.closePopUp}
           className='pop-close' />
         <Form
-          action='/nuevo-festi'
+          action='/edit-festival'
           failAlert='true'
           onSuccess={this.onSuccess}>
           <label className='legend'>
-            Nuevo Festival
+            Editar Festival
           </label>
           <div className='form-row-field'>
             <label htmlFor='titulo'>Titulo</label>
@@ -71,7 +90,7 @@ export default class NuevoFesti extends Component {
           <div className='form-row-field'>
             <label htmlFor='desc'>Descripción</label>
             <textarea
-              name='desc'
+              name='descripcion'
               id='desc'
               type='text'
               onChange={this.updateDesc}
@@ -82,7 +101,7 @@ export default class NuevoFesti extends Component {
             <input
               name='fecha'
               id='fecha'
-              type='date'
+              type='text'
               onChange={this.updateFecha}
               value={this.state.fecha} />
           </div>
@@ -97,7 +116,7 @@ export default class NuevoFesti extends Component {
               lat={this.state.geoLocalResult[0]}
               lng={this.state.geoLocalResult[1]}
               visible={this.props.open ? 'true' : 'false'}>
-              <input type='hidden' name='location' />
+              <input type='hidden' name='locacion' />
             </geo-select>
           </div>
           <div className='form-row-field'>

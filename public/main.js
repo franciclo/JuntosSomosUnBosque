@@ -43238,6 +43238,22 @@
 	        _this2.fetchRed();
 	      });
 	    }
+
+	    // fetchFestivales () {
+	    //   window.fetch('/festivales')
+	    //     .then(res => {
+	    //       return res.json()
+	    //     })
+	    //     .then(res => {
+	    //       if (res.success) {
+	    //         this.setState({festivales: res.result})
+	    //         window.$tate('festivales').value = res.result
+	    //       } else {
+	    //         console.warn('error al pedir los arboles', res)
+	    //       }
+	    //     })
+	    // }
+
 	  }, {
 	    key: 'fetchRed',
 	    value: function fetchRed() {
@@ -64302,16 +64318,45 @@
 	var Plantaciones = function (_Component) {
 	  _inherits(Plantaciones, _Component);
 
-	  function Plantaciones() {
+	  function Plantaciones(props) {
 	    _classCallCheck(this, Plantaciones);
 
-	    return _possibleConstructorReturn(this, (Plantaciones.__proto__ || Object.getPrototypeOf(Plantaciones)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Plantaciones.__proto__ || Object.getPrototypeOf(Plantaciones)).call(this, props));
+
+	    _this.state = {
+	      festival: null
+	    };
+	    return _this;
 	  }
 
 	  _createClass(Plantaciones, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      if (!window.$tate('festivales').value) {
+	        this.fetchFestivales();
+	      }
+	    }
+	  }, {
+	    key: 'fetchFestivales',
+	    value: function fetchFestivales() {
+	      var _this2 = this;
+
+	      window.fetch('/festivales').then(function (res) {
+	        return res.json();
+	      }).then(function (res) {
+	        if (res.success) {
+	          _this2.setState({ festival: res.result });
+	          window.$tate('festival').value = res.result;
+	        } else {
+	          console.warn('error al pedir el festi', res);
+	        }
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var user = window.$tate('user').value;
+	      var festi = this.state.festival;
 	      return _react2.default.createElement(
 	        'article',
 	        { 'data-id': 'action_content_lugar', id: 'evento-wrapper' },
@@ -64322,15 +64367,14 @@
 	            onClick: function onClick(e) {
 	              window.$tate('popups.active').value = 'nuevoFesti';
 	            } },
-	          'Nuevo festi'
+	          'Editar festi'
 	        ),
-	        _react2.default.createElement(
+	        festi && _react2.default.createElement(
 	          'div',
 	          { id: 'cartel_evento' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'header-evento' },
-	            _react2.default.createElement('img', { src: 'fecha.svg', alt: '24 de septiembre' }),
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'header-evento-text' },
@@ -64338,30 +64382,25 @@
 	                'p',
 	                { className: 'info' },
 	                _react2.default.createElement('img', { src: 'reloj.svg', alt: 'Hora' }),
-	                'S\xE1bado 24  y Domingo 25 de Septiembre.'
+	                festi.fecha
 	              ),
 	              _react2.default.createElement(
 	                'h1',
 	                null,
-	                'Festival de plantaci\xF3n'
+	                festi.titulo
 	              )
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'p',
 	            { className: 'content-evento-text' },
-	            'Estamos creando un Bosque comunitario junto a la Reserva Ecol\xF3gica Costanera norte, en Ciudad Universitaria, lugar en emergencia ambiental y abandono estatal, donde vamos a realizar su inauguraci\xF3n civil.'
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'bolder' },
-	            '\xA1Tra\xE9 tus arboles al festival y plantemos un bosque!'
+	            festi.descripcion
 	          ),
 	          _react2.default.createElement(
 	            'button',
 	            {
 	              onClick: function onClick(e) {
-	                window.$tate('popups.active').value = 'festi';
+	                window.$tate('popups.active').value = 'festi:' + festi._id;
 	              },
 	              'data-id': 'evento-sidebar-mas' },
 	            'Ver m\xE1s',
@@ -64374,6 +64413,34 @@
 
 	  return Plantaciones;
 	}(_react.Component);
+
+	// <div id='cartel_evento'>
+	//   <div className='header-evento'>
+	//     <img src='fecha.svg' alt='24 de septiembre' />
+	//     <div className='header-evento-text'>
+	//       <p className='info'>
+	//         <img src='reloj.svg' alt='Hora' />
+	//         Sábado 24  y Domingo 25 de Septiembre.
+	//       </p>
+	//       <h1>Festival de plantación</h1>
+	//     </div>
+	//   </div>
+	//   <p className='content-evento-text'>
+	//     Estamos creando un Bosque comunitario junto a la Reserva Ecológica Costanera norte, en Ciudad Universitaria, lugar en emergencia ambiental y abandono estatal, donde vamos a realizar su inauguración civil.
+	//   </p>
+	//   <p className='bolder'>
+	//     ¡Traé tus arboles al festival y plantemos un bosque!
+	//   </p>
+	//   <button
+	//     onClick={
+	//       (e) => { window.$tate('popups.active').value = 'festi' }
+	//     }
+	//     data-id='evento-sidebar-mas'>
+	//     Ver más
+	//     <img src='caret-right.svg' />
+	//   </button>
+	// </div>
+
 
 	exports.default = Plantaciones;
 
@@ -65541,9 +65608,9 @@
 
 	var _getStarted2 = _interopRequireDefault(_getStarted);
 
-	var _nuevoFesti = __webpack_require__(874);
+	var _formFesti = __webpack_require__(874);
 
-	var _nuevoFesti2 = _interopRequireDefault(_nuevoFesti);
+	var _formFesti2 = _interopRequireDefault(_formFesti);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -65659,8 +65726,9 @@
 	          emailToVerify: this.props.emailToVerify }),
 	        this.props.isLogged && _react2.default.createElement(_getStarted2.default, {
 	          open: this.state.open === 'getStarted' ? 'open' : '' }),
-	        this.props.isLogged && _react2.default.createElement(_nuevoFesti2.default, {
+	        this.props.isLogged && _react2.default.createElement(_formFesti2.default, {
 	          closePopUp: this.closePopUp,
+	          mode: this.state.open === 'nuevoFesti' ? 'nuevo' : 'cambio',
 	          open: this.state.open === 'nuevoFesti' ? 'open' : '' })
 	      );
 	    }
@@ -67935,13 +68003,13 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var NuevoFesti = function (_Component) {
-	  _inherits(NuevoFesti, _Component);
+	var FormFesti = function (_Component) {
+	  _inherits(FormFesti, _Component);
 
-	  function NuevoFesti() {
-	    _classCallCheck(this, NuevoFesti);
+	  function FormFesti() {
+	    _classCallCheck(this, FormFesti);
 
-	    var _this = _possibleConstructorReturn(this, (NuevoFesti.__proto__ || Object.getPrototypeOf(NuevoFesti)).call(this));
+	    var _this = _possibleConstructorReturn(this, (FormFesti.__proto__ || Object.getPrototypeOf(FormFesti)).call(this));
 
 	    _this.state = {
 	      geoLocalResult: [-34.539, -58.446],
@@ -67950,10 +68018,32 @@
 	      fecha: ''
 	    };
 	    _this.updateLocation = _this.updateLocation.bind(_this);
+	    _this.updateTitulo = _this.updateTitulo.bind(_this);
+	    _this.updateDesc = _this.updateDesc.bind(_this);
+	    _this.updateFecha = _this.updateFecha.bind(_this);
 	    return _this;
 	  }
 
-	  _createClass(NuevoFesti, [{
+	  _createClass(FormFesti, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps() {
+	      var festi = window.$tate('festival').value;
+	      var loc = {};
+	      try {
+	        loc = JSON.parse(festi.locacion);
+	      } catch (err) {
+	        console.log(err);
+	        loc = { lat: null, lng: null };
+	      }
+	      console.log('recieveProps');
+	      this.setState({
+	        geoLocalResult: [loc.lat, loc.lng],
+	        titulo: festi.titulo,
+	        desc: festi.descripcion,
+	        fecha: festi.fecha
+	      });
+	    }
+	  }, {
 	    key: 'updateTitulo',
 	    value: function updateTitulo(e) {
 	      this.setState({ titulo: e.target.value });
@@ -67976,10 +68066,8 @@
 	  }, {
 	    key: 'onSuccess',
 	    value: function onSuccess(res) {
-	      window.$tate('user.userType').value = res.userType;
-	      window.$tate('user.location').value = res.location;
-	      window.$tate('user.primerLogin').value = false;
-	      window.$tate('popups.active').value = 'getStarted';
+	      console.log(res);
+	      window.$tate('festival').value = res;
 	    }
 	  }, {
 	    key: 'render',
@@ -67996,13 +68084,13 @@
 	        _react2.default.createElement(
 	          _form2.default,
 	          {
-	            action: '/nuevo-festi',
+	            action: '/edit-festival',
 	            failAlert: 'true',
 	            onSuccess: this.onSuccess },
 	          _react2.default.createElement(
 	            'label',
 	            { className: 'legend' },
-	            'Nuevo Festival'
+	            'Editar Festival'
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -68028,7 +68116,7 @@
 	              'Descripci\xF3n'
 	            ),
 	            _react2.default.createElement('textarea', {
-	              name: 'desc',
+	              name: 'descripcion',
 	              id: 'desc',
 	              type: 'text',
 	              onChange: this.updateDesc,
@@ -68045,7 +68133,7 @@
 	            _react2.default.createElement('input', {
 	              name: 'fecha',
 	              id: 'fecha',
-	              type: 'date',
+	              type: 'text',
 	              onChange: this.updateFecha,
 	              value: this.state.fecha })
 	          ),
@@ -68070,7 +68158,7 @@
 	                lat: this.state.geoLocalResult[0],
 	                lng: this.state.geoLocalResult[1],
 	                visible: this.props.open ? 'true' : 'false' },
-	              _react2.default.createElement('input', { type: 'hidden', name: 'location' })
+	              _react2.default.createElement('input', { type: 'hidden', name: 'locacion' })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -68087,10 +68175,10 @@
 	    }
 	  }]);
 
-	  return NuevoFesti;
+	  return FormFesti;
 	}(_react.Component);
 
-	exports.default = NuevoFesti;
+	exports.default = FormFesti;
 
 /***/ }),
 /* 875 */

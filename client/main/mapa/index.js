@@ -26,6 +26,21 @@ export default class Mapa extends Component {
       .subscribe(() => { this.fetchRed() })
   }
 
+  // fetchFestivales () {
+  //   window.fetch('/festivales')
+  //     .then(res => {
+  //       return res.json()
+  //     })
+  //     .then(res => {
+  //       if (res.success) {
+  //         this.setState({festivales: res.result})
+  //         window.$tate('festivales').value = res.result
+  //       } else {
+  //         console.warn('error al pedir los arboles', res)
+  //       }
+  //     })
+  // }
+
   fetchRed () {
     window.fetch('/red')
       .then(res => {
