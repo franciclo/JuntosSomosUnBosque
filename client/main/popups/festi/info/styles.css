@@ -12,7 +12,7 @@
   height: 13px;
 }
 #popup_festi_content_info {
-  padding: 15px 30px 0;
+  padding: 15px 30px 30px;
   height: 100%;
   box-sizing: border-box;
   overflow: auto;
@@ -21,7 +21,7 @@
   font-size: 16px;
   color: #444;
   margin: 10px 0 0;
-}    
+}
 #popup_festi_content_info p.info {
   font-style: italic;
   margin: 0 0 10px;

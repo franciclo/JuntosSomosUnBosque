@@ -26,10 +26,8 @@ export default class FormFesti extends Component {
     try {
       loc = JSON.parse(festi.locacion)
     } catch (err) {
-      console.log(err)
       loc = {lat: null, lng: null}
     }
-    console.log('recieveProps')
     this.setState({
       geoLocalResult: [loc.lat, loc.lng],
       titulo: festi.titulo,
@@ -58,7 +56,6 @@ export default class FormFesti extends Component {
   }
 
   onSuccess (res) {
-    console.log(res)
     window.$tate('festival').value = res
   }
 
@@ -74,6 +71,7 @@ export default class FormFesti extends Component {
         <Form
           action='/edit-festival'
           failAlert='true'
+          successAlert='true'
           onSuccess={this.onSuccess}>
           <label className='legend'>
             Editar Festival

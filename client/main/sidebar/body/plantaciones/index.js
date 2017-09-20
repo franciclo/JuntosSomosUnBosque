@@ -58,7 +58,7 @@ export default class Plantaciones extends Component {
             </p>
             <button
               onClick={
-                (e) => { window.$tate('popups.active').value = `festi:${festi._id}` }
+                (e) => { window.$tate('popups.active').value = 'festi' }
               }
               data-id='evento-sidebar-mas'>
               Ver más

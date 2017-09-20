@@ -1,5 +1,5 @@
 .leaflet-div-icon {
-  border: none; 
+  border: none;
   width: 0!important;
   height: 0!important;
   position: relative;
@@ -14,15 +14,10 @@
   bottom: 0;
   background: #fff;
   font-family: P22Underground;
-  width: 138px;
+  width: 100px;
   margin-left: -61px;
   align-items: center;
   justify-content: center;
-}
-#festi_marker img {
-  width: 30px;
-  height: auto;
-  margin: 0 5px;
 }
 #festi_marker span.title {
     color: #fff;
@@ -37,7 +32,7 @@
   width: 0;
   position: absolute;
   bottom: -8px;
-  left: 59px;
+  left: 40px;
   border-style: solid;
   border-width: 11px 8px 0 8px;
   border-color: #ff687b transparent transparent transparent;

@@ -4,10 +4,9 @@
 }
 #popup_festi > div {
   background: white;
-  height: 90vh;
   width: 90vw;
-  max-width: 700px;
-  max-height: 600px;
+  max-width: 500px;
+  max-height: 480px;
   display: flex;
   flex-direction: column;
 }
@@ -29,6 +28,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 20px 30px;
 }
 #popup_festi .header-wrapper header .header-info h1{
     margin: 0;

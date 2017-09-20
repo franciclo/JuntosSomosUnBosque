@@ -618,7 +618,7 @@ form .foot-buttons .back{
 .leaflet-container {
   background: #75cff0;
 }.leaflet-div-icon {
-  border: none; 
+  border: none;
   width: 0!important;
   height: 0!important;
   position: relative;
@@ -633,15 +633,10 @@ form .foot-buttons .back{
   bottom: 0;
   background: #fff;
   font-family: P22Underground;
-  width: 138px;
+  width: 100px;
   margin-left: -61px;
   align-items: center;
   justify-content: center;
-}
-#festi_marker img {
-  width: 30px;
-  height: auto;
-  margin: 0 5px;
 }
 #festi_marker span.title {
     color: #fff;
@@ -656,7 +651,7 @@ form .foot-buttons .back{
   width: 0;
   position: absolute;
   bottom: -8px;
-  left: 59px;
+  left: 40px;
   border-style: solid;
   border-width: 11px 8px 0 8px;
   border-color: #ff687b transparent transparent transparent;
@@ -692,7 +687,8 @@ form .foot-buttons .back{
   100% {
     top:-18px;
   }
-}.user_marker {
+}
+.user_marker {
   position: relative;
 }
 .user_marker img{
@@ -1178,7 +1174,7 @@ slider-box > article.active {
   width: 16px;
 }
 #cartel_evento .content-evento-text {
-  padding: 5px 3px 0;
+  padding: 5px 0;
   font-size:15px;
   text-align: left;
   margin: 0;
@@ -1759,10 +1755,9 @@ label.legend {
 }
 #popup_festi > div {
   background: white;
-  height: 90vh;
   width: 90vw;
-  max-width: 700px;
-  max-height: 600px;
+  max-width: 500px;
+  max-height: 480px;
   display: flex;
   flex-direction: column;
 }
@@ -1784,6 +1779,7 @@ label.legend {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 20px 30px;
 }
 #popup_festi .header-wrapper header .header-info h1{
     margin: 0;
@@ -1843,7 +1839,8 @@ label.legend {
 }
 #popup_festi .close {
   color:white;
-}#popup_festi_content_info button{
+}
+#popup_festi_content_info button{
   position: absolute;
   bottom: 0;
   right: 0;
@@ -1857,7 +1854,7 @@ label.legend {
   height: 13px;
 }
 #popup_festi_content_info {
-  padding: 15px 30px 0;
+  padding: 15px 30px 30px;
   height: 100%;
   box-sizing: border-box;
   overflow: auto;
@@ -1866,11 +1863,12 @@ label.legend {
   font-size: 16px;
   color: #444;
   margin: 10px 0 0;
-}    
+}
 #popup_festi_content_info p.info {
   font-style: italic;
   margin: 0 0 10px;
-}#popup_festi_content_crono {
+}
+#popup_festi_content_crono {
   padding: 0 50px;
   box-sizing: border-box;
   color: #555;

@@ -43220,7 +43220,8 @@
 	      lat: -34.53753049571174,
 	      lng: -58.44419449567794,
 	      zoom: 11,
-	      red: []
+	      red: [],
+	      festi: {}
 	    };
 	    _this.fetchRed = _this.fetchRed.bind(_this);
 	    _this.userArboles = window.$tate('user.arboles').on('N');
@@ -43237,23 +43238,10 @@
 	      this.userArboles.subscribe(function () {
 	        _this2.fetchRed();
 	      });
+	      window.$tate('festival').on(['N', 'E']).subscribe(function (festival) {
+	        _this2.setState({ festi: festival });
+	      });
 	    }
-
-	    // fetchFestivales () {
-	    //   window.fetch('/festivales')
-	    //     .then(res => {
-	    //       return res.json()
-	    //     })
-	    //     .then(res => {
-	    //       if (res.success) {
-	    //         this.setState({festivales: res.result})
-	    //         window.$tate('festivales').value = res.result
-	    //       } else {
-	    //         console.warn('error al pedir los arboles', res)
-	    //       }
-	    //     })
-	    // }
-
 	  }, {
 	    key: 'fetchRed',
 	    value: function fetchRed() {
@@ -43275,6 +43263,13 @@
 	    key: 'render',
 	    value: function render() {
 	      var position = [this.state.lat, this.state.lng];
+	      var festiLoc = {};
+	      try {
+	        festiLoc = JSON.parse(this.state.festi.locacion);
+	      } catch (err) {
+	        festiLoc = { lat: 0, lng: 0 };
+	      }
+
 	      return _react2.default.createElement(
 	        _reactLeaflet.Map,
 	        {
@@ -43294,7 +43289,10 @@
 	            position: user.location,
 	            user: user,
 	            key: i });
-	        })
+	        }),
+	        this.state.festi && _react2.default.createElement(_festiMarker2.default, {
+	          position: [festiLoc.lat, festiLoc.lng],
+	          className: 'festi-marker' })
 	      );
 	    }
 	  }]);
@@ -61355,7 +61353,6 @@
 	            onClick: function onClick(e) {
 	              window.$tate('popups.active').value = 'festi';
 	            } },
-	          _react2.default.createElement('img', { src: 'fecha.svg', title: '24 y 25 de Septiembre' }),
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'title' },
@@ -64400,7 +64397,7 @@
 	            'button',
 	            {
 	              onClick: function onClick(e) {
-	                window.$tate('popups.active').value = 'festi:' + festi._id;
+	                window.$tate('popups.active').value = 'festi';
 	              },
 	              'data-id': 'evento-sidebar-mas' },
 	            'Ver m\xE1s',
@@ -67002,25 +66999,36 @@
 	    var _this = _possibleConstructorReturn(this, (Festi.__proto__ || Object.getPrototypeOf(Festi)).call(this));
 
 	    _this.state = {
-	      active: 'info'
+	      active: 'info',
+	      festi: null
 	    };
 	    _this.activeSection = _this.activeSection.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(Festi, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      window.$tate('festival').on(['N', 'E']).subscribe(function (festival) {
+	        _this2.setState({ festi: festival });
+	      });
+	    }
+	  }, {
 	    key: 'activeSection',
 	    value: function activeSection(active) {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      return function () {
 	        window.$tate('popups.list.festi.content.active').value = active;
-	        _this2.setState({ active: active });
+	        _this3.setState({ active: active });
 	      };
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      if (!this.state.festi) return null;
 	      return _react2.default.createElement(
 	        'dia-log',
 	        {
@@ -67039,77 +67047,34 @@
 	            _react2.default.createElement(
 	              'header',
 	              null,
-	              _react2.default.createElement('img', { src: 'fecha.svg' }),
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'header-info' },
 	                _react2.default.createElement(
 	                  'h1',
 	                  null,
-	                  'Festival de plantaci\xF3n'
-	                ),
-	                _react2.default.createElement(
-	                  'p',
-	                  { className: 'info' },
-	                  _react2.default.createElement('img', { src: 'lugar.svg' }),
-	                  'Reserva Ecol\xF3gica Costanera Norte, acceso Puente FADU, Ciudad Universitaria.'
+	                  this.state.festi.titulo
 	                ),
 	                _react2.default.createElement(
 	                  'p',
 	                  { className: 'info' },
 	                  _react2.default.createElement('img', { src: 'reloj-fff.svg' }),
-	                  'S\xE1bado 24  y Domingo 25 de Septiembre. De 10am  hasta que caiga el sol.'
+	                  this.state.festi.fecha
 	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'nav',
-	              null,
-	              _react2.default.createElement(
-	                'button',
-	                {
-	                  id: 'popup_festi_nav_info',
-	                  className: (this.state.active === 'info' ? 'active' : '') + ' nav',
-	                  onClick: this.activeSection('info') },
-	                'Info',
-	                _react2.default.createElement('span', { className: 'underline' })
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                {
-	                  id: 'popup_festi_nav_crono',
-	                  className: (this.state.active === 'crono' ? 'active' : '') + ' nav hide',
-	                  onClick: this.activeSection('crono') },
-	                'Cronograma',
-	                _react2.default.createElement('span', { className: 'underline' })
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                {
-	                  id: 'popup_festi_nav_ayuda',
-	                  className: (this.state.active === 'ayuda' ? 'active' : '') + ' nav',
-	                  onClick: this.activeSection('ayuda') },
-	                'Quiero ayudar',
-	                _react2.default.createElement('span', { className: 'underline' })
-	              ),
-	              _react2.default.createElement(
-	                'a',
-	                {
-	                  id: 'popup_festi_nav_fb',
-	                  href: 'https://www.facebook.com/events/701647386601384/',
-	                  target: '_blank' },
-	                _react2.default.createElement('img', { src: 'facebook-fff.svg' }),
-	                'Ver evento'
 	              )
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'slider-box',
+	            'article',
 	            {
-	              'data-path': 'popups.list.festi.content' },
-	            _react2.default.createElement(_info2.default, null),
-	            _react2.default.createElement(_crono2.default, null),
-	            _react2.default.createElement(_voluntariado2.default, null)
+	              'data-id': 'info',
+	              id: 'popup_festi_content_info',
+	              className: 'active' },
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              this.state.festi.descripcion
+	            )
 	          )
 	        )
 	      );
@@ -68032,10 +67997,8 @@
 	      try {
 	        loc = JSON.parse(festi.locacion);
 	      } catch (err) {
-	        console.log(err);
 	        loc = { lat: null, lng: null };
 	      }
-	      console.log('recieveProps');
 	      this.setState({
 	        geoLocalResult: [loc.lat, loc.lng],
 	        titulo: festi.titulo,
@@ -68066,7 +68029,6 @@
 	  }, {
 	    key: 'onSuccess',
 	    value: function onSuccess(res) {
-	      console.log(res);
 	      window.$tate('festival').value = res;
 	    }
 	  }, {
@@ -68086,6 +68048,7 @@
 	          {
 	            action: '/edit-festival',
 	            failAlert: 'true',
+	            successAlert: 'true',
 	            onSuccess: this.onSuccess },
 	          _react2.default.createElement(
 	            'label',

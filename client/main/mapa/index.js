@@ -13,7 +13,8 @@ export default class Mapa extends Component {
       lat: -34.53753049571174,
       lng: -58.44419449567794,
       zoom: 11,
-      red: []
+      red: [],
+      festi: {}
     }
     this.fetchRed = this.fetchRed.bind(this)
     this.userArboles = window.$tate('user.arboles').on('N')
@@ -24,22 +25,12 @@ export default class Mapa extends Component {
     window.$tate('map.popups.active').value = ''
     this.userArboles
       .subscribe(() => { this.fetchRed() })
+    window.$tate('festival')
+      .on(['N', 'E'])
+      .subscribe(festival => {
+        this.setState({ festi: festival })
+      })
   }
-
-  // fetchFestivales () {
-  //   window.fetch('/festivales')
-  //     .then(res => {
-  //       return res.json()
-  //     })
-  //     .then(res => {
-  //       if (res.success) {
-  //         this.setState({festivales: res.result})
-  //         window.$tate('festivales').value = res.result
-  //       } else {
-  //         console.warn('error al pedir los arboles', res)
-  //       }
-  //     })
-  // }
 
   fetchRed () {
     window.fetch('/red')
@@ -59,6 +50,13 @@ export default class Mapa extends Component {
 
   render () {
     const position = [this.state.lat, this.state.lng]
+    let festiLoc = {}
+    try {
+      festiLoc = JSON.parse(this.state.festi.locacion)
+    } catch (err) {
+      festiLoc = {lat: 0, lng: 0}
+    }
+
     return (
       <Map
         id='mapa'
@@ -80,6 +78,12 @@ export default class Mapa extends Component {
                 user={user}
                 key={i} />
             })
+        }
+        {
+          this.state.festi &&
+            <FestiMarker
+              position={[festiLoc.lat, festiLoc.lng]}
+              className='festi-marker' />
         }
       </Map>
     )
