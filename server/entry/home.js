@@ -2,7 +2,7 @@ var config = require('../config')
 
 module.exports = function (req, res) {
   var userClient = {}
-
+  console.log('config.admins', config.admins, config.admins.includes)
   if (req.isAuthenticated()) {
     userClient.nombre = req.user.getNombre()
     if (!req.user.emailVerified) {
@@ -15,6 +15,7 @@ module.exports = function (req, res) {
       userClient.primerLogin = true
     } else {
       userClient.type = req.user.userType
+      console.log(config.admins)
       if (config.admins.includes(req.user.getEmail())) {
         userClient.isAdmin = true
       }

@@ -17,7 +17,7 @@ module.exports.isAdmin = function (req, res, next) {
     }
     res.json({
       success: false,
-      text: 'Vo no so admin.'
+      text: 'No tienes permiso.'
     })
   }
   res.json({
