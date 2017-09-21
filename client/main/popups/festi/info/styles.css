@@ -19,6 +19,7 @@
 }
 #popup_festi_content_info p {
   font-size: 16px;
+  white-space: pre-wrap;
   color: #444;
   margin: 10px 0 0;
 }

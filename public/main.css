@@ -1174,6 +1174,7 @@ slider-box > article.active {
   width: 16px;
 }
 #cartel_evento .content-evento-text {
+  white-space: pre-wrap;
   padding: 5px 0;
   font-size:15px;
   text-align: left;
@@ -1756,8 +1757,8 @@ label.legend {
 #popup_festi > div {
   background: white;
   width: 90vw;
-  max-width: 500px;
-  max-height: 480px;
+  height: 90vh;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
 }
@@ -1765,7 +1766,6 @@ label.legend {
 #popup_festi .header-wrapper header {
   display: flex;
   align-items: center;
-  min-height: 150px;
   background: rgba(50, 50, 50, 0.3);
 }
 #popup_festi .header-wrapper header img[src="fecha.svg"]{
@@ -1779,7 +1779,7 @@ label.legend {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px 30px;
+  padding: 30px;
 }
 #popup_festi .header-wrapper header .header-info h1{
     margin: 0;
@@ -1861,6 +1861,7 @@ label.legend {
 }
 #popup_festi_content_info p {
   font-size: 16px;
+  white-space: pre-wrap;
   color: #444;
   margin: 10px 0 0;
 }

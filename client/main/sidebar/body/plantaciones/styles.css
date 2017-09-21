@@ -89,6 +89,7 @@
   width: 16px;
 }
 #cartel_evento .content-evento-text {
+  white-space: pre-wrap;
   padding: 5px 0;
   font-size:15px;
   text-align: left;

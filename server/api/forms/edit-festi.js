@@ -4,6 +4,7 @@ module.exports = function (req, res) {
   Festival.findOne({}, function (err, festi) {
     festi.titulo = req.body.titulo
     festi.descripcion = req.body.descripcion
+    festi.descripcionLarga = req.body.descripcionLarga
     festi.fecha = req.body.fecha
     festi.locacion = req.body.locacion
     festi.save((err) => {

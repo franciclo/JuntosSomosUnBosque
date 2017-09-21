@@ -4,6 +4,7 @@ var especieSchema = mongoose.Schema(
   {
     titulo: String,
     descripcion: String,
+    descripcionLarga: String,
     fecha: String,
     locacion: String
   },

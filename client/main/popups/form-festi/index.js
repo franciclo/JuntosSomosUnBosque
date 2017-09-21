@@ -12,11 +12,13 @@ export default class FormFesti extends Component {
       geoLocalResult: [-34.539, -58.446],
       titulo: '',
       desc: '',
+      longDesc: '',
       fecha: ''
     }
     this.updateLocation = this.updateLocation.bind(this)
     this.updateTitulo = this.updateTitulo.bind(this)
     this.updateDesc = this.updateDesc.bind(this)
+    this.updateLongDesc = this.updateLongDesc.bind(this)
     this.updateFecha = this.updateFecha.bind(this)
   }
 
@@ -32,6 +34,7 @@ export default class FormFesti extends Component {
       geoLocalResult: [loc.lat, loc.lng],
       titulo: festi.titulo,
       desc: festi.descripcion,
+      longDesc: festi.descripcionLarga,
       fecha: festi.fecha
     })
   }
@@ -46,6 +49,10 @@ export default class FormFesti extends Component {
 
   updateDesc (e) {
     this.setState({desc: e.target.value})
+  }
+
+  updateLongDesc (e) {
+    this.setState({longDesc: e.target.value})
   }
 
   updateLocation (e) {
@@ -90,9 +97,16 @@ export default class FormFesti extends Component {
             <textarea
               name='descripcion'
               id='desc'
-              type='text'
               onChange={this.updateDesc}
               value={this.state.desc} />
+          </div>
+          <div className='form-row-field'>
+            <label htmlFor='desc'>Más info</label>
+            <textarea
+              name='descripcionLarga'
+              id='long-desc'
+              onChange={this.updateLongDesc}
+              value={this.state.longDesc} />
           </div>
           <div className='form-row-field'>
             <label htmlFor='type'>Fecha</label>

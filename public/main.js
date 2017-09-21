@@ -67073,7 +67073,7 @@
 	            _react2.default.createElement(
 	              'p',
 	              null,
-	              this.state.festi.descripcion
+	              this.state.festi.descripcionLarga
 	            )
 	          )
 	        )
@@ -67980,11 +67980,13 @@
 	      geoLocalResult: [-34.539, -58.446],
 	      titulo: '',
 	      desc: '',
+	      longDesc: '',
 	      fecha: ''
 	    };
 	    _this.updateLocation = _this.updateLocation.bind(_this);
 	    _this.updateTitulo = _this.updateTitulo.bind(_this);
 	    _this.updateDesc = _this.updateDesc.bind(_this);
+	    _this.updateLongDesc = _this.updateLongDesc.bind(_this);
 	    _this.updateFecha = _this.updateFecha.bind(_this);
 	    return _this;
 	  }
@@ -68003,6 +68005,7 @@
 	        geoLocalResult: [loc.lat, loc.lng],
 	        titulo: festi.titulo,
 	        desc: festi.descripcion,
+	        longDesc: festi.descripcionLarga,
 	        fecha: festi.fecha
 	      });
 	    }
@@ -68020,6 +68023,11 @@
 	    key: 'updateDesc',
 	    value: function updateDesc(e) {
 	      this.setState({ desc: e.target.value });
+	    }
+	  }, {
+	    key: 'updateLongDesc',
+	    value: function updateLongDesc(e) {
+	      this.setState({ longDesc: e.target.value });
 	    }
 	  }, {
 	    key: 'updateLocation',
@@ -68081,9 +68089,22 @@
 	            _react2.default.createElement('textarea', {
 	              name: 'descripcion',
 	              id: 'desc',
-	              type: 'text',
 	              onChange: this.updateDesc,
 	              value: this.state.desc })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-row-field' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'desc' },
+	              'M\xE1s info'
+	            ),
+	            _react2.default.createElement('textarea', {
+	              name: 'descripcionLarga',
+	              id: 'long-desc',
+	              onChange: this.updateLongDesc,
+	              value: this.state.longDesc })
 	          ),
 	          _react2.default.createElement(
 	            'div',

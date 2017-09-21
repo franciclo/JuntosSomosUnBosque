@@ -106,7 +106,7 @@ export default class Festi extends Component {
             id='popup_festi_content_info'
             className='active'>
             <p>
-              {this.state.festi.descripcion}
+              {this.state.festi.descripcionLarga}
             </p>
           </article>
         </div>
