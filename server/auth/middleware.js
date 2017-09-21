@@ -12,7 +12,7 @@ module.exports.isLoggedIn = function (req, res, next) {
 
 module.exports.isAdmin = function (req, res, next) {
   if (req.isAuthenticated()) {
-    if (config.admins.includes(req.user.getEmail())) {
+    if (~config.admins.indexOf(req.user.getEmail())) {
       return next()
     }
     res.json({
